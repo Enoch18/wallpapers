@@ -15,6 +15,7 @@ class CreateUnsubscribersTable extends Migration
     {
         Schema::create('unsubscribers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('email');
             $table->timestamps();
         });
     }

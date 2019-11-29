@@ -15,6 +15,8 @@ class CreateCategoryLinksTable extends Migration
     {
         Schema::create('category_links', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('details_id');
+            $table->integer('category_id');
             $table->timestamps();
         });
     }

@@ -15,6 +15,10 @@ class CreateDetailsTable extends Migration
     {
         Schema::create('details', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('image_title');
+            $table->string('author');
+            $table->text('author_link');
+            $table->longText('description');
             $table->timestamps();
         });
     }

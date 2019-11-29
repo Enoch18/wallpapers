@@ -15,6 +15,8 @@ class CreateSubcategoryLinksTable extends Migration
     {
         Schema::create('subcategory_links', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('details_id');
+            $table->integer('subcategory_id');
             $table->timestamps();
         });
     }
