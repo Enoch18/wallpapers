@@ -1,0 +1,68 @@
+body{
+    background-color: rgb(75, 74, 74) !important;
+    color: white !important;
+}
+
+.topbanner{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.topbanner img{
+    width: 100%;
+}
+
+.nav-item{
+    width: 25%;
+}
+
+.nav-link{
+    width: 90%;
+    font-size: 18px;
+}
+
+.search{
+    width: 80%;
+}
+
+.searchbtn{
+    width: 20%;
+}
+
+.navbar-nav{
+    width: 80%;
+}
+
+.form-inline{
+    width: 20%;
+}
+
+.navbar-toggler{
+    background-color: white !important;
+}
+
+.mainbody{
+    margin: 20px;
+}
+
+.ads{
+    min-height: 70px;
+}
+
+.list-group-item{
+    font-size: 20px;
+    background-color: rgb(73, 133, 204);
+    border: 1px solid rgb(75, 74, 74);
+}
+
+.list-group-item a{
+    color: white !important;
+    text-decoration: none !important;
+}
+
+@media (max-width: 1500px){
+    .topbanner{
+        width: 100%;
+    }
+}
