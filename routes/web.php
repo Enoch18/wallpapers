@@ -12,10 +12,12 @@
 */
 
 Route::get('/', 'IndexController@index');
-Route::get('/{value}', 'IndexController@tabvalues');
+Route::get('wallpapers/{value}', 'IndexController@tabvalues');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/admin/ssgrouplogin', 'Admin\AdminController@index');
+
+Route::get('/admin/ssgrouplogin/{value}', 'Admin\AdminController@displayvalue');
