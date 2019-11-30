@@ -19,6 +19,7 @@ class CreateDetailsTable extends Migration
             $table->string('author');
             $table->text('author_link');
             $table->longText('description');
+            $table->longText('liveat');
             $table->timestamps();
         });
     }
