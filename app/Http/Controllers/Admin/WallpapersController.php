@@ -15,6 +15,7 @@ class WallpapersController extends Controller
     public function index()
     {
         //
+        
     }
 
     /**
@@ -36,6 +37,7 @@ class WallpapersController extends Controller
     public function store(Request $request)
     {
         //
+        return "I am here";
     }
 
     /**

@@ -68,19 +68,19 @@
                     
                                 <div class = "modal-content">
                                     <span id = "form_result"></span>
-                                    <form action = "POST" id = "sample_form" enctype = "multipart/form-data">
+                                    <form action = "POST" id = "wallpaperupload" enctype = "multipart/form-data">
                                         @csrf
                                         <div class = "form-group">
                                             <label class = "control-label col-md-12">Image Title/Name</label>
                                             <div class = "col-md-12">
-                                                <input type = "text" name = "image_title" id = "first_name" class = "form-control"><br />
+                                                <input type = "text" name = "image_title" id = "image_title" class = "form-control"><br />
                                             </div>
                                         </div>
                     
                                         <div class = "form-group">
                                             <label class = "control-label col-md-12">Tags</label>
                                             <div class = "col-md-12">
-                                                <input type = "text" name = "tags" id = "last_name" class = "form-control"><br />
+                                                <input type = "text" name = "tags" id = "tags" class = "form-control"><br />
                                             </div>
                                         </div>
                     
@@ -94,28 +94,28 @@
                                         <div class = "form-group"><br />
                                             <label class = "control-label col-md-12">Author's Name</label>
                                             <div class = "col-md-12">
-                                                <input type = "text" name = "author_name" id = "image" class = "form-control"><br />
+                                                <input type = "text" name = "author_name" id = "author_name" class = "form-control"><br />
                                             </div>
                                         </div>
                 
                                         <div class = "form-group"><br />
                                             <label class = "control-label col-md-12">Author's Link</label>
                                             <div class = "col-md-12">
-                                                <input type = "text" name = "author_link" id = "image" class = "form-control"><br />
+                                                <input type = "text" name = "author_link" id = "author_link" class = "form-control"><br />
                                             </div>
                                         </div>
                 
                                         <div class = "form-group"><br />
                                             <label class = "control-label col-md-12">Make Live at</label>
                                             <div class = "col-md-12">
-                                                <input type = "time" name = "live_at" id = "image" class = "form-control"><br />
+                                                <input type = "time" name = "live_at" id = "live_at" class = "form-control"><br />
                                             </div>
                                         </div>
                 
                                         <div class = "form-group"><br />
                                             <label class = "control-label col-md-12">Wallpaper Description</label>
                                             <div class = "col-md-12">
-                                                <textarea name = "description" class = "form-control"></textarea><br />
+                                                <textarea name = "description" id = "description" class = "form-control"></textarea><br />
                                             </div>
                                         </div>
                     
@@ -222,7 +222,7 @@
                     
                             <div class = "modal-content">
                                 <span id = "form_result"></span>
-                                <form action = "POST" id = "sample_form" class = "form-horizontal" enctype = "multipart/form-data">
+                                <form action = "POST" id = "wallpaperupload" class = "form-horizontal" enctype = "multipart/form-data">
                                     @csrf
 
                                     <div class = "form-group">
@@ -273,7 +273,6 @@ $(document).ready(function(){
     $('#children1').hide();
     $('#children2').slideToggle();
   });
-});
 
 // Adding the wallpaper
 $("#addwallpaper").click(function(){
@@ -287,6 +286,27 @@ $("#addcategory").click(function(){
 
 $("#addsubcategory").click(function(){
     $("#subcategoryformModel").modal('show');
+});
+
+// Posting Image upload data to the database
+$("#wallpaperupload").on("submit", function(event){
+    event.preventDefault();
+    alert($("#first_name").val());
+    $.ajax({
+        url: "admin/ssgrouplogin/wallpaper/add",
+        method: "POST",
+        data: new formData(this),
+        contentType: false,
+        cache: false,
+        processData: false,
+        dataType: "json",
+        success:function(data){
+            alert('it is sent.');
+            //$("#user_table").DataTable().ajax.reload();
+        }
+    });
+});
+
 });
 </script>
 

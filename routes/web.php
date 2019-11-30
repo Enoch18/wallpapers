@@ -18,6 +18,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/admin/ssgrouplogin', 'Admin\AdminController@index');
-
-Route::get('/admin/ssgrouplogin/{value}', 'Admin\AdminController@displayvalue');
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
+    Route::get('ssgrouplogin/{value}', 'AdminController@displayvalue');
+    Route::get('ssgrouplogin', 'AdminController@index');
+    Route::resource('ssgrouplogin/wallpaper/add', 'WallpapersController');
+});

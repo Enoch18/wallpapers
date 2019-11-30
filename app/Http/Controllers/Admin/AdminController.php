@@ -66,4 +66,8 @@ class AdminController extends Controller
             return view ('Admin.index', compact('value'));
         }
     }
+
+    public function addwallpapers(){
+        return 'added';
+    }
 }
