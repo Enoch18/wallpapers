@@ -38,7 +38,7 @@
                     <a href="/admin/ssgrouplogin/unsubscribers" class="list-group-item list-group-item-action bg-light"><i class="material-icons">subscriptions</i> UNSUBSCRIBERS</a>
                     <a href="/admin/ssgrouplogin/newsletters" class="list-group-item list-group-item-action bg-light"><i class="fa fa-newspaper-o"></i> NEWS LETTERS</a>
                     <a href="/admin/ssgrouplogin/logindetails" class="list-group-item list-group-item-action bg-light"><i class="fa fa-gear"></i> LOGIN DETAILS</a>
-                    <a href="/admin/ssgrouplogin/logout" class="list-group-item list-group-item-action bg-light"><i class="fa fa-sign-out"></i> LOGOUT</a>
+                    <a href="{{ route('logout') }}" class="list-group-item list-group-item-action bg-light"><i class="fa fa-sign-out"></i> LOGOUT</a>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
                     
                                 <div class = "modal-content">
                                     <span id = "form_result"></span>
-                                    <form action = "POST" id = "wallpaperupload" enctype = "multipart/form-data">
+                                    <form method = "POST" id = "wallpaperupload" action = "wallpaper/add" enctype = "multipart/form-data">
                                         @csrf
                                         <div class = "form-group">
                                             <label class = "control-label col-md-12">Image Title/Name</label>
@@ -81,6 +81,18 @@
                                             <label class = "control-label col-md-12">Tags</label>
                                             <div class = "col-md-12">
                                                 <input type = "text" name = "tags" id = "tags" class = "form-control"><br />
+                                            </div>
+                                        </div>
+
+                                        <div class = "form-group">
+                                            <label class = "control-label col-md-12" style = "text-align: left;">Category Name</label>
+                                            <div class = "col-md-12">
+                                                <select name = "category_id" id = "category_name" class = "form-control">
+                                                    <option value = "">-- Select Category --</option>
+                                                    @foreach ($category as $categories)
+                                                        <option value = "{{$categories->id}}">{{$categories->cat_name}}</option>
+                                                    @endforeach
+                                                </select><br />
                                             </div>
                                         </div>
                     
@@ -165,7 +177,7 @@
                     
                             <div class = "modal-content">
                                 <span id = "form_result"></span>
-                                <form action = "POST" id = "sample_form" class = "form-horizontal" enctype = "multipart/form-data">
+                                <form method = "POST" id = "sample_form" action = "category/add" class = "form-horizontal" enctype = "multipart/form-data">
                                     @csrf
                                     <div class = "form-group">
                                         <label class = "control-label col-md-12" style = "text-align: left;">Category Name</label>
@@ -222,27 +234,29 @@
                     
                             <div class = "modal-content">
                                 <span id = "form_result"></span>
-                                <form action = "POST" id = "wallpaperupload" class = "form-horizontal" enctype = "multipart/form-data">
+                                <form method = "POST" id = "wallpaperupload" action = "subcategory/add" class = "form-horizontal" enctype = "multipart/form-data">
                                     @csrf
 
                                     <div class = "form-group">
-                                        <label class = "control-label col-md-12" style = "text-align: left;">Category Name</label>
                                         <div class = "col-md-12">
-                                            <select name = "category_name" id = "category_name" class = "form-control">
-                                                <option></select>
+                                            <label class = "control-label col-md-12" style = "text-align: left;">Category Name</label>
+                                            <select name = "category_id" id = "category_id" class = "form-control">
+                                                <option value = "">-- Select Category --</option>
+                                                @foreach ($category as $categories)
+                                                    <option value = "{{$categories->id}}">{{$categories->cat_name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
 
                                     <div class = "form-group">
-                                        <label class = "control-label col-md-12" style = "text-align: left;">Category Name</label>
+                                        <label class = "control-label col-md-12" style = "text-align: left;">Subcategory Name</label>
                                         <div class = "col-md-12">
-                                            <input type = "text" name = "category_name" id = "category_name" class = "form-control">
+                                            <input type = "text" name = "subcategory_name" id = "subcategory_name" class = "form-control">
                                         </div>
                                     </div>
                     
                                     <div class = "form-group">
-                                        <input type = "hidden" value = "Add" id = "action">
                                         <div class = "col-md-8">
                                             <input type = "submit" name = "submit" id = "submit" class = "btn btn-warning">
                                         </div>
@@ -289,23 +303,23 @@ $("#addsubcategory").click(function(){
 });
 
 // Posting Image upload data to the database
-$("#wallpaperupload").on("submit", function(event){
-    event.preventDefault();
-    alert($("#first_name").val());
-    $.ajax({
-        url: "admin/ssgrouplogin/wallpaper/add",
-        method: "POST",
-        data: new formData(this),
-        contentType: false,
-        cache: false,
-        processData: false,
-        dataType: "json",
-        success:function(data){
-            alert('it is sent.');
-            //$("#user_table").DataTable().ajax.reload();
-        }
-    });
-});
+// $("#wallpaperupload").on("submit", function(event){
+//     event.preventDefault();
+//     alert($("#first_name").val());
+//     $.ajax({
+//         url: "admin/ssgrouplogin/wallpaper/add",
+//         method: "POST",
+//         data: new formData(this),
+//         contentType: false,
+//         cache: false,
+//         processData: false,
+//         dataType: "json",
+//         success:function(data){
+//             alert('it is sent.');
+//             //$("#user_table").DataTable().ajax.reload();
+//         }
+//     });
+// });
 
 });
 </script>

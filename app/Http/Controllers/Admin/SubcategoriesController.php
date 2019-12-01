@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Subcategory;
 
 class SubcategoriesController extends Controller
 {
@@ -35,7 +36,11 @@ class SubcategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $subcategory = new Subcategory;
+        $subcategory->category_id = $request->category_id;
+        $subcategory->sub_name = $request->subcategory_name;
+        $subcategory->save();
+        return redirect()->back()->with(['msg' => 'Category successfull added', 'type' => 'success']);
     }
 
     /**

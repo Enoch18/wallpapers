@@ -22,4 +22,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     Route::get('ssgrouplogin/{value}', 'AdminController@displayvalue');
     Route::get('ssgrouplogin', 'AdminController@index');
     Route::resource('ssgrouplogin/wallpaper/add', 'WallpapersController');
+    Route::resource('ssgrouplogin/category/add', 'CategoriesController');
+    Route::resource('ssgrouplogin/subcategory/add', 'SubcategoriesController');
 });

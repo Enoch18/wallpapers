@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Category;
 
 class CategoriesController extends Controller
 {
@@ -35,7 +36,10 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category;
+        $category->cat_name = $request->category_name;
+        $category->save();
+        return redirect()->back()->with(['msg' => 'Category successfull added', 'type' => 'success']);
     }
 
     /**

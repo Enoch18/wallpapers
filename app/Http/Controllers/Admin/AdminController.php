@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Category;
+use App\Subcategory;
 
 class AdminController extends Controller
 {
@@ -27,7 +29,8 @@ class AdminController extends Controller
     public function displayvalue($value)
     {
         if ($value == "wallpapers"){
-            return view ('Admin.index', compact('value'));
+            $category = Category::all();
+            return view ('Admin.index', compact('value', 'category'));
         }
 
         if ($value == "categories"){
@@ -35,7 +38,8 @@ class AdminController extends Controller
         }
 
         if ($value == "subcategories"){
-            return view ('Admin.index', compact('value'));
+            $category = Category::all();
+            return view ('Admin.index', compact('value', 'category'));
         }
 
         if ($value == "subscribers"){
