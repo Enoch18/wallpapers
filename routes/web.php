@@ -20,7 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     Route::get('ssgrouplogin/{value}', 'AdminController@displayvalue');
-    Route::get('ssgrouplogin', 'AdminController@index');
+    Route::get('ssgrouplogin', 'AdminController@index')->name('Admin.index');
     Route::resource('ssgrouplogin/wallpaper/add', 'WallpapersController');
     Route::resource('ssgrouplogin/category/add', 'CategoriesController');
     Route::resource('ssgrouplogin/subcategory/add', 'SubcategoriesController');

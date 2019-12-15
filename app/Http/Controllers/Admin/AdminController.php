@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Subcategory;
+use App\Detail;
+use App\Wallpaper;
+use App\CategoryLink;
+use App\SubcategoryLink;
 
 class AdminController extends Controller
 {
@@ -29,8 +33,9 @@ class AdminController extends Controller
     public function displayvalue($value)
     {
         if ($value == "wallpapers"){
+            $wallpaper = Wallpaper::where('width', '=', '1280')->orderBy('id', 'DESC')->get();
             $category = Category::all();
-            return view ('Admin.index', compact('value', 'category'));
+            return view ('Admin.index', compact('value', 'wallpaper', 'category'));
         }
 
         if ($value == "categories"){

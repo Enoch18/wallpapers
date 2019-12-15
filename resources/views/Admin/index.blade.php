@@ -49,15 +49,23 @@
             {{-- Viewing Modifying and Adding Wallpapers  --}}
             @if ($value == "wallpapers")
                 <div class = "wallpapers">
-                    <div class = "container">
+                    <div class = "">
                         <h3 align="center">All Wallpapers</h3>
                         <div align="right">
                             <button name = "addwallpaper" id = "addwallpaper" class = "btn btn-success btn-sm">Add Wallpaper</button>
                         </div><br />
+
+                        <div class = "row">
+                            @foreach($wallpaper as $wallpapers)
+                                <div class = "col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                    <img src = "{{asset($wallpapers->url)}}" class = "img img-responsive img-thumbnail">
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
 
-
+                {{-- ============================== Code for the Models --}}
                 <div id = "formModal" class = "modal fade" role = "dialog">
                         <div class = "modal-dialog">
                             <div class = "modal-content">
