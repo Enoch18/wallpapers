@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Detail extends Model
 {
     //Relationship with the images
-    public function images(){
-        return $this->hasMany(Image::class, 'details_id');
+    public function wallpapers(){
+        return $this->hasMany(Wallpaper::class, 'details_id');
     }
 
     // Relationship with the categories

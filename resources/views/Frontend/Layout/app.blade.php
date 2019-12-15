@@ -22,19 +22,19 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-link btn btn-primary" href="#">HOME</a>
+                                <a class="nav-link btn btn-primary" href="index">HOME</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link btn btn-primary" href="#">LATEST WALLPAPERS</a>
+                                <a class="nav-link btn btn-primary" href="latest">LATEST WALLPAPERS</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link btn btn-primary" href="#">TOP DOWNLOADS</a>
+                                <a class="nav-link btn btn-primary" href="top-downloads">TOP DOWNLOADS</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link btn btn-primary" href="#">RANDOM WALLPAPERS</a>
+                                <a class="nav-link btn btn-primary" href="random-wallpapers">RANDOM WALLPAPERS</a>
                             </li>
                         </ul>
 
@@ -52,8 +52,10 @@
                 <div class = "row">
                     <div class = "col-lg-2" id = "col1">
                         <ul class = "list-group">
-                            <li class = 'list-group-item'><a href = 'allcategories.php'>All Categories (10)</a></li>
-                            <li class = 'list-group-item'><a href = 'allcategories.php'>Animals (5)</a></li>
+                            <li class = 'list-group-item'><a href = 'allcategories.php'>All Categories ({{count($category)}})</a></li>
+                            @foreach ($category as $categories)
+                                <li class = 'list-group-item'><a href = '{{$categories->cat_name}}'>{{$categories->cat_name}}</a></li>
+                            @endforeach
                         </ul>
                     </div>
 
