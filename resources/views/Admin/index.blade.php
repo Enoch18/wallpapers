@@ -163,13 +163,19 @@
         
                 <div class = "table-responsive">
                     <table class = "table table-bordered table-striped" id = "user_table">
-                        <thread>
+                        <tr>
+                            <th width="10%">Category Name</th>
+                            <th width="10%">Added On</th>
+                            <th width="10%">Action</th>
+                        </tr>
+
+                        @foreach($category as $categories)
                             <tr>
-                                <th width="10%">Category Name</th>
-                                <th width="10%">Added On</th>
-                                <th width="10%">Action</th>
+                                <td>{{$categories->cat_name}}</td>
+                                <td>{{str_replace("-", "/", $categories->created_at)}}</td>
+                                <td><button class = "btn btn-danger">Delete</button></td>
                             </tr>
-                        </thread>
+                        @endforeach
                     </table>  
                 </div>
                 </div>
@@ -219,14 +225,19 @@
         
                 <div class = "table-responsive">
                     <table class = "table table-bordered table-striped" id = "user_table">
-                        <thread>
+                        <tr>
+                            <th width="10%">Sub-Category Name</th>
+                            <th width="10%">Added On</th>
+                            <th width="10%">Action</th>
+                        </tr>
+
+                        @foreach($subcategory as $subcategories)
                             <tr>
-                                <th width="10%">Category Name</th>
-                                <th width="10%">Sub-Category Name</th>
-                                <th width="10%">Added On</th>
-                                <th width="10%">Action</th>
+                                <td>{{$subcategories->sub_name}}</td>
+                                <td>{{str_replace("-", "/", $subcategories->created_at)}}</td>
+                                <td><button class = "btn btn-danger">Delete</button></td>
                             </tr>
-                        </thread>
+                        @endforeach
                     </table>  
                 </div>
                 </div>

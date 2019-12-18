@@ -196,6 +196,10 @@ class WallpapersController extends Controller
             $catlink->details_id = $details_id;
             $catlink->category_id = $request->category_id;
             $catlink->save();
+        }else{
+            $catlink->details_id = $details_id;
+            $catlink->category_id = 0;
+            $catlink->save();
         }
 
         if ($request->subcategory_id != ''){

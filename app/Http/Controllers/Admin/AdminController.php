@@ -39,12 +39,14 @@ class AdminController extends Controller
         }
 
         if ($value == "categories"){
-            return view ('Admin.index', compact('value'));
+            $category = Category::orderBy('cat_name', 'ASC')->get();
+            return view ('Admin.index', compact('value', 'category'));
         }
 
         if ($value == "subcategories"){
-            $category = Category::all();
-            return view ('Admin.index', compact('value', 'category'));
+            $category = Category::orderBy('cat_name', 'ASC')->get();
+            $subcategory = Subcategory::orderBy('sub_name', 'ASC')->get();
+            return view ('Admin.index', compact('value', 'subcategory', 'category'));
         }
 
         if ($value == "subscribers"){

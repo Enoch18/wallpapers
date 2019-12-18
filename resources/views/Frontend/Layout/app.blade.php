@@ -22,19 +22,19 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-link btn btn-primary" href="index">HOME</a>
+                                <a class="nav-link btn btn-primary" href="{{url('/')}}">HOME</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link btn btn-primary" href="latest">LATEST WALLPAPERS</a>
+                                <a class="nav-link btn btn-primary" href="{{url('/wallpapers/latest')}}">LATEST WALLPAPERS</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link btn btn-primary" href="top-downloads">TOP DOWNLOADS</a>
+                                <a class="nav-link btn btn-primary" href="{{url('/wallpapers/top-downloads')}}">TOP DOWNLOADS</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link btn btn-primary" href="random-wallpapers">RANDOM WALLPAPERS</a>
+                                <a class="nav-link btn btn-primary" href="{{url('/wallpapers/random-wallpapers')}}">RANDOM WALLPAPERS</a>
                             </li>
                         </ul>
 
@@ -54,7 +54,7 @@
                         <ul class = "list-group">
                             <li class = 'list-group-item'><a href = 'allcategories.php'>All Categories ({{count($category)}})</a></li>
                             @foreach ($category as $categories)
-                                <li class = 'list-group-item'><a href = '{{$categories->cat_name}}'>{{$categories->cat_name}}</a></li>
+                                <li class = 'list-group-item'><a href = '{{url('/wallpapers')}}/{{$categories->cat_name}}'>{{$categories->cat_name}}</a></li>
                             @endforeach
                         </ul>
                     </div>
