@@ -11423,6 +11423,19 @@ body {
   text-decoration: none !important;
 }
 
+.resolutions {
+  text-align: center;
+}
+
+.resolutions p {
+  font-weight: bold;
+}
+
+.resolutions a {
+  text-decoration: none !important;
+  color: white !important;
+}
+
 @media (max-width: 1500px) {
   .topbanner {
     width: 100%;
