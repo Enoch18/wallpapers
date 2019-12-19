@@ -71,11 +71,18 @@ body{
 
 .resolutions p{
     font-weight: bold;
+    font-size: 18px;
 }
 
 .resolutions a{
     text-decoration: none !important;
     color: white !important;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.download_p{
+    font-size: 18px;
 }
 
 @media (max-width: 1500px){

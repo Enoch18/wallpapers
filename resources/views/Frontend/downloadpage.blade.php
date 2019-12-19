@@ -5,9 +5,10 @@
         <a href = "{{url($wallpaper->url)}}">
             <img src = "{{url($wallpaper->url)}}" class = "img img-responsive img-thumbnail"><br /><br />
         </a>
-        <p style = "color: white;">
+        <p style = "color: white;" class = "download_p">
             Name: {{$detail->image_title}}<br />
             Downloads: <br />
+            Category: {{$cat_name}}<br />
             Added On: {{$detail->created_at}}<br />
             Description: {!! $detail->description !!}<br />
             Tags: 

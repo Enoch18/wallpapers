@@ -20,7 +20,7 @@ class CreateDetailsTable extends Migration
             $table->text('author_link');
             $table->longText('description');
             $table->longText('liveat');
-            $table->string('downloads');
+            $table->integer('downloads');
             $table->timestamps();
         });
     }
