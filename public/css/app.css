@@ -11404,6 +11404,10 @@ body {
   margin: 20px;
 }
 
+.img-responsive {
+  width: 100%;
+}
+
 .ads {
   min-height: 70px;
 }

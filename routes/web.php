@@ -13,6 +13,7 @@
 
 Route::get('/', 'IndexController@index');
 Route::get('wallpapers/{value}', 'IndexController@tabvalues');
+Route::get('download/{id}', 'IndexController@download');
 
 Auth::routes();
 
