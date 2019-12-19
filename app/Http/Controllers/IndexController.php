@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Image;
+use App\Wallpaper;
 use App\Category;
 use App\Subcategory;
 use App\CategoryLink;
@@ -22,7 +22,21 @@ class IndexController extends Controller
 
     public function tabvalues($value){
         $category = Category::all();
-        return view ("Frontend.index", compact("category"));
+
+        if ($value == "latest"){
+            $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->orderBy('created_at', 'DESC')->get();
+            return view ("Frontend.index", compact("category", "wallpaper", "value", "category"));
+        }
+
+        if ($value == "top-downloads"){
+            $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->orderBy('created_at', 'DESC')->get();
+            return view ("Frontend.index", compact("category", "wallpaper", "value", "category"));
+        }
+
+        if ($value == "random-wallpapers"){
+            $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->orderBy('created_at', 'DESC')->get();
+            return view ("Frontend.index", compact("category", "wallpaper", "value", "category"));
+        }
     }
 
     public function download($id){
