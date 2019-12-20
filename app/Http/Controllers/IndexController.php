@@ -10,6 +10,7 @@ use App\CategoryLink;
 use App\Detail;
 use App\SubcategoryLink;
 use App\Tag;
+use App\Subscriber;
 use App\TagDetail;
 use Illuminate\Support\Facades\DB;
 
@@ -44,6 +45,8 @@ class IndexController extends Controller
         if ($value != "latest" && $value != "top-downloads" && $value != "random-wallpapers"){
             $cat_id = Category::where('cat_name', '=' ,$value)->first()->id;
             $detail = CategoryLink::where('category_id', '=', $cat_id)->get();
+            $totaldetails = $detail->count();
+            return $totaldetails;
             $wallpaper = Wallpaper::all();
             $value = "categories";
             return view ("Frontend.index", compact("category", "wallpaper", "value", 'detail', 'value'));
@@ -78,5 +81,18 @@ class IndexController extends Controller
         }
 
         return view ("Frontend.downloadpage", compact("category", "wallpaper", "detail", "cat_name", "wallpaper", 'sub_name'));
+    }
+
+    public function subscribe(Request $request){
+        $email = $request->email;
+        $sub = new Subscriber;
+        $subscriber = Subscriber::where('email', '=', $email)->first();
+        if ($subscriber == null){
+            $sub->email = $email;
+            $sub->save();
+            return 'not found';
+        }else{
+            return 'found';
+        }
     }
 }

@@ -66,11 +66,16 @@
 
                     <div class = "col-lg-2" id = "col1">
                         <form class = "from-group" id = "form1">
+                            @csrf
+                            <div id = "sub_success_div" style = "display:none;">
+                                <p id = "sub_success"></p><br />
+                            </div>
+
                             <div id = "subscribe" style = "margin-top: -30px !important; display: none;">
                                 <input type = "email" name = "email" placeholder = "Email" class = "form-control"><br />
                                 <button id = "submit" class = "btn btn-primary" style = "background-color: rgb(73, 133, 204); border: 1px solid rgb(73, 133, 204); width: 100%;">Subscribe</button>
                             </div>
-                            <button class = "btn btn-primary form-control" id = "subbtn" style = "background-color: rgb(73, 133, 204); border: 1px solid rgb(73, 133, 204);">Subscribe Here</button><br /><br />
+                            <a class = "btn btn-primary form-control" id = "subbtn" style = "background-color: rgb(73, 133, 204); border: 1px solid rgb(73, 133, 204);">Subscribe Here</a><br /><br />
                         </form>
                         
                         <div id = "bannerright">
@@ -99,8 +104,49 @@ $(document).ready(function(){
         $("#subscribe").show();
     });
 
-    $("#submit").click(function(e){
+    $("#form1").submit(function(e){
         e.preventDefault();
+        $.ajax({
+            url: "/subscribe",
+            method: "POST",
+            data: $("#form1").serialize(),
+            success:function(data){
+                alert(data);
+                if (data == "not found"){
+                    $("#sub_success_div").show();
+                    $("#sub_success").css({
+                        color: 'white',
+                        fontSize: '18px',
+                        fontWeight: '600',
+                        backgroundColor: 'green'
+                    });
+                    $("#sub_success").html("<b>Thank you for subscribing!!!</b>");
+                    $("#form1")[0].reset();
+                    setTimeout(function(){
+                        $("#subbtn").show();
+                        $("#subscribe").hide();
+                        $("#sub_success_div").hide();
+                    }, 5000);
+                }
+
+                if (data == "found"){
+                    $("#sub_success_div").show();
+                    $("#sub_success").css({
+                        color: 'white',
+                        fontSize: '18px',
+                        fontWeight: '600',
+                        backgroundColor: 'red'
+                    });
+                    $("#sub_success").html("<b>That email is already subscribed!!!</b>");
+                    $("#form1")[0].reset();
+                    setTimeout(function(){
+                        $("#subbtn").show();
+                        $("#subscribe").hide();
+                        $("#sub_success_div").hide();
+                    }, 5000);
+                }
+            }
+        });
     });
 });
 </script>
