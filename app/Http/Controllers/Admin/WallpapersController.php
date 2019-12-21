@@ -230,7 +230,13 @@ class WallpapersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $detail = Detail::find($id);
+        $wallpaper = Wallpaper::where('details_id', '=', $id)->where('width', '=', '1280')->where('height', '=', '720')->first();
+        $tag = Tag::where("details_id", "=", $id)->first();
+        $category_id = CategoryLink::where('details_id', '=', $id)->first()->category_id ?? '';
+        $cat_name = Category::where('id', '=', $category_id)->first()->cat_name ?? 'Uncategorized';
+
+        return view ("Admin.update", compact("detail", "wallpaper", "tag", "cat_name"));
     }
 
     /**
@@ -253,6 +259,12 @@ class WallpapersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $detail_id = Wallpaper::where("id", "=", $id)->first()->details_id;
+        Wallpaper::where("details_id", "=", $detail_id)->delete();
+        CategoryLink::where("details_id", "=", $detail_id)->delete();
+        SubcategoryLink::where("details_id", "=", $detail_id)->delete();
+        Tag::where("details_id", "=", $detail_id)->delete();
+        Detail::find($detail_id)->delete();
+        return redirect()->back()->with(['msg' => 'Wallpaper successfull added', 'type' => 'success']);
     }
 }

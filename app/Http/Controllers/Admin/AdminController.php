@@ -10,6 +10,7 @@ use App\Detail;
 use App\Wallpaper;
 use App\CategoryLink;
 use App\SubcategoryLink;
+use App\Subscriber;
 
 class AdminController extends Controller
 {
@@ -50,7 +51,8 @@ class AdminController extends Controller
         }
 
         if ($value == "subscribers"){
-            return view ('Admin.index', compact('value'));
+            $subscriber = Subscriber::orderBy("created_at", "DESC")->get();
+            return view ('Admin.index', compact('value', 'subscriber'));
         }
 
         if ($value == "unsubscribers"){
@@ -58,7 +60,10 @@ class AdminController extends Controller
         }
 
         if ($value == "topdownloads"){
-            return view ('Admin.index', compact('value'));
+            $allcategorytotal = Detail::count();
+            $detail = Detail::orderBy('downloads', 'DESC')->get();
+            $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->get();
+            return view ("Admin.index", compact("category", "wallpaper", "value", "detail", "allcategorytotal"));
         }
 
         if ($value == "frontpages"){

@@ -1,51 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin Panel</title>
-    <link rel = "stylesheet" href = "{{asset('css/app.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+@extends ('Admin.layout.app')
 
-  <!-- Custom styles for this template -->
-  <link href="css/simple-sidebar.css" rel="stylesheet">
-</head>
-<body id = "adminbody">
-    <section>
-        <div class = "adminsidebar">
-            <div class="bg-light border-right" id="sidebar-wrapper">
-                <div class="list-group list-group-flush">
-                    <li class="list-group-item list-group-item-action bg-light" style = "color: white;">WELCOME ADMIN</li><hr /> 
-                    <a href="index.php" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> DASHBOARD </a><hr />
-                    <ul class = "side" style = "margin-top: -40px;">
-                        <li>
-                            <a href = "/admin/ssgrouplogin/wallpapers" class="list-group-item list-group-item-action bg-light" id = "parent1"><i class="material-icons">collections</i> WALLPAPER</a>
-                        </li>
-                    </ul>
-
-                    <ul class = "side">
-                      <li><a href = "/admin/ssgrouplogin/categories" class="list-group-item list-group-item-action bg-light" id = "parent2"><i class="fa fa-th"></i> CATEGORIES</a></li>
-                        <li><a href = "/admin/ssgrouplogin/subcategories" class="list-group-item list-group-item-action bg-light" id = "parent2"><i class="fa fa-th"></i> SUB-CATEGORIES </a></li>
-                    </ul>
-                    <a href="/admin/ssgrouplogin/topdownloads" class="list-group-item list-group-item-action bg-light"><i class="fa fa-download"></i> TOP DOWNLOADS</a>
-                    <a href="/admin/ssgrouplogin/frontpages" class="list-group-item list-group-item-action bg-light"><i class="fa fa-align-justify"></i> FRONT PAGE CONTENT</a>
-                    <a href="/admin/ssgrouplogin/subscribers" class="list-group-item list-group-item-action bg-light"><i class="material-icons">subscriptions</i> SUBSCRIBERS</a>
-                    <a href="/admin/ssgrouplogin/unsubscribers" class="list-group-item list-group-item-action bg-light"><i class="material-icons">subscriptions</i> UNSUBSCRIBERS</a>
-                    <a href="/admin/ssgrouplogin/newsletters" class="list-group-item list-group-item-action bg-light"><i class="fa fa-newspaper-o"></i> NEWS LETTERS</a>
-                    <a href="/admin/ssgrouplogin/logindetails" class="list-group-item list-group-item-action bg-light"><i class="fa fa-gear"></i> LOGIN DETAILS</a>
-                    <a href="{{ route('logout') }}" class="list-group-item list-group-item-action bg-light"><i class="fa fa-sign-out"></i> LOGOUT</a>
-                </div>
-            </div>
-        </div>
-
-        <div class = "adminmaincontent">
-            <nav id = "nav"></nav>
-
+@section ('content')
             {{-- Viewing Modifying and Adding Wallpapers  --}}
             @if ($value == "wallpapers")
                 <div class = "wallpapers">
@@ -58,7 +13,10 @@
                         <div class = "row">
                             @foreach($wallpaper as $wallpapers)
                                 <div class = "col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                    <img src = "{{asset($wallpapers->url)}}" class = "img img-responsive img-thumbnail">
+                                    <div class = "image">
+                                        <img src = "{{asset($wallpapers->url)}}" class = "img img-responsive img-thumbnail">
+                                        <a href = "{{url('admin/ssgrouplogin/wallpaper/add')}}/{{{$wallpapers->find($wallpapers->id)->details->id}}}/edit" class = "btn btn-primary btn-admin" id = "edit"><i class = "fa fa-edit admin-fa"></i></a> <button class = "btn btn-danger btn-admin trash" id = "{{$wallpapers->id}}"><i class = "fa fa-trash admin-fa"></i></button><br /><br />
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
@@ -148,6 +106,25 @@
                                     <br />
                                 </div>
                             </div>
+                    </div>
+                </div>
+            @endif
+
+
+            @if ($value == "topdownloads")
+                <div class = "topd">
+                    <h2>Top Downloaded Wallpapers</h2><br />
+                    <div class = "row">
+                        @foreach ($detail as $details)
+                            @foreach ($wallpaper as $wallpapers)
+                                @if ($details->id == $wallpapers->details_id)
+                                    <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                        <img src = "{{url($wallpapers->url)}}" class = "img img-responsive img-thumbnail">
+                                        <p>{{$details->downloads}} Downloads</p><br /><br />
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endforeach
                     </div>
                 </div>
             @endif
@@ -287,63 +264,23 @@
                 </div>
             @endif
         </div>
-    <section>
-</body>
-</html>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script>
-$(document).ready(function(){
-  $('#children1').hide();
-  $('#children2').hide();
-
-  $('#parent1').click(function(){
-    $('#children2').hide();
-    $('#children1').slideToggle();
-  });
-
-  $('#parent2').click(function(){
-    $('#children1').hide();
-    $('#children2').slideToggle();
-  });
-
-// Adding the wallpaper
-$("#addwallpaper").click(function(){
-    $("#formModal").modal('show');
-});
-
-// Adding the category
-$("#addcategory").click(function(){
-    $("#categoryformModel").modal('show');
-});
-
-$("#addsubcategory").click(function(){
-    $("#subcategoryformModel").modal('show');
-});
-
-// Posting Image upload data to the database
-// $("#wallpaperupload").on("submit", function(event){
-//     event.preventDefault();
-//     alert($("#first_name").val());
-//     $.ajax({
-//         url: "admin/ssgrouplogin/wallpaper/add",
-//         method: "POST",
-//         data: new formData(this),
-//         contentType: false,
-//         cache: false,
-//         processData: false,
-//         dataType: "json",
-//         success:function(data){
-//             alert('it is sent.');
-//             //$("#user_table").DataTable().ajax.reload();
-//         }
-//     });
-// });
-
-});
-</script>
-
-<script src="//cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
-<script>
-    CKEDITOR.replace( 'description' );
-</script>
+        <div id = "deleteconfirm" class = "modal fade" role = "dialog">
+            <div class = "modal-dialog">
+                <div class = "modal-content">
+                    <div class = "modal-header">
+                        <h4 class = "modal-title" style = "color: black !important;">Confirm Delete</h4>
+                        <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
+                    </div>
+            
+                    <div class = "modal-content">
+                        <h4 style = "color: black !important;">Are you sure you want to delete?</h4><br />
+                        <div>
+                            <span id = "yes"></span>
+                            <button type = "button" class = "btn btn-primary" class = "close" data-dismiss = "modal" style = "width: 30%; margin: 20px;">No</a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+@endsection

@@ -11478,6 +11478,26 @@ body {
   background-color: black !important;
 }
 
+.image {
+  position: relative;
+}
+
+.btn-admin {
+  bottom: 35px;
+  position: absolute;
+  font-size: 14px !important;
+}
+
+.trash {
+  right: 20px !important;
+  color: white;
+}
+
+#edit {
+  left: 20px !important;
+  color: white;
+}
+
 #adminbody a {
   font-size: 18px !important;
 }
@@ -11496,5 +11516,17 @@ body {
 
 .modal-content {
   margin-top: 20px;
+}
+
+.updatecontainer {
+  margin-top: 10px !important;
+}
+
+.updatecontainer > h2 {
+  text-align: center;
+}
+
+.topd > h2 {
+  text-align: center;
 }
 

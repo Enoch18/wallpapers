@@ -53,9 +53,9 @@
                 <div class = "row">
                     <div class = "col-lg-2" id = "col1">
                         <ul class = "list-group">
-                            <li class = 'list-group-item'><a href = 'allcategories.php'>All Categories ({{count($category)}})</a></li>
+                            <li class = 'list-group-item'><a href = '{{url('/wallpapers/all-categories')}}'>All Categories ({{$allcategorytotal}})</a></li>
                             @foreach ($category as $categories)
-                                <li class = 'list-group-item'><a href = '{{url('/wallpapers')}}/{{$categories->cat_name}}'>{{$categories->cat_name}}</a></li>
+                                <li class = 'list-group-item'><a href = '{{url('/wallpapers')}}/{{$categories->cat_name}}'>{{$categories->cat_name}} ({{$categories->find($categories->id)->categorylinks->count()}})</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -137,7 +137,7 @@ $(document).ready(function(){
                         fontWeight: '600',
                         backgroundColor: 'red'
                     });
-                    $("#sub_success").html("<b>That email is already subscribed!!!</b>");
+                    $("#sub_success").html("<b>That email is already subscribed !!!</b>");
                     $("#form1")[0].reset();
                     setTimeout(function(){
                         $("#subbtn").show();
