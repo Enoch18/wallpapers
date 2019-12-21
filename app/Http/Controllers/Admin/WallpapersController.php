@@ -10,6 +10,7 @@ use App\Tag;
 use App\Wallpaper;
 use App\CategoryLink;
 Use App\SubcategoryLink;
+use App\Subcategory;
 use Intervention\Image\Facades\Image;
 use File;
 use DB;
@@ -230,13 +231,15 @@ class WallpapersController extends Controller
      */
     public function edit($id)
     {
+        $category = Category::orderBy("created_at", "DESC")->get();
+        $subcategory = Subcategory::orderBy("created_at", "DESC")->get();
         $detail = Detail::find($id);
         $wallpaper = Wallpaper::where('details_id', '=', $id)->where('width', '=', '1280')->where('height', '=', '720')->first();
         $tag = Tag::where("details_id", "=", $id)->first();
         $category_id = CategoryLink::where('details_id', '=', $id)->first()->category_id ?? '';
         $cat_name = Category::where('id', '=', $category_id)->first()->cat_name ?? 'Uncategorized';
 
-        return view ("Admin.update", compact("detail", "wallpaper", "tag", "cat_name"));
+        return view ("Admin.update", compact("detail", "wallpaper", "tag", "cat_name", "category", "subcategory"));
     }
 
     /**
@@ -249,6 +252,13 @@ class WallpapersController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $details = Detail::find($id);
+        $details->image_title = $request->image_title;
+        $details->author = $request->author_name;
+        $details->author_link = $request->author_link;
+        $details->description = $request->description;
+        $details->save();
+        return redirect()->back()->with(['msg' => 'Wallpaper successfully updated', 'type' => 'success']);
     }
 
     /**

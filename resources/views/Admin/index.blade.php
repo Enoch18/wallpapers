@@ -263,6 +263,19 @@
                     </div>
                 </div>
             @endif
+
+            @if ($value == "subscribers")
+                <div class = "subscribers">
+                    <h2>Subscribers</h2>
+                    <table>
+                        <tr>
+                            <th width="10%">Category Name</th>
+                            <th width="10%">Added On</th>
+                            <th width="10%">Action</th>
+                        </tr>
+                    </table>  
+                </div>
+            @endif
         </div>
 
         <div id = "deleteconfirm" class = "modal fade" role = "dialog">
