@@ -265,14 +265,24 @@
             @endif
 
             @if ($value == "subscribers")
-                <div class = "subscribers">
+                <div class = "container subscribers">
                     <h2>Subscribers</h2>
-                    <table>
+                    <table class = "table table-bordered table-striped">
                         <tr>
-                            <th width="10%">Category Name</th>
-                            <th width="10%">Added On</th>
-                            <th width="10%">Action</th>
+                            <th width="10%">#</th>
+                            <th width="10%">Email</th>
+                            <th width="10%">Subscribed On</th>
                         </tr>
+
+                        <?php $count = 0; ?>
+                        @foreach ($subscriber as $subscribers)
+                            <?php $count = $count + 1; ?>
+                            <tr>
+                                <td>{{$count}}</td>
+                                <td>{{$subscribers->email}}</td>
+                                <td>{{$subscribers->created_at}}</td>
+                            </tr>
+                        @endforeach
                     </table>  
                 </div>
             @endif
