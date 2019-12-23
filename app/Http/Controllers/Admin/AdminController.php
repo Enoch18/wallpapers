@@ -11,6 +11,9 @@ use App\Wallpaper;
 use App\CategoryLink;
 use App\SubcategoryLink;
 use App\Subscriber;
+use App\FrontPage;
+use App\Tag;
+use App\TagDetail;
 
 class AdminController extends Controller
 {
@@ -67,7 +70,11 @@ class AdminController extends Controller
         }
 
         if ($value == "frontpages"){
-            return view ('Admin.index', compact('value'));
+            $categorylist = Category::all();
+            $frontcategory = FrontPage::all();
+            $fronttags = TagDetail::all();
+            $tag = Tag::all();
+            return view ('Admin.index', compact('value', 'categorylist', 'tag', 'frontcategory', 'fronttags'));
         }
 
         if ($value == "newsletters"){
@@ -85,5 +92,25 @@ class AdminController extends Controller
 
     public function addwallpapers(){
         return 'added';
+    }
+
+    public function frontpage(Request $request){
+        if ($request->category_id){
+            foreach($request->category_id as $cat_id){
+                $frontpage = new FrontPage;
+                $frontpage->category_id = $cat_id;
+                $frontpage->save();
+            }
+            return redirect()->back()->with(['msg' => 'Front Page images Categories added', 'type' => 'success']);
+        }
+
+        if ($request->tag_id){
+            foreach($request->tag_id as $tagid){
+                $frontpage = new TagDetail;
+                $frontpage->tag_id = $tagid;
+                $frontpage->save();
+            }
+            return redirect()->back()->with(['msg' => 'Front Page iTags have been added', 'type' => 'success']);
+        }
     }
 }

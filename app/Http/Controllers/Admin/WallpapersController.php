@@ -11,6 +11,7 @@ use App\Wallpaper;
 use App\CategoryLink;
 Use App\SubcategoryLink;
 use App\Subcategory;
+use App\TagDetail;
 use Intervention\Image\Facades\Image;
 use File;
 use DB;
@@ -49,8 +50,6 @@ class WallpapersController extends Controller
         $details = new Detail;
         $catlink = new CategoryLink;
         $sublink = new SubcategoryLink;
-        $tag = new Tag;
-        $wallpaper = new Wallpaper;
 
         $details->image_title = $request->image_title;
         $details->author = $request->author_name;
@@ -75,111 +74,76 @@ class WallpapersController extends Controller
         }
 
         if ($request->hasFile('image')){
-            //Saving the original resolution
-            // $image = $request->file('image');
-            // $width = Image::make($image)->width();
-            // $height = Image::make($image)->height();
-            // $filenameWithExt = $image->getClientOriginalName();
-            // $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // $extension = $image->getClientOriginalExtension();
-            // $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            // $image_resize->save(public_path($stpath. "/" .$fileNameToStore));
-
-            // $wallpaper->details_id = $details_id;
-            // $wallpaper->width = $width;
-            // $wallpaper->height = $height;
-            // $wallpaper->original = 1;
-            // $wallpaper->url = $stpath .'/'.$fileNameToStore;
-            // $wallpaper->save();
-
             //Saving the 1280 X 720 resolution
             $image = $request->file('image');
             $filenameWithExt = $image->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $image->getClientOriginalExtension();
-            $fileNameToStore = $filename.'_'.time().'1280X720.'.$extension;
+            $fileNameToStore1 = $filename.'_'.time().'1280X720.'.$extension;
+            $fileNameToStore2 = $filename.'_'.time().'1920X1080.'.$extension;
+            $fileNameToStore3 = $filename.'_'.time().'2560x1440.'.$extension;
+            $fileNameToStore4 = $filename.'_'.time().'3840X2160.'.$extension;
+            //$fileNameToStore5 = $filename.'_'.time().'5120X2880.'.$extension;
 
-            $image_resize = Image::make($image->getRealPath());              
-            $image_resize->resize(1280, 720);
-            $image_resize->save(public_path($stpath. "/" .$fileNameToStore));
+            $image_resize1 = Image::make($image->getRealPath());              
+            $image_resize1->resize(1280, 720);
+            $image_resize1->save(public_path($stpath. "/" .$fileNameToStore1));
 
+            $image_resize2 = Image::make($image->getRealPath());              
+            $image_resize2->resize(1920, 1080);
+            $image_resize2->save(public_path($stpath. "/" .$fileNameToStore2));
+
+            $image_resize3 = Image::make($image->getRealPath());              
+            $image_resize3->resize(2560, 1440);
+            $image_resize3->save(public_path($stpath. "/" .$fileNameToStore3));
+
+            $image_resize4 = Image::make($image->getRealPath());              
+            $image_resize4->resize(3840, 2160);
+            $image_resize4->save(public_path($stpath. "/" .$fileNameToStore4));
+
+            // $image_resize5 = Image::make($image->getRealPath());              
+            // $image_resize5->resize(5120, 2880);
+            // $image_resize5->save(public_path($stpath. "/" .$fileNameToStore5));
+
+
+            $wallpaper = new Wallpaper;
             $wallpaper->details_id = $details_id;
             $wallpaper->width = "1280";
             $wallpaper->height = "720";
             $wallpaper->original = 0;
-            $wallpaper->url = $stpath .'/'.$fileNameToStore;
+            $wallpaper->url = $stpath .'/'.$fileNameToStore1;
             $wallpaper->save();
 
-            //Saving the 1920 x 1080 resolution
-            // $image = $request->file('image');
-            // $filenameWithExt = $image->getClientOriginalName();
-            // $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // $extension = $image->getClientOriginalExtension();
-            // $fileNameToStore = $filename.'_'.time().'1920x1080.'.$extension;
+            $wallpaper = new Wallpaper;
+            $wallpaper->details_id = $details_id;
+            $wallpaper->width = "1920";
+            $wallpaper->height = "1080";
+            $wallpaper->original = 0;
+            $wallpaper->url = $stpath .'/'.$fileNameToStore2;
+            $wallpaper->save();
 
-            // $image_resize = Image::make($image->getRealPath());              
-            // $image_resize->resize(1920, 1080);
-            // $image_resize->save(public_path($stpath. "/" .$fileNameToStore));
+            $wallpaper = new Wallpaper;
+            $wallpaper->details_id = $details_id;
+            $wallpaper->width = "2560";
+            $wallpaper->height = "1440";
+            $wallpaper->original = 0;
+            $wallpaper->url = $stpath .'/'.$fileNameToStore3;
+            $wallpaper->save();
 
-            // $wallpaper->details_id = $details_id;
-            // $wallpaper->width = "1920";
-            // $wallpaper->height = "1080";
-            // $wallpaper->original = 0;
-            // $wallpaper->url = $stpath .'/'.$fileNameToStore;
-            // $wallpaper->save();
+            $wallpaper = new Wallpaper;
+            $wallpaper->details_id = $details_id;
+            $wallpaper->width = "3840";
+            $wallpaper->height = "2160";
+            $wallpaper->original = 0;
+            $wallpaper->url = $stpath .'/'.$fileNameToStore4;
+            $wallpaper->save();
 
-            //Saving the 2560 x 1440 resolution
-            // $image = $request->file('image');
-            // $filenameWithExt = $image->getClientOriginalName();
-            // $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // $extension = $image->getClientOriginalExtension();
-            // $fileNameToStore = $filename.'_'.time().'2560x1440.'.$extension;
-
-            // $image_resize = Image::make($image->getRealPath());              
-            // $image_resize->resize(2560, 1440);
-            // $image_resize->save(public_path($stpath. "/" .$fileNameToStore));
-
-            // $wallpaper->details_id = $details_id;
-            // $wallpaper->width = "2560";
-            // $wallpaper->height = "1440";
-            // $wallpaper->original = 0;
-            // $wallpaper->url = $stpath .'/'.$fileNameToStore;
-            // $wallpaper->save();
-
-            //Saving the 3840 x 2160 resolution
-            // $image = $request->file('image');
-            // $filenameWithExt = $image->getClientOriginalName();
-            // $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // $extension = $image->getClientOriginalExtension();
-            // $fileNameToStore = $filename.'_'.time().'3840x2160.'.$extension;
-
-            // $image_resize = Image::make($image->getRealPath());              
-            // $image_resize->resize(3840, 2160);
-            // $image_resize->save(public_path($stpath. "/" .$fileNameToStore));
-
-            // $wallpaper->details_id = $details_id;
-            // $wallpaper->width = "3840";
-            // $wallpaper->height = "2160";
-            // $wallpaper->original = 0;
-            // $wallpaper->url = $stpath .'/'.$fileNameToStore;
-            // $wallpaper->save();
-
-            //Saving the 5120 x 2880  resolution
-            // $image = $request->file('image');
-            // $filenameWithExt = $image->getClientOriginalName();
-            // $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // $extension = $image->getClientOriginalExtension();
-            // $fileNameToStore = $filename.'_'.time().'.'.$extension;
-
-            // $image_resize = Image::make($image->getRealPath());              
-            // $image_resize->resize(5120, 2880);
-            // $image_resize->save(public_path($stpath. "/" .$fileNameToStore));
-
+            // $wallpaper = new Wallpaper;
             // $wallpaper->details_id = $details_id;
             // $wallpaper->width = "5120";
             // $wallpaper->height = "2880";
             // $wallpaper->original = 0;
-            // $wallpaper->url = $stpath .'/'.$fileNameToStore;
+            // $wallpaper->url = $stpath .'/'.$fileNameToStore5;
             // $wallpaper->save();
         }
         
@@ -187,6 +151,7 @@ class WallpapersController extends Controller
 
         if (count($tags) > 0){
             for ($i = 0; $i < count($tags); $i++){
+                $tag = new Tag;
                 $tag->tag_name = $tags[$i];
                 $tag->details_id = $details_id;
                 $tag->save();
@@ -270,6 +235,16 @@ class WallpapersController extends Controller
     public function destroy($id)
     {
         $detail_id = Wallpaper::where("id", "=", $id)->first()->details_id;
+        $wallpaper = Wallpaper::where("details_id", "=", $detail_id)->get();
+        foreach ($wallpaper as $wallpapers){
+            unlink ($wallpapers->url);
+        }
+
+        $tag = Tag::where("details_id", "=", $detail_id)->get();
+        foreach ($tag as $tags){
+            TagDetail::where("tag_id", "=", $tags->id)->delete();
+        }
+
         Wallpaper::where("details_id", "=", $detail_id)->delete();
         CategoryLink::where("details_id", "=", $detail_id)->delete();
         SubcategoryLink::where("details_id", "=", $detail_id)->delete();

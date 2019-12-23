@@ -53,12 +53,10 @@
                                         <div class = "form-group">
                                             <label class = "control-label col-md-12" style = "text-align: left;">Category Name</label>
                                             <div class = "col-md-12">
-                                                <select name = "category_id" id = "category_name" class = "form-control">
-                                                    <option value = "">-- Select Category --</option>
-                                                    @foreach ($category as $categories)
-                                                        <option value = "{{$categories->id}}">{{$categories->cat_name}}</option>
-                                                    @endforeach
-                                                </select><br />
+                                                @foreach ($category as $categories)
+                                                    <input type = "checkbox" name = "cat_id[]" value = "{{$categories->id}}"> {{$categories->cat_name}} &nbsp;&nbsp;&nbsp;&nbsp;
+                                                @endforeach
+                                                <br /><br />
                                             </div>
                                         </div>
                     
@@ -284,6 +282,54 @@
                             </tr>
                         @endforeach
                     </table>  
+                </div>
+            @endif
+
+            @if ($value == "frontpages")
+                <div class = "frontpage">
+                    <h2>Home Page Image Categories</h2>
+                    <div class = "row">
+                        <div class = "col-md-4 col-lg-4">
+                            <h4>Selected Categories</h4>
+                            @foreach ($frontcategory as $categories)
+                                <input type = "checkbox" name = "cat_delete[]" value = "{{$categories->category_id}}" style = "display:none;" id = "catdelete"> {{$categories->find($categories->id)->categories->cat_name}} &nbsp;&nbsp;&nbsp;&nbsp;
+                            @endforeach
+                        </div>
+
+                        <div class = "col-md-8 col-lg-8">
+                            <h4>All Categories</h4>
+                            <form action="{{url('admin/ssgrouplogin/index/frontpage')}}" method="POST">
+                                @csrf
+                                @foreach ($categorylist as $categories)
+                                    <input type = "checkbox" name = "category_id[]" value = "{{$categories->id}}"> {{$categories->cat_name}} &nbsp;&nbsp;&nbsp;&nbsp;
+                                @endforeach
+                                <br /><br />
+                                <input type="submit" value="Submit" class = "btn btn-primary">
+                            </form>
+                        </div>
+                    </div><hr /><br />
+
+                    <h2>Home Page Tags</h2>
+                    <div class = "row">
+                        <div class = "col-md-4 col-lg-4">
+                            <h4>Active Tags</h4>
+                            @foreach ($fronttags as $fronttag)
+                                <input type = "checkbox" name = "cat_delete[]" value = "{{$fronttag->tag_id}}" style = "display:none;" id = "catdelete"> {{$fronttag->find($fronttag->id)->tags->tag_name}} &nbsp;&nbsp;&nbsp;&nbsp;
+                            @endforeach
+                        </div>
+
+                        <div class = "col-md-8 col-lg-8">
+                            <h4>All Tags</h4>
+                            <form action="{{url('admin/ssgrouplogin/index/frontpage')}}" method="POST">
+                                @csrf
+                                @foreach ($tag as $tags)
+                                    <input type = "checkbox" name = "tag_id[]" value = "{{$tags->id}}"> {{$tags->tag_name}} &nbsp;&nbsp;&nbsp;&nbsp;
+                                @endforeach
+                                <br /><br />
+                                <input type="submit" value="Submit" class = "btn btn-primary">
+                            </form>
+                        </div>
+                    </div>
                 </div>
             @endif
         </div>

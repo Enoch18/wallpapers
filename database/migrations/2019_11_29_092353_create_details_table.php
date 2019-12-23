@@ -16,11 +16,11 @@ class CreateDetailsTable extends Migration
         Schema::create('details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('image_title');
-            $table->string('author');
-            $table->text('author_link');
+            $table->string('author')->nullable();
+            $table->text('author_link')->nullable();
             $table->longText('description');
             $table->longText('liveat');
-            $table->integer('downloads');
+            $table->integer('downloads')->nullable();
             $table->timestamps();
         });
     }

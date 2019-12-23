@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title></title>
+        <title>{{str_replace("_", " ", $title)}}</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -39,8 +39,8 @@
                             </li>
                         </ul>
 
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2 search" type="search" placeholder="Search" aria-label="Search">
+                        <form class="form-inline" method = "GET" action = "{{url('results')}}">
+                            <input class="form-control mr-sm-2 search" type="search" name = "search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-primary my-2 my-sm-0 searchbtn" type="submit"><i class = "fa fa-search"></i></button>
                         </form>
                     <div>
@@ -48,20 +48,48 @@
             </div>
 
             <div class = "mainbody">
-                <div class = "ads">Advertisement</div>
+                <div class = "ads">
+                    <p>Advertisement</p>
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({
+                            google_ad_client: "ca-pub-8918135732106370",
+                            enable_page_level_ads: true
+                         });
+                    </script>
+                </div>
 
                 <div class = "row">
                     <div class = "col-lg-2" id = "col1">
                         <ul class = "list-group">
                             <li class = 'list-group-item'><a href = '{{url('/wallpapers/all-categories')}}'>All Categories ({{$allcategorytotal}})</a></li>
                             @foreach ($category as $categories)
-                                <li class = 'list-group-item'><a href = '{{url('/wallpapers')}}/{{$categories->cat_name}}'>{{$categories->cat_name}} ({{$categories->find($categories->id)->categorylinks->count()}})</a></li>
+                                <li class = 'list-group-item'><a href = '{{url('/wallpapers')}}/{{str_replace('/', '+', $categories->cat_name)}}'>{{$categories->cat_name}} ({{$categories->find($categories->id)->categorylinks->count()}})</a></li>
                             @endforeach
                         </ul>
                     </div>
 
                     <div class = "col-lg-8">
                         @yield('content')
+                        <hr />
+                        
+                        <div class = "ads">
+                            <p>Advertisement</p>
+                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({
+                                    google_ad_client: "ca-pub-8918135732106370",
+                                    enable_page_level_ads: true
+                                 });
+                            </script>
+                        </div>
+
+                        <div class = "populartags">
+                            <h4>Popular Tags:</h4>
+                            @foreach ($activetags as $activetag)
+                            <a href = "{{url('results')}}?search={{str_replace(' ', '+', $activetag->find($activetag->id)->tags->tag_name)}}">{{$activetag->find($activetag->id)->tags->tag_name}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            @endforeach
+                        </div>
                     </div>
 
                     <div class = "col-lg-2" id = "col1">
@@ -89,6 +117,11 @@
                             </script>
                         </div><br /><br />
                     </div>
+                </div><hr />
+                <div class = "footer">
+                    <p>&copy; 2019 @if (date("Y") != "2019") - {{date("Y")}} @endif, All Rights Reserved.</p>
+                    <a href = "{{url('disclaimer')}}">Desclaimer</a> &nbsp;&nbsp;&nbsp; <a href = "{{url('privacy')}}">Privacy Policy</a> &nbsp;&nbsp;&nbsp;<a href = "{{url('terms')}}">Terms of Service</a> &nbsp;&nbsp;&nbsp;
+                    <a href = "{{url('sitemap')}}">Site Map</a> &nbsp;&nbsp;&nbsp; <a href = "#">Contact us</a>
                 </div>
             </div>
         <section>
@@ -111,7 +144,6 @@ $(document).ready(function(){
             method: "POST",
             data: $("#form1").serialize(),
             success:function(data){
-                alert(data);
                 if (data == "not found"){
                     $("#sub_success_div").show();
                     $("#sub_success").css({

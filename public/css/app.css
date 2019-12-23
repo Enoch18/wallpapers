@@ -11404,6 +11404,33 @@ body {
   margin: 20px;
 }
 
+.mainbody p {
+  font-size: 18px;
+}
+
+.populartags a {
+  font-size: 18px;
+  text-decoration: none;
+  color: white !important;
+}
+
+a,
+p {
+  font-size: 18px;
+  text-decoration: none;
+  color: white !important;
+}
+
+#bannerright p {
+  font-size: 14px;
+}
+
+.imagename {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .img-responsive {
   width: 100%;
 }
@@ -11412,10 +11439,21 @@ body {
   min-height: 70px;
 }
 
+.ads p {
+  font-size: 14px;
+}
+
 .list-group-item {
   font-size: 20px;
   background-color: #4985cc;
   border: 1px solid #4b4a4a;
+}
+
+.headinglabel {
+  width: 100%;
+  background-color: #4985cc;
+  width: 95%;
+  height: 30px;
 }
 
 .list-group-item a {
@@ -11443,6 +11481,10 @@ body {
   font-size: 18px;
 }
 
+.footer {
+  text-align: center;
+}
+
 @media (max-width: 1500px) {
   .topbanner {
     width: 100%;
@@ -11462,6 +11504,11 @@ body {
 
 .adminmaincontent {
   color: black !important;
+}
+
+.adminmaincontent h2 {
+  font-size: 20px !important;
+  font-weight: bold !important;
 }
 
 .wallpapers img {
@@ -11527,6 +11574,10 @@ body {
 }
 
 .topd > h2 {
+  text-align: center;
+}
+
+.frontpage h2 {
   text-align: center;
 }
 
