@@ -3,7 +3,7 @@
 @section ('content')
 
     <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h4 class = "headinglabel" style = "width: 100% !important;">{{$cat_name}}<h4>
+        <h4 class = "headinglabel" style = "width: 100% !important;">@if ($cat_name != '') {{ucwords($cat_name)}} @else {{ucwords($detail->image_title)}} @endif<h4>
 
         <a href = "{{url($wallpaper->url)}}">
             <img src = "{{url($wallpaper->url)}}" class = "img img-responsive img-thumbnail"><br /><br />
@@ -40,10 +40,13 @@
                 @foreach ($related as $relateds)
                     @foreach ($relatedwallpaper as $relatedwallpapers)
                         @if ($relateds->details_id == $relatedwallpapers->details_id && $relateds->details_id != $id)
-                            <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-4 imgcontainer">
                                 <a href = "{{url('download/' . str_replace(' ', '_', $relatedwallpapers->find($relatedwallpapers->id)->details->image_title) . '-' . $relatedwallpapers->find($relatedwallpapers->id)->details->id)}}">
                                     <img src = "{{url($relatedwallpapers->url)}}" class = "img img-responsive img-thumbnail"><br /><br />
                                 </a>
+                                <div class = "downloadno">
+                                    <p><i class = "fa fa-download"></i> {{$relatedwallpapers->find($relatedwallpapers->id)->details->downloads}}</p>
+                                </div>
                                 <p class = "imagename">{{$relatedwallpapers->find($relatedwallpapers->id)->details->image_title}}</p>
                             </div>
                         @endif

@@ -39,7 +39,8 @@ class AdminController extends Controller
         if ($value == "wallpapers"){
             $wallpaper = Wallpaper::where('width', '=', '1280')->orderBy('id', 'DESC')->get();
             $category = Category::all();
-            return view ('Admin.index', compact('value', 'wallpaper', 'category'));
+            $subcategory = Subcategory::all();
+            return view ('Admin.index', compact('value', 'wallpaper', 'category', 'subcategory'));
         }
 
         if ($value == "categories"){

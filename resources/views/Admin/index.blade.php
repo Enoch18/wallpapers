@@ -52,13 +52,25 @@
 
                                         <div class = "form-group">
                                             <label class = "control-label col-md-12" style = "text-align: left;">Category Name</label>
-                                            <div class = "col-md-12">
+                                            <div class = "col-md-12" style = "max-height: 150px; overflow-y: auto;">
                                                 @foreach ($category as $categories)
-                                                    <input type = "checkbox" name = "cat_id[]" value = "{{$categories->id}}"> {{$categories->cat_name}} &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <input type = "checkbox" name = "category_id[]" value = "{{$categories->id}}"> {{$categories->cat_name}} &nbsp;&nbsp;&nbsp;&nbsp;
                                                 @endforeach
                                                 <br /><br />
                                             </div>
                                         </div>
+
+                                        @if (count($subcategory) > 0)
+                                            <div class = "form-group">
+                                                <label class = "control-label col-md-12" style = "text-align: left;">Subcategory Name</label>
+                                                <div class = "col-md-12" style = "max-height: 150px; overflow-y: auto;">
+                                                    @foreach ($subcategory as $subcategories)
+                                                        <input type = "checkbox" name = "subcategory_id[]" value = "{{$subcategories->id}}"> {{$subcategories->sub_name}} &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    @endforeach
+                                                    <br /><br />
+                                                </div>
+                                            </div>
+                                        @endif
                     
                                         <div class = "form-group"><br />
                                             <label class = "control-label col-md-12">Wallpaper</label>

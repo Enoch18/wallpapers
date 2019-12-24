@@ -48,8 +48,6 @@ class WallpapersController extends Controller
     public function store(Request $request)
     {
         $details = new Detail;
-        $catlink = new CategoryLink;
-        $sublink = new SubcategoryLink;
 
         $details->image_title = $request->image_title;
         $details->author = $request->author_name;
@@ -159,18 +157,30 @@ class WallpapersController extends Controller
         }
 
         if ($request->category_id != ''){
-            $catlink->details_id = $details_id;
-            $catlink->category_id = $request->category_id;
-            $catlink->save();
+            foreach ($request->category_id as $cat_id){
+                $catlink = new CategoryLink;
+                $catlink->details_id = $details_id;
+                $catlink->category_id = $cat_id;
+                $catlink->save();
+            }
         }else{
+            $catlink = new CategoryLink;
             $catlink->details_id = $details_id;
             $catlink->category_id = 0;
             $catlink->save();
         }
 
         if ($request->subcategory_id != ''){
+            foreach ($request->subcategory_id as $sub_id){
+                $sublink = new SubcategoryLink;
+                $sublink->details_id = $details_id;
+                $sublink->subcategory_id = $sub_id;
+                $catlink->save();
+            }
+        }else{
+            $sublink = new SubcategoryLink;
             $sublink->details_id = $details_id;
-            $sublink->subcategory_id = $request->category_id;
+            $sublink->subcategory_id = 0;
             $catlink->save();
         }
 

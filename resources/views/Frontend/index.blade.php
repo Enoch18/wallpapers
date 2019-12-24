@@ -11,10 +11,13 @@
 
         @if ($value != "index" && $value != "categories" && $value != "top-downloads" && $value != "all-categories" && $value != "search")
             @foreach ($wallpaper as $wallpapers)
-                <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-4 imgcontainer">
                     <a href = "{{url('download/' . str_replace(' ', '_', $wallpapers->find($wallpapers->id)->details->image_title) . '-' . $wallpapers->find($wallpapers->id)->details->id)}}">
                         <img src = "{{url($wallpapers->url)}}" class = "img img-responsive img-thumbnail"><br /><br />
                     </a>
+                    <div class = "downloadno">
+                        <p><i class = "fa fa-download"></i> {{$wallpapers->find($wallpapers->id)->details->downloads}}</p>
+                    </div>
                     <p class = "imagename">{{ucwords($wallpapers->find($wallpapers->id)->details->image_title)}}</p>
                 </div>
             @endforeach
@@ -26,10 +29,13 @@
             </div><br /><br />
 
             @foreach ($wallpaper as $wallpapers)
-                <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-4 imgcontainer">
                     <a href = "{{url('download/' . str_replace(' ', '_', $wallpapers->find($wallpapers->id)->details->image_title) . '-' . $wallpapers->find($wallpapers->id)->details->id)}}">
                         <img src = "{{url($wallpapers->url)}}" class = "img img-responsive img-thumbnail"><br /><br />
                     </a>
+                    <div class = "downloadno">
+                        <p><i class = "fa fa-download"></i> {{$wallpapers->find($wallpapers->id)->details->downloads}}</p>
+                    </div>
                     <p class = "imagename">{{ucwords($wallpapers->find($wallpapers->id)->details->image_title)}}</p>
                 </div>
             @endforeach
@@ -42,10 +48,13 @@
             @foreach ($detail as $details)
                 @foreach ($wallpaper as $wallpapers)
                     @if ($details->id == $wallpapers->details_id)
-                        <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-4 imgcontainer">
                             <a href = "{{url('download/' . str_replace(' ', '_', $wallpapers->find($wallpapers->id)->details->image_title) . '-' . $wallpapers->find($wallpapers->id)->details->id)}}">
                                 <img src = "{{url($wallpapers->url)}}" class = "img img-responsive img-thumbnail"><br /><br />
                             </a>
+                            <div class = "downloadno">
+                                <p><i class = "fa fa-download"></i> {{$wallpapers->find($wallpapers->id)->details->downloads}}</p>
+                            </div>
                             <p class = "imagename">{{$wallpapers->find($wallpapers->id)->details->image_title}}</p>
                         </div>
                     @endif
@@ -61,10 +70,13 @@
             @foreach ($detail as $details)
                 @foreach ($wallpaper as $wallpapers)
                     @if ($details->details_id == $wallpapers->details_id)
-                        <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-4 imgcontainer">
                             <a href = "{{url('download/' . str_replace(' ', '_', $wallpapers->find($wallpapers->id)->details->image_title) . '-' . $wallpapers->find($wallpapers->id)->details->id)}}">
                                 <img src = "{{url($wallpapers->url)}}" class = "img img-responsive img-thumbnail"><br /><br />
                             </a>
+                            <div class = "downloadno">
+                                <p><i class = "fa fa-download"></i> {{$wallpapers->find($wallpapers->id)->details->downloads}}</p>
+                            </div>
                             <p class = "imagename">{{$wallpapers->find($wallpapers->id)->details->image_title}}</p>
                         </div>
                     @endif
@@ -76,10 +88,13 @@
             @foreach ($detail as $details)
                 @foreach ($wallpaper as $wallpapers)
                     @if ($details->id == $wallpapers->details_id)
-                        <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-4 imgcontainer">
                             <a href = "{{url('download/' . str_replace(' ', '_', $wallpapers->find($wallpapers->id)->details->image_title) . '-' . $wallpapers->find($wallpapers->id)->details->id)}}">
                                 <img src = "{{url($wallpapers->url)}}" class = "img img-responsive img-thumbnail"><br /><br />
                             </a>
+                            <div class = "downloadno">
+                                <p><i class = "fa fa-download"></i> {{$wallpapers->find($wallpapers->id)->details->downloads}}</p>
+                            </div>
                             <p class = "imagename">{{ucwords($wallpapers->find($wallpapers->id)->details->image_title)}}</p>
                         </div>
                     @endif

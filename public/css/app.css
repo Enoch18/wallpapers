@@ -11485,6 +11485,20 @@ p {
   text-align: center;
 }
 
+.imgcontainer {
+  position: relative;
+}
+
+.downloadno {
+  position: absolute;
+  bottom: 60px;
+  right: 25px;
+}
+
+.downloadno p {
+  font-size: 16px;
+}
+
 @media (max-width: 1500px) {
   .topbanner {
     width: 100%;
