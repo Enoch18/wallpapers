@@ -12,6 +12,7 @@ use App\SubcategoryLink;
 use App\Tag;
 use App\Subscriber;
 use App\TagDetail;
+use App\FrontPage;
 use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
@@ -21,10 +22,14 @@ class IndexController extends Controller
         $title = "Download All Wallpapers";
         $activetags = TagDetail::all();
         $value = "index";
+        $frontpage = FrontPage::all();
+        $categorylink = CategoryLink::all();
+        $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->orderBy('id', 'DESC')->get();
         $allcategorytotal = Detail::count();
+        $detail = Detail::orderby("downloads", "DESC")->get();
         $category = Category::all();
         $catid = TagDetail::all();
-        return view ("Frontend.index", compact("category", 'value', 'allcategorytotal', 'activetags', 'title'));
+        return view ("Frontend.index", compact("category", 'value', 'allcategorytotal', 'activetags', 'title', 'frontpage', 'categorylink', 'wallpaper', 'detail'));
     }
 
     public function search(Request $request){
@@ -47,7 +52,7 @@ class IndexController extends Controller
         if ($value == "latest"){
             $allcategorytotal = Detail::count();
             $title = "Latest Wallpapers";
-            $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->orderBy('created_at', 'DESC')->get();
+            $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->orderBy('created_at', 'DESC')->paginate(3);
             return view ("Frontend.index", compact("category", "wallpaper", "value", "allcategorytotal", "allcategorytotal", "activetags", "title"));
         }
 
@@ -56,7 +61,7 @@ class IndexController extends Controller
             $title = "Top Downloaded Wallpapers";
             $allcategorytotal = Detail::count();
             $detail = Detail::orderBy('downloads', 'DESC')->get();
-            $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->get();
+            $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->paginate(3);
             return view ("Frontend.index", compact("category", "wallpaper", "value", "detail", "allcategorytotal", "activetags", "title"));
         }
 
@@ -64,7 +69,7 @@ class IndexController extends Controller
             $activetags = TagDetail::all();
             $title = "Random Wallpapers";
             $allcategorytotal = Detail::count();
-            $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->inRandomOrder()->get();
+            $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->inRandomOrder()->paginate(3);
             return view ("Frontend.index", compact("category", "wallpaper", "value", "allcategorytotal", "activetags", "title"));
         }
 
@@ -77,7 +82,7 @@ class IndexController extends Controller
                 $cat_id = Category::where('cat_name', '=' ,$value)->first()->id;
                 $detail = CategoryLink::where('category_id', '=', $cat_id)->get();
                 $totaldetails = $detail->count();
-                $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->get();
+                $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->paginate(3);
                 $cat_name = Category::where("id", "=", $cat_id)->first()->cat_name;
                 $value = "categories";
                 return view ("Frontend.index", compact("category", "wallpaper", "value", 'detail', 'value', 'allcategorytotal', 'cat_name', 'activetags', 'title'));
@@ -85,7 +90,7 @@ class IndexController extends Controller
                 $value = str_replace("+", "/", $value);
                 $title = ucwords(str_replace("-", " ", $value));
                 $allcategorytotal = Detail::count();
-                $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->get();
+                $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->paginate(3);
                 return view ("Frontend.index", compact("category", "wallpaper", 'detail', 'value', 'allcategorytotal', 'activetags', 'title'));
             }
         }
@@ -105,7 +110,7 @@ class IndexController extends Controller
         $category_id = CategoryLink::where('details_id', '=', $id)->first()->category_id ?? '0';
         $subcategory_id = SubcategoryLink::where('details_id', '=', $id)->first()->subcategory_id ?? '0';
         $related = CategoryLink::where('category_id', '=', $category_id)->get();
-        $relatedwallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->get();
+        $relatedwallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->limit(4)->get();
         $cat_name = '';
         $sub_name = '';
         if ($category_id != '0'){

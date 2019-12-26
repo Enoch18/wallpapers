@@ -18,7 +18,7 @@
                 <nav class="navbar navbar-expand-lg">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
-                    </button>
+                    </button><br /><br />
 
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
@@ -60,6 +60,10 @@
                 </div>
 
                 <div class = "row">
+                    <div class = "col-sm-12">
+                        <button class = "btn btn-primary viewcategories">View Categories</button><br />
+                    </div>
+
                     <div class = "col-lg-2" id = "col1">
                         <ul class = "list-group">
                             <li class = 'list-group-item'><a href = '{{url('/wallpapers/all-categories')}}'>All Categories ({{$allcategorytotal}})</a></li>
@@ -89,6 +93,7 @@
                             @foreach ($activetags as $activetag)
                             <a href = "{{url('results')}}?search={{str_replace(' ', '+', $activetag->find($activetag->id)->tags->tag_name)}}">{{$activetag->find($activetag->id)->tags->tag_name}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
                             @endforeach
+                            <br /><br /><br />
                         </div>
                     </div>
 
@@ -179,6 +184,15 @@ $(document).ready(function(){
                 }
             }
         });
+    });
+
+    $(".navbar-toggler").click(function(){
+        $("#navbarNavDropdown").toggle();
+    });
+
+    $(".viewcategories").click(function(e){
+        e.preventDefault();
+        $("#col1").toggle();
     });
 });
 </script>

@@ -17,6 +17,6 @@ class Category extends Model
     }
 
     public function fontpagecategories(){
-        return $this->hasMany(Subcategory::class, 'category_id');
+        return $this->hasMany(Category::class, 'category_id');
     }
 }

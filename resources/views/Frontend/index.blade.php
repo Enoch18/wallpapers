@@ -7,6 +7,7 @@
             <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <h4 class = "headinglabel">Popular Categories<h4>
             </div><br /><br />
+            
         @endif
 
         @if ($value != "index" && $value != "categories" && $value != "top-downloads" && $value != "all-categories" && $value != "search")
@@ -21,6 +22,10 @@
                     <p class = "imagename">{{ucwords($wallpapers->find($wallpapers->id)->details->image_title)}}</p>
                 </div>
             @endforeach
+
+            <div class = "pagination">
+                {!! $wallpaper->render() !!}
+            </div>
         @endif
 
         @if ($value == "all-categories")
@@ -39,6 +44,10 @@
                     <p class = "imagename">{{ucwords($wallpapers->find($wallpapers->id)->details->image_title)}}</p>
                 </div>
             @endforeach
+
+            <div class = "pagination">
+                {!! $wallpaper->render() !!}
+            </div>
         @endif
 
         @if ($value == "search")
@@ -82,6 +91,10 @@
                     @endif
                 @endforeach
             @endforeach
+
+            <div class = "pagination">
+                {!! $wallpaper->render() !!}
+            </div>
         @endif
 
         @if ($value == "top-downloads")
@@ -100,6 +113,10 @@
                     @endif
                 @endforeach
             @endforeach
+
+            <div class = "pagination">
+                {!! $wallpaper->render() !!}
+            </div>
         @endif
     </div>
 </div>
