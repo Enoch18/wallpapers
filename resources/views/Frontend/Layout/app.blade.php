@@ -93,7 +93,17 @@
                             @foreach ($activetags as $activetag)
                             <a href = "{{url('results')}}?search={{str_replace(' ', '+', $activetag->find($activetag->id)->tags->tag_name)}}">{{$activetag->find($activetag->id)->tags->tag_name}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
                             @endforeach
-                            <br /><br /><br />
+                            <br />
+                            <div class = "ads">
+                                <p>Advertisement</p>
+                                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || []).push({
+                                        google_ad_client: "ca-pub-8918135732106370",
+                                        enable_page_level_ads: true
+                                     });
+                                </script>
+                            </div><br /><br /><br />
                         </div>
                     </div>
 
@@ -113,13 +123,25 @@
                         
                         <div id = "bannerright">
                             <p>Advertisement</p>
-                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({
-                                    google_ad_client: "ca-pub-8918135732106370",
-                                    enable_page_level_ads: true
-                                 });
-                            </script>
+                            <div class = "ads">
+                                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || []).push({
+                                        google_ad_client: "ca-pub-8918135732106370",
+                                        enable_page_level_ads: true
+                                    });
+                                </script>
+                            </div><br />
+
+                            <div class = "ads">
+                                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || []).push({
+                                        google_ad_client: "ca-pub-8918135732106370",
+                                        enable_page_level_ads: true
+                                    });
+                                </script>
+                            </div>
                         </div><br /><br />
                     </div>
                 </div><hr />

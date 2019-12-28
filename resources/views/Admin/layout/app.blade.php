@@ -21,7 +21,7 @@
                 <div class="bg-light border-right" id="sidebar-wrapper">
                     <div class="list-group list-group-flush">
                         <li class="list-group-item list-group-item-action bg-light" style = "color: white;">WELCOME ADMIN</li><hr /> 
-                        <a href="index.php" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> DASHBOARD </a><hr />
+                        <a href="{{url('/admin/ssgrouplogin')}}" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> DASHBOARD </a><hr />
                         <ul class = "side" style = "margin-top: -40px;">
                             <li>
                                 <a href = "{{url('/admin/ssgrouplogin/wallpapers')}}" class="list-group-item list-group-item-action bg-light" id = "parent1"><i class="material-icons">collections</i> WALLPAPER</a>
@@ -38,7 +38,10 @@
                         <a href="{{url('/admin/ssgrouplogin/unsubscribers')}}" class="list-group-item list-group-item-action bg-light"><i class="material-icons">subscriptions</i> UNSUBSCRIBERS</a>
                         <a href="{{url('/admin/ssgrouplogin/newsletters')}}" class="list-group-item list-group-item-action bg-light"><i class="fa fa-newspaper-o"></i> NEWS LETTERS</a>
                         <a href="{{url('/admin/ssgrouplogin/logindetails')}}" class="list-group-item list-group-item-action bg-light"><i class="fa fa-gear"></i> LOGIN DETAILS</a>
-                        <a href="{{ route('logout') }}" class="list-group-item list-group-item-action bg-light"><i class="fa fa-sign-out"></i> LOGOUT</a>
+                        <a href="{{ route('logout') }}" class="list-group-item list-group-item-action bg-light" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out"></i> LOGOUT</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     </div>
                 </div>
             </div>
@@ -111,6 +114,12 @@
     //     });
     // });
     
+        $("#changelogin").submit(function(e){
+            if ($("#newpassword").val() != $("#confirmpassword").val()){
+                $("#mismatch").show();
+                return false;
+            }
+        });
     });
     </script>
     

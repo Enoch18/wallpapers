@@ -15,8 +15,9 @@
                                 <div class = "col-xs-12 col-sm-6 col-md-4 col-lg-4">
                                     <div class = "image">
                                         <img src = "{{asset($wallpapers->url)}}" class = "img img-responsive img-thumbnail">
-                                        <a href = "{{url('admin/ssgrouplogin/wallpaper/add')}}/{{{$wallpapers->find($wallpapers->id)->details->id}}}/edit" class = "btn btn-primary btn-admin" id = "edit"><i class = "fa fa-edit admin-fa"></i></a> <button class = "btn btn-danger btn-admin trash" id = "{{$wallpapers->id}}"><i class = "fa fa-trash admin-fa"></i></button><br /><br />
+                                        <a href = "{{url('admin/ssgrouplogin/wallpaper/add')}}/{{$wallpapers->find($wallpapers->id)->details->id}}/edit" class = "btn btn-primary btn-admin" id = "edit"><i class = "fa fa-edit admin-fa"></i></a> <button class = "btn btn-danger btn-admin trash" id = "{{$wallpapers->id}}"><i class = "fa fa-trash admin-fa"></i></button><br /><br />
                                     </div>
+                                    <p style = "color: black !important; text-align: center !important; margin-top: -10px;">{{$wallpapers->find($wallpapers->id)->details->image_title}}</p><br />
                                 </div>
                             @endforeach
                         </div>
@@ -116,6 +117,81 @@
                                     <br />
                                 </div>
                             </div>
+                    </div>
+                </div>
+            @endif
+
+            @if ($value == "newsletters")
+                <div class = "newsletter container">
+                    <h2>Newsletter</h2><br />
+                    <form action = "" method = "post" enctype = "multipart/form-data">
+                        @csrf
+                        <div class = "row">
+                            <div class = "col-lg-12" style = "margin-left:10px; margin-top: -15px;">
+                                <label style = "font-weight: bold; margin-left: -10px;">Subject</label>
+                            </div>
+        
+                            <div class = "col-lg-12 form-group">
+                                <input type = "text" name = "subject" class = "form-control" placeholder = "Subject"><br /><br />
+                            </div>
+                        </div>
+        
+                        <div class = "row">
+                            <div class = "col-lg-12" style = "margin-left:10px; margin-top: -20px;">
+                                <label style = "font-weight: bold; margin-left: -10px;">Message</label>
+                            </div>
+        
+                            <div class = "col-lg-12 form-group">
+                                <textarea name = "message" id = "description" class = "form-control" maxlength = 300></textarea><br /><br />
+                            </div>
+                        </div>
+        
+                        <div class = "row">
+                            <div class = "col-lg-12" style = "margin-left:10px;">
+                                <label style = "font-weight: bold; margin-left: -10px;">Choose Wallpapers from yesterday's upload</label>
+                            </div>
+                            <div class = "col-lg-12 form-group">
+                                <div class = "row">
+                                    @foreach ($wallpaper as $wallpapers)
+                                        <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                                            <label class = "checkbox-inline">
+                                                <img src = "{{url($wallpapers->url)}}"class = "img img-responsive" style = "width: 100%; cursor: pointer;">
+                                                <input type = "checkbox" name = "images[]" value = "{{$wallpapers->url}}" style = "float: right; height: 20px; width: 20px; margin-top: 1%;"><br /><br /><br />
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class = "row">
+                            {{-- <div class = "col-lg-12">
+                                <input type = "submit" name = "submit" class = "btn btn-primary pull-left" value = "Send" style = "height:50px; width:200px; font-size:25px; margin-top: -30px;">
+                            </div><br /><br /> --}}
+                            <a class = "btn btn-primary">Send</a>
+                        </div>
+                    </form>
+                </div>
+            @endif
+
+            @if ($value == "logindetails")
+                <div class = "logindetails container">
+                    <h2>Login Details</h2><br />
+                    <div class = "row">
+                        <div class = "col-lg-12">
+                            <form class = "form-group" id = "changelogin" action = "{{url('admin/ssgrouplogin/login/update')}}" method = "POST">
+                                @csrf
+                                <label for = "name">Name</label>
+                                <input type = "text" name = "name" class = "form-control" id = "name" value = "{{auth()->user()->name}}" placeholder = "Name"><br />
+
+                                <label for = "email">Enter New Email</label>
+                                <input type = "email" name = "email" class = "form-control" value = "{{auth()->user()->email}}"><br />
+                                <input type = "password" name = "newpassword" id = "newpassword" class = "form-control" placeholder = "New Password"><br />
+                                <input type = "password" name = "confirm" id = "confirmpassword" class = "form-control" placeholder = "Confirm Password">
+                                <p id = "mismatch" style = "display: none !important;"><small style = "color: red !important;">Your passwords do not match!</small></p><br />
+                                <input type = "submit" name = "editdetails" class = "form-control btn btn-primary col-lg-3" value = "Update">
+                            </form>
+                        </div>
                     </div>
                 </div>
             @endif

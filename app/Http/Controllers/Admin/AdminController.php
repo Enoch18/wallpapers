@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Category;
 use App\Subcategory;
 use App\Detail;
@@ -14,6 +15,7 @@ use App\Subscriber;
 use App\FrontPage;
 use App\Tag;
 use App\TagDetail;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -30,7 +32,7 @@ class AdminController extends Controller
     
     public function index()
     {
-        $value = "index";
+        $value = "dashboard";
         return view ('Admin.index', compact('value'));
     }
 
@@ -79,7 +81,8 @@ class AdminController extends Controller
         }
 
         if ($value == "newsletters"){
-            return view ('Admin.index', compact('value'));
+            $wallpaper = Wallpaper::where('width', '=', '1280')->orderBy('created_at', 'DESC')->get();
+            return view ('Admin.index', compact('value', 'wallpaper'));
         }
 
         if ($value == "logindetails"){
@@ -113,5 +116,28 @@ class AdminController extends Controller
             }
             return redirect()->back()->with(['msg' => 'Front Page iTags have been added', 'type' => 'success']);
         }
+    }
+
+    public function updatelogin(Request $request){
+        $id = auth()->user()->id;
+        $users = User::find($id);
+        $password = '';
+
+        if ($request->newpassword != ''){
+            $password = Hash::make($request->newpassword);
+            $users->password = $password;
+            $users->save();
+        }
+
+        if ($request->email != ''){
+            $users->email = $request->email;
+            $users->save();
+        }
+
+        if ($request->name != ''){
+            $users->name = $request->name;
+            $users->save();
+        }
+        return redirect()->back()->with(['msg' => 'Your login details have been updated', 'type' => 'success']);
     }
 }

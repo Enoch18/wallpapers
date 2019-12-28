@@ -22,7 +22,7 @@
                     <p class = "imagename">{{ucwords($wallpapers->find($wallpapers->id)->details->image_title)}}</p>
                 </div>
             @endforeach
-
+            
             <div class = "pagination">
                 {!! $wallpaper->render() !!}
             </div>
@@ -44,7 +44,7 @@
                     <p class = "imagename">{{ucwords($wallpapers->find($wallpapers->id)->details->image_title)}}</p>
                 </div>
             @endforeach
-
+            
             <div class = "pagination">
                 {!! $wallpaper->render() !!}
             </div>

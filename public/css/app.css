@@ -11505,8 +11505,8 @@ p {
 }
 
 .pagination {
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: auto !important;
+  margin-right: auto !important;
   color: black !important;
 }
 
@@ -11518,13 +11518,85 @@ p {
   color: black !important;
 }
 
+.desc_p {
+  margin-top: -20px;
+}
+
+.desc_p p {
+  display: inline;
+}
+
+#share-buttons {
+  text-align: center !important;
+}
+
+#share-buttons img {
+  padding: 5px;
+  border: 0;
+  box-shadow: 0;
+  display: inline;
+  width: 50px !important;
+}
+
 @media (max-width: 1500px) {
   .topbanner {
     width: 100%;
   }
 
+  .search {
+    width: 70% !important;
+  }
+
   .nav-link {
     font-size: 16px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .nav-link {
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 990px) {
+  .nav-item,
+  .navbar {
+    width: 100% !important;
+  }
+
+  .nav-link {
+    width: 100% !important;
+    margin-top: 10px !important;
+  }
+
+  .navbar-nav {
+    width: 100% !important;
+  }
+
+  .form-inline {
+    width: 100% !important;
+  }
+
+  .form-inline {
+    margin-top: 10px !important;
+    width: 100% !important;
+  }
+
+  .search {
+    width: 84% !important;
+  }
+
+  .searchbtn {
+    width: 15% !important;
+  }
+
+  #col1 {
+    margin-bottom: 10px;
+    display: none;
+  }
+
+  .viewcategories {
+    display: block;
   }
 }
 
@@ -11650,6 +11722,15 @@ p {
 
 .updatecontainer > h2 {
   text-align: center;
+}
+
+.updatecontainer p {
+  color: black !important;
+}
+
+.updatecontainer a {
+  color: black !important;
+  text-decoration: underline !important;
 }
 
 .topd > h2 {

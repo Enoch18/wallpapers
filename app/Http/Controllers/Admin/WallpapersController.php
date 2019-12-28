@@ -81,7 +81,7 @@ class WallpapersController extends Controller
             $fileNameToStore2 = $filename.'_'.time().'1920X1080.'.$extension;
             $fileNameToStore3 = $filename.'_'.time().'2560x1440.'.$extension;
             $fileNameToStore4 = $filename.'_'.time().'3840X2160.'.$extension;
-            //$fileNameToStore5 = $filename.'_'.time().'5120X2880.'.$extension;
+            // $fileNameToStore5 = $filename.'_'.time().'5120X2880.'.$extension;
 
             $image_resize1 = Image::make($image->getRealPath());              
             $image_resize1->resize(1280, 720);
@@ -213,8 +213,9 @@ class WallpapersController extends Controller
         $tag = Tag::where("details_id", "=", $id)->first();
         $category_id = CategoryLink::where('details_id', '=', $id)->first()->category_id ?? '';
         $cat_name = Category::where('id', '=', $category_id)->first()->cat_name ?? 'Uncategorized';
+        $sub_name = DB::table('subcategories')->join('subcategory_links', 'subcategories.id', '=', 'subcategory_links.subcategory_id')->where('subcategory_links.details_id', '=', $id)->select('subcategories.*', 'subcategory_links.*')->first()->sub_name ?? 'Uncategorized';
 
-        return view ("Admin.update", compact("detail", "wallpaper", "tag", "cat_name", "category", "subcategory"));
+        return view ("Admin.update", compact("detail", "wallpaper", "tag", "cat_name", "sub_name", "category", "subcategory"));
     }
 
     /**

@@ -11,9 +11,9 @@
                 <p><b>Added On: </b>{{$detail->created_at}}</p>
                 <p><b>Downloads: </b>{{$detail->downloads ?? '0'}}</p>
                 <p><b>Category: </b>{{$cat_name}}</p>
-                <p><b>Subcategory: </b>{{$cat_name}}</p>
+                <p><b>Subcategory: </b>{{$sub_name}}</p>
                 <p><b>Description: </b></p><span>{!!$detail->description!!}</span>
-                <p><b>Url: </b>http://www.downloadallwallpapers.com/download/{{str_replace(" ", "_", $detail->image_title)}}-{{$detail->id}}</p>
+                <p><b>Url: </b><a href = "http://www.downloadallwallpapers.com/download/{{str_replace(" ", "_", $detail->image_title)}}-{{$detail->id}}">http://www.downloadallwallpapers.com/download/{{str_replace(" ", "_", $detail->image_title)}}-{{$detail->id}}</a></p>
             </div>
 
             <div class = "col-md-6 col-lg-6">

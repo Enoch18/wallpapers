@@ -133,6 +133,7 @@ class IndexController extends Controller
         $download_1920X1080 = Detail::find($id)->wallpapers->where('width', '=', '1920')->where('height', '=', '1080')->first()->url;
         $download_2560X1440 = Detail::find($id)->wallpapers->where('width', '=', '2560')->where('height', '=', '1440')->first()->url;
         $download_3840x2160 = Detail::find($id)->wallpapers->where('width', '=', '3840')->where('height', '=', '2160')->first()->url;
+        // $download_5120X2880 = Detail::find($id)->wallpapers->where('width', '=', '5120')->where('height', '=', '2880')->first()->url;
         return view ("Frontend.downloadpage", compact("category", "wallpaper", "detail", "cat_name", "wallpaper", 'sub_name', 'allcategorytotal', 'tag', 'download_1280X720', 'download_1920X1080', 'download_2560X1440', 'download_3840x2160', 'related', 'relatedwallpaper', 'id', 'activetags', 'title'));
     }
 
