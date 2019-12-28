@@ -236,7 +236,7 @@
                             <tr>
                                 <td>{{$categories->cat_name}}</td>
                                 <td>{{str_replace("-", "/", $categories->created_at)}}</td>
-                                <td><button class = "btn btn-danger">Delete</button></td>
+                                <td><button class = "btn btn-primary">Details</button> <button class = "btn btn-primary">Rename</button> <button class = "btn btn-danger catdelete" id = "{{$categories->id}}">Delete</button></td>
                             </tr>
                         @endforeach
                     </table>  
@@ -298,7 +298,7 @@
                             <tr>
                                 <td>{{$subcategories->sub_name}}</td>
                                 <td>{{str_replace("-", "/", $subcategories->created_at)}}</td>
-                                <td><button class = "btn btn-danger">Delete</button></td>
+                                <td><button class = "btn btn-primary">Rename</button> <button class = "btn btn-danger">Delete</button></td>
                             </tr>
                         @endforeach
                     </table>  

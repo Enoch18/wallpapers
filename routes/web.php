@@ -27,6 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     Route::get('ssgrouplogin/{value}', 'AdminController@displayvalue');
+    Route::get('ssgrouplogin/deletecategory/{id}', 'AdminController@deletecategory');
     Route::get('ssgrouplogin', 'AdminController@index')->name('Admin.index');
     Route::post('ssgrouplogin/login/update', 'AdminController@updatelogin');
     Route::post('ssgrouplogin/index/frontpage', 'AdminController@frontpage');

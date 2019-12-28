@@ -234,6 +234,29 @@ class WallpapersController extends Controller
         $details->author_link = $request->author_link;
         $details->description = $request->description;
         $details->save();
+
+        if ($request->catid != ''){
+            foreach ($request->catid as $cat_id){
+                $catcomp = CategoryLink::where('category_id', '=', $cat_id)->first()->category_id ?? 'none';
+                if ($cat_id != $catcomp){
+                    $catlink = new CategoryLink;
+                    $catlink->details_id = $id;
+                    $catlink->category_id = $cat_id;
+                    $catlink->save();
+                }
+            }
+        }
+
+        if ($request->subid != ''){
+            foreach ($request->subid as $sub_id){
+                if ($sub_id != SubcategoryLink::where('subcategory_id', '=', $subcategory_id)->first()->id){
+                    $sublink = new SubcategoryLink;
+                    $sublink->details_id = $id;
+                    $sublink->subcategory_id = $sub_id;
+                    $catlink->save();
+                }
+            }
+        }
         return redirect()->back()->with(['msg' => 'Wallpaper successfully updated', 'type' => 'success']);
     }
 

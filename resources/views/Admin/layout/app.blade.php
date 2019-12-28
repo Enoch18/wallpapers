@@ -20,7 +20,7 @@
             <div class = "adminsidebar">
                 <div class="bg-light border-right" id="sidebar-wrapper">
                     <div class="list-group list-group-flush">
-                        <li class="list-group-item list-group-item-action bg-light" style = "color: white;">WELCOME ADMIN</li><hr /> 
+                        <li class="list-group-item list-group-item-action bg-light" style = "color: white;">WELCOME <br /><small>{{strtoupper(auth()->user()->name)}}</small></li><hr /> 
                         <a href="{{url('/admin/ssgrouplogin')}}" class="list-group-item list-group-item-action bg-light"><i class="fa fa-dashboard"></i> DASHBOARD </a><hr />
                         <ul class = "side" style = "margin-top: -40px;">
                             <li>
@@ -90,10 +90,16 @@
         $("#yes").html("<a href = '"+path+"' class = 'btn btn-danger' style = 'width: 30%;'>Yes</a>");
         $("#deleteconfirm").modal('show');
     });
+
+    $(".catdelete").click(function(){
+        let path = "{{url('admin/ssgrouplogin/deletecategory/')}}/" + this.id;
+        $("#yes").html("<a href = '"+path+"' class = 'btn btn-danger' style = 'width: 30%;'>Yes</a>");
+        $("#deleteconfirm").modal('show');
+    });
     
     $("#no").click(function(){
         $("#deleteconfirm").hide();
-    })
+    });
     
     // Posting Image upload data to the database
     // $("#wallpaperupload").on("submit", function(event){

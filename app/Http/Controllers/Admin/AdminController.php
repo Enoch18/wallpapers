@@ -16,6 +16,7 @@ use App\FrontPage;
 use App\Tag;
 use App\TagDetail;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -138,6 +139,23 @@ class AdminController extends Controller
             $users->name = $request->name;
             $users->save();
         }
+        return redirect()->back()->with(['msg' => 'Your login details have been updated', 'type' => 'success']);
+    }
+
+    public function deletecategory($id){
+        $catdelete = Category::find($id);
+        $catdelete->delete();
+        
+        DB::table('category_links')->where('category_id', $id)->update(['category_id' => 0]);
+
+        $frontpage_cat = FrontPage::where('category_id', '=', $id);
+        $frontpage_cat->delete();
+
+        $subcat_id = Subcategory::where('category_id', '=', $id)->first()->id ?? '';
+        SubcategoryLink::where('subcategory_id', '=', $subcat_id)->delete();
+
+        $subcat_delete = Subcategory::where('category_id', '=', $id);
+        $subcat_delete->delete();
         return redirect()->back()->with(['msg' => 'Your login details have been updated', 'type' => 'success']);
     }
 }

@@ -34,7 +34,7 @@
                         <label>Subcategory</label><br />
                         @foreach ($subcategory as $subcategory)
                             <label class = "checkbox-inline">
-                                <input type = "checkbox" name = "catid[]" value = "{{$subcategory->id}}">{{$subcategory->sub_name}} &nbsp&nbsp&nbsp&nbsp
+                                <input type = "checkbox" name = "subid[]" value = "{{$subcategory->id}}">{{$subcategory->sub_name}} &nbsp&nbsp&nbsp&nbsp
                             </label>
                         @endforeach
                         <br /><br />
