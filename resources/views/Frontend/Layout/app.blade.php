@@ -91,8 +91,8 @@
                         <div class = "populartags">
                             <h4>Popular Tags:</h4>
                             @foreach ($activetags as $activetag)
-                            <a href = "{{url('results')}}?search={{str_replace(' ', '+', $activetag->find($activetag->id)->tags->tag_name)}}">{{$activetag->find($activetag->id)->tags->tag_name}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            @endforeach
+                            <a href = "{{url('results')}}?search={{str_replace(' ', '+', $activetag->tag_name)}}">{{$activetag->tag_name}}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            @endforeach 
                             <br />
                             <div class = "ads">
                                 <p>Advertisement</p>

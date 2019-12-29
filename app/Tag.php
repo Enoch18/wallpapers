@@ -13,6 +13,6 @@ class Tag extends Model
 
     // Relationship with the Tag Details
     public function tagdetails(){
-        return $this->hasMany(TagDetail::class, 'tag_id');
+        return $this->hasMany(TagDetail::class, 'tag_name');
     }
 }

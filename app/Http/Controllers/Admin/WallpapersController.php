@@ -150,7 +150,7 @@ class WallpapersController extends Controller
         if (count($tags) > 0){
             for ($i = 0; $i < count($tags); $i++){
                 $tag = new Tag;
-                $tag->tag_name = $tags[$i];
+                $tag->tag_name = str_replace(" ", "", $tags[$i]);
                 $tag->details_id = $details_id;
                 $tag->save();
             }
@@ -163,11 +163,6 @@ class WallpapersController extends Controller
                 $catlink->category_id = $cat_id;
                 $catlink->save();
             }
-        }else{
-            $catlink = new CategoryLink;
-            $catlink->details_id = $details_id;
-            $catlink->category_id = 0;
-            $catlink->save();
         }
 
         if ($request->subcategory_id != ''){
@@ -177,11 +172,6 @@ class WallpapersController extends Controller
                 $sublink->subcategory_id = $sub_id;
                 $catlink->save();
             }
-        }else{
-            $sublink = new SubcategoryLink;
-            $sublink->details_id = $details_id;
-            $sublink->subcategory_id = 0;
-            $catlink->save();
         }
 
         return redirect()->back()->with(['msg' => 'Wallpaper successfull added', 'type' => 'success']);
@@ -211,11 +201,10 @@ class WallpapersController extends Controller
         $detail = Detail::find($id);
         $wallpaper = Wallpaper::where('details_id', '=', $id)->where('width', '=', '1280')->where('height', '=', '720')->first();
         $tag = Tag::where("details_id", "=", $id)->first();
-        $category_id = CategoryLink::where('details_id', '=', $id)->first()->category_id ?? '';
-        $cat_name = Category::where('id', '=', $category_id)->first()->cat_name ?? 'Uncategorized';
-        $sub_name = DB::table('subcategories')->join('subcategory_links', 'subcategories.id', '=', 'subcategory_links.subcategory_id')->where('subcategory_links.details_id', '=', $id)->select('subcategories.*', 'subcategory_links.*')->first()->sub_name ?? 'Uncategorized';
-
-        return view ("Admin.update", compact("detail", "wallpaper", "tag", "cat_name", "sub_name", "category", "subcategory"));
+        $catlink = CategoryLink::where('details_id', '=', $id)->get();
+        $sublink = SubcategoryLink::where('details_id', '=', $id)->get();
+        $tag = Tag::where('details_id', '=', $id)->get();
+        return view ("Admin.update", compact("detail", "wallpaper", "tag", "catlink", "sublink", "category", "subcategory"));
     }
 
     /**
@@ -237,8 +226,9 @@ class WallpapersController extends Controller
 
         if ($request->catid != ''){
             foreach ($request->catid as $cat_id){
-                $catcomp = CategoryLink::where('category_id', '=', $cat_id)->first()->category_id ?? 'none';
-                if ($cat_id != $catcomp){
+                $cat = CategoryLink::where('category_id', '=', $cat_id)->where('details_id', '=', $id)->get();
+               
+                if (count($cat) < 1){
                     $catlink = new CategoryLink;
                     $catlink->details_id = $id;
                     $catlink->category_id = $cat_id;
@@ -249,11 +239,25 @@ class WallpapersController extends Controller
 
         if ($request->subid != ''){
             foreach ($request->subid as $sub_id){
-                if ($sub_id != SubcategoryLink::where('subcategory_id', '=', $subcategory_id)->first()->id){
+                $sub = SubcategoryLink::where('subcategory_id', '=', $sub_id)->where('details_id', '=', $id)->get();
+
+                if (count($sub) < 1){
                     $sublink = new SubcategoryLink;
                     $sublink->details_id = $id;
                     $sublink->subcategory_id = $sub_id;
-                    $catlink->save();
+                    $sublink->save();
+                }
+            }
+        }
+
+        if ($request->tags){
+            $tags = explode (",", $request->tags);
+            if (count($tags) > 0){
+                for ($i = 0; $i < count($tags); $i++){
+                    $tag = new Tag;
+                    $tag->tag_name = str_replace(" ", "", $tags[$i]);
+                    $tag->details_id = $request->id;
+                    $tag->save();
                 }
             }
         }
@@ -276,7 +280,7 @@ class WallpapersController extends Controller
 
         $tag = Tag::where("details_id", "=", $detail_id)->get();
         foreach ($tag as $tags){
-            TagDetail::where("tag_id", "=", $tags->id)->delete();
+            TagDetail::where("tag_name", "=", $tags->tag_name)->delete();
         }
 
         Wallpaper::where("details_id", "=", $detail_id)->delete();
@@ -285,5 +289,37 @@ class WallpapersController extends Controller
         Tag::where("details_id", "=", $detail_id)->delete();
         Detail::find($detail_id)->delete();
         return redirect()->back()->with(['msg' => 'Wallpaper successfull added', 'type' => 'success']);
+    }
+
+    public function wallpaperdetailsdelete(Request $request){
+        if ($request->rmcat_id != ''){
+            foreach ($request->rmcat_id as $catlink_id){
+                $catlink = CategoryLink::where('id', '=', $catlink_id)->delete();
+                return redirect()->back()->with(['msg' => 'Category Removed Successfully', 'type' => 'success']);
+            }
+        }
+
+        if ($request->rmsub_id != ''){
+            foreach ($request->rmsub_id as $sublink_id){
+                $sublink = SubcategoryLink::where('id', '=', $sublink_id)->delete();
+                return redirect()->back()->with(['msg' => 'Subcategory Removed Successfully', 'type' => 'success']);
+            }
+        }
+
+        if ($request->tag_name){
+            for ($i = 0; $i < count($request->tag_name); $i++){
+                $tag = Tag::find($request->tag_id[$i]);
+                $tag->tag_name = $request->tag_name[$i];
+                $tag->save();
+            }
+
+            if ($request->rmtag_id){
+                foreach ($request->rmtag_id as $tagid){
+                    Tag::find($tagid)->delete();
+                }
+            }
+
+            return redirect()->back()->with(['msg' => 'Action Performed Successfully', 'type' => 'success']);
+        }
     }
 }

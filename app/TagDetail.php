@@ -8,6 +8,6 @@ class TagDetail extends Model
 {
     // Relationship with the Tags
     public function tags(){
-        return $this->belongsTo(Tag::class, 'tag_id');
+        return $this->belongsTo(Tag::class, 'tag_name');
     }
 }

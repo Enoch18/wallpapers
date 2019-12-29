@@ -1,28 +1,139 @@
 @extends ('Admin.layout.app')
 
 @section ('content')
-            {{-- Viewing Modifying and Adding Wallpapers  --}}
-            @if ($value == "wallpapers")
-                <div class = "wallpapers">
-                    <div class = "">
-                        <h3 align="center">All Wallpapers</h3>
-                        <div align="right">
-                            <button name = "addwallpaper" id = "addwallpaper" class = "btn btn-success btn-sm">Add Wallpaper</button>
-                        </div><br />
+            @if ($value == "dashboard")
+                <div class = "dashboard">
+                    <h3 align="center">Dashboard</h3>
+
+                    <div class = "buttons">
+                        <form method = "GET" action = "">
+                            <input type = "hidden" name = "period" value = "alltimes">
+                            <input type = "submit" value = "All Times" class = "btn btn-primary">
+                        </form>
+
+                        <form method = "GET" action = "">
+                            <input type = "hidden" name = "period" value = "oneday">
+                            <input type = "submit" value = "One Day" class = "btn btn-primary">
+                        </form>
+
+                        <form method = "GET" action = "">
+                            <input type = "hidden" name = "period" value = "oneweek">
+                            <input type = "submit" value = "One Week" class = "btn btn-primary">
+                        </form>
+
+                        <form method = "GET" action = "">
+                            <input type = "hidden" name = "period" value = "onemonth">
+                            <input type = "submit" value = "One Month" class = "btn btn-primary">
+                        </form>
+                    </div><br /><br />
+
+                    <div class = "actualcontent">
+                        <div class = "row">
+                            <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h4> {{$interval}} </h4>
+                            </div>
+                        </div>
 
                         <div class = "row">
-                            @foreach($wallpaper as $wallpapers)
-                                <div class = "col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                    <div class = "image">
-                                        <img src = "{{asset($wallpapers->url)}}" class = "img img-responsive img-thumbnail">
-                                        <a href = "{{url('admin/ssgrouplogin/wallpaper/add')}}/{{$wallpapers->find($wallpapers->id)->details->id}}/edit" class = "btn btn-primary btn-admin" id = "edit"><i class = "fa fa-edit admin-fa"></i></a> <button class = "btn btn-danger btn-admin trash" id = "{{$wallpapers->id}}"><i class = "fa fa-trash admin-fa"></i></button><br /><br />
-                                    </div>
-                                    <p style = "color: black !important; text-align: center !important; margin-top: -10px;">{{$wallpapers->find($wallpapers->id)->details->image_title}}</p><br />
+                            <div class = "col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                                <div class = "innerbox1">
+                                    <h3>VISITS <br />{{$visits}} Visits</h3>
                                 </div>
-                            @endforeach
+                            </div>
+
+                            <div class = "col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                                <div class = "innerbox2">
+                                    <h3>SUBSCRIBERS <br />{{$subscribers}} Subscribers</h3>
+                                </div>
+                            </div>
+
+                            <div class = "col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                                <div class = "innerbox3">
+                                    <h3>DOWNLOADS <br />{{$downloads}} Downloads</h3>
+                                </div>
+                            </div>
+
+                            <div class = "col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                                <div class = "innerbox4">
+                                    <h3>TOTAL WALLPAPERS <br />{{$totalwallpapers}} Wallpapers</h3>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            @endif
+
+            {{-- Viewing Modifying and Adding Wallpapers  --}}
+            @if ($value == "wallpapers")
+                
+                @if ($search == '')
+                    <div class = "wallpapers">
+                        <div class = "">
+                            <h3 align="center">All Wallpapers</h3>
+                            <div align="right">
+                                <button name = "addwallpaper" id = "addwallpaper" class = "btn btn-success btn-sm">Add Wallpaper</button>
+                            </div>
+
+                            <div class = "row">
+                                <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <form class="form-inline" method = "GET" action = "{{url('admin/ssgrouplogin/wallpapers')}}">
+                                        <input class="form-control mr-sm-2 search" type="search" name = "search" placeholder="Search" aria-label="Search">
+                                        <button class="btn btn-primary my-2 my-sm-0 searchbtn" type="submit"><i class = "fa fa-search"></i></button>
+                                    </form><br /><br />
+                                </div>
+                            </div>
+
+                            <div class = "row">
+                                @foreach($wallpaper as $wallpapers)
+                                    <div class = "col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                        <div class = "image">
+                                            <img src = "{{asset($wallpapers->url)}}" class = "img img-responsive img-thumbnail">
+                                            <a href = "{{url('admin/ssgrouplogin/wallpaper/add')}}/{{$wallpapers->find($wallpapers->id)->details->id}}/edit" class = "btn btn-primary btn-admin" id = "edit"><i class = "fa fa-edit admin-fa"></i></a> <button class = "btn btn-danger btn-admin trash" id = "{{$wallpapers->id}}"><i class = "fa fa-trash admin-fa"></i></button><br /><br />
+                                        </div>
+                                        <p style = "color: black !important; text-align: center !important; margin-top: -10px;">{{$wallpapers->find($wallpapers->id)->details->image_title}}</p><br />
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                @if ($search != '')
+                    <div class = "wallpapers">
+                        <div class = "">
+                            <h3 align="center">All Wallpapers</h3>
+                            <div align="right">
+                                <button name = "addwallpaper" id = "addwallpaper" class = "btn btn-success btn-sm">Add Wallpaper</button>
+                            </div>
+
+                            <div class = "row">
+                                <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <form class="form-inline" method = "GET" action = "{{url('admin/ssgrouplogin/wallpapers')}}">
+                                        <input class="form-control mr-sm-2 search" type="search" name = "search" placeholder="Search" aria-label="Search">
+                                        <button class="btn btn-primary my-2 my-sm-0 searchbtn" type="submit"><i class = "fa fa-search"></i></button>
+                                    </form><br /><br />
+                                    <h4>Search result for "{{ucwords($search)}}" ({{$resultscount}})</h4>
+                                </div>
+                            </div>
+
+                            <div class = "row">
+                                @foreach ($detail as $details)
+                                    @foreach ($wallpaper as $wallpapers)
+                                        @if ($details->id == $wallpapers->details_id)
+                                            <div class = "col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                                <div class = "image">
+                                                    <img src = "{{asset($wallpapers->url)}}" class = "img img-responsive img-thumbnail">
+                                                    <a href = "{{url('admin/ssgrouplogin/wallpaper/add')}}/{{$wallpapers->find($wallpapers->id)->details->id}}/edit" class = "btn btn-primary btn-admin" id = "edit"><i class = "fa fa-edit admin-fa"></i></a> <button class = "btn btn-danger btn-admin trash" id = "{{$wallpapers->id}}"><i class = "fa fa-trash admin-fa"></i></button><br /><br />
+                                                </div>
+                                                <p style = "color: black !important; text-align: center !important; margin-top: -10px;">{{$wallpapers->find($wallpapers->id)->details->image_title}}</p><br />
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @endif
 
                 {{-- ============================== Code for the Models --}}
                 <div id = "formModal" class = "modal fade" role = "dialog">
@@ -142,7 +253,9 @@
                             </div>
         
                             <div class = "col-lg-12 form-group">
-                                <textarea name = "message" id = "description" class = "form-control" maxlength = 300></textarea><br /><br />
+                                <textarea name = "message" id = "description" class = "form-control" maxlength = 300>
+                                    Check out the latest wallpapers that were uploaded yesterday.    
+                                </textarea><br /><br />
                             </div>
                         </div>
         
@@ -206,7 +319,7 @@
                                 @if ($details->id == $wallpapers->details_id)
                                     <div class = "col-xs-12 col-sm-12 col-md-4 col-lg-3">
                                         <img src = "{{url($wallpapers->url)}}" class = "img img-responsive img-thumbnail">
-                                        <p>{{$details->downloads}} Downloads</p><br /><br />
+                                        <p style="color: black !important;">{{$details->downloads ?? '0'}} Downloads</p><br /><br />
                                     </div>
                                 @endif
                             @endforeach
@@ -236,7 +349,11 @@
                             <tr>
                                 <td>{{$categories->cat_name}}</td>
                                 <td>{{str_replace("-", "/", $categories->created_at)}}</td>
-                                <td><button class = "btn btn-primary">Details</button> <button class = "btn btn-primary">Rename</button> <button class = "btn btn-danger catdelete" id = "{{$categories->id}}">Delete</button></td>
+                                <td>
+                                    <a href = "{{url('admin/ssgrouplogin/categories')}}?catid={{$categories->id}}" class = "btn btn-primary" style = "font-size: 14px !important;">Details</a> 
+                                    <button class = "btn btn-primary catmodalrename" id = "{{$categories->cat_name}}_{{$categories->id}}">Rename</button> 
+                                    <button class = "btn btn-danger catdelete" id = "{{$categories->id}}">Delete</button>
+                                </td>
                             </tr>
                         @endforeach
                     </table>  
@@ -274,6 +391,98 @@
                         </div>
                     </div>
                 </div>
+
+                <div id = "renamecategoryformModel" class = "modal fade" role = "dialog">
+                    <div class = "modal-dialog">
+                        <div class = "modal-content">
+                            <div class = "modal-header">
+                                <h4 class = "modal-title">Rename Category</h4>
+                                <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
+                            </div>
+                    
+                            <div class = "modal-content">
+                                <span id = "form_result"></span>
+                                <form method = "POST" id = "sample_form" action = "{{url('admin/ssgrouplogin/index/renames')}}" class = "form-horizontal" enctype = "multipart/form-data">
+                                    @csrf
+                                    <div class = "form-group">
+                                        <label class = "control-label col-md-12" style = "text-align: left;">Category Rename</label>
+                                        <div class = "col-md-12" id = "renamecategory">
+                                            {{-- This code in jquery --}}
+                                        </div>
+                                    </div>
+                    
+                                    <div class = "form-group">
+                                        <input type = "hidden" value = "Add" id = "action">
+                                        <div class = "col-md-8">
+                                            <input type = "submit" name = "submit" id = "submit" class = "btn btn-warning">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            @if ($value == "categorydetails")
+                <div class = "container">
+                    <br />
+                    <h3 align = "center" >{{ucwords($cat_name)}} Category Details</h3><br />
+                    <div align="right">
+                        <button name = "addsubcategory" id = "addsubcategory" class = "btn btn-success btn-sm">Add Subcategory</button>
+                    </div><br />
+            
+                    <div class = "table-responsive">
+                        <table class = "table table-bordered table-striped" id = "user_table">
+                            <tr>
+                                <th width="10%">Sub-Category Name</th>
+                                <th width="10%">Added On</th>
+                            </tr>
+
+                            @foreach($subcategory as $subcategories)
+                                <tr>
+                                    <td>{{$subcategories->sub_name}}</td>
+                                    <td>{{str_replace("-", "/", $subcategories->created_at)}}</td>
+                                </tr>
+                            @endforeach
+                        </table>  
+                    </div>
+                    <h4>Total Subcategories: {{$totalsubcategory}}</h4>
+                    <h4>Total Wallpapers in Category: {{$totalwallpapers}}</h4>
+                    <h4>Last Updated: {{str_replace('-', '/', $lastupdated)}}</h4>
+                </div>
+
+
+                <div id = "subcategoryformModel" class = "modal fade" role = "dialog">
+                    <div class = "modal-dialog">
+                        <div class = "modal-content">
+                            <div class = "modal-header">
+                                <h4 class = "modal-title">Add New Category</h4>
+                                <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
+                            </div>
+                    
+                            <div class = "modal-content">
+                                <span id = "form_result"></span>
+                                <form method = "POST" id = "wallpaperupload" action = "subcategory/add" class = "form-horizontal" enctype = "multipart/form-data">
+                                    @csrf
+                                    <div class = "form-group">
+                                        <label class = "control-label col-md-12" style = "text-align: left;">Subcategory Name</label>
+                                        <div class = "col-md-12">
+                                            <input type = "hidden" name = "category_id" value = "{{$catid}}">
+                                            <input type = "text" name = "subcategory_name" id = "subcategory_name" class = "form-control">
+                                        </div>
+                                    </div>
+                    
+                                    <div class = "form-group">
+                                        <div class = "col-md-8">
+                                            <input type = "submit" name = "submit" id = "submit" class = "btn btn-warning">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endif
 
 
@@ -298,7 +507,10 @@
                             <tr>
                                 <td>{{$subcategories->sub_name}}</td>
                                 <td>{{str_replace("-", "/", $subcategories->created_at)}}</td>
-                                <td><button class = "btn btn-primary">Rename</button> <button class = "btn btn-danger">Delete</button></td>
+                                <td>
+                                    <button class = "btn btn-primary subcatrename" id = "{{$subcategories->sub_name}}_{{$subcategories->id}}">Rename</button> 
+                                    <button class = "btn btn-danger subdelete" id = "{{$subcategories->id}}">Delete</button>
+                                </td>
                             </tr>
                         @endforeach
                     </table>  
@@ -348,6 +560,37 @@
                         </div>
                     </div>
                 </div>
+
+                <div id = "renamesubcategoryformModel" class = "modal fade" role = "dialog">
+                    <div class = "modal-dialog">
+                        <div class = "modal-content">
+                            <div class = "modal-header">
+                                <h4 class = "modal-title">Rename Subcategory</h4>
+                                <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
+                            </div>
+                    
+                            <div class = "modal-content">
+                                <span id = "form_result"></span>
+                                <form method = "POST" id = "sample_form" action = "{{url('admin/ssgrouplogin/index/renames')}}" class = "form-horizontal" enctype = "multipart/form-data">
+                                    @csrf
+                                    <div class = "form-group">
+                                        <label class = "control-label col-md-12" style = "text-align: left;">Subcategory Rename</label>
+                                        <div class = "col-md-12" id = "renamesubcategory">
+                                            {{-- This code in jquery --}}
+                                        </div>
+                                    </div>
+                    
+                                    <div class = "form-group">
+                                        <input type = "hidden" value = "Add" id = "action">
+                                        <div class = "col-md-8">
+                                            <input type = "submit" name = "submit" id = "submit" class = "btn btn-warning">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @endif
 
             @if ($value == "subscribers")
@@ -378,10 +621,16 @@
                     <h2>Home Page Image Categories</h2>
                     <div class = "row">
                         <div class = "col-md-4 col-lg-4">
-                            <h4>Selected Categories</h4>
-                            @foreach ($frontcategory as $categories)
-                                <input type = "checkbox" name = "cat_delete[]" value = "{{$categories->category_id}}" style = "display:none;" id = "catdelete"> {{$categories->find($categories->id)->categories->cat_name}} &nbsp;&nbsp;&nbsp;&nbsp;
-                            @endforeach
+                            <form action="{{url('admin/ssgrouplogin/index/tagdelete')}}" method="POST">
+                                @csrf
+                                <h4>Selected Categories</h4>
+                                @foreach ($frontcategory as $categories)
+                                    <input type = "checkbox" name = "cat_delete[]" value = "{{$categories->category_id}}" style = "display:none;" class = "catdel"> {{$categories->find($categories->id)->categories->cat_name}} &nbsp;&nbsp;&nbsp;&nbsp;
+                                @endforeach
+                                <br /><br />
+                                <input type = "submit" value = "Delete" class = "btn btn-danger" style = "display: none;" id = "catdeletesubmit">
+                                <p style = "color: red !important; text-decoration: underline; cursor: pointer;" id = "catdeleteclick">Remove Category</p>
+                            </form>
                         </div>
 
                         <div class = "col-md-8 col-lg-8">
@@ -401,9 +650,21 @@
                     <div class = "row">
                         <div class = "col-md-4 col-lg-4">
                             <h4>Active Tags</h4>
-                            @foreach ($fronttags as $fronttag)
-                                <input type = "checkbox" name = "cat_delete[]" value = "{{$fronttag->tag_id}}" style = "display:none;" id = "catdelete"> {{$fronttag->find($fronttag->id)->tags->tag_name}} &nbsp;&nbsp;&nbsp;&nbsp;
-                            @endforeach
+                            <form action="{{url('admin/ssgrouplogin/index/tagdelete')}}" method="POST">
+                                @csrf
+                                @foreach ($fronttags as $fronttag)
+                                    <input type = "checkbox" name = "tag_delete[]" value = "{{$fronttag->tag_name}}" style = "display:none;" class = "tagdel"> {{$fronttag->tag_name}} 
+                                    @foreach ($tag as $tags)
+                                        @if ($tags->tag_name == $fronttag->tag_name)
+                                            ({{$tags->where('tag_name', '=', $fronttag->tag_name)->count()}})
+                                        @endif
+                                    @endforeach
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                @endforeach
+                                <br /><br />
+                                <input type = "submit" value = "Delete" class = "btn btn-danger" style = "display: none;" id = "tagdeletesubmit">
+                                <p style = "color: red !important; text-decoration: underline; cursor: pointer;" id = "tagdeleteclick">Remove Tags</p>
+                            </form>
                         </div>
 
                         <div class = "col-md-8 col-lg-8">
@@ -411,7 +672,7 @@
                             <form action="{{url('admin/ssgrouplogin/index/frontpage')}}" method="POST">
                                 @csrf
                                 @foreach ($tag as $tags)
-                                    <input type = "checkbox" name = "tag_id[]" value = "{{$tags->id}}"> {{$tags->tag_name}} &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <input type = "checkbox" name = "tag_name[]" value = "{{$tags->tag_name}}"> {{$tags->tag_name}} ({{$tags->where('tag_name', '=', $tags->tag_name)->count()}}) &nbsp;&nbsp;&nbsp;&nbsp;
                                 @endforeach
                                 <br /><br />
                                 <input type="submit" value="Submit" class = "btn btn-primary">

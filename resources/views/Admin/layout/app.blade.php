@@ -47,7 +47,10 @@
             </div>
 
             <div class = "adminmaincontent">
-                <nav id = "nav"></nav>
+                <nav id = "nav">
+                    <button class = "btn btn-primary" id = "togglebtn1" style="margin-top: 5px; margin-left: 5px;"><i class = "fa fa-align-justify"></i></button>
+                    <button class = "btn btn-primary" id = "togglebtn2" style="margin-top: 5px; margin-left: 5px; display: none;"><i class = "fa fa-align-justify"></i></button>
+                </nav>
                 @yield ('content')
             </div>
 
@@ -69,10 +72,71 @@
         $('#children1').hide();
         $('#children2').slideToggle();
       });
+
+      if ($(window).width() > 990){
+        $("#togglebtn1").click(function(){
+                $("#togglebtn2").show();
+                $("#nav").css({
+                    marginLeft: '0px'
+                });
+                $("#togglebtn1").hide();
+                $(".adminsidebar").hide();
+        });
+
+        $("#togglebtn2").click(function(){
+                $("#togglebtn2").hide();
+                $("#nav").css({
+                    marginLeft: '252px'
+                });
+                $("#togglebtn1").show();
+                $(".adminsidebar").show();
+        });
+      }else{
+        $("#togglebtn2").show();
+        $("#togglebtn1").hide();
+        $("#togglebtn1").click(function(){
+                $("#togglebtn2").show();
+                $("#nav").css({
+                    marginLeft: '0px'
+                });
+                $("#togglebtn1").hide();
+                $(".adminsidebar").hide();
+        });
+
+        $("#togglebtn2").click(function(){
+                $("#togglebtn2").hide();
+                $("#nav").css({
+                    marginLeft: '252px'
+                });
+                $("#togglebtn1").show();
+                $(".adminsidebar").show();
+        });
+      }
     
     // Adding the wallpaper
     $("#addwallpaper").click(function(){
         $("#formModal").modal('show');
+    });
+
+    $(".catmodalrename").click(function(){
+        let catname = this.id;
+        let split = catname.split("_");
+        let cat_name = split[0];
+        let cat_id = split[1];
+
+        $("#renamecategory").html("<input type = 'text' name = 'cat_name' id = 'cat_name' value = '"+cat_name+"' class = 'form-control'> <input type = 'hidden' name = 'cat_id' value = '"+cat_id+"' class = 'form-control'>");
+        $("#renamecategoryformModel").modal('show');
+    });
+
+    $(".subcatrename").click(function(){
+        let subname = this.id;
+        let split = subname.split("_");
+        let sub_name = split[0];
+        let sub_id = split[1];
+
+
+        $("#renamesubcategory").html("<input type = 'text' name = 'sub_name' value = '"+sub_name+"' class = 'form-control'> <input type = 'hidden' name = 'sub_id' value = '"+sub_id+"' class = 'form-control'>");
+        $("#renamesubcategoryformModel").modal('show');
     });
     
     // Adding the category
@@ -93,6 +157,12 @@
 
     $(".catdelete").click(function(){
         let path = "{{url('admin/ssgrouplogin/deletecategory/')}}/" + this.id;
+        $("#yes").html("<a href = '"+path+"' class = 'btn btn-danger' style = 'width: 30%;'>Yes</a>");
+        $("#deleteconfirm").modal('show');
+    });
+
+    $(".subdelete").click(function(){
+        let path = "{{url('admin/ssgrouplogin/deletesubcategory/')}}/" + this.id;
         $("#yes").html("<a href = '"+path+"' class = 'btn btn-danger' style = 'width: 30%;'>Yes</a>");
         $("#deleteconfirm").modal('show');
     });
@@ -125,6 +195,47 @@
                 $("#mismatch").show();
                 return false;
             }
+        });
+
+        $("#tagdeleteclick").click(function(){
+            $(".tagdel").show();
+            $("#tagdeleteclick").hide();
+            $("#tagdeletesubmit").show();
+        });
+
+        $("#catdeleteclick").click(function(){
+            $(".catdel").show();
+            $("#catdeleteclick").hide();
+            $("#catdeletesubmit").show();
+        });
+
+        $("#rmcattrigger").click(function(){
+            $(".rmcat").show();
+            $("#rmcatbtn").show();
+            $("#rmcattrigger").hide();
+        });
+
+        $("#rmsubtrigger").click(function(){
+            $(".rmsub").show();
+            $("#rmsubbtn").show();
+            $("#rmsubtrigger").hide();
+        });
+
+        $("#renametrigger").click(function(){
+            $(".renametag").show();
+            $(".wallpapertags").hide();
+            $("#renametagbtn").show();
+            $("#renametrigger").hide();
+            $("#rmtagtrigger").hide();
+            $("#rmtagbtn").hide();
+        });
+
+        $("#rmtagtrigger").click(function(){
+            $(".rmtag").show();
+            $("#rmtagbtn").show();
+            $("#rmtagtrigger").hide();
+            $("#renametrigger").hide();
+            $("#renametagbtn").hide();
         });
     });
     </script>

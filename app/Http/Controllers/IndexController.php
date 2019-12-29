@@ -13,6 +13,7 @@ use App\Tag;
 use App\Subscriber;
 use App\TagDetail;
 use App\FrontPage;
+use App\visit;
 use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
@@ -29,6 +30,19 @@ class IndexController extends Controller
         $detail = Detail::orderby("downloads", "DESC")->get();
         $category = Category::all();
         $catid = TagDetail::all();
+        $visitno = visit::all();
+
+        if (count($visitno) < 1){
+            $visit = new visit;
+            $visit->visit_number = 1;
+            $visit->save();
+        }else{
+            $visitno = visit::where('id', '=', 1)->first()->visit_number;
+            $visit = visit::find(1);
+            $visitno = $visitno + 1;
+            $visit->visit_number = $visitno;
+            $visit->save();
+        }
         return view ("Frontend.index", compact("category", 'value', 'allcategorytotal', 'activetags', 'title', 'frontpage', 'categorylink', 'wallpaper', 'detail'));
     }
 

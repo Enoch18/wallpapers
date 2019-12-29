@@ -96,3 +96,73 @@
 .frontpage h2{
     text-align: center;
 }
+
+// ============================ THE DASHBOARD ===================
+.dashboard > .row{
+    margin-top: 20px;
+}
+
+.dashboard h3{
+    padding: 20px;
+}
+
+.dashboard .buttons form{
+    display: inline;
+    margin-left: 15px;
+}
+
+.innerbox1{
+    background-color: rgb(60, 0, 128);
+    width: 100%;
+    color: white;
+    height: 150px;
+}
+
+.innerbox2{
+    background-color: green;
+    width: 100%;
+    color: white;
+    height: 150px;
+}
+
+.innerbox3{
+    background-color: rgb(240, 111, 64);
+    width: 100%;
+    color: white;
+    height: 150px;
+}
+
+.innerbox4{
+    background-color: rgb(223, 51, 51);
+    width: 100%;
+    color: white;
+    height: 150px;
+}
+
+#admindescription p{
+    display: inline !important;
+}
+
+@media (max-width: 990px){
+    .adminsidebar{
+        display: none;
+    }
+
+    .adminmaincontent{
+        width: 100% !important;
+    }
+
+    .adminmaincontent #nav{
+        width: 100% !important;
+        margin-left: 0px !important;
+    }
+
+    .actualcontent{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .innerbox1, .innerbox2, .innerbox3, .innerbox4{
+        width: 100% !important;
+    }
+}

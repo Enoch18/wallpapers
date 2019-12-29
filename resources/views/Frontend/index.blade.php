@@ -52,7 +52,7 @@
 
         @if ($value == "search")
             <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h4 class = "headinglabel">{{ucwords($search)}} Search Results ({{$resultscount}})<h4>
+                <h4 class = "headinglabel">Search result for "{{ucwords($search)}}" ({{$resultscount}})<h4>
             </div><br /><br />
             @foreach ($detail as $details)
                 @foreach ($wallpaper as $wallpapers)

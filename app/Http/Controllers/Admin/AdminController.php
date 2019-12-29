@@ -16,6 +16,7 @@ use App\FrontPage;
 use App\Tag;
 use App\TagDetail;
 use App\User;
+use App\visit;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -33,22 +34,110 @@ class AdminController extends Controller
     
     public function index()
     {
-        $value = "dashboard";
-        return view ('Admin.index', compact('value'));
+        $period = '';
+        if (!empty($_GET['period'])){
+            $period = $_GET['period'];
+        }
+        
+        if ($period == '' || $period == 'alltimes'){
+            $interval = "All Times";
+            $value = "dashboard";
+            $visits = DB::table("visits")->get()->sum("visit_number");
+            $subscribers = count(Subscriber::all());
+            $downloads = DB::table("details")->get()->sum("downloads");
+            $totalwallpapers = count(Detail::all());
+            return view ('Admin.index', compact('value', 'visits', 'subscribers', 'downloads', 'totalwallpapers', 'interval'));
+        }
+
+        if ($period == 'oneday'){
+            $interval = "Past One Day";
+            $time = date("Y-m-d H:i:s");
+            $oneday = date('Y-m-d H:i:s', strtotime($time. ' - 1 day'));
+            $now = date("Y-m-d H:i:s");
+
+            $value = "dashboard";
+            $visits = DB::table("visits")->whereBetween('created_at', [$oneday, $now])->get()->sum("visit_number");
+            $subscribers = count(Subscriber::whereBetween('created_at', [$oneday, $now])->get());
+            $downloads = DB::table("details")->whereBetween('created_at', [$oneday, $now])->get()->sum("downloads");
+            $totalwallpapers = count(Detail::whereBetween('created_at', [$oneday, $now])->get());
+            return view ('Admin.index', compact('value', 'visits', 'subscribers', 'downloads', 'totalwallpapers', 'interval'));
+        }
+
+        if ($period == 'oneweek'){
+            $interval = "Past One Week";
+            $time = date("Y-m-d H:i:s");
+            $oneweek = date('Y-m-d H:i:s', strtotime($time. ' - 1 week'));
+            $now = date("Y-m-d H:i:s");
+
+            $value = "dashboard";
+            $visits = DB::table("visits")->whereBetween('created_at', [$oneweek, $now])->get()->sum("visit_number");
+            $subscribers = count(Subscriber::whereBetween('created_at', [$oneweek, $now])->get());
+            $downloads = DB::table("details")->whereBetween('created_at', [$oneweek, $now])->get()->sum("downloads");
+            $totalwallpapers = count(Detail::whereBetween('created_at', [$oneweek, $now])->get());
+            return view ('Admin.index', compact('value', 'visits', 'subscribers', 'downloads', 'totalwallpapers', 'interval'));
+        }
+
+        if ($period == 'onemonth'){
+            $interval = "Past One Month";
+            $time = date("Y-m-d H:i:s");
+            $onemonth = date('Y-m-d H:i:s', strtotime($time. ' - 1 month'));
+            $now = date("Y-m-d H:i:s");
+
+            $value = "dashboard";
+            $visits = DB::table("visits")->whereBetween('created_at', [$onemonth, $now])->get()->sum("visit_number");
+            $subscribers = count(Subscriber::whereBetween('created_at', [$onemonth, $now])->get());
+            $downloads = DB::table("details")->whereBetween('created_at', [$onemonth, $now])->get()->sum("downloads");
+            $totalwallpapers = count(Detail::whereBetween('created_at', [$onemonth, $now])->get());
+            return view ('Admin.index', compact('value', 'visits', 'subscribers', 'downloads', 'totalwallpapers', 'interval'));
+        }
     }
 
     public function displayvalue($value)
     {
         if ($value == "wallpapers"){
-            $wallpaper = Wallpaper::where('width', '=', '1280')->orderBy('id', 'DESC')->get();
-            $category = Category::all();
-            $subcategory = Subcategory::all();
-            return view ('Admin.index', compact('value', 'wallpaper', 'category', 'subcategory'));
+            $search = '';
+            if (!empty($_GET['search'])){
+                $search = $_GET['search'];
+            }
+
+            if ($search == ''){
+                $wallpaper = Wallpaper::where('width', '=', '1280')->orderBy('id', 'DESC')->get();
+                $category = Category::all();
+                $subcategory = Subcategory::all();
+                return view ('Admin.index', compact('value', 'wallpaper', 'category', 'subcategory', 'search'));
+            }else{
+                $activetags = TagDetail::all();
+                $title = $search;
+                $category = Category::all();
+                $allcategorytotal = Detail::count();
+                $subcategory = Subcategory::all();
+                $detail = DB::table('tags')->join('details', 'details.id', '=', 'tags.details_id')->where("tag_name", "LIKE", "%$search%")->orWhere("image_title", "LIKE", "%$search%")->select("tags.details_id", "details.*")->distinct()->get();
+                $resultscount = DB::table('tags')->join('details', 'details.id', '=', 'tags.details_id')->where("tag_name", "LIKE", "%$search%")->orWhere("image_title", "LIKE", "%$search%")->select("tags.details_id", "details.*")->distinct()->get()->count();
+                $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->orderBy('created_at', 'DESC')->get();
+                return view ("Admin.index", compact("category", "wallpaper", "value", "subcategory", "allcategorytotal", "detail", "resultscount", "search", "activetags", "title", "search"));
+            }
         }
 
         if ($value == "categories"){
-            $category = Category::orderBy('cat_name', 'ASC')->get();
-            return view ('Admin.index', compact('value', 'category'));
+            $catid = '';
+            if (!empty($_GET['catid'])){
+                $catid = $_GET['catid'];
+            }
+
+            if ($catid == ''){
+                $category = Category::orderBy('cat_name', 'ASC')->get();
+                return view ('Admin.index', compact('value', 'category'));
+            }
+
+            if ($catid != ''){
+                $value = "categorydetails";
+                $subcategory = Subcategory::where('category_id', '=', $catid)->get();
+                $totalsubcategory = Subcategory::where('category_id', '=', $catid)->count();
+                $totalwallpapers = CategoryLink::where('category_id', '=', $catid)->count();
+                $lastupdated = CategoryLink::where('category_id', '=', $catid)->max('created_at');
+                $cat_name = Category::where('id', '=', $catid)->first()->cat_name;
+                return view ('Admin.index', compact('value', 'category', 'subcategory', 'catid', 'cat_name', 'totalsubcategory', 'totalwallpapers', 'lastupdated'));
+            }
         }
 
         if ($value == "subcategories"){
@@ -76,8 +165,8 @@ class AdminController extends Controller
         if ($value == "frontpages"){
             $categorylist = Category::all();
             $frontcategory = FrontPage::all();
-            $fronttags = TagDetail::all();
-            $tag = Tag::all();
+            $fronttags = TagDetail::distinct()->get(['tag_name']);
+            $tag = Tag::distinct()->get(['tag_name']);
             return view ('Admin.index', compact('value', 'categorylist', 'tag', 'frontcategory', 'fronttags'));
         }
 
@@ -109,11 +198,14 @@ class AdminController extends Controller
             return redirect()->back()->with(['msg' => 'Front Page images Categories added', 'type' => 'success']);
         }
 
-        if ($request->tag_id){
-            foreach($request->tag_id as $tagid){
-                $frontpage = new TagDetail;
-                $frontpage->tag_id = $tagid;
-                $frontpage->save();
+        if ($request->tag_name){
+            foreach($request->tag_name as $tagname){
+                $checking = TagDetail::where ('tag_name', '=', $tagname)->first();
+                if ($checking == null){
+                    $frontpage = new TagDetail;
+                    $frontpage->tag_name = $tagname;
+                    $frontpage->save();
+                }
             }
             return redirect()->back()->with(['msg' => 'Front Page iTags have been added', 'type' => 'success']);
         }
@@ -146,7 +238,7 @@ class AdminController extends Controller
         $catdelete = Category::find($id);
         $catdelete->delete();
         
-        DB::table('category_links')->where('category_id', $id)->update(['category_id' => 0]);
+        CategoryLink::where('category_id', $id)->delete();
 
         $frontpage_cat = FrontPage::where('category_id', '=', $id);
         $frontpage_cat->delete();
@@ -157,5 +249,49 @@ class AdminController extends Controller
         $subcat_delete = Subcategory::where('category_id', '=', $id);
         $subcat_delete->delete();
         return redirect()->back()->with(['msg' => 'Your login details have been updated', 'type' => 'success']);
+    }
+
+    public function deletesubcategory($id){
+        $subcatdelete = Subcategory::find($id);
+        $subcatdelete->delete();
+        SubcategoryLink::where('subcategory_id', '=', $id)->delete();
+        return redirect()->back()->with(['msg' => 'Your login details have been updated', 'type' => 'success']);
+    }
+
+    public function tagdelete(Request $request){
+        if ($request->tag_delete){
+            foreach ($request->tag_delete as $tag){
+                TagDetail::where('tag_name', '=', $tag)->delete();
+            }
+        }
+
+        if ($request->cat_delete){
+            foreach ($request->cat_delete as $cat){
+                FrontPage::where('category_id', '=', $cat)->delete();
+            }
+        }
+        return redirect()->back()->with(['msg' => 'Deleted Successfully', 'type' => 'success']);
+    }
+
+    public function renames(Request $request){
+        if ($request->cat_name != ''){
+            $catname = $request->cat_name;
+            $catid = $request->cat_id;
+            
+            $rename = Category::find($catid);
+            $rename->cat_name = $catname;
+            $rename->save();
+            return redirect()->back()->with(['msg' => 'Category Successfully Renamed', 'type' => 'success']);
+        }
+
+        if ($request->sub_name != ''){
+            $subname = $request->sub_name;
+            $subid = $request->sub_id;
+
+            $rename = Subcategory::find($subid);
+            $rename->sub_name = $subname;
+            $rename->save();
+            return redirect()->back()->with(['msg' => 'Subcategory Successfully Renamed', 'type' => 'success']);
+        }
     }
 }

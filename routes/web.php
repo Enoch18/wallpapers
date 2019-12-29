@@ -27,12 +27,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     Route::get('ssgrouplogin/{value}', 'AdminController@displayvalue');
+    Route::post('ssgrouplogin/index/tagdelete', 'AdminController@tagdelete');
+    Route::post('ssgrouplogin/index/renames', 'AdminController@renames');
     Route::get('ssgrouplogin/deletecategory/{id}', 'AdminController@deletecategory');
+    Route::get('ssgrouplogin/deletesubcategory/{id}', 'AdminController@deletesubcategory');
     Route::get('ssgrouplogin', 'AdminController@index')->name('Admin.index');
     Route::post('ssgrouplogin/login/update', 'AdminController@updatelogin');
     Route::post('ssgrouplogin/index/frontpage', 'AdminController@frontpage');
     Route::resource('ssgrouplogin/wallpaper/add', 'WallpapersController');
     Route::get('ssgrouplogin/wallpaper/{id}', 'WallpapersController@destroy');
+    Route::post('ssgrouplogin/wallpaperdetailsdelete', 'WallpapersController@wallpaperdetailsdelete');
     Route::resource('ssgrouplogin/category/add', 'CategoriesController');
     Route::resource('ssgrouplogin/subcategory/add', 'SubcategoriesController');
 });
