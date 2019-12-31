@@ -40,8 +40,9 @@
                         </ul>
 
                         <form class="form-inline" method = "GET" action = "{{url('results')}}">
-                            <input class="form-control mr-sm-2 search" type="search" name = "search" placeholder="Search" aria-label="Search">
+                            <input class="form-control mr-sm-2 search" type="search" id = "autocomplete" name = "search" placeholder="Search" aria-label="Search">
                             <button class="btn btn-primary my-2 my-sm-0 searchbtn" type="submit"><i class = "fa fa-search"></i></button>
+                            <div id = "list" style = "position: absolute; margin-top: 20px; width: 200px;"></div>
                         </form>
                     <div>
                 </nav>
@@ -162,6 +163,29 @@ $(document).ready(function(){
         e.preventDefault();
         $("#subbtn").hide();
         $("#subscribe").show();
+    });
+
+    $("#autocomplete").keyup(function(){
+        let search = $("#autocomplete").val();
+        // list
+        if (search != ''){
+            $.ajax({
+                url: "{{url('autocomplete')}}/" + search,
+                method: "GET",
+                data: {search: search},
+                success:function(data){
+                    $("#list").fadeIn();
+                    $("#list").html(data);
+                }
+            });
+        }else{
+            $("#list").fadeOut();
+        }
+    });
+
+    $(document).on('click', 'li', function(){
+        $("#autocomplete").val($(this).text());
+        $("#list").hide();
     });
 
     $("#form1").submit(function(e){

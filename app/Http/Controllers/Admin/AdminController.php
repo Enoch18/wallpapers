@@ -101,20 +101,12 @@ class AdminController extends Controller
             }
 
             if ($search == ''){
-                $wallpaper = Wallpaper::where('width', '=', '1280')->orderBy('id', 'DESC')->get();
+                $wallpaper = Wallpaper::where('width', '=', '1280')->orderBy('id', 'DESC')->paginate(9);
                 $category = Category::all();
                 $subcategory = Subcategory::all();
                 return view ('Admin.index', compact('value', 'wallpaper', 'category', 'subcategory', 'search'));
             }else{
-                $activetags = TagDetail::all();
-                $title = $search;
-                $category = Category::all();
-                $allcategorytotal = Detail::count();
-                $subcategory = Subcategory::all();
-                $detail = DB::table('tags')->join('details', 'details.id', '=', 'tags.details_id')->where("tag_name", "LIKE", "%$search%")->orWhere("image_title", "LIKE", "%$search%")->select("tags.details_id", "details.*")->distinct()->get();
-                $resultscount = DB::table('tags')->join('details', 'details.id', '=', 'tags.details_id')->where("tag_name", "LIKE", "%$search%")->orWhere("image_title", "LIKE", "%$search%")->select("tags.details_id", "details.*")->distinct()->get()->count();
-                $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->orderBy('created_at', 'DESC')->get();
-                return view ("Admin.index", compact("category", "wallpaper", "value", "subcategory", "allcategorytotal", "detail", "resultscount", "search", "activetags", "title", "search"));
+                return redirect ('admin/ssgrouplogin/search/' . $search);
             }
         }
 
@@ -125,7 +117,7 @@ class AdminController extends Controller
             }
 
             if ($catid == ''){
-                $category = Category::orderBy('cat_name', 'ASC')->get();
+                $category = Category::orderBy('cat_name', 'ASC')->paginate(20);
                 return view ('Admin.index', compact('value', 'category'));
             }
 
@@ -142,12 +134,12 @@ class AdminController extends Controller
 
         if ($value == "subcategories"){
             $category = Category::orderBy('cat_name', 'ASC')->get();
-            $subcategory = Subcategory::orderBy('sub_name', 'ASC')->get();
+            $subcategory = Subcategory::orderBy('sub_name', 'ASC')->paginate(20);
             return view ('Admin.index', compact('value', 'subcategory', 'category'));
         }
 
         if ($value == "subscribers"){
-            $subscriber = Subscriber::orderBy("created_at", "DESC")->get();
+            $subscriber = Subscriber::orderBy("created_at", "DESC")->paginate(20);
             return view ('Admin.index', compact('value', 'subscriber'));
         }
 
@@ -158,7 +150,7 @@ class AdminController extends Controller
         if ($value == "topdownloads"){
             $allcategorytotal = Detail::count();
             $detail = Detail::orderBy('downloads', 'DESC')->get();
-            $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->get();
+            $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->paginate(12);
             return view ("Admin.index", compact("category", "wallpaper", "value", "detail", "allcategorytotal"));
         }
 
@@ -184,8 +176,42 @@ class AdminController extends Controller
         }
     }
 
-    public function addwallpapers(){
-        return 'added';
+    public function searchresult($search){
+        $title = $search;
+        $category = Category::all();
+        $subcategory = Subcategory::all();
+        $value = "wallpapers";
+
+        $wallpaper = DB::table('details')
+        ->join('wallpapers', 'wallpapers.details_id', 'details.id')
+        ->where('wallpapers.width', '=', '1280')->where('wallpapers.height', '=', '720')
+        ->where("image_title", "LIKE", "%$search%")
+        ->select("details.*", "wallpapers.*")->distinct()->paginate(9);
+
+        $resultscount = DB::table('details')
+        ->join('wallpapers', 'wallpapers.details_id', 'details.id')
+        ->where('wallpapers.width', '=', '1280')->where('wallpapers.height', '=', '720')
+        ->where("image_title", "LIKE", "%$search%")
+        ->select("details.*", "wallpapers.*")->distinct()->count();
+        
+        if ($resultscount > 0){
+            return view ("Admin.index", compact("category", "wallpaper", "value", "subcategory", "resultscount", "search", "title"));
+        }else{
+            $wallpaper = DB::table('details')
+            ->join('wallpapers', 'wallpapers.details_id', 'details.id')
+            ->join('tags', 'tags.details_id', 'details.id')
+            ->where('wallpapers.width', '=', '1280')->where('wallpapers.height', '=', '720')
+            ->where("tags.tag_name", "LIKE", "%$search%")
+            ->select("details.*", "wallpapers.*", "tags.id")->distinct()->paginate(9);
+
+            $resultscount = DB::table('details')
+            ->join('wallpapers', 'wallpapers.details_id', 'details.id')
+            ->join('tags', 'tags.details_id', 'details.id')
+            ->where('wallpapers.width', '=', '1280')->where('wallpapers.height', '=', '720')
+            ->where("tags.tag_name", "LIKE", "%$search%")
+            ->select("details.*", "wallpapers.*", "tags.id")->distinct()->count();
+            return view ("Admin.index", compact("category", "wallpaper", "value", "subcategory", "resultscount", "search", "title"));
+        }
     }
 
     public function frontpage(Request $request){

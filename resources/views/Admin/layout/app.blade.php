@@ -238,6 +238,29 @@
             $("#renametagbtn").hide();
         });
     });
+
+    $("#autocomplete").keyup(function(){
+        let search = $("#autocomplete").val();
+        // list
+        if (search != ''){
+            $.ajax({
+                url: "{{url('autocomplete')}}/" + search,
+                method: "GET",
+                data: {search: search},
+                success:function(data){
+                    $("#list").fadeIn();
+                    $("#list").html(data);
+                }
+            });
+        }else{
+            $("#list").fadeOut();
+        }
+    });
+
+    $(document).on('click', 'li', function(){
+        $("#autocomplete").val($(this).text());
+        $("#list").hide();
+    });
     </script>
     
     <script src="//cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>

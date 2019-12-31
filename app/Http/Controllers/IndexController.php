@@ -24,13 +24,18 @@ class IndexController extends Controller
         $activetags = TagDetail::all();
         $value = "index";
         $frontpage = FrontPage::all();
-        $categorylink = CategoryLink::all();
-        $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->orderBy('id', 'DESC')->get();
         $allcategorytotal = Detail::count();
-        $detail = Detail::orderby("downloads", "DESC")->get();
         $category = Category::all();
         $catid = TagDetail::all();
         $visitno = visit::all();
+
+        $wallpaper = DB::table('front_pages')
+        ->join('category_links', 'front_pages.category_id', '=', 'category_links.category_id')
+        ->join('wallpapers', 'wallpapers.details_id', '=', 'category_links.details_id')
+        ->join('details', 'details.id', '=', 'category_links.details_id')
+        ->where('wallpapers.width', '=', '1280')->where('wallpapers.height', '=', '720')
+        ->orderBy('wallpapers.created_at', 'DESC')
+        ->select('front_pages.category_id', 'category_links.details_id', 'wallpapers.*', 'details.*')->get();
 
         if (count($visitno) < 1){
             $visit = new visit;
@@ -43,20 +48,51 @@ class IndexController extends Controller
             $visit->visit_number = $visitno;
             $visit->save();
         }
-        return view ("Frontend.index", compact("category", 'value', 'allcategorytotal', 'activetags', 'title', 'frontpage', 'categorylink', 'wallpaper', 'detail'));
+        return view ("Frontend.index", compact("category", 'value', 'allcategorytotal', 'activetags', 'title', 'wallpaper', 'frontpage'));
     }
 
     public function search(Request $request){
+        $search = $request->search;
+        return redirect('search/' . $search);
+    }
+
+    public function searchresult($search){
         $activetags = TagDetail::all();
-        $title = $request->search;
+        $title = $search;
         $category = Category::all();
         $allcategorytotal = Detail::count();
-        $search = $request->search;
         $value = "search";
-        $detail = DB::table('tags')->join('details', 'details.id', '=', 'tags.details_id')->where("tag_name", "LIKE", "%$search%")->orWhere("image_title", "LIKE", "%$search%")->select("tags.details_id", "details.*")->distinct()->get();
-        $resultscount = DB::table('tags')->join('details', 'details.id', '=', 'tags.details_id')->where("tag_name", "LIKE", "%$search%")->orWhere("image_title", "LIKE", "%$search%")->select("tags.details_id", "details.*")->distinct()->get()->count();
-        $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->orderBy('created_at', 'DESC')->get();
-        return view ("Frontend.index", compact("category", "wallpaper", "value", "allcategorytotal", "detail", "resultscount", "search", "activetags", "title"));
+
+        $wallpaper = DB::table('details')
+        ->join('wallpapers', 'wallpapers.details_id', 'details.id')
+        ->where('wallpapers.width', '=', '1280')->where('wallpapers.height', '=', '720')
+        ->where("image_title", "LIKE", "%$search%")
+        ->select("details.*", "wallpapers.*")->distinct()->paginate(3);
+
+        $resultscount = DB::table('details')
+        ->join('wallpapers', 'wallpapers.details_id', 'details.id')
+        ->where('wallpapers.width', '=', '1280')->where('wallpapers.height', '=', '720')
+        ->where("image_title", "LIKE", "%$search%")
+        ->select("details.*", "wallpapers.*")->distinct()->count();
+        
+        if ($resultscount > 0){
+            return view ("Frontend.index", compact("category", "wallpaper", "value", "allcategorytotal", "detail", "resultscount", "search", "activetags", "title"));
+        }else{
+            $wallpaper = DB::table('details')
+            ->join('wallpapers', 'wallpapers.details_id', 'details.id')
+            ->join('tags', 'tags.details_id', 'details.id')
+            ->where('wallpapers.width', '=', '1280')->where('wallpapers.height', '=', '720')
+            ->where("tags.tag_name", "LIKE", "%$search%")
+            ->select("details.*", "wallpapers.*", "tags.id")->distinct()->paginate(3);
+
+            $resultscount = DB::table('details')
+            ->join('wallpapers', 'wallpapers.details_id', 'details.id')
+            ->join('tags', 'tags.details_id', 'details.id')
+            ->where('wallpapers.width', '=', '1280')->where('wallpapers.height', '=', '720')
+            ->where("tags.tag_name", "LIKE", "%$search%")
+            ->select("details.*", "wallpapers.*", "tags.id")->distinct()->count();
+            return view ("Frontend.index", compact("category", "wallpaper", "value", "allcategorytotal", "detail", "resultscount", "search", "activetags", "title"));
+        }
     }
 
     public function tabvalues($value){
@@ -94,9 +130,12 @@ class IndexController extends Controller
                 $title = $value;
                 $allcategorytotal = Detail::count();
                 $cat_id = Category::where('cat_name', '=' ,$value)->first()->id;
-                $detail = CategoryLink::where('category_id', '=', $cat_id)->get();
+                $detail = Detail::all();
                 $totaldetails = $detail->count();
-                $wallpaper = Wallpaper::where('width', '=', '1280')->where('height', '=', '720')->paginate(3);
+                $wallpaper = DB::table('category_links')->join('wallpapers', 'category_links.details_id', '=', 'wallpapers.details_id')
+                ->where('width', '=', '1280')->where('height', '=', '720')->where('category_links.category_id', '=', $cat_id)
+                ->select('category_links.*', 'wallpapers.*')->paginate(3);
+
                 $cat_name = Category::where("id", "=", $cat_id)->first()->cat_name;
                 $value = "categories";
                 return view ("Frontend.index", compact("category", "wallpaper", "value", 'detail', 'value', 'allcategorytotal', 'cat_name', 'activetags', 'title'));
@@ -196,5 +235,19 @@ class IndexController extends Controller
         $mostdownloaded = Detail::orderBy("downloads", "DESC")->get();
         $subcategory = Subcategory::all();
         return view("Frontend.sitemap", compact("category", "allcategorytotal", "activetags", "subcategory", "mostdownloaded", "title"));
+    }
+
+    public function autocomplete($search){
+        if ($search != ''){
+            $data = Detail::where('image_title', 'LIKE', "%$search%")->get();
+            $output = "<ul class = 'dropdown-menu list-group'>";
+
+            foreach ($data as $row){
+                $output .= "<a href = '#' style = 'text-decoration: none; font-size: 10px !important;'><li class = 'list-group-item' style = 'background-color: gray;'>" . $row->image_title . "</li></a>";
+            }
+
+            $output .= "</ul>";
+            return $output;
+        }
     }
 }

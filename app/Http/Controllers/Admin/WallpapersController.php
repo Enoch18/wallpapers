@@ -61,7 +61,7 @@ class WallpapersController extends Controller
         $ppath = "";
         $stpath = "";
         if ($request->category_id != ''){
-            $category_name = DB::table('categories')->where('id', '=', $request->category_id)->value('cat_name');
+            $category_name = DB::table('categories')->where('id', '=', $request->category_id[0])->value('cat_name');
             $ppath = str_replace('\\', '/', public_path('storage/images/')) . date("M-Y") . '/' . $category_name;
             $stpath = 'storage/images/' . date("M-Y") . '/' . $category_name;
             if (!File::makeDirectory($ppath, 0777, true, true));

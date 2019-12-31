@@ -77,8 +77,9 @@
                             <div class = "row">
                                 <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <form class="form-inline" method = "GET" action = "{{url('admin/ssgrouplogin/wallpapers')}}">
-                                        <input class="form-control mr-sm-2 search" type="search" name = "search" placeholder="Search" aria-label="Search">
+                                        <input class="form-control mr-sm-2 search" type="search" id = "autocomplete" name = "search" placeholder="Search" aria-label="Search">
                                         <button class="btn btn-primary my-2 my-sm-0 searchbtn" type="submit"><i class = "fa fa-search"></i></button>
+                                        <div id = "list" style = "position: absolute; margin-top: 40px; width: 200px; background-color: black !important;"></div>
                                     </form><br /><br />
                                 </div>
                             </div>
@@ -93,6 +94,9 @@
                                         <p style = "color: black !important; text-align: center !important; margin-top: -10px;">{{$wallpapers->find($wallpapers->id)->details->image_title}}</p><br />
                                     </div>
                                 @endforeach
+                                <div class = "pagination">
+                                    {!! $wallpaper->render() !!}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -117,19 +121,19 @@
                             </div>
 
                             <div class = "row">
-                                @foreach ($detail as $details)
-                                    @foreach ($wallpaper as $wallpapers)
-                                        @if ($details->id == $wallpapers->details_id)
-                                            <div class = "col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                                                <div class = "image">
-                                                    <img src = "{{asset($wallpapers->url)}}" class = "img img-responsive img-thumbnail">
-                                                    <a href = "{{url('admin/ssgrouplogin/wallpaper/add')}}/{{$wallpapers->find($wallpapers->id)->details->id}}/edit" class = "btn btn-primary btn-admin" id = "edit"><i class = "fa fa-edit admin-fa"></i></a> <button class = "btn btn-danger btn-admin trash" id = "{{$wallpapers->id}}"><i class = "fa fa-trash admin-fa"></i></button><br /><br />
-                                                </div>
-                                                <p style = "color: black !important; text-align: center !important; margin-top: -10px;">{{$wallpapers->find($wallpapers->id)->details->image_title}}</p><br />
-                                            </div>
-                                        @endif
-                                    @endforeach
+                                @foreach ($wallpaper as $wallpapers)
+                                    <div class = "col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                                        <div class = "image">
+                                            <img src = "{{asset($wallpapers->url)}}" class = "img img-responsive img-thumbnail">
+                                            <a href = "{{url('admin/ssgrouplogin/wallpaper/add')}}/{{$wallpapers->details_id}}/edit" class = "btn btn-primary btn-admin" id = "edit"><i class = "fa fa-edit admin-fa"></i></a> <button class = "btn btn-danger btn-admin trash" id = "{{$wallpapers->id}}"><i class = "fa fa-trash admin-fa"></i></button><br /><br />
+                                        </div>
+                                        <p style = "color: black !important; text-align: center !important; margin-top: -10px;">{{$wallpapers->image_title}}</p><br />
+                                    </div>
                                 @endforeach
+
+                                <div class = "pagination">
+                                    {!! $wallpaper->render() !!}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -324,6 +328,9 @@
                                 @endif
                             @endforeach
                         @endforeach
+                        <div class = "pagination">
+                            {!! $wallpaper->render() !!}
+                        </div>
                     </div>
                 </div>
             @endif
@@ -357,6 +364,10 @@
                             </tr>
                         @endforeach
                     </table>  
+
+                    <div class = "pagination">
+                        {!! $category->render() !!}
+                    </div>
                 </div>
                 </div>
 
@@ -514,6 +525,10 @@
                             </tr>
                         @endforeach
                     </table>  
+
+                    <div class = "pagination">
+                        {!! $subcategory->render() !!}
+                    </div>
                 </div>
                 </div>
 
@@ -613,6 +628,10 @@
                             </tr>
                         @endforeach
                     </table>  
+
+                    <div class = "pagination">
+                        {!! $subscriber->render() !!}
+                    </div>
                 </div>
             @endif
 

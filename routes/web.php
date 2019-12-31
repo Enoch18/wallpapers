@@ -14,12 +14,14 @@
 Route::get('/', 'IndexController@index');
 Route::get('wallpapers/{value}', 'IndexController@tabvalues');
 Route::get('results', 'IndexController@search');
+Route::get('search/{search}', 'IndexController@searchresult');
 Route::get('download/{id}', 'IndexController@download');
 Route::post('/subscribe', 'IndexController@subscribe');
 Route::get('disclaimer', 'IndexController@disclaimer');
 Route::get('privacy', 'IndexController@privacy');
 Route::get('terms', 'IndexController@terms');
 Route::get('sitemap', 'IndexController@sitemap');
+Route::get('autocomplete/{search}', 'IndexController@autocomplete');
 
 Auth::routes();
 
@@ -27,6 +29,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function(){
     Route::get('ssgrouplogin/{value}', 'AdminController@displayvalue');
+    Route::get('ssgrouplogin/search/{search}', 'AdminController@searchresult');
     Route::post('ssgrouplogin/index/tagdelete', 'AdminController@tagdelete');
     Route::post('ssgrouplogin/index/renames', 'AdminController@renames');
     Route::get('ssgrouplogin/deletecategory/{id}', 'AdminController@deletecategory');
