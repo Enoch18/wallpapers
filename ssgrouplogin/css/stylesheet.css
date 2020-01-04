@@ -1,0 +1,103 @@
+#sidebar-wrapper{
+    background-color: black !important;
+    color: gray;
+    font-size: 110%;
+  }
+
+  .sidebar-heading{
+    font-size: 130% !important;
+  }
+
+  .list-group-item{
+    background-color: black !important;
+    color: gray;
+  }
+
+  .navbar{
+    background-color: black !important;
+  }
+
+  .navbar-toggler{
+    background-color: blue !important;
+  }
+
+  .nav-link{
+    color: gray !important;
+  }
+
+  .content{
+    opacity: 0.7;
+    width: 80%;
+    height: 150px;
+  }
+
+  .row{
+    margin-top: 3%;
+  }
+
+  /* Style for the statistics */
+
+* {
+  box-sizing: border-box;
+}
+
+.panel {
+  width: 100%;
+  height: 400px;
+  margin-top: 10%;
+  background: blue;
+  box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  height: 60px;
+  background: #fff;
+}
+ 
+.title {
+  color: #5E6977;
+  font-weight: 500;
+}
+ 
+/* ================================================================ Beginning of code for inc ===================================================================== */
+.side li{
+  list-style-type: none;
+  margin-left: -20px;
+  cursor: pointer;
+}
+
+.side > li >a{
+  list-style-type: none;
+  color: gray !important;
+  cursor: pointer;
+  margin-left: -20px;
+}
+
+.side > li > a:hover{
+  list-style-type: none;
+  cursor: pointer;
+  background-color: gray;
+  color: black !important;
+  text-decoration: none;
+}
+/* ================================================================ Beginning of code for inc ===================================================================== */
+
+#pages{
+  width: 50%;
+}
+
+input[type=file]{
+  display: none;
+}
+
+@media (max-width: 767px){
+  #pages{
+    width: 100%;
+  }
+}

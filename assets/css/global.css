@@ -1,0 +1,434 @@
+/*
+ Table Of Contents
+ 1.) Eric Meyer's Reset
+ 2.) Global Typography
+ 2.0.1) Font Face
+ 2.0.2) Global Headings
+ 2.0.3) Form Elements
+ 2.0.4) List styles
+ 2.0.5) General Text Formatting
+ 2.0.6) Link elements
+ 2.0.7) Table Elements
+ 2.0.8) Button Styles
+ 2.0.9) Sprite Icons
+
+ 3.) Site Wide Content
+ 4.) Header Style
+ 5.) Footer Style
+ ===============================================*/
+
+/*
+ 1.) Eric Meyer's Reset
+ ----------------------------------------*/
+
+/**
+ * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+ * http://cssreset.com
+ */
+
+ html, body, div, span, applet, object, iframe, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol, ul, li {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*
+ 1.) Global Typography
+ ----------------------------------------*/
+
+*, :before, :after {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+html {
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	font-size: 100%;
+}
+
+body {
+	font-size: 15px;
+	font-family: 'Lato', sans-serif;
+	line-height: 1;
+	font-weight: 400;
+	color: #212121;
+}
+
+img {
+	height: auto;
+	max-width: 100%;
+	width: auto;
+}
+
+::-webkit-input-placeholder {
+	color: #4a4a4a;
+	opacity: 1;
+}
+
+:-moz-placeholder {
+	/* Firefox 18- */
+	color: #4a4a4a;
+	opacity: 1;
+}
+
+::-moz-placeholder {
+	/* Firefox 19+ */
+	color: #4a4a4a;
+	opacity: 1;
+}
+
+:-ms-input-placeholder {
+	color: #4a4a4a;
+	opacity: 1;
+}
+
+/*
+ 2.0.3) Form Elements
+ -----------------------------*/
+
+select, textarea {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+input {
+	line-height: normal;
+}
+
+input[type="text"], input[type="email"], input , select {
+	width: 100%;
+	background-color: #fff;
+	border: 1px solid #4a4a4a;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	height: 40px;
+	padding: 0 35px;
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #4a4a4a;
+}
+
+select {
+	padding-bottom: 10px;
+}
+
+input:focus, select:focus, textarea:focus, button:focus {
+	outline: 0;
+}
+
+input[type="checkbox"], input[type="radio"] {
+	padding: 0;
+	border: none;
+}
+
+button, input[type="button"], input[type="reset"], input[type="submit"], input[type="file"] {
+	-webkit-appearance: none;
+	cursor: pointer;
+	line-height: normal;
+	overflow: visible;
+}
+
+button[disabled], input[disabled] {
+	cursor: default;
+	color: #999;
+	border-color: #ccc;
+}
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+	padding: 0;
+	border: 0;
+}
+
+/*
+ 2.0.4) List Styles
+ ---------------------------------*/
+
+ul, ol, dl {
+	font-size: 100%;
+	line-height: 1.5;
+}
+
+li, dt {
+	line-height: 1.5em;
+}
+
+dl {
+	margin: 0 0 1em 0;
+}
+
+dd {
+	margin: 0 0 1em 0.8em;
+}
+
+ul {
+	list-style-type: disc;
+	margin: 0 0 0 0;
+}
+
+ol {
+	list-style-type: decimal;
+	margin: 0 0 1em 0;
+}
+
+ul ul, ol ul {
+	list-style-type: circle;
+	margin-top: 0;
+}
+
+ol ol {
+	list-style-type: lower-latin;
+	margin-top: 0;
+}
+
+/*
+ 2.0.5) General Text Formatting
+ -----------------------------------*/
+
+p {
+	margin-bottom: 20px;
+}
+
+blockquote, cite, q, var, dfn {
+	font-style: italic;
+}
+
+blockquote {
+	background: transparent;
+	color: #666666;
+}
+
+pre, code, kbd, tt, samp, var {
+	font-size: 100%;
+}
+
+pre {
+	font-size: 100%;
+	line-height: 1.5;
+	margin: 0 0 1.5em 0;
+	white-space: pre;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+pre, code {
+	color: #880000;
+}
+
+kbd, samp, var {
+	color: #666666;
+	font-weight: bold;
+}
+
+acronym, abbr {
+	border-bottom: 1px #aaa dotted;
+	font-variant: small-caps;
+	cursor: help;
+}
+
+sub, sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	top: -0.5em;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+/*
+ 2.0.6) Link style
+ -------------------------*/
+
+a {
+	text-decoration: none;
+	outline: none;
+	display: inline-block;
+	transition: .3s ease;
+}
+
+a:hover, a:focus {
+	text-decoration: none;
+}
+
+a:active, a:focus {
+	outline: none;
+}
+
+/*
+ 2.0.8) Sprite Icons
+ -------------------------*/
+
+[class^="icon-"], [class*="icon-"] {
+	background-image: url(../images/sprite.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	display: inline-block;
+	height: 48px;
+	width: 48px;
+	border: none;
+}
+
+/* Containers
+ ----------------------------------------------------------------------------------------------------*/
+
+.container {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 1200px;
+	padding: 0 15px;
+}
+
+/* `Clear Floated Elements
+ ----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+/* http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified */
+
+.clearfix:before, .clearfix:after {
+	content: '\0020';
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+/*
+ The following zoom:1 rule is specifically for IE6 + IE7.
+ Move to separate stylesheet if invalid CSS is a problem.
+ */
+
+/*
+ 3.) Site Wide Content
+ ------------------------------*/
+
+.relative {
+	position: relative;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.float-right {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
+.d-flex {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.justify-content-start {
+	-ms-flex-pack: start;
+	justify-content: flex-start;
+}
+
+.justify-content-end {
+	-ms-flex-pack: end;
+	justify-content: flex-end;
+}
+
+.justify-content-center {
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
+.justify-content-between {
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+}
+
+.justify-content-around {
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+}
+
+.align-items-start {
+	-ms-flex-align: start;
+	align-items: flex-start;
+}
+
+.align-items-end {
+	-ms-flex-align: end;
+	align-items: flex-end;
+}
+
+.align-items-center {
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.align-items-baseline {
+	-ms-flex-align: baseline;
+	align-items: baseline;
+}
+
+.flex-wrap {
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+}

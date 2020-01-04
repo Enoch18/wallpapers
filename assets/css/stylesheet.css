@@ -1,0 +1,338 @@
+/* ======================================================== Beginning of code for the front page navigation Bar ======================================================= */
+body{
+    margin: 18px;
+    padding: 0px;
+    background-color: rgb(75, 74, 74);
+}
+.navbar{
+    background-color: rgb(75, 74, 74) !important;
+    margin-right: -30px !important;
+    margin-top: -18px;
+}
+
+.navbar .row img:hover{
+    opacity: 1.0 !important;
+}
+
+.btn-info{
+    background-color: rgb(73, 133, 204) !important;
+    margin-left: 20px !important;
+    border: 1px solid rgb(73, 133, 204);
+}
+
+.btn:hover{
+    opacity: 0.7 !important;
+}
+
+.btn-info:hover{
+    background-color: rgb(73, 133, 204) !important;
+    margin-left: 20px !important;
+    border: 1px solid rgb(73, 133, 204);
+    opacity: 0.7;
+}
+
+#banner{
+    width: 90% !important; 
+    height: 100% !important;
+    margin-left: 5%;
+}
+
+
+#navbar{
+    margin-top:0px;
+    background-color: rgb(75, 74, 74) !important;
+    margin-left: -5px;
+}
+.nav-item{
+    margin-left: 110px !important;
+}
+.nav-item > a{
+    color: white !important;
+    text-align: center !important;
+    font-size: 20px;
+    padding-left: 10%;
+    padding-top: 10px;
+}
+
+.nav-link{
+    width: 100% !important;
+}
+
+.nav-item > select{
+    height: 32px;
+    margin-top: 2%;
+    padding: 2px;
+}
+
+#searchbtn{
+    margin-left: 10px; 
+    height: 40px; 
+    margin-top: 5px;
+}
+
+#search{
+    margin-left: 20px; 
+    margin-top: 5px; 
+    width: 400px;
+}
+
+#inner{
+    width: 100%; 
+    background-color: rgb(75, 74, 74); 
+}
+
+h2{
+    font-size: 45px;
+    margin-left: 35%;
+    padding-top: 1%;
+    font-weight: bold;
+    color: rgb(103, 101, 104);
+}
+
+#heading{
+    background-color: rgb(73, 133, 204); 
+    color: white; 
+    padding-left: 5%; 
+    margin-right: 10px;
+}
+
+#viewall{
+    color: white !important;
+    font-size: 20px;
+}
+
+#viewall:hover{
+    color: rgb(33, 33, 197) !important;
+    font-size: 20px;
+    opacity: 0.7;
+}
+
+/* ==============================================Scroll Bar =========================================================================== */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+/* ============================================================ End of code for the front page navigation Bar ========================================================= */
+
+/* ============================================================= Beginning of code for the frontend main content ===================================================== */
+#ads{
+    min-height: 70px;
+    background-color: rgb(75, 74, 74);
+    margin-right: -30px;
+}
+
+#catbtn{
+    display: none;
+}
+
+#col1{
+    padding: 15px;
+}
+
+#col2{
+    margin-top: 16px;
+}
+
+#col3{
+    margin-top: 16px;
+}
+
+.list-group-item{
+    font-size: 20px;
+    color: white;
+    background-color: rgb(73, 133, 204);
+    border: 1px solid rgb(75, 74, 74);
+}
+
+#row{
+    background-color: rgb(75, 74, 74);
+}
+
+#row a, p{
+    color: white;
+}
+
+a:hover{
+    opacity: 0.7 !important;
+}
+
+#pages .pagination p{
+    color: black;
+}
+
+#color{
+    background-color: white;
+    width: 100%;
+    margin-left: -15px;
+}
+
+#bannerright{
+    background-color: rgb(75, 74, 74); 
+    height: 780px;
+}
+
+#ad{
+    min-height: 70px; 
+    background-color:rgb(75, 74, 74); 
+}
+/* ============================================================= Beginning of code for Image download ===================================================== */
+
+#imagedownload{
+    margin-left: 5%;
+}
+
+#resolutions{
+    margin-left: 5%;
+    margin-top: -3%;
+    width: 90%;
+}
+
+/* ============================================================= End of code for Image download ===================================================== */
+
+#ul{
+    list-style-type: none;
+}
+
+#li{
+    display: inline;
+}
+
+/* =========================================================== Beginning of Code for the admin Login Panel =============================================== */
+#loginbackground{
+    height: 900px;
+    background-color: #e5e1e1;
+}
+
+#login{
+    height: 400px;
+}
+
+#login form{
+    width: 50%;
+    margin-left: 22%;
+    margin-right: auto;
+    padding-top: 5%;
+}
+/* =========================================================== End of Code for the admin Login Panel =============================================== */
+
+/* ========================================================== Beginning of code for resolutions under Downloads ======================================= */
+#resolutions{
+    margin-top: 0px;
+}
+/* ========================================================== End of code for resolutions under Downloads ======================================= */
+
+/* ========================================================== Beginning of code for Category <a> ======================================= */
+.list-group-item a{
+    color: white;
+}
+/* ========================================================== Beginning of code for Category <a> ======================================= */
+
+/* ========================================================== Beginning of code for Social media Icons ======================================= */
+
+.fa {
+  padding: 10px;
+  font-size: 10px;
+  margin-left: 5px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  padding-top: -50px;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+.facebook {
+  background: #3B5998;
+  color: white;
+  border-radius: 50%;
+  padding-right: 3px !important;
+}
+
+.twitter {
+  background: #55ACEE;
+  color: white;
+  border-radius: 50%;
+  padding-right: 3px !important;
+}
+
+.instagram {
+  background: linear-gradient(#8a3ab9, #e95950, #bc2a8d, #fccc63);
+  color: white;
+  border-radius: 50%;
+  padding-right: 3px !important;
+}
+
+.pinterest{
+    background: #c8232c;
+    color: white;
+    border-radius: 50%;
+    padding-right: 3px !important;
+}
+
+/* ========================================================== End of code for Social media Icons ======================================= */
+
+/* =============================================================== Beginning of code for Image effects ================================ */
+img:hover{
+    opacity: 0.8 !important;
+}
+
+a > p{
+    color: white; 
+    font-size: 20px; 
+    font-weight: bold;
+    margin-top: -50px; 
+    margin-left: 10px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+#hidden{
+    color: white !important; 
+    margin-top: -40px !important;
+    background-color: black !important;
+    font-size: 16px !important;
+}
+
+#hidden:hover{
+    color: white !important; 
+    margin-top: -40px !important;
+    background-color: black !important;
+}
+/* =============================================================== End of code for Image effects ================================ */
+#addedonheader{
+    margin-left: 5%; 
+    background-color: rgb(73, 133, 204) !important;
+    border-radius: 3%; color: white;
+    width: 95%;
+}
+
+#sitemapcontainer{
+background-color: white;
+height: 700px;
+overflow: auto;
+}
+
+#pages{
+    width: 40%;
+}
