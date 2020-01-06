@@ -53,7 +53,7 @@ $(document).ready(function(){
     <!-- Beginning of code for the Site map content -->
     <div class = "container">
         <h3 style = "color:white; text-align: center; padding-top: 5%;">SITE MAP</h3><br /><br />
-        <h4 style = "color: white;">Categories</h4>
+        <h4 style = "color: white; padding-left: 5px;" id = "heading">Categories</h4><br />
         <div class = "row">
             <?php
                 try{
@@ -71,7 +71,7 @@ $(document).ready(function(){
             ?>
         </div><br /><br />
 
-        <h4 style = "color: white;">Subcategories</h4>
+        <h4 style = "color: white; padding-left: 5px;" id = "heading">Subcategories</h4>
         <div class = "row">
             <?php
                 try{
@@ -84,28 +84,6 @@ $(document).ready(function(){
                         </div>";
                     }
                 }catch(PDOException $e){
-                    echo "Error " . $e;
-                }
-            ?>
-        </div><br /><br />
-
-        <h4 style = "color: white;">Most Downloaded Images</h4>
-        <div class = "row">
-            <?php
-                try{
-                    $sql = "SELECT * FROM downloads AS da, details AS d, resolutions AS r
-                    WHERE r.d_id = d.d_id AND d.d_id = da.d_id AND r.original != 'original' 
-                    AND r.width = '1920' AND r.height = '1080' 
-                    GROUP BY d.d_id 
-                    ORDER BY da.counter DESC";
-                    $result = $pdo->query($sql);
-                    while ($row = $result->fetch()){
-                        echo "
-                        <div class = 'col-xs-2 col-md-2 col-xs-2 col-xs-2'>
-                            <a href = '../searchresults.php?search=$row[tag]'>$row[tag]</a>
-                        </div>";
-                    }
-                } catch(PDOException $e){
                     echo "Error " . $e;
                 }
             ?>

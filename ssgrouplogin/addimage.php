@@ -144,7 +144,17 @@ $failed = '';
                     </div>
                         
                     <div class = "col-lg-12 form-group">
-                        <input type = "text" name = "tag2" id = "tag2" class = "form-control" placeholder = "Tags">
+                        <textarea type = "text" name = "tag2" id = "tag2" class = "form-control" rows = "5"></textarea>
+                    </div>
+                </div>
+
+                <div class = "row">
+                    <div class = "col-lg-12" style = "margin-left:10px; margin-top: -15px;">
+                        <label style = "font-weight: bold; margin-left: -10px;">Alt Tags</label>
+                    </div>
+                        
+                    <div class = "col-lg-12 form-group">
+                        <textarea type = "text" name = "alttags" id = "alttags" class = "form-control" rows = "5"></textarea>
                     </div>
                 </div>
 
@@ -310,8 +320,13 @@ $failed = '';
                 $("#load").show();
 
                 setTimeout(function () {
+                    var fullPath = $("#image").val();
+                    var filename = fullPath.replace(/^.*[\\\/]/, '');
+                    var imagename = filename.split('.').slice(0, -1).join('.')
+
                     $("#chomsg1").show();
                     $("#load").hide();
+                    $("#tag").val(imagename);
                     $('#image2')
                     .show()
                     .attr('src', e.target.result)

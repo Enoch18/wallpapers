@@ -154,6 +154,7 @@ $(document).ready(function(){
         </ul>
         <a href="mostdownloaded.php" class="list-group-item list-group-item-action bg-light"><i class="fa fa-download"></i> TOP DOWNLOADS</a>
         <a href="frontpagecontent.php" class="list-group-item list-group-item-action bg-light"><i class="fa fa-align-justify"></i> FRONT PAGE CONTENT</a>
+        <a href="activetag.php" class="list-group-item list-group-item-action bg-light"><i class="fa fa-align-justify"></i> ACTIVE TAGS</a>
         <a href="subscribers.php" class="list-group-item list-group-item-action bg-light"><i class="material-icons">subscriptions</i> SUBSCRIBERS (<?php echo $total ?>)</a>
         <a href="unsubscribers.php" class="list-group-item list-group-item-action bg-light"><i class="material-icons">subscriptions</i> UNSUBSCRIBERS (<?php echo $utotal ?>)</a>
         <a href="newsletters.php" class="list-group-item list-group-item-action bg-light"><i class="fa fa-newspaper-o"></i> NEWS LETTERS</a>

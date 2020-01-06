@@ -369,40 +369,46 @@ $(document).ready(function(){
                     <!-- Beginning of Code for the Facebook Share button -->
                     <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12" id = "socialdiv" style = "text-align: center;">
                         <div id="share-buttons">
-                            <!-- <a href="http://www.facebook.com/sharer.php?u=https://www.downloadallwallpapers.com/download.php?id=<?php echo $id ?>" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" style = 'width: 80%;'/>
+                           <!-- Facebook -->
+                            <!-- <a href="http://www.facebook.com/sharer.php?u=http://www.downloadallwallpapers.com/download.php?value=<?php echo $value ?>" target="_blank">
+                                <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" style = 'width: 80%;' />
                             </a> -->
                             
                             <!-- Pinterest -->
                             <a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());">
-                                <img src="https://simplesharebuttons.com/images/somacro/pinterest.png" alt="Pinterest" style = 'width: 80%;'/>
+                                <img src="https://simplesharebuttons.com/images/somacro/pinterest.png" alt="Pinterest" style = 'width: 80%;' />
+                            </a>
+                            
+                            <!-- Reddit -->
+                            <a href="http://reddit.com/submit?url=http://www.downloadallwallpapers.com/download.php?value=<?php echo $value ?>&amp;title=Simple Share Buttons" target="_blank">
+                                <img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" style = 'width: 80%;' />
                             </a>
                             
                             <!-- Twitter -->
-                            <a href="https://twitter.com/share?url=https://www.downloadallwallpapers.com/download.php?id=<?php echo $id ?>&amp;text=Simple%20Share%20Buttons&amp;hashtags=Wallpapers" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" style = 'width: 80%;'/>
+                            <a href="https://twitter.com/share?url=http://www.downloadallwallpapers.com/download.php?value=<?php echo $value ?>&amp;text=Simple%20Share%20Buttons&amp;hashtags=downloadallwallpapers" target="_blank">
+                                <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" style = 'width: 80%;' />
                             </a>
                         </div>
                     </div>
                     <!-- End of Code for the facebook Share Button -->
 
                     <div class = "col-lg-12">
-                        <h5 style = "margin-left: 6.5%; color: white;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;">Name:</b> <?php echo $name; ?></h5>
+                        <h5 style = "margin-left: 6.5%; color: white; text-align: center;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600; color: #FCFF00;">Name:</b><br /> <?php echo $name; ?></h5>
                     </div>
 
                     <div class = "col-lg-12">
                         <?php if($downloads == ''){
                             $downloads = 0;
                         } ?>
-                        <h5 style = "margin-left: 6.5%; color: white;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;">Downloads:</b> <?php echo $downloads; ?></h5>
+                        <h5 style = "margin-left: 6.5%; color: white; text-align: center;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600; color: #FCFF00;">Downloads:</b><br /> <?php echo $downloads; ?></h5>
                     </div>
 
                     <div class = "col-lg-12">
-                        <h5 style = "margin-left: 6.5%; color: white;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;">Added on:</b> <?php echo $addedon; ?></h5>
+                        <h5 style = "margin-left: 6.5%; color: white; text-align: center; text-align: center;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600; color: #FCFF00;">Added on:</b> <?php echo $addedon; ?></h5>
                     </div>
 
                     <div class = "col-lg-12">
-                        <h5 style = "margin-left: 6.5%; color: white;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;">Category:</b> 
+                        <h5 style = "margin-left: 6.5%; color: white; text-align: center;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600; color: #FCFF00;">Category:</b> <br />
                             <?php 
                                 for($i=0; $i < count($multicat); $i++){
                                     echo "<a href='searchresults.php?search=$multicat[$i]'>" . $multicat[$i] ."</a>&nbsp&nbsp&nbsp&nbsp&nbsp";
@@ -412,13 +418,13 @@ $(document).ready(function(){
                     </div>
 
                     <div class = "col-lg-12">
-                        <h5 style = "margin-left: 6.5%; color: white;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;">Description:</b> <?php echo $description; ?></h5>
+                        <h5 style = "margin-left: 6.5%; color: white; text-align: center;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600; color: #FCFF00;">Description:</b><br /> <?php echo $description; ?></h5>
                     </div>
 
                     <!-- Beginning Wallpaper Tags -->
                     <div class = "col-lg-12" style = "margin-left: 6.5%;">
                         <div class = "row" style = "margin-left: -7.2%;">
-							<h5 style = "margin-left: 6.5%; color: white;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;">Tags:&nbsp;</b></h5>
+							<h5 style = "margin-left: 6.5%; color: white;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600; color: #FCFF00;">Tags:&nbsp;</b></h5>
                             <?php 
                                 $tags = array();
                                 $count = '';

@@ -14,14 +14,14 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!-- Add font awesome icons -->
-        <div class = "col-xs-12 col-sm-12 col-ms-12 col-lg-12">
+        <!-- <div class = "col-xs-12 col-sm-12 col-ms-12 col-lg-12">
             <div class = "social" style = "display: inline; float: right !important;">
                 <a href="https://www.facebook.com/DownloadAllWallpapersDotCom/" target = "_blank" class="facebook"><i class="fa fa-facebook"></i></a> 
                 <a href="https://twitter.com/DownloadAllWall" target = "_blank" class="twitter"><i class="fa fa-twitter"></i></a> 
                 <a href="https://www.instagram.com/downloadallwallpapersdotcom" target = "_blank" class="instagram"><i class="fa fa-instagram"></i></a>
                 <a href = "https://www.pinterest.com/downloadallwallpapers" target = "_blank" class = "pinterest"><i class="fa fa-pinterest"></i></a> 
             </div>
-        </div>
+        </div> -->
 
         <div class = "col-xs-12 col-sm-12 col-ms-12 col-lg-12">
             <img src = "../icons/website banner.jpg" class = "img-responsive" id = "banner">
