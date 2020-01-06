@@ -79,6 +79,7 @@
                             <div class = "row">
                                 <input type = "search" name = 'search' placeholder = "search" class = "col-lg-7" id = "search"><br /><br />
                                 <button type = "submit" name = "searchsubmit" value = "submit" class = "btn btn-primary" id = "searchbtn"><i class="fa fa-search" style = "margin-top: -9px; margin-left: -11px; font-size: 20px;"></i></button><br /><br />
+                                <div id = "list" style = "position: absolute; margin-top: 45px; margin-left: 20px; width: 200px; background-color: white; z-index: 1000;"></div>
                             </div>
                         </form>
                     </li>
@@ -93,5 +94,28 @@
         $('#btnclick').click(function(){
             $('#navbarSupportedContent').slideToggle();
         })
+
+        $("#search").keyup(function(){
+            let search = $("#search").val();
+            // list
+            if (search != ''){
+                $.ajax({
+                    url: "predict?value=" + search,
+                    method: "GET",
+                    data: {search: search},
+                    success:function(data){
+                        $("#list").fadeIn();
+                        $("#list").html(data);
+                    }
+                });
+            }else{
+                $("#list").fadeOut();
+            }
+
+            $(document).on('click', '.select', function(){
+                $("#search").val($(this).text());
+                $("#list").hide();
+            });
+        });
     });
 </script>

@@ -53,8 +53,8 @@ if(isset($_POST['submit'])){
 </nav>
 <body style = "background-color: rgb(75, 74, 74); margin-top: -10px;">
     <div class = "container">
-        <div id = "login" style = "margin-top: 10% !important;">
-            <h2 style = "color: white;">LOGIN</h2><br /><br />
+        <div id = "login" style = "margin-top: 10% !important; max-width: 400px; margin-left: auto; margin-right: auto;">
+            <h2 style = "color: white;">LOGIN</h2>
             <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12" style = "background-color:red; color:white; font-weight: bold; margin-bottom: -2%; margin-top: 1%;"><?php if ($evalutation != '')echo $evalutation ?></div><br /><br />
             <div class = "col-xs-12">
             <form class = "form-group" action = "" method = "POST">

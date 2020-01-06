@@ -15,7 +15,28 @@ include ('../database/connection.php');
                 <ul class = "list-group">
                     <?php 
                         try{
+                            $total = '';
+                            $num = array();
+
                             $sql = "SELECT * FROM unsubscribers ORDER BY id DESC";
+                            $result = $pdo->query($sql);
+                            while($row = $result->fetch()){
+                                $num[] = $row['id'];
+                            }
+                            $total = count($num);
+
+                            if (isset($_GET['pageno'])) {
+                                $pageno = $_GET['pageno'];
+                            } else {
+                                $pageno = 1;
+                            }
+                            $prev = $pageno - 1;
+                            $next = $pageno + 1;
+                            $no_of_records_per_page = 100;
+                            $offset = ($pageno-1) * $no_of_records_per_page;
+                            $pages = ceil($total/$no_of_records_per_page);
+
+                            $sql = "SELECT * FROM unsubscribers ORDER BY id DESC LIMIT $offset, $no_of_records_per_page";
                             $result = $pdo->query($sql);
                             while($row = $result->fetch()){
                                 echo "<li class = 'list-group-item' style = 'background-color: white !important;'>
@@ -25,6 +46,63 @@ include ('../database/connection.php');
                                         </div>
                                       </li>";
                             }
+
+                            echo"
+                            <div class = 'col-lg-12'>
+                            <div class = 'container' id = 'pages'>";
+                            if ($pageno == 1 && $pages > 0){
+                                $pos = $pageno + 1;
+                                $neg = $pageno - 1;
+                                echo"
+                                <br />
+                                <ul class = 'pagination'>           
+                                    <li><a href = '#_' class = 'btn btn-primary'>First</a>
+                                    <li><a href = '?pageno=$pageno' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pageno</a>
+                                    <li><p class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>Out of</p>
+                                    <li><a href = '?pageno=$pages' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pages</a><li>
+                                    <li>";
+                                    if($pages == 1){
+                                    echo "
+                                    <a href = '#_' class = 'btn btn-primary' style = 'margin-left: 20px;'>Last</a>
+                                    </ul>";
+                                    }
+                                    if($pages > 1){
+                                        echo "
+                                        <a href = '?pageno=$pos' class = 'btn btn-primary' style = 'margin-left: 20px;'> >>> </a>
+                                        </ul>";
+                                    }
+                            }
+
+                            if ($pageno >= 2 && $pageno != $pages){
+                                $pos = $pageno + 1;
+                                $neg = $pageno - 1;
+                                echo"
+                                <br />
+                                <ul class = 'pagination'>           
+                                    <li><a href = '?pageno=$neg' class = 'btn btn-primary'> <<< </a>
+                                    <li><a href = '?pageno=$pageno' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pageno</a>
+                                    <li><p class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>Of</p>
+                                    <li><a href = '?pageno=$pages' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pages</a><li>
+                                    <li>";
+                                    
+                                    echo "<a href = '?pageno=$pos' class = 'btn btn-primary' style = 'margin-left: 20px;'> >>> </a>
+                                    </li>
+                                </ul>";
+                            }
+
+                            if ($pageno == $pages && $pages != 1){
+                                $neg = $pageno - 1;
+                                echo"
+                                <br />
+                                <ul class = 'pagination'>           
+                                    <li><a href = '?pageno=$neg' class = 'btn btn-primary'> <<< </a>
+                                    <li><a href = '?pageno=$pageno' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pageno</a>
+                                    <li><p class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>Out of</p>
+                                    <li><a href = '?pageno=$pages' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pages</a><li>
+                                    <li><a href = '#_' class = 'btn btn-primary' style = 'margin-left: 20px;'>Last</a>
+                                </ul>";
+                            }
+                            echo"</div></div>";
                         }catch(PDOException $e){
                             echo "An error occured ". $e;
                         }

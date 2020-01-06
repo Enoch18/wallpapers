@@ -369,7 +369,7 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
     LIMIT $offset, $no_of_records_per_page";
 }
 }
-//exit();
+$searchresulttotal = $total;
 ?>
 
 <!DOCTYPE html>
@@ -437,8 +437,8 @@ $(document).ready(function(){
             <div class = "col-lg-8" id = "col2">
                 <div class = "row">
                     <div class = "col-lg-12" style = "margin-left: -5px;">
-                        <h4 id = "heading"> SEARCH RESULT</h4>
-                        <h4> <?php echo "<h5 style = 'color: white;'>" . strtoupper($search) . "</h5>"; ?></h4><br />
+                        <h4 id = "heading" style = "padding-left: 5px !important;"> SEARCH RESULT</h4>
+                        <h4> <?php echo "<h5 style = 'color: white;'>" . strtoupper($search) . " ($searchresulttotal Wallpapers Found)</h5>"; ?></h4><br />
                     </div>
                     <?php 
                         try{
@@ -510,10 +510,11 @@ $(document).ready(function(){
                                                 $arr[] = $rowt['tagname'];
                                             }
                                             $alt = implode(",", $arr);
+                                            $tagname = str_replace(" ", "_", $row['tag']);
 
                                             echo"
                                             <div class = 'col-lg-4' style = 'margin-left: -5px;'>
-                                            <a href = 'download.php?id=$row[d_id]'>
+                                            <a href = 'download.php?value=$tagname-$row[d_id]'>
                                                 <img src = 'ssgrouplogin/$row[url]' class = 'img img-thumbnail' alt = '$alt' style = 'width: 100%; height: 100%;'>
                                                 <p id = 'hidden' style = 'font-size: 16px; color: white;'><i class='fa fa-download'></i> $downloads</p><br />
                                                 <h5 style = 'text-align: center; color: white;'>$row[tag]</h5>

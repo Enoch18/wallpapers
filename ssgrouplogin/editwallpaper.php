@@ -232,10 +232,10 @@ if($downloads >= 1000000){
                         $result = $pdo->query($sql);
                         while($row = $result->fetch()){
                             echo"
-                            <div class = 'col-lg-12' id = 'imagedownload'>
+                            <div class = 'col-lg-12' id = 'imagedownload' style = 'text-align: center;'>
                                 <img src = '$row[url]' class = 'img-thumbnail' style = 'width: 90%; height: 90%;' title = '$row[tag]'><br />
-                                <h6 style = 'font-weight: bold'>Added on:</h6><p>$row[createdat]</p>
-                                <h6 style = 'font-weight: bold'>Downloads:</h6><p>$downloads</p>
+                                <h6 style = 'font-weight: bold'>Image title/Name:</h6> <p>$row[tag]</p>
+
                                 <h6 style = 'font-weight: bold'>Category:</h6>
                                 ";
                                 $cattotal = count($category);
@@ -257,9 +257,13 @@ if($downloads >= 1000000){
                                     echo "<p> $ccount) " . $subcategory[$inc] ."</p>";
                                 }
                                 $id = $row['d_id'];
-                                echo"
-                                <h6 style = 'font-weight: bold'>Image title/Name:</h6> <li>$row[tag]</li>
-                                <h6 style = 'font-weight: bold'>Description:</h6> <li>$row[description]</li><br />
+
+                                echo "
+                                <h6 style = 'font-weight: bold'>Added on:</h6><p>$row[createdat]</p>
+                                <h6 style = 'font-weight: bold'>Downloads:</h6><p>$downloads</p>
+                                
+                                
+                                <h6 style = 'font-weight: bold'>Description:</h6> <p>$row[description]</p><br />
                                 <h6 style = 'font-weight: bold'>Url:</h6>
                                 <a href = 'http://www.downloadallwallpapers.com/download.php?value=$value' target = '_blank' style = 'margin-top: -20%;'>
                                     http://www.downloadallwallpapers.com/download.php?value=$value
@@ -277,6 +281,7 @@ if($downloads >= 1000000){
                     ?>
                     <form action = "" method = "POST">
                         <?php
+                            echo "<div style = 'text-align: center'>";
                             try{
                                 $del = '';
                                 $sql = "SELECT * FROM tagdetails  WHERE d_id = '$id' ORDER BY id ASC";
@@ -304,7 +309,7 @@ if($downloads >= 1000000){
                                 <input type = 'submit' name = 'tagdelete' id = 'tagdelete' value = 'REMOVE' class = 'btn btn-danger' style = 'margin-left: 2%;'>";
                             }
 
-                            echo "<br /><br /><br />";
+                            echo "</div><br /><br /><br />";
                         ?>
                     </form>
                 </div>

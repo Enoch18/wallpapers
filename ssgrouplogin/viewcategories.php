@@ -82,7 +82,7 @@ if($catid != ''){
                                 echo "<li class = 'list-group-item' style = 'background-color: white !important;'>
                                         <div class = 'row' style = 'margin-top: -5px;'>
                                             <div class = 'col-lg-8'>
-                                                <a href = 'viewwallpapers.php?search=$row[cat_name]' style = 'text-decoration: none; color: black;'>
+                                                <a href = 'viewwallpapers.php?category=$row[cat_name]' style = 'text-decoration: none; color: black;'>
                                                     <h5>$row[cat_name]</h5>
                                                 </a>
                                             </div>

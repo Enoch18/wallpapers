@@ -10,7 +10,15 @@ include ('../database/connection.php');
 include ('../database/createtables.php');
 include ('inc.php');
 
-$search = $_GET['search'];
+$search = '';
+if ($_GET['search'] != ''){
+    $search = $_GET['search'];
+}
+
+if ($_GET['category'] != ''){
+    $search = $_GET['category'];
+}
+
 $id = $_GET['id'];
 $catname = $_GET['catname'];
 
@@ -493,6 +501,7 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
                     <input type = "search" name = 'search' placeholder = "search" class = "col-lg-7" id = "search"><br /><br />
                     <button type = "submit" name = "searchsubmit" value = "submit" class = "btn btn-primary" id = "searchbtn">
                     <i class="fa fa-search" style = "margin-top: -10px; margin-right: 10px; font-size: 25px;"></i></button><br /><br />
+                    <div id = "list" style = "position: absolute; margin-top: 45px; width: 200px; background-color: white; z-index: 1000;"></div>
                 </div>
             </form>
         </div>
@@ -607,21 +616,35 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
                 }
                 
                 if($search != ''){
+                    $searchname = ucwords($search);
                     try{
-                        echo "
-                        <div class = 'col-lg-12' style = 'margin-left: -5px;'>
-                            <h4> Search Result Wallpapers</h4>
-                        </div>
-                        <div class = 'col-lg-12'>
-                            <a href = 'viewwallpapers.php' class = 'btn btn-primary'>Back To All</a>
-                        </div>
-                        ";  
+                        if ($_GET['search']){
+                            echo "
+                            <div class = 'col-lg-12' style = 'margin-left: -5px;'>
+                                <h4> Search Result Wallpapers</h4>
+                            </div>
+                            <div class = 'col-lg-12'>
+                                <a href = 'viewwallpapers.php' class = 'btn btn-primary'>Back To All</a><br />
+                                <h4>$searchname ($total Wallpapers Found)</h4>
+                            </div>
+                            ";  
+                        }
+
+                        if ($_GET['category']){
+                            echo "
+                            <div class = 'col-lg-12'>
+                                <a href = 'viewwallpapers.php' class = 'btn btn-primary'>Back To All</a><br />
+                                <h3>$searchname</h3>
+                            </div>
+                            ";  
+                        }
+
                         $result = $pdo->query($query);
                         while($row = $result->fetch()){
                             if($row['width'] == 1280 && $row['height'] == 720){
                                 $tagname = str_replace(' ', '_', $row['tag']);
                                 echo"
-                                <div class = 'col-lg-4' style = 'margin-left: -5px; margin-top: 5%;'>
+                                <div class = 'col-lg-4' style = 'margin-left: -5px;'>
                                     <img src = '$row[url]' class = 'img-thumbnail' style = 'width: 100%; height: 100%;'>
                                     <div class = 'row'>
                                         <div class = 'col-md- 3 col-lg-4'>
@@ -629,7 +652,7 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
                                         </div>
                     
                                         <div class = 'col-md- 3 col-lg-4'>
-                                            <a href = '?id=$row[d_id]' class = 'btn btn-danger' id = 'delete'><i class='fa fa-trash-o'></i></a>
+                                            <a href = '?id=$row[d_id]' class = 'btn btn-danger delete' id = '$row[d_id]'><i class='fa fa-trash-o'></i></a>
                                         </div>
                         
                                         <div class = 'col-md- 3 col-lg-4'>
@@ -745,6 +768,29 @@ $(document).ready(function(){
     $("#no").click(function(){
         $("#deleteconfirm").hide();
     });
+    
+    $("#search").keyup(function(){
+            let search = $("#search").val();
+            // list
+            if (search != ''){
+                $.ajax({
+                    url: "../predict?value=" + search,
+                    method: "GET",
+                    data: {search: search},
+                    success:function(data){
+                        $("#list").fadeIn();
+                        $("#list").html(data);
+                    }
+                });
+            }else{
+                $("#list").fadeOut();
+            }
+
+            $(document).on('click', '.select', function(){
+                $("#search").val($(this).text());
+                $("#list").hide();
+            });
+        });
 });
 </script>
 

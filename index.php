@@ -192,9 +192,10 @@ $(document).ready(function(){
                                                 $arr[] = $rowt['tagname'];
                                             }
                                             $alt = implode(",", $arr);
+                                            $tagname = str_replace(" ", "_", $row['tag']);
                                             echo"
                                             <div class = 'col-lg-4' style = 'margin-left: -5px;'>
-                                                <a href = 'download.php?id=$row[d_id]'>
+                                                <a href = 'download.php?value=$tagname-$row[d_id]'>
                                                     <img src = 'ssgrouplogin/$row[url]' alt = '$alt' class = 'img img-thumbnail' style = 'width: 100%; height: 100%;'>
                                                     <p id = 'hidden' style = text-align: center; font-size: 16px;'><i class='fa fa-download'></i> $downloads</p>
                                                 </a>

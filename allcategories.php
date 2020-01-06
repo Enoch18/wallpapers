@@ -256,9 +256,10 @@ $(document).ready(function(){
                                             $arr[] = $rowt['tagname'];
                                         }
                                         $alt = implode(",", $arr);
+                                        $tagname = str_replace(" ", "_", $row['tag']);
                                         echo"
                                         <div class = 'col-lg-4' style = 'margin-left: -5px;'>
-                                        <a href = 'download.php?id=$row[d_id]'>
+                                        <a href = 'download.php?value=$tagname-$row[d_id]'>
                                             <img src = 'ssgrouplogin/$row[url]' class = 'img img-thumbnail' alt = '$alt' style = 'width: 100%; height: 100%;'>
                                             <p id = 'hidden' style = 'font-size: 16px;'><i class='fa fa-download'></i> $downloads</p>
                                             <h5 style = 'text-align: center; color: white;'>$row[tag]</h5>
@@ -332,12 +333,12 @@ $(document).ready(function(){
                 <div id = "ad">
                     <p>Advertisement</p>
 					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-8918135732106370",
-          enable_page_level_ads: true
-     });
-</script>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({
+                            google_ad_client: "ca-pub-8918135732106370",
+                            enable_page_level_ads: true
+                        });
+                    </script>
                 </div><br />
 
                 <!-- Beginning of code for tags -->

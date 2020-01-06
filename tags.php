@@ -1,3 +1,4 @@
+<hr />
 <div class = "row">
     <?php 
         $tags = array();
@@ -22,11 +23,21 @@
 
         for($i=0; $i<$count; $i++){
             echo"
-                <a href = 'searchresults.php?search=$tags[$i]' class = 'btn btn-secondary' 
-                    style = 'margin-left: 1%; width: 15%; font-size: 13px; background-color: rgb(73, 133, 204); 
-                    border: 1px solid rgb(73, 133, 204); float: right; margin-top: 10px;'>
+                <a href = 'searchresults.php?search=$tags[$i]'  
+                    style = 'margin-left: 1%; font-weight: bold;'>
                     $tags[$i]
-                </a>&nbsp&nbsp&nbsp&nbsp&nbsp<br /><br />";
+                </a><br /><br />";
         }
     ?>
-</div>
+</div><hr />
+
+<div id = "ad">
+    <p>Advertisement</p>
+	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-8918135732106370",
+            enable_page_level_ads: true
+        });
+    </script>
+</div><br />

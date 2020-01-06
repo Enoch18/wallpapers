@@ -62,4 +62,12 @@
         <?php if($_GET['id'] == "taken") echo "<p style = 'background-color: red; color:white;'>Sorry, that email was already used to subscribe!</p>";?>
 </div>
 </body>
+
+<script>
+    $(document).ready(function(){
+        setTimeout(() => {
+            window.location.href = "./latest.php";
+        }, 5000);
+    })
+</script>
 </html>

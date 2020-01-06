@@ -2,7 +2,10 @@
 include ('database/connection.php');
 session_start();
 error_reporting(0);
-$id = $_GET['id'];
+$value = $_GET['value'];
+$exploded = explode("-", $_GET['value']);
+$id = (int)$exploded[1];
+
 $authorlink = '';
 $author = '';
 $number = array();
@@ -67,7 +70,6 @@ try{
 
 
 if (isset($id)){
-    $id = $_GET['id'];
     $date = date("Y-m-d");
     $time = date("H:i:s");
     $sql = "SELECT * FROM downloads";
@@ -277,7 +279,6 @@ $(document).ready(function(){
             <div class = "col-lg-8" id = "col2">
                 <div class = "row">
                     <?php
-                        $id = $_GET['id'];
                         try{
                             $addedon = '';
                             $description = '';
@@ -417,7 +418,7 @@ $(document).ready(function(){
                     <!-- Beginning Wallpaper Tags -->
                     <div class = "col-lg-12" style = "margin-left: 6.5%;">
                         <div class = "row" style = "margin-left: -7.2%;">
-							<h5 style = "margin-left: 6.5%; color: white;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;">Tags:</b></h5>
+							<h5 style = "margin-left: 6.5%; color: white;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;">Tags:&nbsp;</b></h5>
                             <?php 
                                 $tags = array();
                                 $count = '';
@@ -428,9 +429,9 @@ $(document).ready(function(){
                                     while($row = $result->fetch()){
                                         echo"
                                             <a href = 'searchresults.php?search=$row[tagname]'
-                                            style = 'margin-left: 7.2%; height: 40px; margin-top: 7px; font-size: 14pt; font-weight: bold; background-color: rgb(75, 74, 74);'>
-                                                $row[tagname]
-                                            </a><br /><br />";
+                                            style = 'height: 40px; margin-top: 7px; font-size: 14pt; font-weight: bold; background-color: rgb(75, 74, 74); display: inline;'>
+                                                $row[tagname] &nbsp;
+                                            </a>";
                                     }
                                 }catch(PDOException $e){
                                     echo "An error occured" . $e;
@@ -444,8 +445,7 @@ $(document).ready(function(){
                             <?php
                                 echo "<br />";
                                 if($author != '')echo "<h5 style = 'margin-left: 6.5%; color: white;'>Author: ";
-                                if($authorlink != '' && $author != '') echo "<a href = '$authorlink' target = '_black' class = 'btn btn-primary' 
-                                style = 'background-color: rgb(73, 133, 204); border: 2px solid rgb(73, 133, 204);'>$author</a>"; 
+                                if($authorlink != '' && $author != '') echo "<a href = 'https://$authorlink' target = '_black'><u>$author</u></a>"; 
                                 if($authorlink == '') echo "<a href = '#'>$author</a>"; 
                                 echo "</h5>";
                             ?>
@@ -463,7 +463,6 @@ $(document).ready(function(){
                                 echo"
                                 <div class = 'col-lg-12'>
                                 <h5 style = 'margin-left: 3%; color: white; text-align: center;'>";
-                                $id = $_GET['id'];
                                 try{
                                     $sql = "SELECT * FROM details AS d, resolutions AS r
                                     WHERE d.d_id = '$id'
@@ -532,12 +531,12 @@ $(document).ready(function(){
                         <div id = "ad">
                             <p>Advertisement</p>
 							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-8918135732106370",
-          enable_page_level_ads: true
-     });
-</script>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({
+                                    google_ad_client: "ca-pub-8918135732106370",
+                                    enable_page_level_ads: true
+                                });
+                            </script>
                         </div><br />
 
                         <div class = "row" style = "width: 100%; margin-left: 0px;">
@@ -576,9 +575,10 @@ $(document).ready(function(){
                                                     $arr[] = $rowt['tagname'];
                                                 }
                                                 $alt = implode(",", $arr);
+                                                $tagname = str_replace(" ", "_", $row['tag']);
                                                 echo"
                                                 <div class = 'col-lg-4' style = 'margin-left: -5px;'>
-                                                <a href = 'download.php?id=$row[d_id]'>
+                                                <a href = 'download.php?value=$tagname-$row[d_id]'>
                                                     <img src = 'ssgrouplogin/$row[url]' class = 'img img-thumbnail' alt = '$alt' style = 'width: 100%; height: 100%;'>
                                                     <p id = 'hidden'><i class='fa fa-download'></i> $downloads</p><br />
                                                     <h5 style = 'text-align: center; color: white;'>$row[tag]</h5><br /><br />
@@ -600,12 +600,12 @@ $(document).ready(function(){
                 <div id = "ad">
                     <p>Advertisement</p>
 					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-8918135732106370",
-          enable_page_level_ads: true
-     });
-</script>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({
+                            google_ad_client: "ca-pub-8918135732106370",
+                            enable_page_level_ads: true
+                        });
+                    </script>
                 </div><br />
 
                 <div class = "col-lg-12">

@@ -177,12 +177,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             $tagname = explode(",", $tag2);
             $total = count($tagname);
             for($i=0; $i<$total; $i++){
+                $created_at = date("Y-m-s H:i:s");
                 $sql3 = "INSERT INTO tagdetails SET
                 tagname = :tagname,
-                d_id = :did";
+                d_id = :did,
+                created_at = :created_at";
                 $s3 = $pdo->prepare($sql3);
-                $s3->bindValue(':tagname', $tagname[$i]);
+                $s3->bindValue(':tagname', str_replace(" ", "", $tagname[$i]));
                 $s3->bindValue(':did', $did);
+                $s3->bindValue(':created_at', $created_at);
                 $s3->execute();
             }
 

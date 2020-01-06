@@ -155,7 +155,7 @@ if (isset($_POST['tagdelete'])){
                     <?php
                         try{
                             echo "<h5>Add more: </h5>";
-                            $sql = "SELECT DISTINCT tagname FROM tagdetails AS tn, details AS d WHERE tn.d_id = d.d_id ORDER BY d.createdat DESC LIMIT 200";
+                            $sql = "SELECT DISTINCT tagname FROM tagdetails GROUP BY tagname ORDER BY created_at DESC LIMIT 200";
                             $result = $pdo->query($sql);
                             while($row = $result->fetch()){
                                 echo "
@@ -179,7 +179,7 @@ if (isset($_POST['tagdelete'])){
                 <h5>Active Tags</h5>
                 <?php
                     try{
-                        $sql = "SELECT * FROM tagdetails AS td, tags AS t WHERE td.id = t.tag_id ORDER BY td.tagname ASC";
+                        $sql = "SELECT * FROM tagdetails AS td, tags AS t WHERE td.id = t.tag_id GROUP BY td.tagname ORDER BY td.tagname ASC";
                         $result = $pdo->query($sql);
                         while($row = $result->fetch()){
                             $tag = $row['tagname'];
