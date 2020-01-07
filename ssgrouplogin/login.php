@@ -48,7 +48,7 @@ if(isset($_POST['submit'])){
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style = "background-color: rgb(75, 74, 74) !important;">
     <div class = "container">
-        <img src = "../icons/website banner.jpg" class = "img-responsive" style = "width: 100%; height: 90px; margin-top: 5px;">
+        <img src = "../icons/banner.jpg" class = "img-responsive" style = "width: 100%; height: 90px; margin-top: 5px;">
     </div>
 </nav>
 <body style = "background-color: rgb(75, 74, 74); margin-top: -10px;">

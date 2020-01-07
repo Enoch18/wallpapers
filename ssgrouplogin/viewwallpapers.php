@@ -533,6 +533,7 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
                         $result = $pdo->query($sql);
                         while($row = $result->fetch()){
                             $tagname = str_replace(' ', '_', $row['tag']);
+                            $tagname = str_replace("-", "_", $tagname);
                             echo"
                             <div class = 'col-lg-4' style = 'margin-left: -5px; margin-top: 2%;'>
                                 <img src = '$row[url]' class = 'img-thumbnail' style = 'width: 100%; height: 100%;'>
@@ -643,6 +644,7 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
                         while($row = $result->fetch()){
                             if($row['width'] == 1280 && $row['height'] == 720){
                                 $tagname = str_replace(' ', '_', $row['tag']);
+                                $tagname = str_replace("-", "_", $tagname);
                                 echo"
                                 <div class = 'col-lg-4' style = 'margin-left: -5px;'>
                                     <img src = '$row[url]' class = 'img-thumbnail' style = 'width: 100%; height: 100%;'>

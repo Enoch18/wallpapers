@@ -44,7 +44,7 @@
         </div>-->
 
         <div class = "col-xs-12 col-sm-12 col-ms-12 col-lg-12">
-            <img src = "icons/website banner.jpg" class = "img-responsive" id = "banner">
+            <img src = "icons/banner.jpg" class = "img-responsive" id = "banner">
         </div>
     </div>
 </nav>

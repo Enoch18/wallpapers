@@ -265,12 +265,16 @@ $(document).ready(function(){
         <div id = "ads">
             <p>Advertisement</p>
 			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-8918135732106370",
-          enable_page_level_ads: true
-     });
-</script>
+            <!-- New horiznontal -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-8918135732106370"
+                data-ad-slot="4329202681"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </div><br />
 
@@ -477,7 +481,7 @@ $(document).ready(function(){
                                     $result = $pdo->query($sql);
                                     while($row = $result->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row[url]' download = '$row[name]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>1280 x 720 (HD)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row[url]' download = '$row[name] 1280 X 720' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>1280 x 720 (HD)</a> <br /><br />";
                                     }
 
                                     $sql1 = "SELECT * FROM details AS d, resolutions AS r
@@ -486,7 +490,7 @@ $(document).ready(function(){
                                     $result1 = $pdo->query($sql1);
                                     while($row1 = $result1->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row1[url]' download = '$row1[name]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>1920 x 1080 (FHD)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row1[url]' download = '$row1[name] 1920 X 1080' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>1920 x 1080 (FHD)</a> <br /><br />";
                                     }
 
                                     $sql2 = "SELECT * FROM details AS d, resolutions AS r
@@ -495,7 +499,7 @@ $(document).ready(function(){
                                     $result2 = $pdo->query($sql2);
                                     while($row2 = $result2->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row2[url]' download = '$row2[name]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>2560 x 1440 (QHD)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row2[url]' download = '$row2[name] 2560 X 1440' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>2560 x 1440 (QHD)</a> <br /><br />";
                                     }
 
                                     $sql3 = "SELECT * FROM details AS d, resolutions AS r
@@ -504,7 +508,7 @@ $(document).ready(function(){
                                     $result3 = $pdo->query($sql3);
                                     while($row3 = $result3->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row3[url]' download = '$row3[name]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>3840 x 2160 (4K)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row3[url]' download = '$row3[name] 3840 X 2160' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>3840 x 2160 (4K)</a> <br /><br />";
                                     }
 
                                     $sql4 = "SELECT * FROM details AS d, resolutions AS r
@@ -513,7 +517,7 @@ $(document).ready(function(){
                                     $result4 = $pdo->query($sql4);
                                     while($row4 = $result4->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row4[url]' download = '$row4[name]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>5120 x 2880 (5K)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row4[url]' download = '$row4[name] 5120 X 2880' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>5120 x 2880 (5K)</a> <br /><br />";
                                     }
 
                                     // $sql5 = "SELECT * FROM details AS d, resolutions AS r
@@ -606,12 +610,16 @@ $(document).ready(function(){
                 <div id = "ad">
                     <p>Advertisement</p>
 					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({
-                            google_ad_client: "ca-pub-8918135732106370",
-                            enable_page_level_ads: true
-                        });
-                    </script>
+            <!-- New horiznontal -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-8918135732106370"
+                data-ad-slot="4329202681"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
                 </div><br />
 
                 <div class = "col-lg-12">

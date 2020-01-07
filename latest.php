@@ -87,16 +87,16 @@ $(document).ready(function(){
         <div id = "ads">
             <p>Advertisement</p>
 			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- New horiznontal -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-8918135732106370"
-     data-ad-slot="4329202681"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+            <!-- New horiznontal -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-8918135732106370"
+                data-ad-slot="4329202681"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </div><br />
 
@@ -159,6 +159,7 @@ $(document).ready(function(){
                                         }
                                         $alt = implode(",", $arr);
                                         $tagname = str_replace(" ", "_", $row['tag']);
+                                        $tagname = str_replace("-", "_", $tagname);
 
                                         echo"
                                         <div class = 'col-lg-4' style = 'margin-left: -5px;'>

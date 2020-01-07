@@ -376,12 +376,16 @@ $searchresulttotal = $total;
 <html lang="en">
 <head>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({
-                            google_ad_client: "ca-pub-8918135732106370",
-                            enable_page_level_ads: true
-                        });
-                    </script>
+            <!-- New horiznontal -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-8918135732106370"
+                data-ad-slot="4329202681"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -511,6 +515,7 @@ $(document).ready(function(){
                                             }
                                             $alt = implode(",", $arr);
                                             $tagname = str_replace(" ", "_", $row['tag']);
+                                            $tagname = str_replace("-", "_", $tagname);
 
                                             echo"
                                             <div class = 'col-lg-4' style = 'margin-left: -5px;'>
