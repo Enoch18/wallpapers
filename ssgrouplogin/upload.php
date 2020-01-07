@@ -65,7 +65,7 @@ function resize_image($file, $max_resolution, $width, $height){
         $fileext = $ext = pathinfo($file, PATHINFO_EXTENSION);
         $path_parts = pathinfo($file);
         $filename = $path_parts['filename'];
-        $file = $filename . '_' . $width . '_X_' . $height . '_' . time() . '.' . $fileext;
+        $file = str_replace(" ", "", $filename) . '_' . $width . '_X_' . $height . '_' . time() . '.' . $fileext;
         $file = $path . "/" . $file;
         
         if($original_image){
