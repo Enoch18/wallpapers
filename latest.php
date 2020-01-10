@@ -84,7 +84,7 @@ $(document).ready(function(){
     <div id = "color">
         <?php include ('navbar.php'); ?>
 
-        <div id = "ads">
+        <div id = "ads" style = "margin-left: auto !important; margin-right: auto !important;">
             <p>Advertisement</p>
 			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- New horiznontal -->

@@ -422,7 +422,7 @@ $(document).ready(function(){
     <div id = "color">
         <?php include ('navbar.php'); ?>
 
-        <div id = "ads">
+        <div id = "ads" style = "margin-left: auto !important; margin-right: auto !important;">
             <p>Advertisement</p>
 			<ins class="adsbygoogle"
                 style="display:block"
