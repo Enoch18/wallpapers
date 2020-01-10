@@ -7,6 +7,13 @@ require '../mailer/phpmailer/PHPMailerAutoload.php';
 $sent = '';
 $fail = '';
 
+$server = $_SERVER['SERVER_NAME'];
+if ($_SERVER['SERVER_NAME'] == 'localhost'){
+    $server = "http://" . $_SERVER['SERVER_NAME'] . "/wallpapers";
+}else{
+    "http://" . $_SERVER['SERVER_NAME'];
+}
+
 if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''){
     try{
         $sql = "SELECT * FROM subscribers";
@@ -24,7 +31,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
             $mail->SMTPAuth = true;
             $mail->Port = 80;
             $mail->Username = "admin@downloadallwallpapers.com";
-            $mail->Password = "Download.1";
+            $mail->Password = "Sabir@Groups@88";
             //$mail->SMTPSecure = 'ssl';
             $mail->SetFrom('admin@downloadallwallpapers.com', "Download All Wallpapers");
             $mail->addAddress($email, "");
@@ -37,7 +44,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
             $mail->Subject = $subject;
             $mail->Body = "
                 <div style = 'background-color: rgb(75, 74, 74); width: 100%;'>
-                    <img src = 'http://www.downloadallwallpapers.com/icons/website%20banner.jpg' class = 'img img-responsive' style = 'width: 100%'>
+                    <img src = '$server/icons/banner.jpg' class = 'img img-responsive' style = 'width: 100%'>
                 </div>
                 <div style = 'background-color: white; width: 100%;'>
                     <p style = 'color: black; font-size: 20px;'>$message</p><br />
@@ -46,13 +53,14 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                             foreach ($_POST['images'] as $images){
                                 $data = explode("____", $images);
                                 $images = $data[0];
+                                $images = str_replace("../", "", $images);
                                 $imagename = str_replace(" ", "_", $data[1]);
                                 $id = $data[2];
 
                                 $mail->Body .= "
                                 <div class = 'col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-                                    <a href = 'http://www.downloadallwallpapers.com/download.php?value=$imagename-$id'>
-                                        <img src = '$images' style = 'width: 100%'>
+                                    <a href = '$server/download.php?value=$imagename-$id'>
+                                        <img src = '$server/$images' style = 'width: 100%'>
                                     </a>
                                 </div>";
                             }
@@ -61,7 +69,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                         </div>
                     <p style = 'font-size: 20px;'>You are receiving this message because you have subscribed to www.downloadallwallpapers.com 
                     To no longer receive messages from us, click
-                    <a href = 'http://www.downloadallwallpapers.com/unsubscribe.php?id=$id'>Unsubscribe</a></p><br />
+                    <a href = '$server/unsubscribe.php?id=$id'>Unsubscribe</a></p><br />
                 </div>";
 
             $mail->AltBody = $message;

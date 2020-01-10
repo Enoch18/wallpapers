@@ -432,52 +432,60 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
     }
 
     #edit{
-        margin-top: -120%; 
-        margin-left: 20%;
+        bottom: 20px;
+        position: absolute;
+        left: 10px;
     }
 
     .delete{
-        margin-top: -120%; 
-        margin-left: -60%;
+        bottom: 20px;
+        position: absolute;
+        left: 60px;
     }
 
     #details{
-        margin-top: -120%; 
-        margin-left: -143%;
-        margin-left: 0px;
+        bottom: 20px;
+        position: absolute;
+        left: 110px;
     }
 
     @media (max-width: 1400px){
         #edit{
-        margin-top: -160%; 
-        margin-left: 10%;
+            bottom: 20px;
+            position: absolute;
+            left: 10px;
         }
 
         .delete{
-            margin-top: -160%; 
-            margin-left: -30%;
+            bottom: 20px;
+            position: absolute;
+            left: 60px;
         }
 
         #details{
-            margin-top: -160%; 
-            margin-left: -50%;
+            bottom: 20px;
+            position: absolute;
+            left: 110px;
         }
     }
 
     @media (max-width: 979px){
         #edit{
-        margin-top: -40%; 
-        margin-left: 10%;
+            bottom: 20px;
+            position: absolute;
+            left: 10px;
         }
 
         .delete{
-            margin-top: -47.5%; 
-            margin-left: 25%;
+            bottom: 20px;
+            position: absolute;
+            left: 60px;
         }
 
         #details{
-            margin-top: -55%; 
-            margin-left: 40%;
+            bottom: 20px;
+            position: absolute;
+            left: 110px;
         }
 
         #searchbtn{
@@ -485,24 +493,24 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
         }
     }
 
+
     @media (max-width: 767px){
         #edit{
-        margin-top: -37.5%; 
-        margin-left: 10%;
+            bottom: 20px;
+            position: absolute;
+            left: 10px;
         }
 
         .delete{
-            margin-top: -50%; 
-            margin-left: 25%;
+            bottom: 20px;
+            position: absolute;
+            left: 60px;
         }
 
         #details{
-            margin-top: -62.5%; 
-            margin-left: 40%;
-        }
-
-        #searchbtn{
-            margin-top: 10px !important;
+            bottom: 20px;
+            position: absolute;
+            left: 110px;
         }
     }
 </style>
@@ -557,7 +565,7 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
                     <input type = "search" name = 'search' placeholder = "search" class = "col-lg-7" id = "search"><br /><br />
                     <button type = "submit" name = "searchsubmit" value = "submit" class = "btn btn-primary" id = "searchbtn">
                     <i class="fa fa-search" style = "margin-top: -10px; margin-right: 10px; font-size: 25px;"></i></button><br /><br />
-                    <div id = "list" style = "position: absolute; margin-top: 45px; width: 200px; background-color: white; z-index: 1000;"></div>
+                    <div id = "list" style = "position: absolute; margin-top: 45px; background-color: white; z-index: 1000;"></div>
                 </div>
             </form>
         </div>
@@ -590,21 +598,29 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
                         while($row = $result->fetch()){
                             $tagname = str_replace(' ', '_', $row['tag']);
                             $tagname = str_replace("-", "_", $tagname);
+                            $ide = $row['d_id'];
+                            $category = '';
+                            $sql1 = "SELECT * FROM catlink AS cl, category AS c WHERE cl.cat_id = c.cat_id AND cl.d_id = '$ide'";
+                            $result1 = $pdo->query($sql1);
+                            while($row1 = $result1->fetch()){
+                                $category .= $row1['cat_name'] . ', ';
+                            }
+                            $category = substr($category, 0, -2);
                             echo"
                             <div class = 'col-lg-4' style = 'margin-left: -5px; margin-top: 2%;'>
-                                <img src = '$row[url]' class = 'img-thumbnail' style = 'width: 100%; height: 100%;'>
-                                <div class = 'row'>
-                                    <div class = 'col-md- 3 col-lg-4'>
-                                        <a href = 'editwallpaper.php?value=$tagname-$row[d_id]' class = 'btn btn-primary' id = 'edit'><i class='fa fa-edit'></i></a>
-                                    </div>
+                                <div style = 'position: relative'>
+                                    <img src = '$row[url]' class = 'img-thumbnail' style = 'width: 100%; height: 100%;'>
+                                    <a href = 'editwallpaper.php?value=$tagname-$row[d_id]' class = 'btn btn-primary' id = 'edit'><i class='fa fa-edit'></i></a>
 
-                                    <div class = 'col-md- 3 col-lg-4'>
-                                        <a class = 'btn btn-danger delete' id = '$row[d_id]'><i class='fa fa-trash-o'></i></a>
-                                    </div>
+                                    <a class = 'btn btn-danger delete' id = '$row[d_id]'><i class='fa fa-trash-o'></i></a>
 
-                                    <div class = 'col-md- 3 col-lg-4'>
-                                        <a href = 'wallpaperdetails.php?value=$tagname-$row[d_id]' class = 'btn btn-info' id = 'details'><i class='fa fa-eye'></i></a>
-                                    </div>
+                                    <a href = 'wallpaperdetails.php?value=$tagname-$row[d_id]' class = 'btn btn-info' id = 'details'><i class='fa fa-eye'></i></a>
+                                </div>
+                                <div style = 'text-align: center;'>
+                                    <p style = 'font-size: 16px; font-weight: 500;'>
+                                        $row[tag]<br />
+                                        ($category)
+                                    </p>
                                 </div>
                             </div>";
                         }
@@ -701,21 +717,29 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
                             if($row['width'] == 500 && $row['height'] == 281){
                                 $tagname = str_replace(' ', '_', $row['tag']);
                                 $tagname = str_replace("-", "_", $tagname);
+                                $ide = $row['d_id'];
+                                $category = '';
+                                $sql1 = "SELECT * FROM catlink AS cl, category AS c WHERE cl.cat_id = c.cat_id AND cl.d_id = '$ide'";
+                                $result1 = $pdo->query($sql1);
+                                while($row1 = $result1->fetch()){
+                                    $category .= $row1['cat_name'] . ', ';
+                                }
+                                $category = substr($category, 0, -2);
                                 echo"
-                                <div class = 'col-lg-4' style = 'margin-left: -5px;'>
-                                    <img src = '$row[url]' class = 'img-thumbnail' style = 'width: 100%; height: 100%;'>
-                                    <div class = 'row'>
-                                        <div class = 'col-md- 3 col-lg-4'>
-                                            <a href = 'editwallpaper.php?value=$tagname-$row[d_id]' class = 'btn btn-primary' id = 'edit'><i class='fa fa-edit'></i></a>
-                                        </div>
-                    
-                                        <div class = 'col-md- 3 col-lg-4'>
-                                            <a href = '?id=$row[d_id]' class = 'btn btn-danger delete' id = '$row[d_id]'><i class='fa fa-trash-o'></i></a>
-                                        </div>
-                        
-                                        <div class = 'col-md- 3 col-lg-4'>
-                                            <a href = 'wallpaperdetails.php?value=$tagname-$row[d_id]' class = 'btn btn-info' id = 'details'><i class='fa fa-eye'></i></a>
-                                        </div>
+                                <div class = 'col-lg-4' style = 'margin-left: -5px; margin-top: 2%;'>
+                                    <div style = 'position: relative'>
+                                        <img src = '$row[url]' class = 'img-thumbnail' style = 'width: 100%; height: 100%;'>
+                                        <a href = 'editwallpaper.php?value=$tagname-$row[d_id]' class = 'btn btn-primary' id = 'edit'><i class='fa fa-edit'></i></a>
+
+                                        <a class = 'btn btn-danger delete' id = '$row[d_id]'><i class='fa fa-trash-o'></i></a>
+
+                                        <a href = 'wallpaperdetails.php?value=$tagname-$row[d_id]' class = 'btn btn-info' id = 'details'><i class='fa fa-eye'></i></a>
+                                    </div>
+                                    <div style = 'text-align: center;'>
+                                        <p style = 'font-size: 16px; font-weight: 500;'>
+                                            $row[tag]<br />
+                                            ($category)
+                                        </p>
                                     </div>
                                 </div>";
                             }
@@ -815,6 +839,7 @@ $(document).ready(function(){
             display: 'none'
         });
     });
+
     
     $("#search").keyup(function(){
             let search = $("#search").val();

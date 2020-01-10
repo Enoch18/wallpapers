@@ -257,9 +257,11 @@ if($downloads >= 1000000){
                                     echo "<p> $ccount) " . $subcategory[$inc] ."</p>";
                                 }
                                 $id = $row['d_id'];
-                                $server = "http://" . $_SERVER['SERVER_NAME'];
+                                $server = $_SERVER['SERVER_NAME'];
                                 if ($_SERVER['SERVER_NAME'] == 'localhost'){
                                     $server = "http://" . $_SERVER['SERVER_NAME'] . "/wallpapers";
+                                }else{
+                                    "http://" . $_SERVER['SERVER_NAME'];
                                 }
 
                                 echo "
