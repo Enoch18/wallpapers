@@ -257,6 +257,10 @@ if($downloads >= 1000000){
                                     echo "<p> $ccount) " . $subcategory[$inc] ."</p>";
                                 }
                                 $id = $row['d_id'];
+                                $server = "http://" . $_SERVER['SERVER_NAME'];
+                                if ($_SERVER['SERVER_NAME'] == 'localhost'){
+                                    $server = "http://" . $_SERVER['SERVER_NAME'] . "/wallpapers";
+                                }
 
                                 echo "
                                 <h6 style = 'font-weight: bold'>Added on:</h6><p>$row[createdat]</p>
@@ -265,8 +269,8 @@ if($downloads >= 1000000){
                                 
                                 <h6 style = 'font-weight: bold'>Description:</h6> <p>$row[description]</p><br />
                                 <h6 style = 'font-weight: bold'>Url:</h6>
-                                <a href = 'http://www.downloadallwallpapers.com/download.php?value=$value' target = '_blank' style = 'margin-top: -20%;'>
-                                    http://www.downloadallwallpapers.com/download.php?value=$value
+                                <a href = '$server/download.php?value=$value' target = '_blank' style = 'margin-top: -20%;'>
+                                $server/download.php?value=$value
                                 </a><br /><br />
                                 <h6 style = 'font-weight: bold'>Tags:</h6>
                                 <p>Select Tag(s) that you want to Edit or Delete</p>

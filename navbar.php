@@ -76,8 +76,15 @@
 
                     <li class="nav-item">
                         <form class = "from-group" action = "" method = "POST">
+                            <?php 
+                                $server = $_SERVER['SERVER_NAME'];
+                                if ($server == 'localhost'){
+                                    $server = "http://" . $server . "/wallpapers";
+                                }
+                            ?>
                             <div class = "row">
                                 <input type = "search" name = 'search' placeholder = "search" class = "col-lg-7" id = "search"><br /><br />
+                                <input type = "hidden" name = "server" id = "server" value = "<?php echo $server; ?>">
                                 <button type = "submit" name = "searchsubmit" value = "submit" class = "btn btn-primary" id = "searchbtn"><i class="fa fa-search" style = "margin-top: -9px; margin-left: -11px; font-size: 20px;"></i></button><br /><br />
                                 <div id = "list" style = "position: absolute; margin-top: 45px; margin-left: 20px; width: 200px; background-color: white; z-index: 1000;"></div>
                             </div>
@@ -97,10 +104,11 @@
 
         $("#search").keyup(function(){
             let search = $("#search").val();
+            let server = $("#server").val();
             // list
             if (search != ''){
                 $.ajax({
-                    url: "predict?value=" + search,
+                    url: server + "/predict?value=" + search,
                     method: "GET",
                     data: {search: search},
                     success:function(data){
