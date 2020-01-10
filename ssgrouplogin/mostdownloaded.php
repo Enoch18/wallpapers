@@ -46,11 +46,10 @@ img:hover{
                         try{
                             $total = '';
                             $num = array();
-                            $sql1 = "SELECT * FROM downloads AS da, details AS d, resolutions AS r
-                            WHERE r.d_id = d.d_id AND d.d_id = da.d_id AND r.original != 'original' 
-                            AND r.width = '1920' AND r.height = '1080' 
-                            GROUP BY da.d_id 
-                            ORDER BY da.counter DESC";
+                            $sql1 = "SELECT * FROM details AS d, resolutions AS r
+                            WHERE r.d_id = d.d_id
+                            AND r.width = '500' AND r.height = '281'
+                            ORDER BY d.downloads DESC";
                             $result1 = $pdo->query($sql1);
                             while ($row1 = $result1->fetch()){
                                 $num[] = $row1['url'];
@@ -64,7 +63,7 @@ img:hover{
                             }
                             $prev = $pageno - 1;
                             $next = $pageno + 1;
-                            $no_of_records_per_page = 9;
+                            $no_of_records_per_page = 1;
                             $offset = ($pageno-1) * $no_of_records_per_page;
                             $pages = ceil($total/$no_of_records_per_page);
 
@@ -72,11 +71,10 @@ img:hover{
                                 <div class = 'col-md-12 col-md-12 col-md-12 col-lg-12'>
                                     <h5 style = 'margin-top: 5%;'>Most Downloaded Images</h5><br />
                                 </div>";
-                            $sql = "SELECT * FROM downloads AS da, details AS d, resolutions AS r
-                            WHERE r.d_id = d.d_id AND d.d_id = da.d_id AND r.original != 'original' 
-                            AND r.width = '1920' AND r.height = '1080' 
-                            GROUP BY da.d_id 
-                            ORDER BY da.counter DESC
+                            $sql = "SELECT * FROM details AS d, resolutions AS r
+                            WHERE r.d_id = d.d_id
+                            AND r.width = '500' AND r.height = '281'
+                            ORDER BY d.downloads DESC
                             LIMIT $offset, $no_of_records_per_page";
                             $result = $pdo->query($sql);
                             while ($row = $result->fetch()){

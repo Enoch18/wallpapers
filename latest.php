@@ -124,7 +124,7 @@ $(document).ready(function(){
 
                             $sql = "SELECT * FROM details AS d, resolutions AS r
                             WHERE r.d_id = d.d_id
-                            AND r.width = '1280' AND r.height = '720' 
+                            AND r.width = '500' AND r.height = '281'
                             ORDER BY d.createdat DESC
                             LIMIT $offset, $no_of_records_per_page";
                             $result = $pdo->query($sql);

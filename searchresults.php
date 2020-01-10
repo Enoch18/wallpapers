@@ -74,7 +74,7 @@ if ($search != ''){
     try{
         $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
         FROM details AS d, resolutions AS r
-        WHERE r.d_id = d.d_id AND r.width = '1280' AND r.height = '720'
+        WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
         AND (d.tag LIKE '%$search%')
         ORDER BY d.createdat DESC
         LIMIT $offset, $no_of_records_per_page";
@@ -86,12 +86,12 @@ if ($detcount > 0){
     $num = array();
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r
-    WHERE r.d_id = d.d_id AND r.width = '1280' AND r.height = '720'
+    WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -110,7 +110,7 @@ if ($detcount > 0){
     try{
         $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
         FROM details AS d, resolutions AS r
-        WHERE r.d_id = d.d_id AND r.width = '1280' AND r.height = '720'
+        WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
         AND (d.tag LIKE '%$search%')
         ORDER BY d.createdat DESC
         LIMIT $offset, $no_of_records_per_page";
@@ -124,12 +124,12 @@ if($tagcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR td.tagname LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -149,7 +149,7 @@ if($tagcount > 0){
         $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
         FROM details AS d, resolutions AS r, tagdetails AS td
         WHERE r.d_id = d.d_id AND td.d_id = d.d_id
-        AND r.width = '1280' AND r.height = '720'
+        AND r.width = '500' AND r.height = '281'
         AND (d.tag LIKE '%$search%' OR td.tagname LIKE '%$search%')
         ORDER BY d.createdat DESC
         LIMIT $offset, $no_of_records_per_page";
@@ -163,12 +163,12 @@ if($catcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR c.cat_name LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -187,7 +187,7 @@ if($catcount > 0){
     $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR c.cat_name LIKE '%$search%')
     ORDER BY d.createdat DESC
     LIMIT $offset, $no_of_records_per_page";
@@ -198,12 +198,12 @@ if($subcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink as sl, subcategory AS s
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR s.sub_name LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -222,7 +222,7 @@ if($subcount > 0){
     $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink as sl, subcategory AS s
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR s.sub_name LIKE '%$search%')
     ORDER BY d.createdat DESC
     LIMIT $offset, $no_of_records_per_page";
@@ -234,12 +234,12 @@ if($catcount > 0 && $tagcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR td.tagname LIKE '%$search%' OR c.cat_name LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -258,7 +258,7 @@ if($catcount > 0 && $tagcount > 0){
     $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR td.tagname LIKE '%$search%' OR c.cat_name LIKE '%$search%')
     ORDER BY d.createdat DESC
     LIMIT $offset, $no_of_records_per_page";
@@ -269,12 +269,12 @@ if($subcount > 0 && $tagcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td, subcatlink AS sl, subcategory AS s
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR td.tagname LIKE '%$search%' OR s.sub_name LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -293,7 +293,7 @@ if($subcount > 0 && $tagcount > 0){
     $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td, subcatlink AS sl, subcategory AS s
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR td.tagname LIKE '%$search%' OR s.sub_name LIKE '%$search%')
     ORDER BY d.createdat DESC
     LIMIT $offset, $no_of_records_per_page";
@@ -304,12 +304,12 @@ if($subcount > 0 && $catcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink AS sl, subcategory AS s, category AS c, catlink cl
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id AND cl.d_id = d.d_id AND c.cat_id = cl.cat_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR s.sub_name LIKE '%$search%' OR c.cat_name LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -328,7 +328,7 @@ if($subcount > 0 && $catcount > 0){
     $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink AS sl, subcategory AS s, category AS c, catlink cl
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id AND cl.d_id = d.d_id AND c.cat_id = cl.cat_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR s.sub_name LIKE '%$search%' OR c.cat_name LIKE '%$search%')
     ORDER BY d.createdat DESC
     LIMIT $offset, $no_of_records_per_page";
@@ -339,12 +339,12 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink AS sl, subcategory AS s, category AS c, catlink cl, tagdetails AS td
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id AND cl.d_id = d.d_id AND c.cat_id = cl.cat_id AND td.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR s.sub_name LIKE '%$search%' OR c.cat_name LIKE '%$search%' OR td.tagname LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -363,7 +363,7 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
     $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink AS sl, subcategory AS s, category AS c, catlink cl, tagdetails AS td
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id AND cl.d_id = d.d_id AND c.cat_id = cl.cat_id AND td.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR s.sub_name LIKE '%$search%' OR c.cat_name LIKE '%$search%' OR td.tagname LIKE '%$search%')
     ORDER BY d.createdat DESC
     LIMIT $offset, $no_of_records_per_page";
@@ -484,7 +484,7 @@ $(document).ready(function(){
 
                             $result = $pdo->query($query);
                             while($row = $result->fetch()){
-                                if($row['width'] == 1280 && $row['height'] == 720){
+                                if($row['width'] == 500 && $row['height'] == 281){
                                     if($row['liveat'] <= date("Y-m-d H:i:s") || $row['liveat'] == ''){
                                         // $sqli = "SELECT * FROM resolutions WHERE d_id = '$row[d_id]' AND original = 'original'";
                                         // $resulti = $pdo->query($sqli);

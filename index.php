@@ -148,7 +148,7 @@ $(document).ready(function(){
                             while($row10 = $result10->fetch()){
                                 $sql1 = "SELECT * FROM details AS d, resolutions AS r, category AS c, catlink as cl 
                                 WHERE c.cat_id = $row10[c_id] AND d.d_id = cl.d_id AND c.cat_id = cl.cat_id AND r.d_id = d.d_id 
-                                AND r.width = '1920' AND r.height = '1080' LIMIT 1";
+                                AND r.width = '500' AND r.height = '281' LIMIT 1";
                                 $result1 = $pdo->query($sql1);
                                 while($row1 = $result1->fetch()){
                                 $name = strtoupper($row1['cat_name']);
@@ -161,7 +161,7 @@ $(document).ready(function(){
                                     
                                 $sql = "SELECT DISTINCT url, r.d_id, url, liveat, width, height, tag FROM details AS d, resolutions AS r, frontpage AS f, category AS c, catlink AS cl 
                                 WHERE cl.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.cat_id = '$row10[c_id]' AND f.c_id = c.cat_id 
-                                AND r.d_id = d.d_id AND r.width = '1280' AND r.height = '720'
+                                AND r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
                                 ORDER BY d.createdat DESC LIMIT 3";
                                 $result = $pdo->query($sql);
                                 while($row = $result->fetch()){
@@ -213,7 +213,7 @@ $(document).ready(function(){
 
                                 $sql2 = "SELECT * FROM details AS d, resolutions AS r, frontpage AS f, category AS c, catlink AS cl 
                                 WHERE cl.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.cat_id = $row10[c_id] AND f.c_id = c.cat_id 
-                                AND r.d_id = d.d_id AND r.width = '1920' AND r.height = '1080'  LIMIT 1";
+                                AND r.d_id = d.d_id AND r.width = '500' AND r.height = '281'  LIMIT 1";
                                 $result2 = $pdo->query($sql2);
                                 while($row2 = $result2->fetch()){
                                     echo "

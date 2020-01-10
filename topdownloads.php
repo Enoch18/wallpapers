@@ -112,6 +112,7 @@ $(document).ready(function(){
                         <h4 id = "heading">TOP DOWNLOADS</h4>
                     </div>
                     <?php 
+                        $downloads = 0;
                         try{
                             $total = $pdo->query('SELECT COUNT(*) FROM details')->fetchColumn();
                             if (isset($_GET['pageno'])) {
@@ -125,14 +126,13 @@ $(document).ready(function(){
                             $offset = ($pageno-1) * $no_of_records_per_page;
                             $pages = ceil($total/$no_of_records_per_page);
 
-                            $sql = "SELECT * FROM downloads AS da, details AS d, resolutions AS r
-                            WHERE r.d_id = d.d_id AND da.d_id = d.d_id
-                            AND r.width = '1280' AND r.height = '720' 
-                            GROUP BY da.d_id
-                            ORDER BY da.counter DESC
+                            $sql = "SELECT * FROM details AS d, resolutions AS r
+                            WHERE r.d_id = d.d_id
+                            AND r.width = '500' AND r.height = '281'
+                            ORDER BY d.downloads DESC
                             LIMIT $offset, $no_of_records_per_page";
                             $result = $pdo->query($sql);
-                            while ($row = $result->fetch()){
+                            while($row = $result->fetch()){
                                 if($row['liveat'] <= date("Y-m-d H:i:s") || $row['liveat'] == ''){
                                     // $sqli = "SELECT * FROM resolutions WHERE d_id = '$row[d_id]' AND original = 'original'";
                                     // $resulti = $pdo->query($sqli);
@@ -165,13 +165,13 @@ $(document).ready(function(){
                                         $tagname = str_replace(" ", "_", $row['tag']);
                                         $tagname = str_replace("-", "_", $tagname);
 
-                                        echo "
+                                        echo"
                                         <div class = 'col-lg-4' style = 'margin-left: -5px;'>
-                                            <a href = 'download.php?value=$tagname-$row[d_id]'>
-                                                <img src = 'ssgrouplogin/$row[url]' class = 'img img-thumbnail' alt = '$alt' style = 'width: 100%; height: 100%;'>
-                                                <p id = 'hidden'><i class='fa fa-download'></i> $downloads</p>
-                                                <h5 style = 'text-align: center; color: white;'>$row[tag]</h5><br /><br /><br />
-                                            </a>
+                                        <a href = 'download.php?value=$tagname-$row[d_id]'>
+                                            <img src = 'ssgrouplogin/$row[url]' class = 'img img-thumbnail' alt = '$alt' style = 'width: 100%; height: 100%;'>
+                                            <p id = 'hidden'><i class='fa fa-download'></i> $downloads</p>
+                                            <h5 style = 'text-align: center; color: white;'>$row[tag]</h5><br /><br /><br />
+                                        </a>
                                         </div>";
                                     //}
                                 }

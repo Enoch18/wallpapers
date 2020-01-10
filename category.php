@@ -246,7 +246,7 @@ $(document).ready(function(){
 
                             $sql = "SELECT * FROM details AS d, resolutions AS r, category AS c, catlink AS cl 
                             WHERE cl.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.cat_id = '$id'
-                            AND r.d_id = d.d_id AND r.width = '1280' AND r.height = '720' 
+                            AND r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
                             ORDER BY d.createdat DESC
                             LIMIT $offset, $no_of_records_per_page";
                             $result = $pdo->query($sql);

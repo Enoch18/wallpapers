@@ -65,12 +65,12 @@ if ($search != ''){
     $num = array();
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r
-    WHERE r.d_id = d.d_id AND r.width = '1280' AND r.height = '720'
+    WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -89,7 +89,7 @@ if ($search != ''){
     try{
         $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
         FROM details AS d, resolutions AS r
-        WHERE r.d_id = d.d_id AND r.width = '1280' AND r.height = '720'
+        WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
         AND (d.tag LIKE '%$search%')
         ORDER BY d.createdat DESC
         LIMIT $offset, $no_of_records_per_page";
@@ -101,12 +101,12 @@ if ($detcount > 0){
     $num = array();
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r
-    WHERE r.d_id = d.d_id AND r.width = '1280' AND r.height = '720'
+    WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -125,7 +125,7 @@ if ($detcount > 0){
     try{
         $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
         FROM details AS d, resolutions AS r
-        WHERE r.d_id = d.d_id AND r.width = '1280' AND r.height = '720'
+        WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
         AND (d.tag LIKE '%$search%')
         ORDER BY d.createdat DESC
         LIMIT $offset, $no_of_records_per_page";
@@ -139,12 +139,12 @@ if($tagcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR td.tagname LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -164,7 +164,7 @@ if($tagcount > 0){
         $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
         FROM details AS d, resolutions AS r, tagdetails AS td
         WHERE r.d_id = d.d_id AND td.d_id = d.d_id
-        AND r.width = '1280' AND r.height = '720'
+        AND r.width = '500' AND r.height = '281'
         AND (d.tag LIKE '%$search%' OR td.tagname LIKE '%$search%')
         ORDER BY d.createdat DESC
         LIMIT $offset, $no_of_records_per_page";
@@ -178,12 +178,12 @@ if($catcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR c.cat_name LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -202,7 +202,7 @@ if($catcount > 0){
     $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR c.cat_name LIKE '%$search%')
     ORDER BY d.createdat DESC
     LIMIT $offset, $no_of_records_per_page";
@@ -213,12 +213,12 @@ if($subcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink as sl, subcategory AS s
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR s.sub_name LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -237,7 +237,7 @@ if($subcount > 0){
     $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink as sl, subcategory AS s
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR s.sub_name LIKE '%$search%')
     ORDER BY d.createdat DESC
     LIMIT $offset, $no_of_records_per_page";
@@ -249,12 +249,12 @@ if($catcount > 0 && $tagcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR td.tagname LIKE '%$search%' OR c.cat_name LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -273,7 +273,7 @@ if($catcount > 0 && $tagcount > 0){
     $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR td.tagname LIKE '%$search%' OR c.cat_name LIKE '%$search%')
     ORDER BY d.createdat DESC
     LIMIT $offset, $no_of_records_per_page";
@@ -284,12 +284,12 @@ if($subcount > 0 && $tagcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td, subcatlink AS sl, subcategory AS s
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR td.tagname LIKE '%$search%' OR s.sub_name LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -308,7 +308,7 @@ if($subcount > 0 && $tagcount > 0){
     $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td, subcatlink AS sl, subcategory AS s
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR td.tagname LIKE '%$search%' OR s.sub_name LIKE '%$search%')
     ORDER BY d.createdat DESC
     LIMIT $offset, $no_of_records_per_page";
@@ -319,12 +319,12 @@ if($subcount > 0 && $catcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink AS sl, subcategory AS s, category AS c, catlink cl
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id AND cl.d_id = d.d_id AND c.cat_id = cl.cat_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR s.sub_name LIKE '%$search%' OR c.cat_name LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -343,7 +343,7 @@ if($subcount > 0 && $catcount > 0){
     $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink AS sl, subcategory AS s, category AS c, catlink cl
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id AND cl.d_id = d.d_id AND c.cat_id = cl.cat_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR s.sub_name LIKE '%$search%' OR c.cat_name LIKE '%$search%')
     ORDER BY d.createdat DESC
     LIMIT $offset, $no_of_records_per_page";
@@ -354,12 +354,12 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
     $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink AS sl, subcategory AS s, category AS c, catlink cl, tagdetails AS td
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id AND cl.d_id = d.d_id AND c.cat_id = cl.cat_id AND td.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR s.sub_name LIKE '%$search%' OR c.cat_name LIKE '%$search%' OR td.tagname LIKE '%$search%')
     ORDER BY d.createdat DESC";
     $result1 = $pdo->query($sql1);
     while($row1 = $result1->fetch()){
-        if($row1['width'] == 1280 && $row1['height'] == 720){
+        if($row1['width'] == 500 && $row1['height'] == 281){
             $num[] = $row1['d_id'];
         }
     }
@@ -378,7 +378,7 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
     $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink AS sl, subcategory AS s, category AS c, catlink cl, tagdetails AS td
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id AND cl.d_id = d.d_id AND c.cat_id = cl.cat_id AND td.d_id = d.d_id
-    AND r.width = '1280' AND r.height = '720'
+    AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%' OR s.sub_name LIKE '%$search%' OR c.cat_name LIKE '%$search%' OR td.tagname LIKE '%$search%')
     ORDER BY d.createdat DESC
     LIMIT $offset, $no_of_records_per_page";
@@ -387,6 +387,46 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
 ?>
 
 <style>
+    .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+    /* Modal Content */
+    .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 500px;
+    }
+
+    /* The Close Button */
+    .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    }
+
     #catbtn{
         width: 100%;
     }
@@ -495,6 +535,22 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
         ?>
         </div>
 
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class = "modal-header">
+                    <h4 class = "modal-title" style = "color: black !important;">Confirm Delete</h4>
+                    <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
+                </div>
+            
+                <h5 style = "color: black !important;">Are you sure you want to delete?</h5><br />
+                <div>
+                    <span id = "yes"></span>
+                    <button type = "button" class = "btn btn-primary" class = "close" id = "no" style = "width: 30%; margin: 20px;">No</a> 
+                </div>
+            </div>
+        </div>
+
+
         <div class = "col-lg-12">
             <form action = "" method = "POST" class = "form-group">
                 <div class = "row">
@@ -529,7 +585,7 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
 
                         $sql = "SELECT * FROM details AS d, resolutions AS r
                         WHERE r.d_id = d.d_id
-                        AND r.width = '1280' AND r.height = '720'  ORDER BY d.createdat DESC LIMIT $offset, $no_of_records_per_page";
+                        AND r.width = '500' AND r.height = '281'  ORDER BY d.createdat DESC LIMIT $offset, $no_of_records_per_page";
                         $result = $pdo->query($sql);
                         while($row = $result->fetch()){
                             $tagname = str_replace(' ', '_', $row['tag']);
@@ -642,7 +698,7 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
 
                         $result = $pdo->query($query);
                         while($row = $result->fetch()){
-                            if($row['width'] == 1280 && $row['height'] == 720){
+                            if($row['width'] == 500 && $row['height'] == 281){
                                 $tagname = str_replace(' ', '_', $row['tag']);
                                 $tagname = str_replace("-", "_", $tagname);
                                 echo"
@@ -730,29 +786,6 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
             ?>
         </div>
     </div>
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    
-    <div id = "deleteconfirm" class = "modal fade" role = "dialog">
-            <div class = "modal-dialog">
-                <div class = "modal-content">
-                    <div class = "modal-header">
-                        <h4 class = "modal-title" style = "color: black !important;">Confirm Delete</h4>
-                        <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
-                    </div>
-            
-                    <div class = "modal-content">
-                        <h4 style = "color: black !important;">Are you sure you want to delete?</h4><br />
-                        <div>
-                            <span id = "yes"></span>
-                            <button type = "button" class = "btn btn-primary" class = "close" data-dismiss = "modal" style = "width: 30%; margin: 20px;">No</a> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>
 
 <script>
 $("#menu-toggle").click(function(e) {
@@ -760,15 +793,27 @@ $("#menu-toggle").click(function(e) {
   $("#wrapper").toggleClass("toggled");
 });
 
+// Get the modal
+var modal = document.getElementById("myModal");
+
 $(document).ready(function(){
     $(".delete").click(function(){
         let path = "?id=" + this.id;
+        modal.style.display = "block";
         $("#yes").html("<a href = '"+path+"' class = 'btn btn-danger' style = 'width: 30%;'>Yes</a>");
         $("#deleteconfirm").modal('show');
     });
     
+    $(".close").click(function(){
+        $(".modal").css({
+            display: 'none'
+        });
+    });
+
     $("#no").click(function(){
-        $("#deleteconfirm").hide();
+        $(".modal").css({
+            display: 'none'
+        });
     });
     
     $("#search").keyup(function(){
@@ -794,6 +839,12 @@ $(document).ready(function(){
             });
         });
 });
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 </script>
 
 </body>

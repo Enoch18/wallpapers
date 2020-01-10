@@ -14,6 +14,37 @@ $downloads = '';
 session_start();
 
 try{
+    $d_num = array();
+    $d_total = '';
+    $sql = "SELECT * FROM downloads WHERE d_id = '$id'";
+    $result = $pdo->query($sql);
+    while ($row = $result->fetch()){
+        $d_num[] = $row['d_id'];
+    }
+    $d_total = count($d_num);
+    
+    if ($d_total == 0){
+        $sql1 = "UPDATE details SET
+        downloads = :downloads
+        WHERE d_id = '$id'
+        ";
+        $s1 = $pdo->prepare($sql1);
+        $s1->bindValue(':downloads', 1);
+        $s1->execute();
+    }else{
+        $sql1 = "UPDATE details SET
+        downloads = :downloads
+        WHERE d_id = '$id'
+        ";
+        $s1 = $pdo->prepare($sql1);
+        $s1->bindValue(':downloads', $d_total + 1);
+        $s1->execute();
+    }
+}catch(PDOException $e){
+    echo "Error " . $e;
+}
+
+try{
     $email = $_POST['email'];
     $vemail = '';
     $sql1 = "SELECT * FROM subscribers";

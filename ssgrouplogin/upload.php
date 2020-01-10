@@ -57,7 +57,7 @@ function resize_image($file, $max_resolution, $width, $height){
             $catname = 'others';
         }
 
-        $path = "images/" . date("Y") . "/" . $catname;
+        $path = "images/" . date("Y") . "/" . date("M") . "/" . date('d');
         if (!is_dir($path)){
             mkdir($path, 0777, true);
         }
@@ -65,7 +65,7 @@ function resize_image($file, $max_resolution, $width, $height){
         $fileext = $ext = pathinfo($file, PATHINFO_EXTENSION);
         $path_parts = pathinfo($file);
         $filename = $path_parts['filename'];
-        $file = str_replace(" ", "", $filename) . '_' . $width . '_X_' . $height . '_' . time() . '.' . $fileext;
+        $file = str_replace(" ", "", $filename) . '_' . $width . '_X_' . $height . '.' . $fileext;
         $file = $path . "/" . $file;
         
         if($original_image){
@@ -256,7 +256,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         // Beginning of Code for Inserting the details of the image in the details' table
 
         // Call to the image resizing Function
-        resize_image($file, "640", "640", "360");
+        resize_image($file, "500", "500", "281");
         resize_image($file, "1280", "1280", "720");
         resize_image($file, "1920", "1920", "1080");
         resize_image($file, "2560", "2560", "1440");
