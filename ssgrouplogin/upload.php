@@ -57,7 +57,7 @@ function resize_image($file, $max_resolution, $width, $height){
             $catname = 'others';
         }
 
-        $path = "images/" . date("Y") . "/" . date("M") . "/" . date('d');
+        $path = "../images/" . date("Y") . "/" . date("M") . "/" . date('d');
         if (!is_dir($path)){
             mkdir($path, 0777, true);
         }
@@ -65,8 +65,8 @@ function resize_image($file, $max_resolution, $width, $height){
         $fileext = $ext = pathinfo($file, PATHINFO_EXTENSION);
         $path_parts = pathinfo($file);
         $filename = $path_parts['filename'];
-        $file = str_replace(" ", "", $filename) . '_' . $width . '_X_' . $height . '.' . $fileext;
-        $file = $path . "/" . $file;
+        $filename = str_replace(" ", "", $filename) . '_' . $width . '_X_' . $height . '.' . $fileext;
+        $file = $path . "/" . $filename;
         
         if($original_image){
             // Beginning of code for inserting the resolutions
@@ -85,9 +85,12 @@ function resize_image($file, $max_resolution, $width, $height){
             //End of code for getting the details id of the image
 
             //Beginning of code for storing the url of various resolutions of the image
+            $fileexplode = explode(".", $filename);
+            $filename = $fileexplode[0];
             $sql = "INSERT INTO resolutions SET
             d_id = :did,
             width = :width,
+            filestore = :filestore,
             height = :height,
             original = :orig,
             url = :url,
@@ -95,6 +98,7 @@ function resize_image($file, $max_resolution, $width, $height){
             ";
             $s = $pdo->prepare($sql);
             $s->bindValue(':did', $did);
+            $s->bindValue(':filestore', $filename);
             $s->bindValue(':width', $width);
             $s->bindValue(':height', $height);
             $s->bindValue(':orig', $orig);
@@ -177,18 +181,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             $tagname = explode(",", $tag2);
             $total = count($tagname);
             for($i=0; $i<$total; $i++){
-                $created_at = date("Y-m-s H:i:s");
-                $sql3 = "INSERT INTO tagdetails SET
-                tagname = :tagname,
-                alt = :alt,
-                d_id = :did,
-                created_at = :created_at";
-                $s3 = $pdo->prepare($sql3);
-                $s3->bindValue(':tagname', str_replace(" ", "", $tagname[$i]));
-                $s3->bindValue(':did', $did);
-                $s3->bindValue(':alt', '');
-                $s3->bindValue(':created_at', $created_at);
-                $s3->execute();
+                if ($tagname[$i] != ''){
+                    $created_at = date("Y-m-s H:i:s");
+                    $sql3 = "INSERT INTO tagdetails SET
+                    tagname = :tagname,
+                    alt = :alt,
+                    d_id = :did,
+                    created_at = :created_at";
+                    $s3 = $pdo->prepare($sql3);
+                    $s3->bindValue(':tagname', str_replace(" ", "", $tagname[$i]));
+                    $s3->bindValue(':did', $did);
+                    $s3->bindValue(':alt', '');
+                    $s3->bindValue(':created_at', $created_at);
+                    $s3->execute();
+                }
             }
 
             $did = max($num);

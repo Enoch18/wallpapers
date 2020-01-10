@@ -17,14 +17,14 @@
         if($tags != ''){
             echo "
             <div class = 'col-xs-12 col-md-12 col-sm-12 col-lg-12' style = 'margin-top: 1%;'>
-                <h6 style = 'color: white; font-weight: bold;'>Popular Tags: </h6>
+                <h6 style = 'color: rgb(73, 133, 204); font-weight: bold;'>Popular Tags: </h6>
             </div>";
         }
 
         for($i=0; $i<$count; $i++){
             echo"
                 <a href = 'searchresults.php?search=$tags[$i]'  
-                    style = 'margin-left: 1%; font-weight: bold;'>
+                    class = 'populartags'>
                     $tags[$i]
                 </a><br /><br />";
         }

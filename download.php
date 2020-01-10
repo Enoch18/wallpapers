@@ -247,6 +247,10 @@ $alt = implode(",", $arr);
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arimo&display=swap" rel="stylesheet">
 
+    <head>
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5e185809668efd00128a7878&cms=sop' async='async'></script>
+    </head>
+
     <style type="text/css">
  
     #share-buttons img {
@@ -255,6 +259,21 @@ $alt = implode(",", $arr);
     border: 0;
     box-shadow: 0;
     display: inline;
+    }
+
+    .tags{
+        height: 40px; 
+        margin-top: 7px; 
+        font-size: 14pt; 
+        font-weight: bold; 
+        background-color: rgb(75, 74, 74); 
+        display: inline; 
+        color: rgb(73, 133, 204) !important;
+    }
+
+    .tags:hover{
+        font-size: 15pt; 
+        opacity: 0.8;
     }
     
     @media (max-width: 769px){
@@ -338,6 +357,14 @@ $(document).ready(function(){
                                 $alt = implode(",", $arr);
 
                                 if($category != '' && $subcategory != ''){
+                                    $img = str_replace("../", "", $row['url']);
+                                    $server = $_SERVER['SERVER_NAME'];
+                                    if ($server == 'localhost'){
+                                        $server = "http://" . $server . "/wallpapers";
+                                    }else{
+                                        $server = "http://" . $_SERVER['SERVER_NAME'];
+                                    }
+
                                     echo"
                                     <div class = 'col-lg-12'>
                                         <div class = 'col-lg-12' id = 'addedonheader'>
@@ -346,13 +373,21 @@ $(document).ready(function(){
                                     <br />
 
                                     <div class = 'col-lg-12' id = 'imagedownload'>
-                                        <a href = 'ssgrouplogin/$row[url]' download = '$row[name]' class = 'down' style = 'width: 95%;'>
+                                        <a href = '$server/$img' class = 'down' style = 'width: 95%;'>
                                             <img src = 'ssgrouplogin/$row[url]' class = 'img-thumbnail' alt='$alt' style = 'width: 100%; height: 100%;' title = '$alt'><br /><br />
                                         </a>
                                     </div>";
                                 }
 
                                 if($category != '' && $subcategory == ''){
+                                    $img = str_replace("../", "", $row['url']);
+                                    $server = $_SERVER['SERVER_NAME'];
+                                    if ($server == 'localhost'){
+                                        $server = "http://" . $server . "/wallpapers";
+                                    }else{
+                                        $server = "http://" . $_SERVER['SERVER_NAME'];
+                                    }
+
                                     echo"
                                     <div class = 'col-lg-12'>
                                         <div class = 'col-lg-12' id = 'addedonheader'>
@@ -361,13 +396,21 @@ $(document).ready(function(){
                                     <br />
 
                                     <div class = 'col-lg-12' id = 'imagedownload'>
-                                        <a href = 'ssgrouplogin/$row[url]' download = '$row[name]' class = 'down' style = 'width: 95%;'>
+                                        <a href = '$server/$img' class = 'down' style = 'width: 95%;'>
                                             <img src = 'ssgrouplogin/$row[url]' class = 'img-thumbnail' alt = '$alt' style = 'width: 100%; height: 100%;' title = '$alt'><br /><br />
                                         </a>
                                     </div>";
                                 }
 
                                 if($category == '' && $subcategory != ''){
+                                    $img = str_replace("../", "", $row['url']);
+                                    $server = $_SERVER['SERVER_NAME'];
+                                    if ($server == 'localhost'){
+                                        $server = "http://" . $server . "/wallpapers";
+                                    }else{
+                                        $server = "http://" . $_SERVER['SERVER_NAME'];
+                                    }
+
                                     echo"
                                     <div class = 'col-lg-12'>
                                         <div class = 'col-lg-12' id = 'addedonheader'>
@@ -376,13 +419,21 @@ $(document).ready(function(){
                                     <br />
 
                                     <div class = 'col-lg-12' id = 'imagedownload'>
-                                        <a href = 'ssgrouplogin/$row[url]' download = '$row[name]' class = 'down' style = 'width: 95%;'>
+                                        <a href = '$server/$img' class = 'down' style = 'width: 95%;'>
                                             <img src = 'ssgrouplogin/$row[url]' class = 'img-thumbnail' alt = '$alt' style = 'width: 100%; height: 100%;' title = '$alt'><br /><br />
                                         </a>
                                     </div>";
                                 }
 
                                 if($category == '' && $subcategory == ''){
+                                    $img = str_replace("../", "", $row['url']);
+                                    $server = $_SERVER['SERVER_NAME'];
+                                    if ($server == 'localhost'){
+                                        $server = "http://" . $server . "/wallpapers";
+                                    }else{
+                                        $server = "http://" . $_SERVER['SERVER_NAME'];
+                                    }
+
                                     echo"
                                     <div class = 'col-lg-12'>
                                         <div class = 'col-lg-12' id = 'addedonheader'>
@@ -391,7 +442,7 @@ $(document).ready(function(){
                                     <br />
 
                                     <div class = 'col-lg-12' id = 'imagedownload'>
-                                        <a href = 'ssgrouplogin/$row[url]' download = '$row[name]' class = 'down' style = 'width: 95%;'>
+                                        <a href = '$server/$img' class = 'down' style = 'width: 95%;'>
                                             <img src = 'ssgrouplogin/$row[url]' class = 'img-thumbnail' alt = '$alt' style = 'width: 100%; height: 100%;' title = '$alt'><br /><br />
                                         </a>
                                     </div>";
@@ -401,31 +452,6 @@ $(document).ready(function(){
                             echo "An error occured ". $e;
                         }
                     ?>
-                    <!-- Beginning of Code for the Facebook Share button -->
-                    <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12" id = "socialdiv" style = "text-align: center;">
-                        <div id="share-buttons">
-                           <!-- Facebook -->
-                            <!-- <a href="http://www.facebook.com/sharer.php?u=http://www.downloadallwallpapers.com/download.php?value=<?php echo $value ?>" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" style = 'width: 80%;' />
-                            </a> -->
-                            
-                            <!-- Pinterest -->
-                            <a href="javascript:void((function()%7Bvar%20e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://assets.pinterest.com/js/pinmarklet.js?r='+Math.random()*99999999);document.body.appendChild(e)%7D)());">
-                                <img src="https://simplesharebuttons.com/images/somacro/pinterest.png" alt="Pinterest" style = 'width: 80%;' />
-                            </a>
-                            
-                            <!-- Reddit -->
-                            <a href="http://reddit.com/submit?url=http://www.downloadallwallpapers.com/download.php?value=<?php echo $value ?>&amp;title=Simple Share Buttons" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" style = 'width: 80%;' />
-                            </a>
-                            
-                            <!-- Twitter -->
-                            <a href="https://twitter.com/share?url=http://www.downloadallwallpapers.com/download.php?value=<?php echo $value ?>&amp;text=Simple%20Share%20Buttons&amp;hashtags=downloadallwallpapers" target="_blank">
-                                <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" style = 'width: 80%;' />
-                            </a>
-                        </div>
-                    </div>
-                    <!-- End of Code for the facebook Share Button -->
 
                     <div class = "col-lg-12">
                         <h5 style = "margin-left: 6.5%; color: white; text-align: center;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600; color: #FCFF00;">Name:</b><br /> <?php echo $name; ?></h5>
@@ -470,7 +496,7 @@ $(document).ready(function(){
                                     while($row = $result->fetch()){
                                         echo"
                                             <a href = 'searchresults.php?search=$row[tagname]'
-                                            style = 'height: 40px; margin-top: 7px; font-size: 14pt; font-weight: bold; background-color: rgb(75, 74, 74); display: inline;'>
+                                            class = 'tags'>
                                                 $row[tagname] &nbsp;
                                             </a>";
                                     }
@@ -512,7 +538,7 @@ $(document).ready(function(){
                                     $result = $pdo->query($sql);
                                     while($row = $result->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row[url]' download = '$row[name] 1280 X 720' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>1280 x 720 (HD)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row[url]' download = '$row[filestore]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>1280 x 720 (HD)</a> <br /><br />";
                                     }
 
                                     $sql1 = "SELECT * FROM details AS d, resolutions AS r
@@ -521,7 +547,7 @@ $(document).ready(function(){
                                     $result1 = $pdo->query($sql1);
                                     while($row1 = $result1->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row1[url]' download = '$row1[name] 1920 X 1080' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>1920 x 1080 (FHD)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row1[url]' download = '$row1[filestore]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>1920 x 1080 (FHD)</a> <br /><br />";
                                     }
 
                                     $sql2 = "SELECT * FROM details AS d, resolutions AS r
@@ -530,7 +556,7 @@ $(document).ready(function(){
                                     $result2 = $pdo->query($sql2);
                                     while($row2 = $result2->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row2[url]' download = '$row2[name] 2560 X 1440' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>2560 x 1440 (QHD)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row2[url]' download = '$row2[filestore]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>2560 x 1440 (QHD)</a> <br /><br />";
                                     }
 
                                     $sql3 = "SELECT * FROM details AS d, resolutions AS r
@@ -539,7 +565,7 @@ $(document).ready(function(){
                                     $result3 = $pdo->query($sql3);
                                     while($row3 = $result3->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row3[url]' download = '$row3[name] 3840 X 2160' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>3840 x 2160 (4K)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row3[url]' download = '$row3[filestore]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>3840 x 2160 (4K)</a> <br /><br />";
                                     }
 
                                     $sql4 = "SELECT * FROM details AS d, resolutions AS r
@@ -548,7 +574,7 @@ $(document).ready(function(){
                                     $result4 = $pdo->query($sql4);
                                     while($row4 = $result4->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row4[url]' download = '$row4[name] 5120 X 2880' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>5120 x 2880 (5K)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row4[url]' download = '$row4[filestore]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>5120 x 2880 (5K)</a> <br /><br />";
                                     }
 
                                     // $sql5 = "SELECT * FROM details AS d, resolutions AS r
@@ -582,7 +608,7 @@ $(document).ready(function(){
 
                         <div class = "row" style = "width: 100%; margin-left: 0px;">
                             <div class = "col-lg-12">
-                                <h4 style = "color: white;">Related Wallpapers</h4>
+                                <h4 style = "color: rgb(73, 133, 204); font-weight: bold;">Related Wallpapers</h4>
                             </div>
                             <?php 
                                 try{
