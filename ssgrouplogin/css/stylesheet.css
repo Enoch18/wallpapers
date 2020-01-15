@@ -64,6 +64,11 @@
   color: #5E6977;
   font-weight: 500;
 }
+
+.customization h4{
+  text-align: center;
+  margin-top: 20px;
+}
  
 /* ================================================================ Beginning of code for inc ===================================================================== */
 .side li{

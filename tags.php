@@ -1,4 +1,3 @@
-<hr />
 <div class = "row">
     <?php 
         $tags = array();
@@ -29,7 +28,7 @@
                 </a><br /><br />";
         }
     ?>
-</div><hr />
+</div>
 
 <div id = "ad">
     <p>Advertisement</p>

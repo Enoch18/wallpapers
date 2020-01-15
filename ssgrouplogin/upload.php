@@ -62,10 +62,32 @@ function resize_image($file, $max_resolution, $width, $height){
             mkdir($path, 0777, true);
         }
 
+        $filesize = filesize($file);
+        if ($filesize >= 1048576)
+        {
+            $filesize = number_format($filesize / 1048576, 2) . ' MB';
+        }
+        elseif ($filesize >= 1024)
+        {
+            $filesize = number_format($filesize / 1024, 2) . ' KB';
+        }
+        elseif ($filesize > 1)
+        {
+            $filesize = $filesize . ' B';
+        }
+        elseif ($filesize == 1)
+        {
+            $filesize = $filesize . ' B';
+        }
+        else
+        {
+            $filesize = '0 bytes';
+        }
+
         $fileext = $ext = pathinfo($file, PATHINFO_EXTENSION);
         $path_parts = pathinfo($file);
         $filename = $path_parts['filename'];
-        $filename = str_replace(" ", "", $filename) . '_' . $width . '_X_' . $height . '.' . $fileext;
+        $filename = str_replace(" ", "", $filename) . '_' . $width . 'X' . $height . '_www.downloadallwallpapers.com' . '.' . $fileext;
         $file = $path . "/" . $filename;
         
         if($original_image){
@@ -86,11 +108,12 @@ function resize_image($file, $max_resolution, $width, $height){
 
             //Beginning of code for storing the url of various resolutions of the image
             $fileexplode = explode(".", $filename);
-            $filename = $fileexplode[0];
+            $filename = $fileexplode[0] . '.downloadallwallpapers.com';
             $sql = "INSERT INTO resolutions SET
             d_id = :did,
             width = :width,
             filestore = :filestore,
+            filesize = :filesize,
             height = :height,
             original = :orig,
             url = :url,
@@ -99,6 +122,7 @@ function resize_image($file, $max_resolution, $width, $height){
             $s = $pdo->prepare($sql);
             $s->bindValue(':did', $did);
             $s->bindValue(':filestore', $filename);
+            $s->bindValue(':filesize', $filesize);
             $s->bindValue(':width', $width);
             $s->bindValue(':height', $height);
             $s->bindValue(':orig', $orig);
@@ -124,6 +148,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     if(isset($_FILES['image']) && $_FILES['image']['type'] == 'image/jpeg'){
         move_uploaded_file($_FILES['image']['tmp_name'], $_FILES['image']['name']);
         $file = $_FILES['image']['name'];
+        $path_parts = pathinfo($file);
+        $original_filename = str_replace(" ", "_", $path_parts['filename']);
         // Beginning of Code for Inserting the details of the image in the details' table
 
         $original_image = imagecreatefromjpeg($file);
@@ -154,6 +180,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             tag = :tag,
             author = :author,
             link = :authorlink,
+            original_filename = :original_filename,
             description = :description,
             name = :name,
             createdat = :createdat,
@@ -164,6 +191,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             $s->bindValue(':author', $author);
             $s->bindValue(':authorlink', $authorlink);
             $s->bindValue(':name', $file);
+            $s->bindValue(':original_filename', $original_filename);
             $s->bindValue(':description', $description);
             $s->bindValue(':createdat', $createdat);
             $s->bindValue(':liveat', $liveat);
@@ -211,7 +239,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 $s3 = $pdo->prepare($sql3);
                 $s3->bindValue(':tagname', str_replace(" ", "", $tagname[$i]));
                 $s3->bindValue(':did', $did);
-                $s3->bindValue(':alt', '');
+                $s3->bindValue(':alt', '1');
                 $s3->bindValue(':created_at', $created_at);
                 $s3->execute();
             }

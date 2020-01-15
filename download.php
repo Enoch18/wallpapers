@@ -2,9 +2,18 @@
 include ('database/connection.php');
 session_start();
 error_reporting(0);
-$value = $_GET['value'];
-$exploded = explode("-", $_GET['value']);
-$id = (int)$exploded[1];
+$original_filename = $_GET['value'];
+
+$id = '';
+try{
+    $sql = "SELECT * FROM details WHERE original_filename = '$original_filename'";
+    $result = $pdo->query($sql);
+    while ($row = $result->fetch()){
+        $id = $row['d_id'];
+    }
+}catch(PDOException $e){
+    echo "Error " . $e;
+}
 
 $authorlink = '';
 $author = '';
@@ -212,7 +221,9 @@ $arr = array();
 $sqlt = "SELECT * FROM tagdetails WHERE d_id = '$id'";
 $resultt = $pdo->query($sqlt);
 while ($rowt = $resultt->fetch()){
-    $arr[] = $rowt['tagname'];
+    if ($rowt['alt'] != '1'){
+        $arr[] = $rowt['tagname'];
+    }
 }
 $alt = implode(",", $arr);
 ?>
@@ -494,11 +505,14 @@ $(document).ready(function(){
                                     $sql = "SELECT * FROM tagdetails WHERE d_id = '$id' ORDER BY id ASC LIMIT 10";
                                     $result = $pdo->query($sql);
                                     while($row = $result->fetch()){
-                                        echo"
-                                            <a href = 'searchresults.php?search=$row[tagname]'
-                                            class = 'tags'>
-                                                $row[tagname] &nbsp;
-                                            </a>";
+                                        if ($row['alt'] != '1'){
+                                            echo"
+                                                <a href = 'searchresults.php?search=$row[tagname]'
+                                                class = 'tags'>
+                                                    $row[tagname] &nbsp;
+                                                </a>
+                                            ";
+                                        }
                                     }
                                 }catch(PDOException $e){
                                     echo "An error occured" . $e;
@@ -533,7 +547,7 @@ $(document).ready(function(){
                                 try{
                                     $sql = "SELECT * FROM details AS d, resolutions AS r
                                     WHERE d.d_id = '$id'
-                                    AND r.d_id = d.d_id AND r.width = '1280' AND r.height = '720'";
+                                    AND r.d_id = d.d_id AND r.width = '1280' AND r.height = '720' AND active = '1'";
 
                                     $result = $pdo->query($sql);
                                     while($row = $result->fetch()){
@@ -543,7 +557,7 @@ $(document).ready(function(){
 
                                     $sql1 = "SELECT * FROM details AS d, resolutions AS r
                                     WHERE d.d_id = '$id'
-                                    AND r.d_id = d.d_id AND r.width = '1920' AND r.height = '1080'";
+                                    AND r.d_id = d.d_id AND r.width = '1920' AND r.height = '1080' AND active = '1'";
                                     $result1 = $pdo->query($sql1);
                                     while($row1 = $result1->fetch()){
                                         echo"
@@ -552,7 +566,7 @@ $(document).ready(function(){
 
                                     $sql2 = "SELECT * FROM details AS d, resolutions AS r
                                     WHERE d.d_id = '$id'
-                                    AND r.d_id = d.d_id AND r.width = '2560' AND r.height = '1440'";
+                                    AND r.d_id = d.d_id AND r.width = '2560' AND r.height = '1440' AND active = '1'";
                                     $result2 = $pdo->query($sql2);
                                     while($row2 = $result2->fetch()){
                                         echo"
@@ -561,7 +575,7 @@ $(document).ready(function(){
 
                                     $sql3 = "SELECT * FROM details AS d, resolutions AS r
                                     WHERE d.d_id = '$id'
-                                    AND r.d_id = d.d_id AND r.width = '3840' AND r.height = '2160'";
+                                    AND r.d_id = d.d_id AND r.width = '3840' AND r.height = '2160' AND active = '1'";
                                     $result3 = $pdo->query($sql3);
                                     while($row3 = $result3->fetch()){
                                         echo"
@@ -570,7 +584,7 @@ $(document).ready(function(){
 
                                     $sql4 = "SELECT * FROM details AS d, resolutions AS r
                                     WHERE d.d_id = '$id'
-                                    AND r.d_id = d.d_id AND r.width = '5120' AND r.height = '2880'";
+                                    AND r.d_id = d.d_id AND r.width = '5120' AND r.height = '2880' AND active = '1'";
                                     $result4 = $pdo->query($sql4);
                                     while($row4 = $result4->fetch()){
                                         echo"

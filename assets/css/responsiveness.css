@@ -1,110 +1,12 @@
-@media (max-width: 1900px) {
-    .nav-item{
-        margin-left: 100px;
-    }
-}
-
-@media (max-width: 1850px) {
-    .nav-item{
-        margin-left: 80px !important;
-    }
-    .btn-info{
-        width: 230px !important;
-        font-size: 16px !important;
-    }
-
-    #search{
-        margin-left: 0px; 
-        margin-top: 5px; 
-        width: 230px;
-    }
-}
-
-@media (max-width: 1700px) {
-    .nav-item{
-        margin-left: 60px !important;
-    }
-    .btn-info{
-        width: 230px !important;
-        font-size: 16px !important;
-    }
-
-    #search{
-        margin-left: 20px; 
-        margin-top: 5px; 
-        width: 200px;
-    }
-}
-
-@media (max-width: 1600px) {
-    .nav-item{
-        margin-left: 40px !important;
-    }
-}
-
-@media (max-width: 1500px) {
-    .nav-item{
-        margin-left: 20px !important;
-    }
-}
-
 @media (max-width: 1400px) {
-    .nav-item{
-        margin-left: 10px !important;
-    }
     .btn-info{
-        width: 200px !important;
         font-size: 14px !important;
-    }
-
-    #search{
-        margin-left: 20px; 
-        margin-top: 1px; 
-        width: 200px;
-    }
-    #searchbtn{
-        margin-top: 1px; 
-        height: 40px;
-    }
-}
-
-@media (max-width: 1300px) {
-    .nav-item{
-        margin-left: 10px !important;
-    }
-}
-
-@media (max-width: 1250px) {
-    .nav-item{
-        margin-left: 5px !important;
-    }
-
-    #banner{
-        width: 100% !important; 
-        height: 100% !important;
-        margin-left: 5%;
-    }
-
-    .social{
-        margin-top: 2% !important;
     }
 }
 
 @media (max-width: 1200px) {
-    .nav-item{
-        margin-left: 5px !important;
-    }
-
     .btn-info{
-        width: 145px !important;
         font-size: 10px !important;
-    }
-
-    #search{
-        margin-left: 20px; 
-        margin-top: 0px; 
-        height: 35px !important;
-        width: 200px;
     }
 
     #searchbtn{
@@ -130,7 +32,6 @@
     }
 
     .btn-info{
-        width: 150px !important;
         font-size: 10px !important;
     }
 
@@ -202,6 +103,38 @@
 
 
 @media (max-width: 990px) {
+    .nav-item{
+        display: inline;
+    }
+    .nav-item > a{
+        color: white !important;
+        text-align: center !important;
+        font-size: 20px;
+        padding-left: 10%;
+        padding-top: 10px;
+    }
+
+    .searchcontainer > input{
+        display: inline;
+        width: 93% !important;
+    }
+    
+    .searchcontainer button{
+        display: inline;
+        height: 40px;
+        margin-top: -2px;
+        width: 6% !important;
+    }
+    
+    .searchcontainer button i{
+        font-size: 16px !important;
+        margin-right: 2px;
+        margin-top: -5px;
+    }
+    
+    .nav-link{
+        width: 100%;
+    }
 
     #catbtn{
         display: flex;
@@ -240,12 +173,12 @@
     }
 
     .nav-item a{
-        text-align: justify !important;
+        text-align: center !important;
         font-size: 20px !important;
     }
 
     .btn-info{
-        width: 90% !important;
+        width: 100% !important;
         font-size: 14px !important;
     }
 
@@ -341,6 +274,35 @@
 }
 
 @media (max-width: 767px) {
+    .searchcontainer{
+        width: 100% !important;
+
+    }
+
+    .searchcontainer > input{
+        width: 85% !important;
+    }
+
+    .searchcontainer button{
+        width: 10% !important;
+    }
+
+    .nav-item{
+        display: inline;
+        width: 100%;
+    }
+    .nav-item > a{
+        color: white !important;
+        text-align: center !important;
+        font-size: 20px;
+        padding-left: 10%;
+        padding-top: 10px;
+    }
+    
+    .nav-link{
+        width: 100%;
+    }
+
     .btn-secondary{
         width: 27% !important;
         float: right !important;
@@ -393,7 +355,7 @@
     }
 
     .btn-info{
-        width: 90% !important;
+        width: 100% !important;
         font-size: 14px !important;
     }
 
@@ -535,6 +497,19 @@
 }
 
 @media (max-width: 600px){
+    .searchcontainer{
+        width: 100% !important;
+
+    }
+
+    .searchcontainer > input{
+        width: 80% !important;
+    }
+
+    .searchcontainer button{
+        width: 18% !important;
+    }
+
     #hidden{
         margin-top: -8% !important;
     }

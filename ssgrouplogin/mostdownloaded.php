@@ -63,7 +63,7 @@ img:hover{
                             }
                             $prev = $pageno - 1;
                             $next = $pageno + 1;
-                            $no_of_records_per_page = 1;
+                            $no_of_records_per_page = 12;
                             $offset = ($pageno-1) * $no_of_records_per_page;
                             $pages = ceil($total/$no_of_records_per_page);
 

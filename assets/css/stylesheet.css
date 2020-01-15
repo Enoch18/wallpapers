@@ -4,10 +4,39 @@ body{
     padding: 0px;
     background-color: rgb(75, 74, 74);
 }
+
+.searchcontainer{
+    width: 100%;
+}
+
+.searchcontainer > input{
+    display: inline;
+    width: 94% !important;
+}
+
+.searchcontainer button{
+    display: inline;
+    height: 40px;
+    margin-top: -2px;
+    width: 5% !important;
+}
+
+.searchcontainer button i{
+    font-size: 16px !important;
+    margin-right: 2px;
+    margin-top: -5px;
+}
+
 .navbar{
     background-color: rgb(75, 74, 74) !important;
     margin-right: -30px !important;
     margin-top: -18px;
+}
+
+.navbar .nav{
+    margin-top: 10px; 
+    margin-bottom: 10px; 
+    width: 100%;
 }
 
 .navbar .row img:hover{
@@ -16,7 +45,6 @@ body{
 
 .btn-info{
     background-color: rgb(73, 133, 204) !important;
-    margin-left: 20px !important;
     border: 1px solid rgb(73, 133, 204);
 }
 
@@ -26,7 +54,6 @@ body{
 
 .btn-info:hover{
     background-color: rgb(73, 133, 204) !important;
-    margin-left: 20px !important;
     border: 1px solid rgb(73, 133, 204);
     opacity: 0.7;
 }
@@ -44,7 +71,8 @@ body{
     margin-left: -5px;
 }
 .nav-item{
-    margin-left: 110px !important;
+    display: inline;
+    width: 20%;
 }
 .nav-item > a{
     color: white !important;
@@ -55,7 +83,16 @@ body{
 }
 
 .nav-link{
-    width: 100% !important;
+    width: 97%;
+}
+
+.searchbar{
+    background-color: rgb(75, 74, 74) !important;
+}
+
+.searchbar .row{
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .nav-item > select{
@@ -65,9 +102,7 @@ body{
 }
 
 #searchbtn{
-    margin-left: 10px; 
     height: 40px; 
-    margin-top: 5px;
 }
 
 #search{
@@ -344,4 +379,9 @@ overflow: auto;
 
 #pages{
     width: 40%;
+}
+
+.webstatistics{
+    color: white;
+    text-align: center;
 }

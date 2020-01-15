@@ -25,6 +25,17 @@ if (isset($_POST['tagdelete'])){
     }
 }
 
+if (isset($_POST['res_id'])){
+    foreach ($_POST['res_id'] as $resid){
+        $sql = "UPDATE resolutions SET
+        active = :active
+        WHERE r_id = '$resid'";
+        $s = $pdo->prepare($sql);
+        $s->bindValue(':active', '1');
+        $s->execute();
+    }   
+}
+
 $response = "";
 if (isset($_POST['submitedit'])){
     if ($_POST['edittag'] != ''){
@@ -277,7 +288,7 @@ if($downloads >= 1000000){
                                 <h6 style = 'font-weight: bold'>Tags:</h6>
                                 <p>Select Tag(s) that you want to Edit or Delete</p>
                             </div>";
-
+                            
                             $addedon = $row['createdat'];
                             $category = $row['cat_name'];
                         }
@@ -293,16 +304,18 @@ if($downloads >= 1000000){
                                 $sql = "SELECT * FROM tagdetails  WHERE d_id = '$id' ORDER BY id ASC";
                                 $result = $pdo->query($sql);
                                 while($row = $result->fetch()){
-                                    echo "
-                                        <label class = 'checkbox-inline' style = 'margin-left: 2%; padding-top: -2%;'>
-                                            <input type = 'checkbox' class = 'tagcheckbox' name = 'check_list[]' value = '$row[id]'>
-                                            $row[tagname]
-                                            <div class = 'tagidcontainer' style = 'display: none'>
-                                                <input = 'text' name = 'edittag[]' id = 'edittag' placeholder = 'Edit $row[tagname]' class = 'form-control'>
-                                                <input type = 'hidden' name = 'tagids[]' value = '$row[id]'>
-                                            </div>
-                                        </label><br />
-                                    ";
+                                    if ($row['alt'] != '1'){
+                                        echo "
+                                            <label class = 'checkbox-inline' style = 'margin-left: 2%; padding-top: -2%;'>
+                                                <input type = 'checkbox' class = 'tagcheckbox' name = 'check_list[]' value = '$row[id]'>
+                                                $row[tagname]
+                                                <div class = 'tagidcontainer' style = 'display: none'>
+                                                    <input = 'text' name = 'edittag[]' id = 'edittag' placeholder = 'Edit $row[tagname]' class = 'form-control'>
+                                                    <input type = 'hidden' name = 'tagids[]' value = '$row[id]'>
+                                                </div>
+                                            </label><br />
+                                        ";
+                                    }
                                     $del = "Not Empty";
                                 } 
                             }catch(PDOException $e){
@@ -403,6 +416,31 @@ if($downloads >= 1000000){
 
                         <div class = "col-lg-12 form-group">
                             <input type = "text" name = "authorlink" class = "form-control" placeholder = "Author Link">
+                        </div>
+                    </div>
+
+                    <div class = "row">
+                        <div class = "col-lg-12" style = "margin-left:10px; margin-top: -15px;">
+                            <label style = "font-weight: bold; margin-left: -10px;">Displayed Resolutions</label>
+                        </div>
+
+                        <div class = "col-lg-12 form-group">
+                            <?php 
+                                try{
+                                    $sql = "SELECT * FROM resolutions WHERE d_id = '$id'";
+                                    $result = $pdo->query($sql);
+                                    while ($row = $result->fetch()){
+                                        if ($row['active'] == '1'){
+                                            echo "<input type = 'checkbox' name = 'res_id[]' value = '$row[r_id]' checked> $row[width] X $row[height] &nbsp; &nbsp;";
+                                        }else{
+                                            echo "<input type = 'checkbox' name = 'res_id[]' value = '$row[r_id]'> $row[width] X $row[height] &nbsp; &nbsp;";
+                                        }
+                                    }
+                                }catch(PDOException $e){
+                                    echo "An error just occured ".$e;
+                                    $status = "failed";
+                                }
+                            ?>
                         </div>
                     </div>
 

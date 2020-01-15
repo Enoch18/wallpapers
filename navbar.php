@@ -49,6 +49,25 @@
     </div>
 </nav>
 
+<div class = "searchbar">
+    <form class = "from-group" method = "POST">
+        <?php 
+            $server = $_SERVER['SERVER_NAME'];
+            if ($server == 'localhost'){
+                $server = "http://" . $server . "/wallpapers";
+            }
+        ?>
+        <div class = "container">
+            <div class = "searchcontainer">
+                <input type = "search" name = 'search' placeholder = "search" class = "form-control">
+                <button type = "submit" name = "searchsubmit" value = "submit" class = "btn btn-primary"><i class="fa fa-search"></i></button><br /><br />
+                <div id = "list" style = "position: absolute; margin-top: 45px; margin-left: 20px; width: 200px; background-color: white; z-index: 1000;"></div>
+                <input type = "hidden" name = "server" id = "server" value = "<?php echo $server; ?>">
+            </div>
+        </div>
+    </form>
+</div>
+
 <div class="navbar navbar-expand-lg navbar-light bg-light" id = "navbar">
     <div id = "inner">
         <!-- <div class = "container"> -->
@@ -57,7 +76,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav" style = "margin-top: 10px; margin-bottom: 10px;">
+                <ul class="nav navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link btn btn-info" href="index.php">HOME</a><br />
                     </li>
@@ -75,20 +94,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <form class = "from-group" action = "" method = "POST">
-                            <?php 
-                                $server = $_SERVER['SERVER_NAME'];
-                                if ($server == 'localhost'){
-                                    $server = "http://" . $server . "/wallpapers";
-                                }
-                            ?>
-                            <div class = "row">
-                                <input type = "search" name = 'search' placeholder = "search" class = "col-lg-7" id = "search"><br /><br />
-                                <input type = "hidden" name = "server" id = "server" value = "<?php echo $server; ?>">
-                                <button type = "submit" name = "searchsubmit" value = "submit" class = "btn btn-primary" id = "searchbtn"><i class="fa fa-search" style = "margin-top: -9px; margin-left: -11px; font-size: 20px;"></i></button><br /><br />
-                                <div id = "list" style = "position: absolute; margin-top: 45px; margin-left: 20px; width: 200px; background-color: white; z-index: 1000;"></div>
-                            </div>
-                        </form>
+                        <a class="nav-link btn btn-info" href="active_tags.php">ACTIVE TAGS</a><br />
                     </li>
                 </ul>
             </div>
