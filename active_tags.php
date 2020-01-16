@@ -43,7 +43,7 @@ $(document).ready(function(){
 })
 </script>
 
-<body style = "background-color: blue;">
+<body>
     <div id = "color">
         <?php 
             include ('navbar.php'); 
