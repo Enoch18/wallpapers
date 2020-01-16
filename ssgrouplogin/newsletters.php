@@ -15,15 +15,11 @@ if ($_SERVER['SERVER_NAME'] == 'localhost'){
 }
 
 if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''){
-    try{
-        $sql = "SELECT * FROM subscribers";
-        $result = $pdo->query($sql);
-        while($row = $result->fetch()){
-            $email = $row['email'];
-            $id = $row['id'];
-            $message = $_POST['message'];
-            $subject = $_POST['subject'];
+    if ($_POST['subscribers'] != ''){
+        $message = $_POST['message'];
+        $subject = $_POST['subject'];
 
+        foreach ($_POST['subscribers'] as $email){
             $mail = new PHPMailer;
             $mail->IsSMTP();
             $mail ->SMTPDebug = 4;
@@ -50,20 +46,20 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                     <p style = 'color: black; font-size: 20px;'>$message</p><br />
                         <div class = 'row'>";
 
-                            foreach ($_POST['images'] as $images){
-                                $data = explode("____", $images);
-                                $images = $data[0];
-                                $images = str_replace("../", "", $images);
-                                $imagename = str_replace(" ", "_", $data[1]);
-                                $id = $data[2];
+                        foreach ($_POST['images'] as $images){
+                            $data = explode("____", $images);
+                            $images = $data[0];
+                            $images = str_replace("../", "", $images);
+                            $imagename = str_replace(" ", "_", $data[1]);
+                            $id = $data[2];
 
-                                $mail->Body .= "
-                                <div class = 'col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-                                    <a href = '$server/download.php?value=$imagename-$id'>
-                                        <img src = '$server/$images' style = 'width: 100%'>
-                                    </a>
-                                </div>";
-                            }
+                            $mail->Body .= "
+                            <div class = 'col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                                <a href = '$server/download.php?value=$imagename-$id'>
+                                    <img src = '$server/$images' style = 'width: 100%'>
+                                </a>
+                            </div>";
+                        }
 
                         $mail->Body .= "
                         </div>
@@ -74,7 +70,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
 
             $mail->AltBody = $message;
             if(!$mail->send()) {
-                
+                    
             } else {
                 $_SESSION['sent'] = 'News letters have been sent';
                 $sent = $_SESSION['sent'];
@@ -83,13 +79,123 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
             $mail->clearAddresses();
             $mail->clearAttachments();
         }
-    }catch(PDOException $e){
-        echo "Error ".$e;
+    }
+
+    if ($_POST['subscribers'] == ''){
+        try{
+
+            $sql = "SELECT * FROM subscribers";
+            $result = $pdo->query($sql);
+            while($row = $result->fetch()){
+                $email = $row['email'];
+                $id = $row['id'];
+                $message = $_POST['message'];
+                $subject = $_POST['subject'];
+
+                $mail = new PHPMailer;
+                $mail->IsSMTP();
+                $mail ->SMTPDebug = 4;
+                $mail->Host = "smtpout.secureserver.net";
+                $mail->SMTPAuth = true;
+                $mail->Port = 80;
+                $mail->Username = "admin@downloadallwallpapers.com";
+                $mail->Password = "Sabir@Groups@88";
+                //$mail->SMTPSecure = 'ssl';
+                $mail->SetFrom('admin@downloadallwallpapers.com', "Download All Wallpapers");
+                $mail->addAddress($email, "");
+                $mail->AddReplyTo("admin@downloadallwallpapers.com", "");
+
+                $mail->isHTML(true);                                  // Set email format to HTML
+
+                $mail->IsHtml(true);
+                //$mail->AddEmbeddedImage("http://www.downloadallwallpapers.com/ssgrouplogin/images/936895371559168578Dogs%202.jpg", "image1");
+                $mail->Subject = $subject;
+                $mail->Body = "
+                    <div style = 'background-color: rgb(75, 74, 74); width: 100%;'>
+                        <img src = '$server/icons/banner.jpg' class = 'img img-responsive' style = 'width: 100%'>
+                    </div>
+                    <div style = 'background-color: white; width: 100%;'>
+                        <p style = 'color: black; font-size: 20px;'>$message</p><br />
+                            <div class = 'row'>";
+
+                                foreach ($_POST['images'] as $images){
+                                    $data = explode("____", $images);
+                                    $images = $data[0];
+                                    $images = str_replace("../", "", $images);
+                                    $imagename = str_replace(" ", "_", $data[1]);
+                                    $id = $data[2];
+
+                                    $mail->Body .= "
+                                    <div class = 'col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                                        <a href = '$server/download.php?value=$imagename-$id'>
+                                            <img src = '$server/$images' style = 'width: 100%'>
+                                        </a>
+                                    </div>";
+                                }
+
+                            $mail->Body .= "
+                            </div>
+                        <p style = 'font-size: 20px;'>You are receiving this message because you have subscribed to www.downloadallwallpapers.com 
+                        To no longer receive messages from us, click
+                        <a href = '$server/unsubscribe.php?id=$id'>Unsubscribe</a></p><br />
+                    </div>";
+
+                $mail->AltBody = $message;
+                if(!$mail->send()) {
+                    
+                } else {
+                    $_SESSION['sent'] = 'News letters have been sent';
+                    $sent = $_SESSION['sent'];
+                }
+
+                $mail->clearAddresses();
+                $mail->clearAttachments();
+            }
+        }catch(PDOException $e){
+            echo "Error ".$e;
+        }
     }
 }else{
     $_SESSION['fail'] = "Could not send, no wallpapers were uploaded yesterday";
 }
 ?>
+
+<style>
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    /* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 768px;
+}
+
+@media (max-width: 767px){
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 500px;
+    }
+}
+</style>
 
 <div id="page-content-wrapper">
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
@@ -107,7 +213,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                     </div>
 
                     <div class = "col-lg-12 form-group">
-                        <input type = "text" name = "subject" value = "Latest Wallpapers" class = "form-control" placeholder = "Subject">
+                        <input type = "text" name = "subject" value = "Latest Wallpapers" id = "subject" class = "form-control" placeholder = "Subject">
                     </div>
                 </div>
 
@@ -117,9 +223,27 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                     </div>
 
                     <div class = "col-lg-12 form-group">
-                        <textarea name = "message" class = "form-control" maxlength = 300 rows = 3>Check out our latest wallpapers that were uploaded yesterday.</textarea>
+                        <textarea name = "message" class = "form-control" id = "message" maxlength = 300 rows = 3>Check out our latest wallpapers that were uploaded yesterday.</textarea>
                     </div>
                 </div>
+
+                <div class = "receipients" style = "display: none; max-height: 300px; overflow: auto;">
+                    <h6>Choose Receipients</h6>
+                    <input type = "checkbox" id = "checkall"> <label for = "checkall" style = "text-decoration: underline; cursor: pointer;"> Check All</label> <br />
+                    <?php 
+                        try{
+                            $sql = "SELECT * FROM subscribers ORDER BY timestamp DESC";
+                            $result = $pdo->query($sql);
+                            while ($row = $result->fetch()){
+                                echo "<input type = 'checkbox' name = 'subscribers[]' value = '$row[email]' class = 'receipientcheckbox'> " . $row['email'];
+                            }
+                        }catch(PDOException $e){
+                            echo "An error occured. " .$e;
+                        }
+                    ?>
+                </div>
+
+                <a href = "#" id = "addreceipients">Click here to choose Receipients</a>
 
                 <div class = "row">
                     <div class = "col-lg-12" style = "margin-left:10px;">
@@ -145,7 +269,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                                         echo "<div class = 'col-xs-12 col-sm-12 col-md-4 col-lg-3'>";
                                             echo "<label class = 'checkbox-inline'>
                                                 <img src = '$row[url]'class = 'img img-responsive' style = 'width: 100%; cursor: pointer;'>
-                                                <input type = 'checkbox' name = 'images[]' value = '$row[url]____$row[tag]____$row[d_id]' style = 'float: right; height: 20px; width: 20px; margin-top: 1%;'><br /><br /><br />
+                                                <input type = 'checkbox' name = 'images[]' class = 'images' value = '$row[url]____$row[tag]____$row[d_id]' style = 'float: right; height: 20px; width: 20px; margin-top: 1%;'><br /><br /><br />
                                             </label>
                                         </div>";
                                         }else{
@@ -154,7 +278,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                                     } 
                                     }catch(PDOException $e){
                                         echo "An error occured. " .$e;
-                                }
+                                    }
                             ?>
                         </div>
                     </div>
@@ -162,8 +286,24 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
 
             <div class = "row">
                 <div class = "col-lg-12">
-                    <input type = "submit" name = "submit" class = "btn btn-primary pull-left" value = "Send" style = "height:50px; width:200px; font-size:25px; margin-top: -30px;">
+                    <a class = "btn btn-primary" id = "prebtn" style = "color: white;">Submit</a>
                 </div><br /><br />
+            </div>
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <div class = "modal-header">
+                        <h4 class = "modal-title" style = "color: black !important;">Newsletter Preview</h4>
+                        <button type = "button" class = "close" data-dismiss = "modal">&times;</button>
+                    </div><br />
+                
+                    <div>
+                        <p id = "prevsubject" style = "display:none;"><b>Subject: </b><span id = "prevsubdet"></span></p>
+                        <p id = "prevmessage" style = "display:none;"><b>Message: </b><span id = "prevmesdet"></span></p>
+                        <div id = "selectedimages"></div>
+                        <input type = "submit" name = "submit" class = "btn btn-success pull-left" value = "Send" style = "height:50px; width:200px; font-size:25px;">
+                    </div>
+                </div>
             </div>
         </form>
     </div>
@@ -178,6 +318,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
+    var modal = document.getElementById("myModal");
     $(document).ready(function(){
         $('input[type=checkbox]').click(function(){
             var totalnum = $(":checkbox:checked").length;
@@ -187,7 +328,45 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                 $('input[type=checkbox]').attr('disabled', false);
             }
         });
+
+        $("#prebtn").click(function(){
+            modal.style.display = "block";
+            $("#prevsubject").show();
+            let subject = $("#subject").val();
+            $("#prevsubdet").html(subject);
+
+            $("#prevmessage").show();
+            let message = $("#message").val();
+            $("#prevmesdet").html(message);
+
+            let images = [];
+            $.each($(".images:checked"), function(){
+                images.push($(this).val());
+            });
+
+            for (var i = 0; i < images.length; ++i){
+                $("#selectedimages").append("<div style = 'width: 100%'><img src = '" + images[i].split('___')[0] +"' style = 'width: 100%;'> </div><br />")
+            }
+        });
+
+        $(".close").click(function(){
+            $(".modal").css({
+                display: 'none'
+            });
+        });
+
+        $("#addreceipients").click(function(e){
+            e.preventDefault();
+            $(".receipients").show();
+            $("#addreceipients").hide();
+        });
+
+        $("#checkall").click(function(){
+            $('.receipientcheckbox').not(this).prop('checked', this.checked);
+        });
     });
+
+    
 </script>
 <!-- Menu Toggle Script -->
 <script>

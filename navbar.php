@@ -18,6 +18,10 @@
 <link href="assets/css/responsiveness.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<head>
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5e185809668efd00128a7878&cms=sop' async='async'></script>
+</head>
+
 <script src="/js/ads.js"></script>
 
 <script>
@@ -27,6 +31,8 @@
         $('body').hide();
     }
 </script>
+
+<?php include ('customizedstyles.php'); ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class = "row" style = "width: 100%;">
@@ -59,9 +65,9 @@
         ?>
         <div class = "container">
             <div class = "searchcontainer">
-                <input type = "search" name = 'search' placeholder = "search" class = "form-control">
+                <input type = "search" name = 'search' id = "search" placeholder = "search" class = "form-control">
                 <button type = "submit" name = "searchsubmit" value = "submit" class = "btn btn-primary"><i class="fa fa-search"></i></button><br /><br />
-                <div id = "list" style = "position: absolute; margin-top: 45px; margin-left: 20px; width: 200px; background-color: white; z-index: 1000;"></div>
+                <div id = "list" style = "position: absolute; margin-top: -10px; background-color: white; z-index: 1000;"></div>
                 <input type = "hidden" name = "server" id = "server" value = "<?php echo $server; ?>">
             </div>
         </div>
@@ -114,7 +120,7 @@
             // list
             if (search != ''){
                 $.ajax({
-                    url: server + "/predict?value=" + search,
+                    url: server + "/predict.php?value=" + search,
                     method: "GET",
                     data: {search: search},
                     success:function(data){

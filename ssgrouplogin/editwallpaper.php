@@ -3,10 +3,17 @@ include ('session.php');
 include ('inc.php');
 include ('../database/connection.php');
 
-$value = $_GET['value'];
-$exploded = explode("-", $_GET['value']);
-
-$id = (int)$exploded[1];
+$original_filename = $_GET['value'];
+$id = '';
+try{
+    $sql = "SELECT * FROM details WHERE original_filename = '$original_filename'";
+    $result = $pdo->query($sql);
+    while ($row = $result->fetch()){
+        $id = $row['d_id'];
+    }
+}catch(PDOException $e){
+    echo "Error " . $e;
+}
 
 $category = array();
 $subcategory = array();
@@ -26,6 +33,7 @@ if (isset($_POST['tagdelete'])){
 }
 
 if (isset($_POST['res_id'])){
+    $uncheckcondition = '';
     foreach ($_POST['res_id'] as $resid){
         $sql = "UPDATE resolutions SET
         active = :active
@@ -33,7 +41,25 @@ if (isset($_POST['res_id'])){
         $s = $pdo->prepare($sql);
         $s->bindValue(':active', '1');
         $s->execute();
-    }   
+        $uncheckcondition .= " AND r_id != '$resid'";
+    }  
+    
+    try{
+        $sql = "SELECT * FROM resolutions WHERE d_id = '$id' $uncheckcondition";
+        $result = $pdo->query($sql);
+        while ($row = $result->fetch()){
+            $uncheckid = $row['r_id'];
+            $sql = "UPDATE resolutions SET
+            active = :active
+            WHERE r_id = '$uncheckid'";
+            $s = $pdo->prepare($sql);
+            $s->bindValue(':active', '');
+            $s->execute();
+        }
+    }catch(PDOException $e){
+        echo "Error " . $e;
+    }
+
 }
 
 $response = "";
@@ -282,11 +308,10 @@ if($downloads >= 1000000){
                                 
                                 <h6 style = 'font-weight: bold'>Description:</h6> <p>$row[description]</p><br />
                                 <h6 style = 'font-weight: bold'>Url:</h6>
-                                <a href = '$server/download.php?value=$value' target = '_blank' style = 'margin-top: -20%;'>
-                                $server/download.php?value=$value
+                                <a href = 'http://$server/download.php?value=$original_filename' target = '_blank' style = 'margin-top: -20%;'>
+                                    http://$server/download.php?value=$original_filename
                                 </a><br /><br />
                                 <h6 style = 'font-weight: bold'>Tags:</h6>
-                                <p>Select Tag(s) that you want to Edit or Delete</p>
                             </div>";
                             
                             $addedon = $row['createdat'];
@@ -321,6 +346,31 @@ if($downloads >= 1000000){
                             }catch(PDOException $e){
                                 echo "An error occured. " .$e;
                             }
+
+                            echo "<br /><h6 style = 'font-weight: bold'>Alt Tags:</h6>";
+                            try{
+                                $del = '';
+                                $sql = "SELECT * FROM tagdetails  WHERE d_id = '$id' ORDER BY id ASC";
+                                $result = $pdo->query($sql);
+                                while($row = $result->fetch()){
+                                    if ($row['alt'] == '1'){
+                                        echo "
+                                            <label class = 'checkbox-inline' style = 'margin-left: 2%; padding-top: -2%;'>
+                                                <input type = 'checkbox' class = 'tagcheckbox' name = 'check_list[]' value = '$row[id]'>
+                                                $row[tagname]
+                                                <div class = 'tagidcontainer' style = 'display: none'>
+                                                    <input = 'text' name = 'edittag[]' id = 'edittag' placeholder = 'Edit $row[tagname]' class = 'form-control'>
+                                                    <input type = 'hidden' name = 'tagids[]' value = '$row[id]'>
+                                                </div>
+                                            </label><br />
+                                        ";
+                                    }
+                                    $del = "Not Empty";
+                                } 
+                            }catch(PDOException $e){
+                                echo "An error occured. " .$e;
+                            }
+
                             if($del != '') {
                                 echo "
                                 <button id = 'tageditbtn' class = 'btn btn-primary' style = 'margin-left: 2%;'>Edit</button>
@@ -427,7 +477,7 @@ if($downloads >= 1000000){
                         <div class = "col-lg-12 form-group">
                             <?php 
                                 try{
-                                    $sql = "SELECT * FROM resolutions WHERE d_id = '$id'";
+                                    $sql = "SELECT * FROM resolutions WHERE d_id = '$id' AND width != '500'";
                                     $result = $pdo->query($sql);
                                     while ($row = $result->fetch()){
                                         if ($row['active'] == '1'){

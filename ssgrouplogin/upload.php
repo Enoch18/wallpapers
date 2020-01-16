@@ -60,29 +60,7 @@ function resize_image($file, $max_resolution, $width, $height){
         $path = "../images/" . date("Y") . "/" . date("M") . "/" . date('d');
         if (!is_dir($path)){
             mkdir($path, 0777, true);
-        }
-
-        $filesize = filesize($file);
-        if ($filesize >= 1048576)
-        {
-            $filesize = number_format($filesize / 1048576, 2) . ' MB';
-        }
-        elseif ($filesize >= 1024)
-        {
-            $filesize = number_format($filesize / 1024, 2) . ' KB';
-        }
-        elseif ($filesize > 1)
-        {
-            $filesize = $filesize . ' B';
-        }
-        elseif ($filesize == 1)
-        {
-            $filesize = $filesize . ' B';
-        }
-        else
-        {
-            $filesize = '0 bytes';
-        }
+        }        
 
         $fileext = $ext = pathinfo($file, PATHINFO_EXTENSION);
         $path_parts = pathinfo($file);
@@ -107,6 +85,7 @@ function resize_image($file, $max_resolution, $width, $height){
             //End of code for getting the details id of the image
 
             //Beginning of code for storing the url of various resolutions of the image
+            $filesize = '';
             $fileexplode = explode(".", $filename);
             $filename = $fileexplode[0] . '.downloadallwallpapers.com';
             $sql = "INSERT INTO resolutions SET
@@ -115,6 +94,7 @@ function resize_image($file, $max_resolution, $width, $height){
             filestore = :filestore,
             filesize = :filesize,
             height = :height,
+            active = :active,
             original = :orig,
             url = :url,
             createdat = :createdat
@@ -125,21 +105,58 @@ function resize_image($file, $max_resolution, $width, $height){
             $s->bindValue(':filesize', $filesize);
             $s->bindValue(':width', $width);
             $s->bindValue(':height', $height);
+            $s->bindValue(':active', '1');
             $s->bindValue(':orig', $orig);
             $s->bindValue(':url', $file);
             $s->bindValue(':createdat', $createdat);
             $s->execute();
             //End of code for storing the url of various resolutions of the image
 
-            }catch(PDOException $e){
-                echo "Could not perform the operation ".$e;
-                $status = "failed";
-            }
-
             // End of code for inserting the resolutions       
             $new_image = imagecreatetruecolor($new_width, $new_height);
             imagecopyresampled($new_image, $original_image, 0,0,0,0, $new_width, $new_height, $original_width, $original_height);
             imagejpeg($new_image, $file, 100);
+
+            $finalfilesize = filesize($file);
+            if ($finalfilesize >= 1048576)
+            {
+                $finalfilesize = number_format($finalfilesize / 1048576, 2) . ' MB';
+            }
+            elseif ($finalfilesize >= 1024)
+            {
+                $finalfilesize = number_format($finalfilesize / 1024, 2) . ' KB';
+            }
+            elseif ($finalfilesize > 1)
+            {
+                $finalfilesize = $finalfilesize . ' B';
+            }
+            elseif ($finalfilesize == 1)
+            {
+                $finalfilesize = $finalfilesize . ' B';
+            }
+            else
+            {
+                $finalfilesize = '0 bytes';
+            }
+
+            $array = array();
+            $sql = "SELECT * FROM resolutions";
+            $result = $pdo->query($sql);
+            while ($row = $result->fetch()){
+                $array[] = $row['r_id'];
+            }
+            $maxrid = max($array);
+            $sql = "UPDATE resolutions SET
+            filesize = :filesize
+            WHERE r_id = '$maxrid'";
+            $s = $pdo->prepare($sql);
+            $s->bindValue(':filesize', $finalfilesize);
+            $s->execute();
+
+            }catch(PDOException $e){
+                echo "Could not perform the operation ".$e;
+                $status = "failed";
+            }
         }
     }
 }

@@ -29,6 +29,7 @@
 <body>
 <?php
     include ('navbar.php');
+    include ('customizedstyles.php');
     error_reporting(0);
 ?>
 

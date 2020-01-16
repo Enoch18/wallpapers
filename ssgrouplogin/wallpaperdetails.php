@@ -14,9 +14,13 @@ include ('inc.php');
         <div class = "container">
             <?php
                 try{
-                    $value = $_GET['value'];
-                    $exploded = explode("-", $_GET['value']);
-                    $id = $exploded[1];
+                    $original_filename = $_GET['value'];
+                    $id = '';
+                    $sql = "SELECT * FROM details WHERE original_filename = '$original_filename'";
+                    $result = $pdo->query($sql);
+                    while ($row = $result->fetch()){
+                        $id = $row['d_id'];
+                    }
 
                     $addedon = '';
                     $total = '';
@@ -63,7 +67,7 @@ include ('inc.php');
 
                     //Code for wallpaper details
                     $sql = "SELECT * FROM details AS d, resolutions AS r
-                    WHERE d.d_id = '$id' AND r.d_id = d.d_id AND r.original != 'original' 
+                    WHERE d.d_id = '$id' AND r.d_id = d.d_id
                     AND r.width = '1280' AND r.height = '720'";
                     $result = $pdo->query($sql);
                     while($row = $result->fetch()){
@@ -78,6 +82,7 @@ include ('inc.php');
                         }else{
                             $downloads = $downloads . " Downloads";
                         }
+
                         
 
                         echo"

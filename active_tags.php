@@ -43,9 +43,12 @@ $(document).ready(function(){
 })
 </script>
 
-<body>
+<body style = "background-color: blue;">
     <div id = "color">
-        <?php include ('navbar.php'); ?>
+        <?php 
+            include ('navbar.php'); 
+            include ('customizedstyles.php');
+        ?>
 
         <div id = "ads" style = "margin-left: auto !important; margin-right: auto !important;">
             <p>Advertisement</p>
@@ -63,13 +66,13 @@ $(document).ready(function(){
         </div>
     </div><br />
 
-    <div class = "row" id = row>
+    <div class = "row" id = "row">
             <?php include ('sidebar1.php'); ?>
             <div class = "col-lg-8" id = "col2">
                 <div class = "row" style = "color: white !important;">
                     <div class = "col-lg-12" style = "margin-left: -5px;">
                         <h4 id = "heading">ACTIVE TAGS</h4>
-                    </div>
+                    </div><br /><br /><br /><br />
 
                     <?php 
                         $tags = array();
@@ -88,11 +91,12 @@ $(document).ready(function(){
 
                         if($count == ''){
                             echo "
+                            <br /><br />
                             <div class = 'col-xs-12 col-md-12 col-sm-12 col-lg-12' style = 'text-align: center;'>
                                 <h6 style = 'font-weight: bold;'>No active tags yet</h6>
                             </div>";
                         }
-
+                        
                         for($i=0; $i<$count; $i++){
                             echo"
                                 <a href = 'searchresults.php?search=$tags[$i]'  

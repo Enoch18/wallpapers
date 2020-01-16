@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Disclaimer</title>
+    <title>Privacy</title>
     <link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
     <script src = "../assets/js/jquery.min.js"></script>
     <script src="../bootstrap/js/bootstrap.js"></script>
@@ -13,24 +13,13 @@
     <link href="../assets/css/responsiveness.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script>
-    $(document).ready(function(){
-        $('#subscribe').hide();
-        $('#subbtn').click(function(){
-            $('#subbtn').hide();
-            $('#subscribe').show();
-        })
-    })
-    </script>
-
     <style>
         p{
             font-size: 20px;
-            text-align: justify;
         }
 
-        .container{
-            min-height: 700px;
+        h4{
+            font-family: Arial !important;
         }
 
         @media (max-width: 767px){
@@ -39,17 +28,25 @@
             }
         }
     </style>
-
 </head>
+
+<script>
+$(document).ready(function(){
+    $('#subscribe').hide();
+    $('#subbtn').click(function(){
+        $('#subbtn').hide();
+        $('#subscribe').show();
+    })
+})
+</script>
 
 <body>
     <div id = "color">
         <?php include ('nav.php'); ?>
     </div>
-
-    <!-- Beginning of code for the disclaimer content -->
-    <div class = "container" style = "padding-top: 5%;">
-        <h3 style = "color:white; text-align: center;">DISCLAIMER</h3><br /><br />
+    <!-- Beginning of code for the Privacy content -->
+    <div class = "container" style = "color: white; text-align: justify;">
+        <h3 style = "color:white; text-align: center; padding-top: 5%; text-decoration: underline;">DISCLAIMER</h3><br />
         <p style = "color: white !important;">
         DownloadAllWallpapers is a user-friendly website and welcomes all its users to benefit from our content. However, using this website means you willingly agree 
         to all terms and conditions mentioned in our <a href = "terms.php">Terms of Service</a> and <a href = "privacy.php">Privacy Policy</a> pages. We strongly recommend you to read these pages before using this website 
@@ -64,8 +61,7 @@
         If you’re the author of a specific wallpaper and want to be credited for it, please contact us using the <a href = "contact.php">Contact Us</a> form. We will 
         verify your concern and add your credentials to the respective content.
         </p>
-    </div>
-    <!-- End of code for the disclaimer content -->
-
+    </div><br /><br />
+    <!-- End of code for the Privacy content -->
     <?php include ('footer.php'); ?>
 </body>

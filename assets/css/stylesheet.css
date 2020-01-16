@@ -105,12 +105,6 @@ body{
     height: 40px; 
 }
 
-#search{
-    margin-left: 20px; 
-    margin-top: 5px; 
-    width: 400px;
-}
-
 #inner{
     width: 100%; 
     background-color: rgb(75, 74, 74); 

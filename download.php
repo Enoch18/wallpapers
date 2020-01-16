@@ -258,10 +258,6 @@ $alt = implode(",", $arr);
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arimo&display=swap" rel="stylesheet">
 
-    <head>
-    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5e185809668efd00128a7878&cms=sop' async='async'></script>
-    </head>
-
     <style type="text/css">
  
     #share-buttons img {
@@ -321,7 +317,10 @@ $(document).ready(function(){
 
 <body>
     <div id = "color">
-        <?php include ('navbar.php'); ?>
+        <?php 
+            include ('navbar.php'); 
+            include ('customizedstyles.php');
+        ?>
 
         <div id = "ads" style = "margin-left: auto !important; margin-right: auto !important;">
             <p>Advertisement</p>
@@ -552,7 +551,7 @@ $(document).ready(function(){
                                     $result = $pdo->query($sql);
                                     while($row = $result->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row[url]' download = '$row[filestore]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>1280 x 720 (HD)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row[url]' download = '$row[filestore].jpg' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>1280 x 720 (HD) $row[filesize]</a> <br /><br />";
                                     }
 
                                     $sql1 = "SELECT * FROM details AS d, resolutions AS r
@@ -561,7 +560,7 @@ $(document).ready(function(){
                                     $result1 = $pdo->query($sql1);
                                     while($row1 = $result1->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row1[url]' download = '$row1[filestore]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>1920 x 1080 (FHD)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row1[url]' download = '$row1[filestore].jpg' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>1920 x 1080 (FHD) $row1[filesize]</a> <br /><br />";
                                     }
 
                                     $sql2 = "SELECT * FROM details AS d, resolutions AS r
@@ -570,7 +569,7 @@ $(document).ready(function(){
                                     $result2 = $pdo->query($sql2);
                                     while($row2 = $result2->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row2[url]' download = '$row2[filestore]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>2560 x 1440 (QHD)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row2[url]' download = '$row2[filestore].jpg' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>2560 x 1440 (QHD) $row2[filesize]</a> <br /><br />";
                                     }
 
                                     $sql3 = "SELECT * FROM details AS d, resolutions AS r
@@ -579,7 +578,7 @@ $(document).ready(function(){
                                     $result3 = $pdo->query($sql3);
                                     while($row3 = $result3->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row3[url]' download = '$row3[filestore]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>3840 x 2160 (4K)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row3[url]' download = '$row3[filestore].jpg' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>3840 x 2160 (4K) $row3[filesize]</a> <br /><br />";
                                     }
 
                                     $sql4 = "SELECT * FROM details AS d, resolutions AS r
@@ -588,7 +587,7 @@ $(document).ready(function(){
                                     $result4 = $pdo->query($sql4);
                                     while($row4 = $result4->fetch()){
                                         echo"
-                                        <a href = 'ssgrouplogin/$row4[url]' download = '$row4[filestore]' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>5120 x 2880 (5K)</a> <br /><br />";
+                                        <a href = 'ssgrouplogin/$row4[url]' download = '$row4[filestore].jpg' class = 'down' style = 'font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600;'>5120 x 2880 (5K) $row4[filesize]</a> <br /><br />";
                                     }
 
                                     // $sql5 = "SELECT * FROM details AS d, resolutions AS r
@@ -626,7 +625,7 @@ $(document).ready(function(){
                             </div>
                             <?php 
                                 try{
-                                    $sql = "SELECT DISTINCT r.d_id, r.url, r.width, r.height, d.d_id, d.tag, liveat, da.counter FROM details AS d, resolutions AS r, category AS c, catlink AS cl, downloads AS da
+                                    $sql = "SELECT DISTINCT r.d_id, r.url, r.width, r.height, d.d_id, original_filename, d.tag, liveat, da.counter FROM details AS d, resolutions AS r, category AS c, catlink AS cl, downloads AS da
                                     WHERE c.cat_name = '$category' AND d.d_id != '$id' AND cl.d_id = d.d_id AND c.cat_id = cl.cat_id AND da.d_id = d.d_id
                                     AND r.d_id = d.d_id AND r.width = '1280' AND r.height = '720' 
                                     ORDER BY da.counter DESC LIMIT 3";
@@ -659,7 +658,7 @@ $(document).ready(function(){
                                                 $tagname = str_replace(" ", "_", $row['tag']);
                                                 echo"
                                                 <div class = 'col-lg-4' style = 'margin-left: -5px;'>
-                                                <a href = 'download.php?value=$tagname-$row[d_id]'>
+                                                <a href = 'download.php?value=$row[original_filename]'>
                                                     <img src = 'ssgrouplogin/$row[url]' class = 'img img-thumbnail' alt = '$alt' style = 'width: 100%; height: 100%;'>
                                                     <p id = 'hidden'><i class='fa fa-download'></i> $downloads</p><br />
                                                     <h5 style = 'text-align: center; color: white;'>$row[tag]</h5><br /><br />

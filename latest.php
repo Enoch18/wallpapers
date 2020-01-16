@@ -82,7 +82,10 @@ $(document).ready(function(){
 
 <body>
     <div id = "color">
-        <?php include ('navbar.php'); ?>
+        <?php 
+            include ('navbar.php'); 
+            include ('customizedstyles.php');    
+        ?>
 
         <div id = "ads" style = "margin-left: auto !important; margin-right: auto !important;">
             <p>Advertisement</p>

@@ -63,7 +63,7 @@ $query = '';
 
 if ($search != ''){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r
     WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%')
@@ -87,7 +87,7 @@ if ($search != ''){
     $pages = ceil($total/$no_of_records_per_page);
 
     try{
-        $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+        $query = "SELECT DISTINCT d.d_id, original_filename, url, tag, width, height, liveat 
         FROM details AS d, resolutions AS r
         WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
         AND (d.tag LIKE '%$search%')
@@ -99,7 +99,7 @@ if ($search != ''){
 
 if ($detcount > 0){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r
     WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%')
@@ -123,7 +123,7 @@ if ($detcount > 0){
     $pages = ceil($total/$no_of_records_per_page);
 
     try{
-        $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+        $query = "SELECT DISTINCT d.d_id, original_filename, url, tag, width, height, liveat 
         FROM details AS d, resolutions AS r
         WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
         AND (d.tag LIKE '%$search%')
@@ -136,7 +136,7 @@ if ($detcount > 0){
 
 if($tagcount > 0){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -161,7 +161,7 @@ if($tagcount > 0){
     $pages = ceil($total/$no_of_records_per_page);
 
     try{
-        $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+        $query = "SELECT DISTINCT d.d_id, original_filename, url, tag, width, height, liveat 
         FROM details AS d, resolutions AS r, tagdetails AS td
         WHERE r.d_id = d.d_id AND td.d_id = d.d_id
         AND r.width = '500' AND r.height = '281'
@@ -175,7 +175,7 @@ if($tagcount > 0){
 
 if($catcount > 0){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -199,7 +199,7 @@ if($catcount > 0){
     $offset = ($pageno - 1) * $no_of_records_per_page;
     $pages = ceil($total/$no_of_records_per_page);
 
-    $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $query = "SELECT DISTINCT d.d_id, original_filename, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -210,7 +210,7 @@ if($catcount > 0){
 
 if($subcount > 0){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink as sl, subcategory AS s
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -234,7 +234,7 @@ if($subcount > 0){
     $offset = ($pageno - 1) * $no_of_records_per_page;
     $pages = ceil($total/$no_of_records_per_page);
 
-    $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $query = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink as sl, subcategory AS s
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -610,11 +610,11 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
                             <div class = 'col-lg-4' style = 'margin-left: -5px; margin-top: 2%;'>
                                 <div style = 'position: relative'>
                                     <img src = '$row[url]' class = 'img-thumbnail' style = 'width: 100%; height: 100%;'>
-                                    <a href = 'editwallpaper.php?value=$tagname-$row[d_id]' class = 'btn btn-primary' id = 'edit'><i class='fa fa-edit'></i></a>
+                                    <a href = 'editwallpaper.php?value=$row[original_filename]' class = 'btn btn-primary' id = 'edit'><i class='fa fa-edit'></i></a>
 
                                     <a class = 'btn btn-danger delete' id = '$row[d_id]'><i class='fa fa-trash-o'></i></a>
 
-                                    <a href = 'wallpaperdetails.php?value=$tagname-$row[d_id]' class = 'btn btn-info' id = 'details'><i class='fa fa-eye'></i></a>
+                                    <a href = 'wallpaperdetails.php?value=$row[original_filename]' class = 'btn btn-info' id = 'details'><i class='fa fa-eye'></i></a>
                                 </div>
                                 <div style = 'text-align: center;'>
                                     <p style = 'font-size: 16px; font-weight: 500;'>
@@ -729,11 +729,11 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
                                 <div class = 'col-lg-4' style = 'margin-left: -5px; margin-top: 2%;'>
                                     <div style = 'position: relative'>
                                         <img src = '$row[url]' class = 'img-thumbnail' style = 'width: 100%; height: 100%;'>
-                                        <a href = 'editwallpaper.php?value=$tagname-$row[d_id]' class = 'btn btn-primary' id = 'edit'><i class='fa fa-edit'></i></a>
+                                        <a href = 'editwallpaper.php?value=$row[original_filename]' class = 'btn btn-primary' id = 'edit'><i class='fa fa-edit'></i></a>
 
                                         <a class = 'btn btn-danger delete' id = '$row[d_id]'><i class='fa fa-trash-o'></i></a>
 
-                                        <a href = 'wallpaperdetails.php?value=$tagname-$row[d_id]' class = 'btn btn-info' id = 'details'><i class='fa fa-eye'></i></a>
+                                        <a href = 'wallpaperdetails.php?value=$row[original_filename]' class = 'btn btn-info' id = 'details'><i class='fa fa-eye'></i></a>
                                     </div>
                                     <div style = 'text-align: center;'>
                                         <p style = 'font-size: 16px; font-weight: 500;'>
