@@ -525,6 +525,21 @@
     }
 }
 
+@media (max-width: 480px){
+    .searchcontainer{
+        width: 100% !important;
+
+    }
+
+    .searchcontainer > input{
+        width: 65% !important;
+    }
+
+    .searchcontainer button{
+        width: 18% !important;
+    }
+}
+
 @media (max-width: 400px){
     .btn-secondary{
         font-size: 10px !important;
