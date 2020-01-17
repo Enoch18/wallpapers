@@ -22,7 +22,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
         foreach ($_POST['subscribers'] as $email){
             $mail = new PHPMailer;
             $mail->IsSMTP();
-            $mail ->SMTPDebug = 4;
+            //$mail ->SMTPDebug = 4;
             $mail->Host = "smtpout.secureserver.net";
             $mail->SMTPAuth = true;
             $mail->Port = 80;
@@ -94,7 +94,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
 
                 $mail = new PHPMailer;
                 $mail->IsSMTP();
-                $mail ->SMTPDebug = 4;
+                //$mail ->SMTPDebug = 4;
                 $mail->Host = "smtpout.secureserver.net";
                 $mail->SMTPAuth = true;
                 $mail->Port = 80;
