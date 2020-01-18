@@ -19,8 +19,7 @@ input[type="email"]{
         </div>
     </form>
 
-    <div id = "bannerright">
-        <div class = "webstatistics">
+    <div class = "webstatistics">
             <h5>Website Statistics</h5>
             <?php 
                 include ('database/connection.php');
@@ -138,8 +137,9 @@ input[type="email"]{
                     <?php echo $lastupload; ?>
                 <?php } ?>
             </p>
-        </div><br />
+    </div><br />
 
+    <div id = "bannerright">
         <p>Advertisement</p>
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- New horiznontal -->
