@@ -45,7 +45,7 @@ $(document).ready(function(){
         <?php include ('nav.php'); ?>
     </div>
     <!-- Beginning of code for the Privacy content -->
-    <div class = "container" style = "color: white; text-align: justify;">
+    <div class = "container footercontent" style = "color: white; text-align: justify;">
         <h3 style = "color:white; text-align: center; text-decoration: underline;">TERMS OF SERVICE</h3>
         <p>
         This document outlines what constitutes acceptable use of the DownloadAllWallpapers, it's associated web services, and server infrastructure. It also 

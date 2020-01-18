@@ -20,6 +20,126 @@ input[type="email"]{
     </form>
 
     <div id = "bannerright">
+        <div class = "webstatistics">
+            <h5>Website Statistics</h5>
+            <?php 
+                include ('database/connection.php');
+                $totalwallpapers = '';
+                $totaldownloads = '';
+                $totalcategories = '';
+                $totalsubcategories = '';
+                $lastupload = '';
+                $maxdid = '';
+
+                try{
+                    $num = array();
+                    $sql = "SELECT * FROM details";
+                    $result = $pdo->query($sql);
+                    while ($row = $result->fetch()){
+                        $num[] = $row['d_id'];
+                    }
+                    $maxdid = max($num);
+                    $totalwallpapers = count($num);
+                }catch(PDOException $e){
+                    echo "Could not perform the operation ".$e;
+                }
+
+                try{
+                    $num = array();
+                    $sql = "SELECT * FROM downloads";
+                    $result = $pdo->query($sql);
+                    while ($row = $result->fetch()){
+                        $num[] = $row['counter'];
+                    }
+                    $totaldownloads = array_sum($num);
+                }catch(PDOException $e){
+                    echo "Could not perform the operation ".$e;
+                }
+
+                try{
+                    $num = array();
+                    $sql = "SELECT * FROM category";
+                    $result = $pdo->query($sql);
+                    while ($row = $result->fetch()){
+                        $num[] = $row['cat_id'];
+                    }
+                    $totalcategories = count($num);
+                }catch(PDOException $e){
+                    echo "Could not perform the operation ".$e;
+                }
+
+                try{
+                    $num = array();
+                    $sql = "SELECT * FROM subcategory";
+                    $result = $pdo->query($sql);
+                    while ($row = $result->fetch()){
+                        $num[] = $row['sub_id'];
+                    }
+                    $totalsubcategories = count($num);
+                }catch(PDOException $e){
+                    echo "Could not perform the operation ".$e;
+                }
+
+                try{
+                    $sql = "SELECT * FROM details WHERE d_id = '$maxdid'";
+                    $result = $pdo->query($sql);
+                    while ($row = $result->fetch()){
+                        $lastupload = str_replace("-", "/", $row['createdat']);
+                    }
+                    echo $maxdid = max($num);
+                }catch(PDOException $e){
+                    echo "Could not perform the operation ".$e;
+                }
+            ?>
+            <p>
+                <?php if ($totalwallpapers != '0') { ?>
+                    Total Wallpapers - <?php 
+                    if($totalwallpapers >= 1000){
+                        $totalwallpapers = $downloads/1000;
+                        $totalwallpapers = number_format($totalwallpapers, 1) . "k";
+                    }
+
+                    if($totalwallpapers >= 1000000){
+                        $totalwallpapers = $totalwallpapers/1000000;
+                        $totalwallpapers = number_format($totalwallpapers, 1) . "M";
+                    }
+                    echo $totalwallpapers;
+                    ?><br /><br />
+                <?php } ?>
+
+                <?php if ($totalcategories != '0') { ?>
+                    Total Categories - 
+                    <?php
+                        echo $totalcategories; 
+                    ?><br /><br />
+                <?php } ?>
+
+                <?php if ($totalsubcategories != '0') { ?>
+                    Total Subcategories - <?php echo $totalsubcategories; ?><br /><br />
+                <?php } ?>
+
+                <?php if ($totaldownloads != '0') { ?>
+                    Total Downloads - 
+                    <?php 
+                        if($totaldownloads >= 1000){
+                            $totaldownloads = $totaldownloads/1000;
+                            $totaldownloads = number_format($totaldownloads, 1) . "k";
+                        }
+    
+                        if($totaldownloads >= 1000000){
+                            $totaldownloads = $totaldownloads/1000000;
+                            $totaldownloads = number_format($totaldownloads, 1) . "M";
+                        }
+                        echo $totaldownloads; 
+                    ?><br /><br />
+                <?php } ?>
+
+                <?php if ($lastupload != '0') { ?>
+                    <?php echo $lastupload; ?>
+                <?php } ?>
+            </p>
+        </div><br />
+
         <p>Advertisement</p>
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- New horiznontal -->
@@ -32,100 +152,6 @@ input[type="email"]{
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
-    </div><br />
-
-    <div class = "webstatistics">
-        <h5>Website Statistics</h5>
-        <?php 
-            include ('database/connection.php');
-            $totalwallpapers = '';
-            $totaldownloads = '';
-            $totalcategories = '';
-            $totalsubcategories = '';
-            $lastupload = '';
-            $maxdid = '';
-
-            try{
-                $num = array();
-                $sql = "SELECT * FROM details";
-                $result = $pdo->query($sql);
-                while ($row = $result->fetch()){
-                    $num[] = $row['d_id'];
-                }
-                $maxdid = max($num);
-                $totalwallpapers = count($num);
-            }catch(PDOException $e){
-                echo "Could not perform the operation ".$e;
-            }
-
-            try{
-                $num = array();
-                $sql = "SELECT * FROM downloads";
-                $result = $pdo->query($sql);
-                while ($row = $result->fetch()){
-                    $num[] = $row['counter'];
-                }
-                $totaldownloads = array_sum($num);
-            }catch(PDOException $e){
-                echo "Could not perform the operation ".$e;
-            }
-
-            try{
-                $num = array();
-                $sql = "SELECT * FROM category";
-                $result = $pdo->query($sql);
-                while ($row = $result->fetch()){
-                    $num[] = $row['cat_id'];
-                }
-                $totalcategories = count($num);
-            }catch(PDOException $e){
-                echo "Could not perform the operation ".$e;
-            }
-
-            try{
-                $num = array();
-                $sql = "SELECT * FROM subcategory";
-                $result = $pdo->query($sql);
-                while ($row = $result->fetch()){
-                    $num[] = $row['sub_id'];
-                }
-                $totalsubcategories = count($num);
-            }catch(PDOException $e){
-                echo "Could not perform the operation ".$e;
-            }
-
-            try{
-                $sql = "SELECT * FROM details WHERE d_id = '$maxdid'";
-                $result = $pdo->query($sql);
-                while ($row = $result->fetch()){
-                    $lastupload = str_replace("-", "/", $row['createdat']);
-                }
-                echo $maxdid = max($num);
-            }catch(PDOException $e){
-                echo "Could not perform the operation ".$e;
-            }
-        ?>
-        <p>
-            <?php if ($totalwallpapers != '0') { ?>
-                Total Wallpapers - <?php echo $totalwallpapers; ?><br />
-            <?php } ?>
-
-            <?php if ($totalcategories != '0') { ?>
-                Total Categories - <?php echo $totalcategories; ?><br />
-            <?php } ?>
-
-            <?php if ($totalsubcategories != '0') { ?>
-                Total Subcategories - <?php echo $totalsubcategories; ?><br />
-            <?php } ?>
-
-            <?php if ($totaldownloads != '0') { ?>
-                Total Downloads - <?php echo $totaldownloads; ?><br />
-            <?php } ?>
-
-            <?php if ($lastupload != '0') { ?>
-                Last Upload - <?php echo $lastupload; ?>
-            <?php } ?>
-        </p>
     </div><br />
 
     <div id = "bannerright">

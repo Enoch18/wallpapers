@@ -48,7 +48,7 @@ $query = '';
 
 if ($search != ''){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, original_filename, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r
     WHERE r.d_id = d.d_id AND r.width = '1280' AND r.height = '720'
     AND (d.tag LIKE '%$search%')
@@ -72,7 +72,7 @@ if ($search != ''){
     $pages = ceil($total/$no_of_records_per_page);
 
     try{
-        $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+        $query = "SELECT DISTINCT d.d_id, original_filename, url, tag, width, height, liveat 
         FROM details AS d, resolutions AS r
         WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
         AND (d.tag LIKE '%$search%')
@@ -84,7 +84,7 @@ if ($search != ''){
 
 if ($detcount > 0){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, original_filename, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r
     WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
     AND (d.tag LIKE '%$search%')
@@ -108,7 +108,7 @@ if ($detcount > 0){
     $pages = ceil($total/$no_of_records_per_page);
 
     try{
-        $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+        $query = "SELECT DISTINCT d.d_id, original_filename, url, tag, width, height, liveat 
         FROM details AS d, resolutions AS r
         WHERE r.d_id = d.d_id AND r.width = '500' AND r.height = '281'
         AND (d.tag LIKE '%$search%')
@@ -121,7 +121,7 @@ if ($detcount > 0){
 
 if($tagcount > 0){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, original_filename, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -146,7 +146,7 @@ if($tagcount > 0){
     $pages = ceil($total/$no_of_records_per_page);
 
     try{
-        $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+        $query = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
         FROM details AS d, resolutions AS r, tagdetails AS td
         WHERE r.d_id = d.d_id AND td.d_id = d.d_id
         AND r.width = '500' AND r.height = '281'
@@ -160,7 +160,7 @@ if($tagcount > 0){
 
 if($catcount > 0){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, original_filename, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -184,7 +184,7 @@ if($catcount > 0){
     $offset = ($pageno - 1) * $no_of_records_per_page;
     $pages = ceil($total/$no_of_records_per_page);
 
-    $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $query = "SELECT DISTINCT d.d_id, original_filename, url, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -195,7 +195,7 @@ if($catcount > 0){
 
 if($subcount > 0){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink as sl, subcategory AS s
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -219,7 +219,7 @@ if($subcount > 0){
     $offset = ($pageno - 1) * $no_of_records_per_page;
     $pages = ceil($total/$no_of_records_per_page);
 
-    $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $query = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink as sl, subcategory AS s
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -231,7 +231,7 @@ if($subcount > 0){
 
 if($catcount > 0 && $tagcount > 0){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -255,7 +255,7 @@ if($catcount > 0 && $tagcount > 0){
     $offset = ($pageno - 1) * $no_of_records_per_page;
     $pages = ceil($total/$no_of_records_per_page);
 
-    $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $query = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td, catlink as cl, category AS c
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id AND cl.cat_id = c.cat_id AND cl.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -266,7 +266,7 @@ if($catcount > 0 && $tagcount > 0){
 
 if($subcount > 0 && $tagcount > 0){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td, subcatlink AS sl, subcategory AS s
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -290,7 +290,7 @@ if($subcount > 0 && $tagcount > 0){
     $offset = ($pageno - 1) * $no_of_records_per_page;
     $pages = ceil($total/$no_of_records_per_page);
 
-    $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $query = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, tagdetails AS td, subcatlink AS sl, subcategory AS s
     WHERE r.d_id = d.d_id AND td.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -301,7 +301,7 @@ if($subcount > 0 && $tagcount > 0){
 
 if($subcount > 0 && $catcount > 0){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink AS sl, subcategory AS s, category AS c, catlink cl
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id AND cl.d_id = d.d_id AND c.cat_id = cl.cat_id
     AND r.width = '500' AND r.height = '281'
@@ -325,7 +325,7 @@ if($subcount > 0 && $catcount > 0){
     $offset = ($pageno - 1) * $no_of_records_per_page;
     $pages = ceil($total/$no_of_records_per_page);
 
-    $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $query = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink AS sl, subcategory AS s, category AS c, catlink cl
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id AND cl.d_id = d.d_id AND c.cat_id = cl.cat_id
     AND r.width = '500' AND r.height = '281'
@@ -336,7 +336,7 @@ if($subcount > 0 && $catcount > 0){
 
 if($subcount > 0 && $catcount > 0 && $tagcount > 0){
     $num = array();
-    $sql1 = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $sql1 = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink AS sl, subcategory AS s, category AS c, catlink cl, tagdetails AS td
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id AND cl.d_id = d.d_id AND c.cat_id = cl.cat_id AND td.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -360,7 +360,7 @@ if($subcount > 0 && $catcount > 0 && $tagcount > 0){
     $offset = ($pageno - 1) * $no_of_records_per_page;
     $pages = ceil($total/$no_of_records_per_page);
 
-    $query = "SELECT DISTINCT d.d_id, url, tag, width, height, liveat 
+    $query = "SELECT DISTINCT d.d_id, url, original_filename, tag, width, height, liveat 
     FROM details AS d, resolutions AS r, subcatlink AS sl, subcategory AS s, category AS c, catlink cl, tagdetails AS td
     WHERE r.d_id = d.d_id AND sl.sub_id = s.sub_id AND sl.d_id = d.d_id AND cl.d_id = d.d_id AND c.cat_id = cl.cat_id AND td.d_id = d.d_id
     AND r.width = '500' AND r.height = '281'
@@ -419,13 +419,13 @@ $(document).ready(function(){
 </script>
 
 <body>
-    <div id = "color">
+    <div id = "color" style = "margin-top: -300px !important;">
         <?php 
             include ('navbar.php'); 
             include ('customizedstyles.php');    
         ?>
 
-        <div id = "ads" style = "margin-left: auto !important; margin-right: auto !important;">
+        <div id = "ads" class = 'ads' style = "margin-left: auto !important; margin-right: auto !important;">
             <p>Advertisement</p>
 			<ins class="adsbygoogle"
                 style="display:block"
@@ -438,6 +438,13 @@ $(document).ready(function(){
             </script>
         </div>
     </div><br />
+
+    <div id="myModal" class="modal">
+        <div class="modal-content" style = "text-align: center;">
+            <img src = "icons/banner.jpg" style = "width: 100%;"><br />
+            <h4>AdBlock is Enabled! Please disable AdBlock to continue using the best Wallpapers website.</h4><br />
+        </div>
+    </div>
 
     <div class = "row" id = "row">
         <?php include ('sidebar1.php'); ?>
@@ -620,3 +627,14 @@ $(document).ready(function(){
     </div>
 </body>
 </html>
+
+<script>
+    $(document).ready(function(){
+        setTimeout(() => {
+            if ($(".ads").height() < 80){
+                var modal = document.getElementById("myModal");
+                modal.style.display = "block";
+            }
+        }, 500);
+    });
+</script>

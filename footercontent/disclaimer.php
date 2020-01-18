@@ -45,9 +45,9 @@ $(document).ready(function(){
         <?php include ('nav.php'); ?>
     </div>
     <!-- Beginning of code for the Privacy content -->
-    <div class = "container" style = "color: white; text-align: justify;">
+    <div class = "container footercontent" style = "color: white; text-align: justify;">
         <h3 style = "color:white; text-align: center; padding-top: 5%; text-decoration: underline;">DISCLAIMER</h3><br />
-        <p style = "color: white !important;">
+        <p>
         DownloadAllWallpapers is a user-friendly website and welcomes all its users to benefit from our content. However, using this website means you willingly agree 
         to all terms and conditions mentioned in our <a href = "terms.php">Terms of Service</a> and <a href = "privacy.php">Privacy Policy</a> pages. We strongly recommend you to read these pages before using this website 
         and its content.<br /><br />

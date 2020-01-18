@@ -15,8 +15,8 @@
         }
         if($tags != ''){
             echo "
-            <div class = 'col-xs-12 col-md-12 col-sm-12 col-lg-12' style = 'margin-top: 1%;'>
-                <h6 style = 'color: rgb(73, 133, 204); font-weight: bold;'>Popular Tags: </h6>
+            <div style = 'margin-top: 1%;'>
+                <h6 style = 'font-weight: bold;' id = 'populartagstext'>Popular Tags: </h6>
             </div>";
         }
 

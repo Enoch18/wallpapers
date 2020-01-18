@@ -50,7 +50,7 @@ $(document).ready(function(){
             include ('customizedstyles.php');
         ?>
 
-        <div id = "ads" style = "margin-left: auto !important; margin-right: auto !important;">
+        <div id = "ads" class = 'ads' style = "margin-left: auto !important; margin-right: auto !important;">
             <p>Advertisement</p>
 			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- New horiznontal -->
@@ -66,44 +66,120 @@ $(document).ready(function(){
         </div>
     </div><br />
 
-    <div class = "row" id = "row">
+    <div id="myModal" class="modal">
+        <div class="modal-content" style = "text-align: center;">
+            <img src = "icons/banner.jpg" style = "width: 100%;"><br />
+            <h4>AdBlock is Enabled! Please disable AdBlock to continue using the best Wallpapers website.</h4><br />
+        </div>
+    </div>
+
+    <div class = "row">
             <?php include ('sidebar1.php'); ?>
-            <div class = "col-lg-8" id = "col2">
+            <div class = "col-lg-8 activetags" id = "col2">
                 <div class = "row" style = "color: white !important;">
                     <div class = "col-lg-12" style = "margin-left: -5px;">
                         <h4 id = "heading">ACTIVE TAGS</h4>
                     </div><br /><br /><br /><br />
 
-                    <?php 
-                        $tags = array();
-                        $count = '';
-
+                    <?php
                         try{
-                            $sql = "SELECT DISTINCT tagname FROM tagdetails AS t, tags AS ta WHERE t.id = ta.tag_id";
+                            $tot = array();
+                            $sql = "SELECT DISTINCT tagname FROM tagdetails GROUP BY tagname ORDER BY tagname ASC LIMIT 200";
                             $result = $pdo->query($sql);
                             while($row = $result->fetch()){
-                                $tags[] = $row['tagname'];
+                                $tot[] = $row['tagname'];
                             }
-                            $count = count($tags);
-                        }catch(PDOException $e){
-                            echo "An error occured" . $e;
-                        }
+                            $total = count($tot);
+                            if (isset($_GET['pageno'])) {
+                                $pageno = $_GET['pageno'];
+                            } else {
+                                $pageno = 1;
+                            }
+                            $prev = $pageno - 1;
+                            $next = $pageno + 1;
+                            $no_of_records_per_page = 200;
+                            $offset = ($pageno-1) * $no_of_records_per_page;
+                            $pages = ceil($total/$no_of_records_per_page);
 
-                        if($count == ''){
-                            echo "
-                            <br /><br />
-                            <div class = 'col-xs-12 col-md-12 col-sm-12 col-lg-12' style = 'text-align: center;'>
-                                <h6 style = 'font-weight: bold;'>No active tags yet</h6>
-                            </div>";
-                        }
-                        
-                        for($i=0; $i<$count; $i++){
+                            $sql = "SELECT DISTINCT tagname FROM tagdetails GROUP BY tagname ORDER BY tagname ASC LIMIT $offset, $no_of_records_per_page";
+                            $result = $pdo->query($sql);
+                            while($row = $result->fetch()){
+                                $tag = $row['tagname'];
+                                $num = array();
+                                $sql1 = "SELECT * FROM tagdetails WHERE tagname LIKE '$tag'";
+                                $result1 = $pdo->query($sql1);
+                                while($row1 = $result1->fetch()){
+                                    $num[] = $row1['id'];
+                                }
+                                $count = count($num);
+
+                                echo "
+                                    <a href = './searchresults.php?search=$row[tagname]' class = 'mainalttags' style = 'text-decoration: none;'>
+                                        $row[tagname] ($count)&nbsp&nbsp&nbsp&nbsp&nbsp
+                                    </a>
+                                ";
+                            }
+
+                            if ($total > $no_of_records_per_page){
                             echo"
-                                <a href = 'searchresults.php?search=$tags[$i]'  
-                                    class = 'populartags'>
-                                    $tags[$i]
-                                </a><br /><br />
-                            ";
+                            <div class = 'col-lg-12'>
+                            <div class = 'container' id = 'pages'>";
+                            if ($pageno == 1 && $pages > 0){
+                                $pos = $pageno + 1;
+                                $neg = $pageno - 1;
+                                echo"
+                                <br />
+                                <ul class = 'pagination'>           
+                                    <li><a href = '#_' class = 'btn btn-primary'>First</a>
+                                    <li><a href = '?pageno=$pageno' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pageno</a>
+                                    <li><p class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>Out of</p>
+                                    <li><a href = '?pageno=$pages' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pages</a><li>
+                                    <li>";
+                                    if($pages == 1){
+                                    echo "
+                                    <a href = '#_' class = 'btn btn-primary' style = 'margin-left: 20px;'>Last</a>
+                                    </ul>";
+                                    }
+                                    if($pages > 1){
+                                        echo "
+                                        <a href = '?pageno=$pos' class = 'btn btn-primary' style = 'margin-left: 20px;'> >>> </a>
+                                        </ul>";
+                                    }
+                            }
+
+                            if ($pageno >= 2 && $pageno != $pages){
+                                $pos = $pageno + 1;
+                                $neg = $pageno - 1;
+                                echo"
+                                <br />
+                                <ul class = 'pagination'>           
+                                    <li><a href = '?pageno=$neg' class = 'btn btn-primary'> <<< </a>
+                                    <li><a href = '?pageno=$pageno' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pageno</a>
+                                    <li><p class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>Of</p>
+                                    <li><a href = '?pageno=$pages' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pages</a><li>
+                                    <li>";
+                                    
+                                    echo "<a href = '?pageno=$pos' class = 'btn btn-primary' style = 'margin-left: 20px;'> >>> </a>
+                                    </li>
+                                </ul>";
+                            }
+
+                            if ($pageno == $pages && $pages != 1){
+                                $neg = $pageno - 1;
+                                echo"
+                                <br />
+                                <ul class = 'pagination'>           
+                                    <li><a href = '?pageno=$neg' class = 'btn btn-primary'> <<< </a>
+                                    <li><a href = '?pageno=$pageno' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pageno</a>
+                                    <li><p class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>Out of</p>
+                                    <li><a href = '?pageno=$pages' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pages</a><li>
+                                    <li><a href = '#_' class = 'btn btn-primary' style = 'margin-left: 20px;'>Last</a>
+                                </ul>";
+                            }
+                            echo"</div></div>";
+                            }
+                        }catch(PDOException $e){
+                            echo "An error occured. " .$e;
                         }
                     ?>
                 </div><br /><br />
@@ -139,3 +215,14 @@ $(document).ready(function(){
     </div>
 </body>
 </html>
+
+<script>
+    $(document).ready(function(){
+        setTimeout(() => {
+            if ($(".ads").height() < 80){
+                var modal = document.getElementById("myModal");
+                modal.style.display = "block";
+            }
+        }, 500);
+    });
+</script>

@@ -113,6 +113,7 @@ try{
         $catid = $_POST['category'];
         $subid = $_POST['subid'];
         $tag = $_POST['tag'];
+        $alttags = $_POST['alttags'];
         $description = $_POST['imagedescription'];
         $author = $_POST['author'];
         $authorlink = $_POST['authorlink'];
@@ -164,9 +165,28 @@ try{
             for($i=0; $i<$total; $i++){
                 $sql3 = "INSERT INTO tagdetails SET
                 tagname = :tagname,
+                alt = :alt,
                 d_id = :did";
                 $s3 = $pdo->prepare($sql3);
                 $s3->bindValue(':tagname', $tagname[$i]);
+                $s3->bindValue(':alt', '');
+                $s3->bindValue(':did', $id);
+                $s3->execute();
+            }
+        }
+
+        if($_POST['alttags'] != ''){
+            $alttags = $_POST['alttags'];
+            $tagname = explode(",", $alttags);
+            $total = count($tagname);
+            for($i=0; $i<$total; $i++){
+                $sql3 = "INSERT INTO tagdetails SET
+                tagname = :tagname,
+                alt = :alt,
+                d_id = :did";
+                $s3 = $pdo->prepare($sql3);
+                $s3->bindValue(':tagname', $tagname[$i]);
+                $s3->bindValue(':alt', '1');
                 $s3->bindValue(':did', $id);
                 $s3->execute();
             }
@@ -408,7 +428,7 @@ if($downloads >= 1000000){
 
                     <div class = "row">
                         <div class = "col-lg-12" style = "margin-left:10px;">
-                            <label style = "font-weight: bold; margin-left: -10px;">Subategory</label>
+                            <label style = "font-weight: bold; margin-left: -10px;">Subcategory</label>
                         </div>
                         <div class = "col-lg-12 form-group">
                             <?php
@@ -455,7 +475,17 @@ if($downloads >= 1000000){
                         </div>
 
                         <div class = "col-lg-12 form-group">
-                            <input type = "text" name = "tag2" class = "form-control" placeholder = "Tags">
+                            <textarea name = "tag2" class = "form-control" placeholder = "Tags"></textarea>
+                        </div>
+                    </div>
+
+                    <div class = "row">
+                        <div class = "col-lg-12" style = "margin-left:10px; margin-top: -15px;">
+                            <label style = "font-weight: bold; margin-left: -10px;">Add More Alt Tags</label>
+                        </div>
+
+                        <div class = "col-lg-12 form-group">
+                            <textarea name = "alttags" class = "form-control" placeholder = "Alt Tags"></textarea>
                         </div>
                     </div>
 

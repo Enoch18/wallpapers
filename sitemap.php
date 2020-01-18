@@ -2,7 +2,16 @@
 include ('database/connection.php');
 
 
-$base_url = "http://localhost/wallpapers/";
+$base_url = "";
+$base_url1 = "";
+$server = $_SERVER['SERVER_NAME'];
+if ($server == 'localhost'){
+    $base_url = "http://$server/wallpapers/";
+    $base_url1 = "http://$server/wallpapers";
+}else{
+    $base_url = "http://$server/";
+    $base_url1 = "http://$server/wallpapers";
+}
 
 $sql = "SELECT * FROM category ORDER BY cat_name ASC";
 $result = $pdo->query($sql);
@@ -18,7 +27,7 @@ http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">' . PHP_EOL;
 
 
 echo '<url>' . PHP_EOL;
-echo '<loc>' . $base_url . '</loc>' . PHP_EOL;
+echo '<loc>' . $base_url1 . '</loc>' . PHP_EOL;
 echo '<changefreq>daily</changefreq>' . PHP_EOL;
 echo '<priority>1.00</priority>' . PHP_EOL;
 echo '</url>' . PHP_EOL;
@@ -90,27 +99,12 @@ try{
 }
 
 try{
-    $sql = "SELECT * FROM category ORDER BY cat_id ASC";
-    $result = $pdo->query($sql);
-    while($row = $result->fetch()){
-        $res = str_replace(" ", "%20", $row['cat_name']);
-        echo '<url>' . PHP_EOL;
-        echo "<loc>" . $base_url . "searchresults.php?id=$res</loc>" . PHP_EOL;
-        echo '<changefreq>daily</changefreq>' . PHP_EOL;
-        echo '<priority>0.85</priority>' . PHP_EOL;
-        echo '</url>' . PHP_EOL;
-    }
-}catch(PDOException $e){
-    echo "Error";
-}
-
-try{
     $sql = "SELECT * FROM details ORDER BY d_id ASC";
     $result = $pdo->query($sql);
     while($row = $result->fetch()){
         $res = str_replace(" ", "%20", $row['tag']);
         echo '<url>' . PHP_EOL;
-        echo "<loc>" . $base_url . "searchresults.php?id=$res</loc>" . PHP_EOL;
+        echo "<loc>" . $base_url . "searchresults.php?search=$res</loc>" . PHP_EOL;
         echo '<changefreq>daily</changefreq>' . PHP_EOL;
         echo '<priority>0.85</priority>' . PHP_EOL;
         echo '</url>' . PHP_EOL;

@@ -82,12 +82,12 @@ $(document).ready(function(){
         <?php include ('nav.php'); ?>
     </div>
     <!-- Beginning of code for the Site Contact -->
-        <div class = "container" style = "height: 700px !important; border: 2px solid white;">
+        <div class = "container" style = "height: 700px !important;">
             <div class = "container" id = "cont2">
                 <h3 style = "color:gray; text-align: center; padding-top: 10%; color: white;">CONTACT US</h3>
                 <div id = "contactus">
                 <div class = "row">
-                    <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12" style = "border: 1px solid gray; margin-right:">
+                    <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12" style = "margin-right:">
                         <?php if($status != '') echo "<div style = 'background-color: green; color:white;'>$status</div>"; ?>
                         <h5 style = "color: white;">SEND US A MESSAGE</h5>
                         <div class = "col-xs-12">

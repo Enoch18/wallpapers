@@ -100,7 +100,7 @@ $(document).ready(function(){
         ?>
 
 
-        <div id = "ads" style = "margin-left: auto !important; margin-right: auto !important;">
+        <div id = "ads" class = 'ads' style = "margin-left: auto !important; margin-right: auto !important;">
             <p>Advertisement</p>
 			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- New horiznontal -->
@@ -115,6 +115,13 @@ $(document).ready(function(){
             </script>
         </div>
     </div><br />
+
+    <div id="myModal" class="modal">
+        <div class="modal-content" style = "text-align: center;">
+            <img src = "icons/banner.jpg" style = "width: 100%;"><br />
+            <h4>AdBlock is Enabled! Please disable AdBlock to continue using the best Wallpapers website.</h4><br />
+        </div>
+    </div>
 
     <div class = "row" id = "row">
         <?php include ('sidebar1.php'); ?>
@@ -369,3 +376,14 @@ $(document).ready(function(){
     </div>
 </body>
 </html>
+
+<script>
+    $(document).ready(function(){
+        setTimeout(() => {
+            if ($(".ads").height() < 80){
+                var modal = document.getElementById("myModal");
+                modal.style.display = "block";
+            }
+        }, 500);
+    });
+</script>

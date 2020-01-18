@@ -45,7 +45,7 @@ $(document).ready(function(){
         <?php include ('nav.php'); ?>
     </div>
     <!-- Beginning of code for the Privacy content -->
-    <div class = "container" style = "color: white; text-align: justify;">
+    <div class = "container footercontent" style = "color: white; text-align: justify;">
         <h3 style = "color:white; text-align: center; padding-top: 5%; text-decoration: underline;">PRIVACY</h3><br />
         <p>
         DownloadAllWallpapers respects the privacy of all its visitors and any co-branded, mirrored, or successor sites (the "Website") and is committed to 

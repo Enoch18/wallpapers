@@ -12,12 +12,17 @@ body{
     font-size: <?php echo $row['fontsize']; ?> !important;
 }
 
-p, a{
+p, a, #footer li, .mainalttags{
     color: <?php echo $row['textcolor']; ?> !important;
+    font-size: <?php echo $row['fontsize']; ?> !important;
 }
 
 h1, h2, h3, h4, h5, h6, b, a{
     color: <?php echo $row['textcolor']; ?> !important;
+}
+
+.footercontent a{
+    color: blue !important;
 }
 
 .navbar{
@@ -74,11 +79,17 @@ h1, h2, h3, h4, h5, h6, b, a{
 .btn-info, .btn{
     background-color: <?php echo $row['backgroundcolor']; ?> !important;
     color: <?php echo $row['textcolor']; ?> !important;
+    border: 1px solid <?php echo $row['bordercolor']; ?> !important;
+}
+
+#resolutions a, #relatedtext, #populartagstext{
+    background-color: <?php echo $row['backgroundcolor']; ?> !important;
+    color: <?php echo $row['textcolor']; ?> !important;
 }
 
 .btn-info:hover{
     background-color: <?php echo $row['backgroundcolor']; ?> !important;
-    border: 1px solid <?php echo $row['backgroundcolor']; ?> !important;
+    border: 1px solid <?php echo $row['bordercolor']; ?> !important;
     opacity: 0.7;
 }
 
@@ -113,6 +124,8 @@ h1, h2, h3, h4, h5, h6, b, a{
 </style>
 
 <?php } ?>
+
+
 
 <!-- Left Sidebar -->
 

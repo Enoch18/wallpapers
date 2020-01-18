@@ -176,7 +176,7 @@ if (isset($_POST['tagdelete'])){
                             $pages = ceil($total/$no_of_records_per_page);
 
                             echo "<h5>Add more: </h5>";
-                            $sql = "SELECT DISTINCT tagname FROM tagdetails GROUP BY tagname ORDER BY tagname ASC LIMIT $offset, $no_of_records_per_page";
+                            $sql = "SELECT DISTINCT tagname FROM tagdetails WHERE alt != '1' GROUP BY tagname ORDER BY tagname ASC LIMIT $offset, $no_of_records_per_page";
                             $result = $pdo->query($sql);
                             while($row = $result->fetch()){
                                 $tag = $row['tagname'];

@@ -2,6 +2,10 @@
     .btn-info{
         font-size: 14px !important;
     }
+
+    .navbar img{
+        margin-top: 10px !important;
+    }
 }
 
 @media (max-width: 1200px) {
@@ -19,6 +23,20 @@
     #col1 .btn{
         font-size: 14px;
         padding-top: 5px;
+    }
+
+    #list{
+        margin-left: 250px !important;
+    }
+}
+
+@media (max-width: 1024px){
+    #footer{
+        margin-bottom: 30px !important;
+    }
+
+    #list{
+        margin-left: 225px !important;
     }
 }
 
@@ -38,9 +56,7 @@
        /* =========================================================== Beginning of Code for Social media icons =============================================== */
 
     .social{
-        margin-top: -90px; 
-        width: 150px;
-        margin-left: 90%;
+        
     }
 
     .social #follow{
@@ -106,6 +122,13 @@
     .nav-item{
         display: inline;
     }
+
+    .marquee{
+        margin-left: auto; 
+        margin-right: auto; 
+        width: 100%; 
+    }
+
     .nav-item > a{
         color: white !important;
         text-align: center !important;
@@ -166,7 +189,6 @@
     }
 
     #heading{
-        background-color: rgb(63, 62, 62); 
         color: white; 
         padding-left: 5%; 
         margin-right: 0px;
@@ -214,8 +236,8 @@
       }
 
        .social{
-    margin-bottom: 2%;
-}
+            
+        }
 
     .social #follow{
         font-size: 10px;
@@ -273,14 +295,28 @@
     }
 }
 
+@media (max-width: 768px){
+    #list{
+        margin-left: 200px !important;
+    }
+}
+
 @media (max-width: 767px) {
     .searchcontainer{
         width: 100% !important;
 
     }
 
+    .modal-content {
+        width: 100% !important;
+      }
+
     .searchcontainer > input{
         width: 85% !important;
+    }
+
+    #list{
+        margin-left: 0px !important;
     }
 
     .searchcontainer button{
@@ -422,12 +458,6 @@
         color: black;
     }
 
-    .social{
-        display: inline !important;
-        float: right !important;
-        margin-right:-11% !important;
-    }
-
     .fa {
     padding: 3px !important;
     font-size: 10px !important;
@@ -477,7 +507,6 @@
 
     #addedonheader{
         margin-left: 0px !important; 
-        background-color: rgb(63, 62, 62); 
         border-radius: 3%; color: white;
         width: 100% !important;
     }
@@ -503,11 +532,11 @@
     }
 
     .searchcontainer > input{
-        width: 80% !important;
+        width: 90% !important;
     }
 
     .searchcontainer button{
-        width: 18% !important;
+        width: 9% !important;
     }
 
     #hidden{
@@ -532,15 +561,40 @@
     }
 
     .searchcontainer > input{
-        width: 65% !important;
+        width: 370px !important;
+        margin-left: 0px !important;
     }
 
     .searchcontainer button{
-        width: 18% !important;
+        width: 45px !important;
+    }
+
+    .social{
+        right: 0px !important;
+    }
+    .navbar img{
+        margin-top: 10px !important;
     }
 }
 
-@media (max-width: 400px){
+@media (max-width: 479px){
+    .social{
+        right: 0px !important;
+    }
+
+    .navbar img{
+        margin-top: 10px !important;
+    }
+
+    .searchcontainer > input{
+        width: 370px !important;
+        margin-left: 0px !important;
+    }
+
+    .searchcontainer button{
+        width: 45px !important;
+    }
+    
     .btn-secondary{
         font-size: 10px !important;
     }
@@ -559,11 +613,6 @@
         height: 50px !important;
         margin-left: -5px;
         margin-right: 5%;
-    }
-
-    .social{
-        margin-right: -25% !important;
-        margin-bottom: 8px;
     }
 
     .fa {

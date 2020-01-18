@@ -91,7 +91,7 @@ img:hover{
                                 }
                                 echo "
                                     <div class = 'col-md-12 col-md-6 col-md-4 col-lg-4'>
-                                        <a href = 'viewwallpapers.php?search=$row[tag]'>
+                                        <a href = 'editwallpaper.php?value=$row[original_filename]'>
                                             <img src = '$row[url]' class = 'img-thumbnail img-responsive'>
                                         </a>
                                         <h6>$downloads</h6>

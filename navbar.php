@@ -22,16 +22,6 @@
     <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5e185809668efd00128a7878&cms=sop' async='async'></script>
 </head>
 
-<script src="/js/ads.js"></script>
-
-<script>
-    var canRunAds = true;
-    if( window.canRunAds === undefined ){
-        alert("Website cannot be loaded due to Adblocker that's installed on your browser");
-        $('body').hide();
-    }
-</script>
-
 <?php include ('customizedstyles.php'); ?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -39,35 +29,66 @@
         <!-- Add icon library -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <!-- Add font awesome icons -->
-        <!-- <div class = "col-xs-12 col-sm-12 col-ms-12 col-lg-12">
-            <div class = "social" style = "display: inline; float: right !important;">
+        <div class = "col-xs-12 col-sm-12 col-ms-12 col-lg-12" style = "position: relative;">
+            <a href = "./" style = "width: 100%;">
+                <img src = "icons/banner.jpg" class = "img-responsive" id = "banner">
+            </a>
+
+            <div class = "social">
                 <a href="https://www.facebook.com/DownloadAllWallpapersDotCom/" target = "_blank" class="facebook"><i class="fa fa-facebook"></i></a> 
                 <a href="https://twitter.com/DownloadAllWall" target = "_blank" class="twitter"><i class="fa fa-twitter"></i></a> 
                 <a href="https://www.instagram.com/downloadallwallpapersdotcom" target = "_blank" class="instagram"><i class="fa fa-instagram"></i></a>
                 <a href = "https://www.pinterest.com/downloadallwallpapers" target = "_blank" class = "pinterest"><i class="fa fa-pinterest"></i></a> 
             </div>
-        </div>-->
-
-        <div class = "col-xs-12 col-sm-12 col-ms-12 col-lg-12">
-            <img src = "icons/banner.jpg" class = "img-responsive" id = "banner">
         </div>
+        <?php 
+            $desc = '';
+            $bcolor = 'orange';
+            $textcolor = 'white';
+            try {
+                include ('database/connection.php');
+                $sql = "SELECT * FROM customizations WHERE name = 'marquee'";
+                $result = $pdo->query($sql);
+                while($row = $result->fetch()){
+                    $desc = $row['description'];
+                    if ($row['backgroundcolor'] != ''){
+                        $bcolor = $row['backgroundcolor'];
+                    }
+
+                    if ($row['textcolor'] != ''){
+                        $textcolor = $row['textcolor'];
+                    }
+                }
+            }catch(PDOException $e){
+                echo $e;
+            }
+        ?>
+
+        <?php if ($desc != ''){ ?>
+            <div class = "container">
+                <div class = "marquee" style = "background-color: <?php echo $bcolor; ?>; text-align: center; padding-top: 10px; padding-bottom: 5px;">
+                    <p style = "color: <?php echo $textcolor; ?>;"><?php echo $desc; ?></p>
+                </div>
+            </div>
+        <?php } ?>
     </div>
 </nav>
 
-<div class = "searchbar">
+<div class = "searchbar" style = "padding-top: 40px;">
     <form class = "from-group" method = "POST">
         <?php 
             $server = $_SERVER['SERVER_NAME'];
             if ($server == 'localhost'){
                 $server = "http://" . $server . "/wallpapers";
+            }else{
+                $server = "http://" . $server;
             }
         ?>
         <div class = "container">
             <div class = "searchcontainer">
                 <input type = "search" name = 'search' id = "search" placeholder = "search" class = "form-control">
                 <button type = "submit" name = "searchsubmit" value = "submit" class = "btn btn-primary"><i class="fa fa-search"></i></button><br /><br />
-                <div id = "list" style = "position: absolute; margin-top: -10px; background-color: white; z-index: 1000;"></div>
+                <div id = "list" style = "position: absolute; margin-top: -10px; background-color: white; z-index: 1000; text-align: center;"></div>
                 <input type = "hidden" name = "server" id = "server" value = "<?php echo $server; ?>">
             </div>
         </div>
@@ -93,10 +114,6 @@
 
                     <li class="nav-item">
                         <a class="nav-link btn btn-info" href="topdownloads.php">TOP DOWNLOADS</a><br />
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-info" href="random.php">RANDOM WALLPAPERS</a><br />
                     </li>
 
                     <li class="nav-item">

@@ -5,14 +5,20 @@ error_reporting(0);
 $original_filename = $_GET['value'];
 
 $id = '';
+$itexists = '';
 try{
     $sql = "SELECT * FROM details WHERE original_filename = '$original_filename'";
     $result = $pdo->query($sql);
     while ($row = $result->fetch()){
         $id = $row['d_id'];
+        $itexists = 'yes';
     }
 }catch(PDOException $e){
     echo "Error " . $e;
+}
+
+if ($itexists == ''){
+    header ("Location: ./notfound.php");
 }
 
 $authorlink = '';
@@ -29,6 +35,7 @@ try{
     $result = $pdo->query($sql);
     while ($row = $result->fetch()){
         $d_num[] = $row['d_id'];
+        $itexists = "yes";
     }
     $d_total = count($d_num);
     
@@ -221,11 +228,12 @@ $arr = array();
 $sqlt = "SELECT * FROM tagdetails WHERE d_id = '$id'";
 $resultt = $pdo->query($sqlt);
 while ($rowt = $resultt->fetch()){
-    if ($rowt['alt'] != '1'){
+    if ($rowt['alt'] == '1'){
         $arr[] = $rowt['tagname'];
     }
 }
-$alt = implode(",", $arr);
+$alt = implode(" ", $arr);
+$dscralt = implode(",", $arr);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -244,7 +252,7 @@ $alt = implode(",", $arr);
     <title><?php echo $alt; ?></title>
     <link rel="shortcut icon" href = "icons/ico.ico">
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-    <meta name="description" content="Your one-stop destination to download high quality wallpapers of celebrities, food, nature, vehicles, animals, 3D, abstract, and so on in HD, FHD, QHD, 4K and 5K for desktops, mobiles and tablets.">
+    <meta name="description" content="<?php echo $dscralt; ?>">
     <meta name="keywords" content="Wallpapers, Images, Wallpaper, Image, Photos, Photo, 5K, FHD, HD, free,download,4k ultra hd,5k uhd,desktop,high quality,cute,stock,best,widescreen,HDTV,1080p full hd,720p hd">
     <meta name="robots" content="index, follow" />
     <script src = "assets/js/jquery.min.js"></script>
@@ -322,7 +330,7 @@ $(document).ready(function(){
             include ('customizedstyles.php');
         ?>
 
-        <div id = "ads" style = "margin-left: auto !important; margin-right: auto !important;">
+        <div id = "ads" class = 'ads' style = "margin-left: auto !important; margin-right: auto !important;">
             <p>Advertisement</p>
 			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- New horiznontal -->
@@ -337,6 +345,13 @@ $(document).ready(function(){
             </script>
         </div>
     </div><br />
+
+    <div id="myModal" class="modal">
+        <div class="modal-content" style = "text-align: center;">
+            <img src = "icons/banner.jpg" style = "width: 100%;"><br />
+            <h4>AdBlock is Enabled! Please disable AdBlock to continue using the best Wallpapers website.</h4><br />
+        </div>
+    </div>
 
     <div class = "row" id = "row">
         <?php include ('sidebar1.php'); ?>
@@ -475,7 +490,7 @@ $(document).ready(function(){
                     </div>
 
                     <div class = "col-lg-12">
-                        <h5 style = "margin-left: 6.5%; color: white; text-align: center; text-align: center;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600; color: #FCFF00;">Added on:</b> <?php echo $addedon; ?></h5>
+                        <h5 style = "margin-left: 6.5%; color: white; text-align: center; text-align: center;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600; color: #FCFF00;">Added on:</b><br /> <?php echo $addedon; ?></h5>
                     </div>
 
                     <div class = "col-lg-12">
@@ -493,9 +508,9 @@ $(document).ready(function(){
                     </div>
 
                     <!-- Beginning Wallpaper Tags -->
-                    <div class = "col-lg-12" style = "margin-left: 6.5%;">
-                        <div class = "row" style = "margin-left: -7.2%;">
-							<h5 style = "margin-left: 6.5%; color: white;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600; color: #FCFF00;">Tags:&nbsp;</b></h5>
+                    <div style = "text-align: center; width: 100%;">
+                        <h5 style = "margin-left: 6.5%; color: white;"><b style = "font-family: Ubuntu, serif; font-size: 16pt; font-weight: 600; color: #FCFF00;">Tags:&nbsp;</b></h5>
+                        <div style = "text-align: center; width: 100%;">
                             <?php 
                                 $tags = array();
                                 $count = '';
@@ -507,7 +522,7 @@ $(document).ready(function(){
                                         if ($row['alt'] != '1'){
                                             echo"
                                                 <a href = 'searchresults.php?search=$row[tagname]'
-                                                class = 'tags'>
+                                                class = 'tags' style = 'text-align: center;'>
                                                     $row[tagname] &nbsp;
                                                 </a>
                                             ";
@@ -620,9 +635,7 @@ $(document).ready(function(){
                         </div><br />
 
                         <div class = "row" style = "width: 100%; margin-left: 0px;">
-                            <div class = "col-lg-12">
-                                <h4 style = "color: rgb(73, 133, 204); font-weight: bold;">Related Wallpapers</h4>
-                            </div>
+                            <h4 id = "relatedtext" style = "font-size: 20px !important">Related Wallpapers</h4>
                             <?php 
                                 try{
                                     $sql = "SELECT DISTINCT r.d_id, r.url, r.width, r.height, d.d_id, original_filename, d.tag, liveat, da.counter FROM details AS d, resolutions AS r, category AS c, catlink AS cl, downloads AS da
@@ -704,3 +717,14 @@ $(document).ready(function(){
     </div>
 </body>
 </html>
+
+<script>
+    $(document).ready(function(){
+        setTimeout(() => {
+            if ($(".ads").height() < 80){
+                var modal = document.getElementById("myModal");
+                modal.style.display = "block";
+            }
+        }, 500);
+    });
+</script>

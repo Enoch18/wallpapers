@@ -235,7 +235,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                             $sql = "SELECT * FROM subscribers ORDER BY timestamp DESC";
                             $result = $pdo->query($sql);
                             while ($row = $result->fetch()){
-                                echo "<input type = 'checkbox' name = 'subscribers[]' value = '$row[email]' class = 'receipientcheckbox'> " . $row['email'];
+                                echo "<input type = 'checkbox' name = 'subscribers[]' value = '$row[email]' class = 'receipientcheckbox'> " . $row['email'] . "&nbsp;";
                             }
                         }catch(PDOException $e){
                             echo "An error occured. " .$e;
@@ -259,7 +259,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                                     $images = array();
 
                                     $sql = "SELECT * FROM resolutions AS r, details AS d
-                                    WHERE width = '1920' AND height = '1080'
+                                    WHERE width = '500' AND height = '281' AND r.createdat BETWEEN '$yesterday' AND '$today'
                                     AND d.d_id = r.d_id 
                                     ORDER BY r.createdat DESC
                                     LIMIT 30";
