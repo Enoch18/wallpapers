@@ -181,7 +181,7 @@ if (isset($_POST['tagdelete'])){
                             while($row = $result->fetch()){
                                 $tag = $row['tagname'];
                                 $num = array();
-                                $sql1 = "SELECT * FROM tagdetails WHERE tagname LIKE '$tag'";
+                                $sql1 = "SELECT * FROM tagdetails WHERE tagname LIKE '$tag' AND alt != '1'";
                                 $result1 = $pdo->query($sql1);
                                 while($row1 = $result1->fetch()){
                                     $num[] = $row1['id'];
@@ -272,7 +272,7 @@ if (isset($_POST['tagdelete'])){
                         while($row = $result->fetch()){
                             $tag = $row['tagname'];
                             $num = array();
-                            $sql1 = "SELECT * FROM tagdetails WHERE tagname LIKE '$tag'";
+                            $sql1 = "SELECT * FROM tagdetails WHERE tagname LIKE '$tag' AND alt != '1'";
                             $result1 = $pdo->query($sql1);
                             while($row1 = $result1->fetch()){
                                 $num[] = $row1['id'];

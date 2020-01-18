@@ -101,12 +101,12 @@ $(document).ready(function(){
                             $offset = ($pageno-1) * $no_of_records_per_page;
                             $pages = ceil($total/$no_of_records_per_page);
 
-                            $sql = "SELECT DISTINCT tagname FROM tagdetails GROUP BY tagname ORDER BY tagname ASC LIMIT $offset, $no_of_records_per_page";
+                            $sql = "SELECT DISTINCT tagname FROM tagdetails  WHERE alt != '1' GROUP BY tagname ORDER BY tagname ASC LIMIT $offset, $no_of_records_per_page";
                             $result = $pdo->query($sql);
                             while($row = $result->fetch()){
                                 $tag = $row['tagname'];
                                 $num = array();
-                                $sql1 = "SELECT * FROM tagdetails WHERE tagname LIKE '$tag'";
+                                $sql1 = "SELECT * FROM tagdetails WHERE tagname LIKE '$tag' AND alt != '1'";
                                 $result1 = $pdo->query($sql1);
                                 while($row1 = $result1->fetch()){
                                     $num[] = $row1['id'];
