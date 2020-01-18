@@ -36,16 +36,20 @@ include ('../database/connection.php');
                             $offset = ($pageno-1) * $no_of_records_per_page;
                             $pages = ceil($total/$no_of_records_per_page);
 
+                            echo "<div class = 'row' style='box-shadow: inset 0 0 5px gray; padding: 10px;'>";
                             $sql = "SELECT * FROM unsubscribers ORDER BY id DESC LIMIT $offset, $no_of_records_per_page";
                             $result = $pdo->query($sql);
                             while($row = $result->fetch()){
-                                echo "<li class = 'list-group-item' style = 'background-color: white !important;'>
+                                echo "<div class = 'col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+                                    <li class = 'list-group-item' style = 'background-color: white !important;'>
                                         <div class = 'col-lg-8'>
                                             <h6 style = 'color:black;'>Email: $row[email]</h6>
                                             <h6 style = 'color:black;'>Subscription Date: $row[timestamp]
                                         </div>
-                                      </li>";
+                                    </li>
+                                </div>";
                             }
+                            echo "</div>";
 
                             echo"
                             <div class = 'col-lg-12'>
