@@ -27,38 +27,26 @@
 <?php
     include ('database/connection.php');
     include ('navbar.php');
-    $id = $_GET['id'];
-    if($id != ''){
+    $email = $_GET['email'];
+    if($email != ''){
         echo "
         <div style = 'color: white; margin-top: 5%; text-align: center; font-size: 20px;'>
             <p>We are sad to see that you have unsubscribed.</p> <p>Feel free to subscribe again at anytime when you want to.</p>
         </div>
         ";
-        $email = '';
-        $timestamp = date("Y-m-d H:i:s");
-        try{
-            $sql = "SELECT * FROM subscribers WHERE id = '$id'";
-            $result = $pdo->query($sql);
-            while($row = $result->fetch()){
-                $email = $row['email'];
-            }
-        }catch(PDOException $e){
-            echo "An error occured ". $e;
-        }
-
         try{
             $sql = "INSERT INTO unsubscribers SET
             email = :email,
             timestamp = :timestamp";
             $s = $pdo->prepare($sql);
             $s->bindValue(':email', $email);
-            $s->bindValue(':timestamp', $timestamp);
+            $s->bindValue(':timestamp', date('Y-m-d H:i:s'));
             $s->execute();
         }catch(PDOException $e){
             echo "An error occured ". $e;
         }
 
-        $sql = "DELETE FROM subscribers WHERE id = '$id'";
+        $sql = "DELETE FROM subscribers WHERE email = '$email'";
         $pdo->exec($sql);
     }
 ?>

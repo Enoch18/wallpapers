@@ -514,15 +514,16 @@ $(document).ready(function(){
                             <?php 
                                 $tags = array();
                                 $count = '';
+                                $colors = array("#00a2ed", "#00a550", "#00ff00", "#1c39bb"," #6ca0dc", "#6f00ff", "#9c51b6", "#15f2fd", "#66c992", "#80daeb", "#c1f9a2", "#cae00d", "#cc99ff", "#e3ff00", "#f64a8a");
 
                                 try{
                                     $sql = "SELECT * FROM tagdetails WHERE d_id = '$id' ORDER BY id ASC LIMIT 10";
                                     $result = $pdo->query($sql);
                                     while($row = $result->fetch()){
                                         if ($row['alt'] != '1'){
+                                            $color = $colors[rand(0, 14)];
                                             echo"
-                                                <a href = 'searchresults.php?search=$row[tagname]'
-                                                class = 'tags' style = 'text-align: center;'>
+                                                <a href = 'searchresults.php?search=$row[tagname]' class = 'tags' style = 'text-align: center; color: $color !important;'>
                                                     $row[tagname] &nbsp;
                                                 </a>
                                             ";

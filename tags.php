@@ -20,10 +20,12 @@
             </div>";
         }
 
+        $colors = array("#00a2ed", "#00a550", "#00ff00", "#1c39bb"," #6ca0dc", "#6f00ff", "#9c51b6", "#15f2fd", "#66c992", "#80daeb", "#c1f9a2", "#cae00d", "#cc99ff", "#e3ff00", "#f64a8a");
+        
         for($i=0; $i<$count; $i++){
+            $color = $colors[rand(0, 14)];
             echo"
-                <a href = 'searchresults.php?search=$tags[$i]'  
-                    class = 'populartags'>
+                <a href = 'searchresults.php?search=$tags[$i]' style = 'color: $color !important;' class = 'populartags'>
                     $tags[$i]
                 </a><br /><br />";
         }

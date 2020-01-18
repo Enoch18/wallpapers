@@ -65,7 +65,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                         </div>
                     <p style = 'font-size: 20px;'>You are receiving this message because you have subscribed to www.downloadallwallpapers.com 
                     To no longer receive messages from us, click
-                    <a href = '$server/unsubscribe.php?id=$id'>Unsubscribe</a></p><br />
+                    <a href = '$server/unsubscribe.php?email=$email'>Unsubscribe</a></p><br />
                 </div>";
 
             $mail->AltBody = $message;
@@ -137,7 +137,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                             </div>
                         <p style = 'font-size: 20px;'>You are receiving this message because you have subscribed to www.downloadallwallpapers.com 
                         To no longer receive messages from us, click
-                        <a href = '$server/unsubscribe.php?id=$id'>Unsubscribe</a></p><br />
+                        <a href = '$server/unsubscribe.php?email=$email'>Unsubscribe</a></p><br />
                     </div>";
 
                 $mail->AltBody = $message;
