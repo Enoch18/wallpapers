@@ -83,6 +83,8 @@ $(document).ready(function(){
 
                     <?php
                         try{
+                            $colors = array("#00a2ed", "#00a550", "#00ff00", "#1c39bb"," #6ca0dc", "#6f00ff", "#9c51b6", "#15f2fd", "#66c992", "#80daeb", "#c1f9a2", "#cae00d", "#cc99ff", "#e3ff00", "#f64a8a");
+                            
                             $tot = array();
                             $sql = "SELECT DISTINCT tagname FROM tagdetails GROUP BY tagname ORDER BY tagname ASC LIMIT 200";
                             $result = $pdo->query($sql);
@@ -97,27 +99,49 @@ $(document).ready(function(){
                             }
                             $prev = $pageno - 1;
                             $next = $pageno + 1;
-                            $no_of_records_per_page = 200;
+                            $no_of_records_per_page = 60;
                             $offset = ($pageno-1) * $no_of_records_per_page;
                             $pages = ceil($total/$no_of_records_per_page);
 
-                            $sql = "SELECT DISTINCT tagname FROM tagdetails  WHERE alt != '1' GROUP BY tagname ORDER BY tagname ASC LIMIT $offset, $no_of_records_per_page";
-                            $result = $pdo->query($sql);
-                            while($row = $result->fetch()){
-                                $tag = $row['tagname'];
+                            echo "
+                            <div class = 'col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                            <div class = 'row' style = 'margin-left: 0px;'>
+                            ";
+                            foreach (range('A', 'Z') as $letters){
                                 $num = array();
-                                $sql1 = "SELECT * FROM tagdetails WHERE tagname LIKE '$tag' AND alt != '1'";
+                                $sql1 = "SELECT DISTINCT tagname FROM tagdetails WHERE tagname LIKE '$letters%' AND alt != '1'";
                                 $result1 = $pdo->query($sql1);
                                 while($row1 = $result1->fetch()){
-                                    $num[] = $row1['id'];
+                                    $num[] = $row1['tagname'];
                                 }
-                                $count = count($num);
+                                $total = count($num);
 
-                                echo "
-                                    <a href = './searchresults.php?search=$row[tagname]' class = 'mainalttags' style = 'text-decoration: none;'>
-                                        $row[tagname] ($count)&nbsp&nbsp&nbsp&nbsp&nbsp
-                                    </a>
-                                ";
+                                echo "<span id = '$letters' class = 'letters'>$letters ($total)</span> &nbsp;&nbsp;";
+                            }
+                            echo "</div></div><br /><br /><br />";
+
+                            foreach (range('A', 'Z') as $letters2){
+                                echo "<div id = 'letter$letters2' class = 'alpcontainer' style = 'display: none; margin-top: 10px;'>";
+                                $sql = "SELECT DISTINCT tagname FROM tagdetails  WHERE alt != '1' AND tagname LIKE '$letters2%' GROUP BY tagname ORDER BY tagname ASC LIMIT $offset, $no_of_records_per_page";
+                                $result = $pdo->query($sql);
+                                while($row = $result->fetch()){
+                                    $tag = $row['tagname'];
+                                    $num = array();
+                                    $sql1 = "SELECT * FROM tagdetails WHERE tagname LIKE '$tag' AND alt != '1'";
+                                    $result1 = $pdo->query($sql1);
+                                    while($row1 = $result1->fetch()){
+                                        $num[] = $row1['id'];
+                                    }
+                                    $count = count($num);
+                                    $color = $colors[rand(0, 14)];
+
+                                    echo "
+                                        <a href = './searchresults.php?search=$row[tagname]' class = 'mainalttags' style = 'text-decoration: none; color: $color !important;'>
+                                            $row[tagname] ($count)&nbsp&nbsp&nbsp&nbsp&nbsp
+                                        </a>
+                                    ";
+                                }
+                                echo "</div>";
                             }
 
                             if ($total > $no_of_records_per_page){
@@ -224,5 +248,12 @@ $(document).ready(function(){
                 modal.style.display = "block";
             }
         }, 500);
+
+        $("#letterA").show();
+        $(".letters").click(function(){
+            let letter = this.id;
+            $(".alpcontainer").hide();
+            $("#letter" + letter).show();
+        });
     });
 </script>

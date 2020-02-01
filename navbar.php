@@ -66,8 +66,8 @@
 
         <?php if ($desc != ''){ ?>
             <div class = "container">
-                <div class = "marquee" style = "background-color: <?php echo $bcolor; ?>; text-align: center; padding-top: 10px; padding-bottom: 5px;">
-                    <p style = "color: <?php echo $textcolor; ?>;"><?php echo $desc; ?></p>
+                <div>
+                    <marquee width="100%" direction="left" style = "color: <?php echo $textcolor; ?>;"><p style = "background-color: <?php echo $bcolor; ?>; font-size: 18px; color: <?php echo $textcolor; ?>; padding-top: 1px; padding-bottom: 1px;"><?php echo $desc; ?></p></marquee>
                 </div>
             </div>
         <?php } ?>

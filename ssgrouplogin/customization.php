@@ -98,6 +98,13 @@ if (isset($_POST['submit'])){
              $s = $pdo->prepare($sql);
              $s->bindValue(':description', $_POST['marqueedescription']);
              $s->execute();
+
+             $sql = "UPDATE customizations SET
+             textcolor = :textcolor
+             WHERE name = 'tagletters'";
+             $s = $pdo->prepare($sql);
+             $s->bindValue(':textcolor', $_POST['tagletterstextcolor']);
+             $s->execute();
     }catch(PDOException $e){
         echo "Error ".$e;
     }
@@ -190,6 +197,15 @@ img:hover{
 
                                 <p>Text Color: $row[textcolor]</p>
                                 <input type = 'text' name = 'headingstextcolor' value = '$row[textcolor]' class = 'form-control edit'><br />
+                            ";
+                        }
+
+                        $sql = "SELECT * FROM customizations WHERE name = 'tagletters'";
+                        $result = $pdo->query($sql);
+                        while ($row = $result->fetch()){
+                            echo "
+                                <p><b>Active Tags Letter Color:</b> $row[textcolor]</p>
+                                <input type = 'text' name = 'tagletterstextcolor' value = '$row[textcolor]' class = 'form-control edit'><br />
                             ";
                         }
                     ?>

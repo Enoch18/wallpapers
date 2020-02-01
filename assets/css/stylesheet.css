@@ -146,6 +146,7 @@ h2{
 .populartags{
     margin-left: 1%; 
     font-weight: bold;
+    font-size: 16px !important;
 }
 
 .populartags:hover{
@@ -408,6 +409,7 @@ overflow: auto;
     color: white;
     box-shadow: 0 0 5px black;
     padding: 10px;
+    text-align: center;
 }
 
 .modal {
@@ -451,4 +453,19 @@ overflow: auto;
     position: absolute;
     top: 0;
     right: 2px;
+}
+
+.letters{
+    cursor: pointer;
+}
+
+.letters:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.footer{
+    background-color: rgb(75, 74, 74); 
+    margin-top: 30px; 
+    width: 100% !important;
 }

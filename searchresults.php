@@ -635,6 +635,6 @@ $(document).ready(function(){
                 var modal = document.getElementById("myModal");
                 modal.style.display = "block";
             }
-        }, 500);
+        }, 2000);
     });
 </script>

@@ -19,7 +19,7 @@
     }
 </style>
 
-<div style = "background-color: rgb(75, 74, 74); margin-top: 30px; width: 100% !important;">
+<div class = "footer">
     <ul style = "margin-left: 0px; font-weight: bold; padding-top: 10px; padding-bottom: 10px; color:white; text-align: center;" id = "footer">
         <li style = "display: inline; padding-left: 25px;">&copy 2019<?php if (date("Y") != "2019") echo " - " .date("Y"); ?>, All rights reserved.</li><br />
         <li style = "display: inline; padding-left: 25px;"><a href = "disclaimer.php">Disclaimer</a></li>

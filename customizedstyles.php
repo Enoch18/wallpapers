@@ -125,18 +125,18 @@ h1, h2, h3, h4, h5, h6, b, a{
 
 <?php } ?>
 
-
-
 <!-- Left Sidebar -->
 
 <?php
-    $sql = "SELECT * FROM customizations WHERE name = 'buttons'";
+    $sql = "SELECT * FROM customizations WHERE name = 'tagletters'";
     $result = $pdo->query($sql);
     while($row = $result->fetch()){
 ?>
 
 <style>
-
+.letters{
+    color: <?php echo $row['textcolor']; ?> !important;
+}
 </style>
 
 <?php } ?>

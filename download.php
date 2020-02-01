@@ -225,15 +225,14 @@ try{
 }
 
 $arr = array();
-$sqlt = "SELECT * FROM tagdetails WHERE d_id = '$id'";
+$sqlt = "SELECT * FROM tagdetails WHERE d_id = '$id' ORDER BY id ASC";
 $resultt = $pdo->query($sqlt);
 while ($rowt = $resultt->fetch()){
     if ($rowt['alt'] == '1'){
         $arr[] = $rowt['tagname'];
     }
 }
-$alt = implode(" ", $arr);
-$dscralt = implode(",", $arr);
+$alt = implode(",", $arr);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -252,7 +251,7 @@ $dscralt = implode(",", $arr);
     <title><?php echo $alt; ?></title>
     <link rel="shortcut icon" href = "icons/ico.ico">
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-    <meta name="description" content="<?php echo $dscralt; ?>">
+    <meta name="description" content="<?php echo $alt; ?>">
     <meta name="keywords" content="Wallpapers, Images, Wallpaper, Image, Photos, Photo, 5K, FHD, HD, free,download,4k ultra hd,5k uhd,desktop,high quality,cute,stock,best,widescreen,HDTV,1080p full hd,720p hd">
     <meta name="robots" content="index, follow" />
     <script src = "assets/js/jquery.min.js"></script>
@@ -726,6 +725,6 @@ $(document).ready(function(){
                 var modal = document.getElementById("myModal");
                 modal.style.display = "block";
             }
-        }, 500);
+        }, 2000);
     });
 </script>
