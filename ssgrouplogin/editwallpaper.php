@@ -285,7 +285,7 @@ if($downloads >= 1000000){
                     try{
                         $sql = "SELECT * FROM details AS d, resolutions AS r
                         WHERE d.d_id = '$id' AND r.d_id = d.d_id
-                        AND r.width = '1920' AND r.height = '1080'";
+                        AND r.width = '500' AND r.height = '281'";
                         $result = $pdo->query($sql);
                         while($row = $result->fetch()){
                             echo"

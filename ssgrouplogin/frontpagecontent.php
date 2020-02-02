@@ -263,32 +263,6 @@ if (isset($_POST['tagdelete'])){
                 </form>
                 <hr />
             </div>
-            <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h5>Active Tags</h5>
-                <?php
-                    try{
-                        $sql = "SELECT * FROM tagdetails AS td, tags AS t WHERE td.id = t.tag_id GROUP BY td.tagname ORDER BY td.tagname ASC";
-                        $result = $pdo->query($sql);
-                        while($row = $result->fetch()){
-                            $tag = $row['tagname'];
-                            $num = array();
-                            $sql1 = "SELECT * FROM tagdetails WHERE tagname LIKE '$tag' AND alt != '1'";
-                            $result1 = $pdo->query($sql1);
-                            while($row1 = $result1->fetch()){
-                                $num[] = $row1['id'];
-                            }
-                            $count = count($num);
-                            echo "
-                                <label>
-                                    $row[tagname] ($count)&nbsp&nbsp&nbsp&nbsp&nbsp
-                                </label>
-                            ";
-                        }
-                    }catch(PDOException $e){
-                        echo "An error occured. " .$e;
-                    }
-                ?>
-            </div>
         </div>
     </div>
     </div>

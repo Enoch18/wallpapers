@@ -247,7 +247,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
 
                 <div class = "row">
                     <div class = "col-lg-12" style = "margin-left:10px;">
-                        <label style = "font-weight: bold; margin-left: -10px;">Choose Wallpapers from yesterday's upload</label>
+                        <label style = "font-weight: bold; margin-left: -10px;">Choose Previously Uploaded Wallpapers</label>
                     </div>
                     <div class = "col-lg-12 form-group">
                         <div class = "row">
@@ -259,7 +259,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                                     $images = array();
 
                                     $sql = "SELECT * FROM resolutions AS r, details AS d
-                                    WHERE width = '500' AND height = '281' AND r.createdat BETWEEN '$yesterday' AND '$today'
+                                    WHERE width = '500' AND height = '281'
                                     AND d.d_id = r.d_id 
                                     ORDER BY r.createdat DESC
                                     LIMIT 30";
