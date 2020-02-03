@@ -141,30 +141,9 @@ input[type="email"]{
 
     <div id = "bannerright">
         <p>Advertisement</p>
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- New horiznontal -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-8918135732106370"
-                data-ad-slot="4329202681"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
     </div><br />
 
     <div id = "bannerright">
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- New horiznontal -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-8918135732106370"
-                data-ad-slot="4329202681"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+		
     </div>
 </div>

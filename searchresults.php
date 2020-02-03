@@ -393,8 +393,8 @@ $searchresulttotal = $total;
     <meta name="description" content="Your one-stop destination to download high quality wallpapers of celebrities, food, nature, vehicles, animals, 3D, abstract, and so on in HD, FHD, QHD, 4K and 5K for desktops, mobiles and tablets.">
     <meta name="keywords" content="Wallpapers, Images, Wallpaper, Image, Photos, Photo, 5K, FHD, HD, free,download,4k ultra hd,5k uhd,desktop,high quality,cute,stock,best,widescreen,HDTV,1080p full hd,720p hd">
     <meta name="robots" content="index, follow" />
-    <title>Download All Wallpapers</title>
-    <link rel="shortcut icon" href = "icons/ico.ico">
+    <title>Incredible Wallpapers</title>
+    <link rel="shortcut icon" href = "icons/Fevicon.ico">
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <script src = "assets/js/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.js"></script>
@@ -427,24 +427,15 @@ $(document).ready(function(){
 
         <div id = "ads" class = 'ads' style = "margin-left: auto !important; margin-right: auto !important;">
             <p>Advertisement</p>
-			<ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-8918135732106370"
-                data-ad-slot="4329202681"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </div>
     </div><br />
 
-    <div id="myModal" class="modal">
+    <!-- <div id="myModal" class="modal">
         <div class="modal-content" style = "text-align: center;">
             <img src = "icons/banner.jpg" style = "width: 100%;"><br />
             <h4>AdBlock is Enabled! Please disable AdBlock to continue using the best Wallpapers website.</h4><br />
         </div>
-    </div>
+    </div> -->
 
     <div class = "row" id = "row">
         <?php include ('sidebar1.php'); ?>
@@ -599,17 +590,6 @@ $(document).ready(function(){
                 <!-- Space for Ads -->
                 <div id = "ad">
                     <p>Advertisement</p>
-					<ins class="adsbygoogle"
-                        style="display:block"
-                        data-ad-client="ca-pub-8918135732106370"
-                        data-ad-slot="4329202681"
-                        data-ad-format="auto"
-                        data-full-width-responsive="true"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-
-
                 </div><br />
                 <!-- End of space for Ads -->
                 
@@ -630,11 +610,11 @@ $(document).ready(function(){
 
 <script>
     $(document).ready(function(){
-        setTimeout(() => {
-            if ($(".ads").height() < 80){
-                var modal = document.getElementById("myModal");
-                modal.style.display = "block";
-            }
-        }, 2000);
+        // setTimeout(() => {
+        //     if ($(".ads").height() < 80){
+        //         var modal = document.getElementById("myModal");
+        //         modal.style.display = "block";
+        //     }
+        // }, 2000);
     });
 </script>

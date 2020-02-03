@@ -1,7 +1,7 @@
 <?php
     if(isset($_POST['searchsubmit']) && $_POST['search'] != ''){
         $search = $_POST['search'];
-        header("Location: searchresults.php?search=$search");
+        header("Location: ../searchresults.php?search=$search");
     }
 ?>
 
@@ -9,13 +9,13 @@
 <meta name="description" content="Your one-stop destination to download high quality wallpapers of celebrities, food, nature, vehicles, animals, 3D, abstract, and so on in HD, FHD, QHD, 4K and 5K for desktops, mobiles and tablets.">
 <meta name="keywords" content="Wallpapers, Images, Wallpaper, Image, Photos, Photo, 5K, FHD, HD, free,download,4k ultra hd,5k uhd,desktop,high quality,cute,stock,best,widescreen,HDTV,1080p full hd,720p hd">
 <meta name="robots" content="index, follow" />
-<link rel="shortcut icon" href = "../icons/ico.ico">
-<link href="../bootstrap/css/bootstrap.css" rel="stylesheet">
-<script src = "../assets/js/jquery.min.js"></script>
-<script src="../bootstrap/js/bootstrap.js"></script>
-<link href="../assets/css/global.css" rel="stylesheet">
-<link href="../assets/css/stylesheet.css" rel="stylesheet">
-<link href="../assets/css/responsiveness.css" rel="stylesheet">
+<link rel="shortcut icon" href = "icons/ico.ico">
+<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+<script src = "assets/js/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.js"></script>
+<link href="assets/css/global.css" rel="stylesheet">
+<link href="assets/css/stylesheet.css" rel="stylesheet">
+<link href="assets/css/responsiveness.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <head>
@@ -34,14 +34,14 @@
                 <img src = "../icons/banner.jpg" class = "img-responsive" id = "banner">
             </a>
 
-            <div class = "social">
-                <a href="https://www.facebook.com/DownloadAllWallpapersDotCom/" target = "_blank" class="facebook"><i class="fa fa-facebook"></i></a> 
-                <a href="https://twitter.com/DownloadAllWall" target = "_blank" class="twitter"><i class="fa fa-twitter"></i></a> 
-                <a href="https://www.instagram.com/downloadallwallpapersdotcom" target = "_blank" class="instagram"><i class="fa fa-instagram"></i></a>
-                <a href = "https://www.pinterest.com/downloadallwallpapers" target = "_blank" class = "pinterest"><i class="fa fa-pinterest"></i></a> 
-            </div>
-
-            <?php 
+            <!-- <div class = "social">
+                <a href="https://www.facebook.com/" target = "_blank" class="facebook"><i class="fa fa-facebook"></i></a> 
+                <a href="https://twitter.com/" target = "_blank" class="twitter"><i class="fa fa-twitter"></i></a> 
+                <a href="https://www.instagram.com/" target = "_blank" class="instagram"><i class="fa fa-instagram"></i></a>
+                <a href = "https://www.pinterest.com/" target = "_blank" class = "pinterest"><i class="fa fa-pinterest"></i></a>
+            </div> -->
+        </div>
+        <?php 
             $desc = '';
             $bcolor = 'orange';
             $textcolor = 'white';
@@ -66,13 +66,11 @@
 
         <?php if ($desc != ''){ ?>
             <div class = "container">
-                <div class = "marquee" style = "background-color: <?php echo $bcolor; ?>; text-align: center; padding-top: 10px; padding-bottom: 5px;">
-                    <p style = "color: <?php echo $textcolor; ?>;"><?php echo $desc; ?></p>
+                <div>
+                    <marquee width="100%" direction="left" style = "color: <?php echo $textcolor; ?>;"><p style = "background-color: <?php echo $bcolor; ?>; font-size: 18px; color: <?php echo $textcolor; ?>; padding-top: 1px; padding-bottom: 1px;"><?php echo $desc; ?></p></marquee>
                 </div>
             </div>
         <?php } ?>
-
-        </div>
     </div>
 </nav>
 

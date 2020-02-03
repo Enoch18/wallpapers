@@ -48,31 +48,31 @@ $(document).ready(function(){
     <div class = "container footercontent" style = "color: white; text-align: justify;">
         <h3 style = "color:white; text-align: center; padding-top: 5%; text-decoration: underline;">PRIVACY</h3><br />
         <p>
-        DownloadAllWallpapers respects the privacy of all its visitors and any co-branded, mirrored, or successor sites (the "Website") and is committed to 
-        protecting their privacy. The owners and operators of DownloadAllWallpapers take your online privacy seriously. This document outlines the types of 
-        information collected by our servers and provides links to the privacy policies of our third-party advertising partners. <br /><br />
-        By using DownloadAllWallpapers, you acknowledge and agree to the <a href = "terms.php">terms and conditions</a> of this DownloadAllWallpapers Privacy Policy 
+        IncredibleWallpapers respects the privacy of all its visitors and any co-branded, mirrored, or successor sites (the "Website") and is committed to protecting their 
+        privacy. The owners and operators of IncredibleWallpapers take your online privacy seriously. This document outlines the types of information collected by our servers 
+        and provides links to the privacy policies of our third-party advertising partners.<br /><br />
+        By using IncredibleWallpapers, you acknowledge and agree to the <a href = "terms.php">terms and conditions</a> of this IncredibleWallpapers Privacy Policy 
         Statement ("<a href = "">Privacy Policy</a>"). 
         If you do not agree to these terms and conditions, please do not use this website.<br /><br />
-        We, DownloadAllWallpapers, reserve the right to change or modify our privacy practices that are described herein from time to time simply by posting a revised 
+        We, IncredibleWallpapers, reserve the right to change or modify our privacy practices that are described herein from time to time simply by posting a revised 
         Privacy Policy on this Website. Any such change shall be effective immediately upon posting of the revised Privacy Policy on this Website. We reserve the right 
         to make the revised or changed Privacy Policy effective for information we already have about you, as well as any information we receive in the future. 
         We encourage you to refer to this Privacy Policy on an ongoing basis so that you understand our current privacy practices.</p><br />
 
         <h4 style = "text-decoration: underline;">Server Logs</h4>
-        <p>Like most web sites, DownloadAllWallpapers logs web, database, and other server-software usage and access information. This information may include your internet 
+        <p>Like most web sites, IncredibleWallpapers logs web, database, and other server-software usage and access information. This information may include your internet 
         protocol (IP) address, which in many cases can be translated to an affiliation (such as your work, school, or internet service provider), or a geographical 
         location. We only use this information for debugging purposes and for aggregating into anonymous usage and traffic statistics.</p><br />
         <h4 style = "text-decoration: underline;">Cookies</h4>
-        <p>We use cookies to ensure that we give you the best experience on our website. If you continue to use DownloadAllWallpapers, we will assume that you are happy 
-        with it. While browsing DownloadAllWallpapers, a small number of text files referred to as "cookies" are created on your local file system by your web browser 
+        <p>We use cookies to ensure that we give you the best experience on our website. If you continue to use IncredibleWallpapers, we will assume that you are happy 
+        with it. While browsing IncredibleWallpapers , a small number of text files referred to as "cookies" are created on your local file system by your web browser 
         at the request of our servers. These files allow us to personalize the browsing experience for both registered and non-registered users. You are free to delete 
-        them at any time or configure your browser not to create them. However, we do not guarantee that every feature of DownloadAllWallpapers will function as expected 
+        them at any time or configure your browser not to create them. However, we do not guarantee that every feature of IncredibleWallpapers  will function as expected 
         without cookies enabled.</p><br />
 
         <h4 style = "text-decoration: underline;">Third-Party Advertisers</h4>
-        <p>In order to cover the costs of providing DownloadAllWallpapers as a free resource to the public, we have relationships with certain third-party advertising 
-        networks. The practices of our advertising partners are not directly covered by DownloadAllWallpapers's privacy policy. We recommend that you read their policies. 
+        <p>In order to cover the costs of providing IncredibleWallpapers as a free resource to the public, we have relationships with certain third-party advertising 
+        networks. The practices of our advertising partners are not directly covered by IncredibleWallpapers's privacy policy. We recommend that you read their policies. 
         For your convenience, we provide a list of our advertising partners below. Unfortunately, we cannot guarantee it is always comprehensive and up to date.</p><br />
 
         <h4 style = "text-decoration: underline;">Google Adsense:</h4>
@@ -85,10 +85,10 @@ $(document).ready(function(){
         </ul>
 
         <h4 style = "text-decoration: underline;">Sharing/Selling of Data</h4>
-        <p>DownloadAllWallpapers does NOT share or sell personally identifiable data to third parties such as direct marketers. We respect your privacy.</p><br />
+        <p>IncredibleWallpapers does NOT share or sell personally identifiable data to third parties such as direct marketers. We respect your privacy.</p><br />
 
         <h4 style = "text-decoration: underline;">Data Retention</h4>
-        <p>The data submitted to and generated by DownloadAllWallpapers may be copied to additional machines for redundancy and backup purposes.</p><br /><br />
+        <p>The data submitted to and generated by IncredibleWallpapers may be copied to additional machines for redundancy and backup purposes.</p><br /><br />
     </div>
     <!-- End of code for the Privacy content -->
     <?php include ('footer.php'); ?>

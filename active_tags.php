@@ -20,8 +20,8 @@ include ('database/connection.php');
     <meta name="description" content="Your one-stop destination to download high quality wallpapers of celebrities, food, nature, vehicles, animals, 3D, abstract, and so on in HD, FHD, QHD, 4K and 5K for desktops, mobiles and tablets.">
     <meta name="keywords" content="Wallpapers, Images, Wallpaper, Image, Photos, Photo, 5K, FHD, HD, free,download,4k ultra hd,5k uhd,desktop,high quality,cute,stock,best,widescreen,HDTV,1080p full hd,720p hd">
     <meta name="robots" content="index, follow" />
-    <title>Download All Wallpapers</title>
-    <link rel="shortcut icon" href = "icons/ico.ico">
+    <title>Incredible Wallpapers</title>
+    <link rel="shortcut icon" href = "icons/Fevicon.ico">
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <script src = "assets/js/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.js"></script>
@@ -52,26 +52,15 @@ $(document).ready(function(){
 
         <div id = "ads" class = 'ads' style = "margin-left: auto !important; margin-right: auto !important;">
             <p>Advertisement</p>
-			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- New horiznontal -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-8918135732106370"
-                data-ad-slot="4329202681"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </div>
     </div><br />
 
-    <div id="myModal" class="modal">
+    <!-- <div id="myModal" class="modal">
         <div class="modal-content" style = "text-align: center;">
             <img src = "icons/banner.jpg" style = "width: 100%;"><br />
             <h4>AdBlock is Enabled! Please disable AdBlock to continue using the best Wallpapers website.</h4><br />
         </div>
-    </div>
+    </div> -->
 
     <div class = "row">
             <?php include ('sidebar1.php'); ?>
@@ -84,25 +73,6 @@ $(document).ready(function(){
                     <?php
                         try{
                             $colors = array("#00a2ed", "#00a550", "#00ff00", "#1c39bb"," #6ca0dc", "#6f00ff", "#9c51b6", "#15f2fd", "#66c992", "#80daeb", "#c1f9a2", "#cae00d", "#cc99ff", "#e3ff00", "#f64a8a");
-                            
-                            $tot = array();
-                            $sql = "SELECT DISTINCT tagname FROM tagdetails GROUP BY tagname ORDER BY tagname ASC LIMIT 200";
-                            $result = $pdo->query($sql);
-                            while($row = $result->fetch()){
-                                $tot[] = $row['tagname'];
-                            }
-                            $total = count($tot);
-                            if (isset($_GET['pageno'])) {
-                                $pageno = $_GET['pageno'];
-                            } else {
-                                $pageno = 1;
-                            }
-                            $prev = $pageno - 1;
-                            $next = $pageno + 1;
-                            $no_of_records_per_page = 60;
-                            $offset = ($pageno-1) * $no_of_records_per_page;
-                            $pages = ceil($total/$no_of_records_per_page);
-
                             echo "
                             <div class = 'col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                             <div class = 'row' style = 'margin-left: 0px;'>
@@ -122,7 +92,7 @@ $(document).ready(function(){
 
                             foreach (range('A', 'Z') as $letters2){
                                 echo "<div id = 'letter$letters2' class = 'alpcontainer' style = 'display: none; margin-top: 10px;'>";
-                                $sql = "SELECT DISTINCT tagname FROM tagdetails  WHERE alt != '1' AND tagname LIKE '$letters2%' GROUP BY tagname ORDER BY tagname ASC LIMIT $offset, $no_of_records_per_page";
+                                $sql = "SELECT DISTINCT tagname FROM tagdetails  WHERE alt != '1' AND tagname LIKE '$letters2%' GROUP BY tagname ORDER BY tagname ASC";
                                 $result = $pdo->query($sql);
                                 while($row = $result->fetch()){
                                     $tag = $row['tagname'];
@@ -143,65 +113,6 @@ $(document).ready(function(){
                                 }
                                 echo "</div>";
                             }
-
-                            if ($total > $no_of_records_per_page){
-                            echo"
-                            <div class = 'col-lg-12'>
-                            <div class = 'container' id = 'pages'>";
-                            if ($pageno == 1 && $pages > 0){
-                                $pos = $pageno + 1;
-                                $neg = $pageno - 1;
-                                echo"
-                                <br />
-                                <ul class = 'pagination'>           
-                                    <li><a href = '#_' class = 'btn btn-primary'>First</a>
-                                    <li><a href = '?pageno=$pageno' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pageno</a>
-                                    <li><p class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>Out of</p>
-                                    <li><a href = '?pageno=$pages' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pages</a><li>
-                                    <li>";
-                                    if($pages == 1){
-                                    echo "
-                                    <a href = '#_' class = 'btn btn-primary' style = 'margin-left: 20px;'>Last</a>
-                                    </ul>";
-                                    }
-                                    if($pages > 1){
-                                        echo "
-                                        <a href = '?pageno=$pos' class = 'btn btn-primary' style = 'margin-left: 20px;'> >>> </a>
-                                        </ul>";
-                                    }
-                            }
-
-                            if ($pageno >= 2 && $pageno != $pages){
-                                $pos = $pageno + 1;
-                                $neg = $pageno - 1;
-                                echo"
-                                <br />
-                                <ul class = 'pagination'>           
-                                    <li><a href = '?pageno=$neg' class = 'btn btn-primary'> <<< </a>
-                                    <li><a href = '?pageno=$pageno' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pageno</a>
-                                    <li><p class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>Of</p>
-                                    <li><a href = '?pageno=$pages' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pages</a><li>
-                                    <li>";
-                                    
-                                    echo "<a href = '?pageno=$pos' class = 'btn btn-primary' style = 'margin-left: 20px;'> >>> </a>
-                                    </li>
-                                </ul>";
-                            }
-
-                            if ($pageno == $pages && $pages != 1){
-                                $neg = $pageno - 1;
-                                echo"
-                                <br />
-                                <ul class = 'pagination'>           
-                                    <li><a href = '?pageno=$neg' class = 'btn btn-primary'> <<< </a>
-                                    <li><a href = '?pageno=$pageno' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pageno</a>
-                                    <li><p class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>Out of</p>
-                                    <li><a href = '?pageno=$pages' class = 'btn btn-primary' style = 'margin-left: 20px; background-color: white; color:black;'>$pages</a><li>
-                                    <li><a href = '#_' class = 'btn btn-primary' style = 'margin-left: 20px;'>Last</a>
-                                </ul>";
-                            }
-                            echo"</div></div>";
-                            }
                         }catch(PDOException $e){
                             echo "An error occured. " .$e;
                         }
@@ -211,18 +122,6 @@ $(document).ready(function(){
                     
                 <div id = "ad">
                     <p>Advertisement</p>
-					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                    <!-- New horiznontal -->
-                    <ins class="adsbygoogle"
-                        style="display:block"
-                        data-ad-client="ca-pub-8918135732106370"
-                        data-ad-slot="4329202681"
-                        data-ad-format="auto"
-                        data-full-width-responsive="true"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-
                 </div><br />
 
                 <!-- Beginning of code for tags -->
@@ -242,12 +141,12 @@ $(document).ready(function(){
 
 <script>
     $(document).ready(function(){
-        setTimeout(() => {
-            if ($(".ads").height() < 80){
-                var modal = document.getElementById("myModal");
-                modal.style.display = "block";
-            }
-        }, 500);
+        // setTimeout(() => {
+        //     if ($(".ads").height() < 80){
+        //         var modal = document.getElementById("myModal");
+        //         modal.style.display = "block";
+        //     }
+        // }, 500);
 
         $("#letterA").show();
         $(".letters").click(function(){

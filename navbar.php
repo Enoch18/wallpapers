@@ -5,11 +5,11 @@
     }
 ?>
 
-<title>Download All Wallpapers</title>
+<title>Incredible Wallpapers</title>
 <meta name="description" content="Your one-stop destination to download high quality wallpapers of celebrities, food, nature, vehicles, animals, 3D, abstract, and so on in HD, FHD, QHD, 4K and 5K for desktops, mobiles and tablets.">
 <meta name="keywords" content="Wallpapers, Images, Wallpaper, Image, Photos, Photo, 5K, FHD, HD, free,download,4k ultra hd,5k uhd,desktop,high quality,cute,stock,best,widescreen,HDTV,1080p full hd,720p hd">
 <meta name="robots" content="index, follow" />
-<link rel="shortcut icon" href = "icons/ico.ico">
+<link rel="shortcut icon" href = "icons/Fevicon.ico">
 <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 <script src = "assets/js/jquery.min.js"></script>
 <script src="bootstrap/js/bootstrap.js"></script>
@@ -34,12 +34,12 @@
                 <img src = "icons/banner.jpg" class = "img-responsive" id = "banner">
             </a>
 
-            <div class = "social">
-                <a href="https://www.facebook.com/DownloadAllWallpapersDotCom/" target = "_blank" class="facebook"><i class="fa fa-facebook"></i></a> 
-                <a href="https://twitter.com/DownloadAllWall" target = "_blank" class="twitter"><i class="fa fa-twitter"></i></a> 
-                <a href="https://www.instagram.com/downloadallwallpapersdotcom" target = "_blank" class="instagram"><i class="fa fa-instagram"></i></a>
-                <a href = "https://www.pinterest.com/downloadallwallpapers" target = "_blank" class = "pinterest"><i class="fa fa-pinterest"></i></a> 
-            </div>
+            <!-- <div class = "social">
+                <a href="https://www.facebook.com/" target = "_blank" class="facebook"><i class="fa fa-facebook"></i></a> 
+                <a href="https://twitter.com/" target = "_blank" class="twitter"><i class="fa fa-twitter"></i></a> 
+                <a href="https://www.instagram.com/" target = "_blank" class="instagram"><i class="fa fa-instagram"></i></a>
+                <a href = "https://www.pinterest.com/" target = "_blank" class = "pinterest"><i class="fa fa-pinterest"></i></a> 
+            </div> -->
         </div>
         <?php 
             $desc = '';

@@ -249,7 +249,7 @@ $alt = implode(",", $arr);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?php echo $alt; ?></title>
-    <link rel="shortcut icon" href = "icons/ico.ico">
+    <link rel="shortcut icon" href = "icons/Fevicon.ico">
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <meta name="description" content="<?php echo $alt; ?>">
     <meta name="keywords" content="Wallpapers, Images, Wallpaper, Image, Photos, Photo, 5K, FHD, HD, free,download,4k ultra hd,5k uhd,desktop,high quality,cute,stock,best,widescreen,HDTV,1080p full hd,720p hd">
@@ -331,26 +331,15 @@ $(document).ready(function(){
 
         <div id = "ads" class = 'ads' style = "margin-left: auto !important; margin-right: auto !important;">
             <p>Advertisement</p>
-			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- New horiznontal -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-8918135732106370"
-                data-ad-slot="4329202681"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
         </div>
     </div><br />
 
-    <div id="myModal" class="modal">
+    <!-- <div id="myModal" class="modal">
         <div class="modal-content" style = "text-align: center;">
             <img src = "icons/banner.jpg" style = "width: 100%;"><br />
             <h4>AdBlock is Enabled! Please disable AdBlock to continue using the best Wallpapers website.</h4><br />
         </div>
-    </div>
+    </div> -->
 
     <div class = "row" id = "row">
         <?php include ('sidebar1.php'); ?>
@@ -625,13 +614,6 @@ $(document).ready(function(){
 
                         <div id = "ad">
                             <p>Advertisement</p>
-							<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({
-                                    google_ad_client: "ca-pub-8918135732106370",
-                                    enable_page_level_ads: true
-                                });
-                            </script>
                         </div><br />
 
                         <div class = "row" style = "width: 100%; margin-left: 0px;">
@@ -693,16 +675,6 @@ $(document).ready(function(){
                 <div id = "ad">
                     <p>Advertisement</p>
 					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- New horiznontal -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-8918135732106370"
-                data-ad-slot="4329202681"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
                 </div><br />
 
                 <div class = "col-lg-12">

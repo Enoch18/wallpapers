@@ -65,8 +65,8 @@ $catname = $_GET['catname'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Download All Wallpapers</title>
-    <link rel="shortcut icon" href = "icons/ico.ico">
+    <title>Incredible Wallpapers</title>
+    <link rel="shortcut icon" href = "icons/Fevicon.ico">
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
     <meta name="description" content="Your one-stop destination to download high quality wallpapers of celebrities, food, nature, vehicles, animals, 3D, abstract, and so on in HD, FHD, QHD, 4K and 5K for desktops, mobiles and tablets.">
     <meta name="keywords" content="Wallpapers, Images, Wallpaper, Image, Photos, Photo, 5K, FHD, HD, free,download,4k ultra hd,5k uhd,desktop,high quality,cute,stock,best,widescreen,HDTV,1080p full hd,720p hd">
@@ -102,18 +102,6 @@ $(document).ready(function(){
 
         <div id = "ads" class = 'ads' style = "margin-left: auto !important; margin-right: auto !important;">
             <p>Advertisement</p>
-			<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- New horiznontal -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-8918135732106370"
-                data-ad-slot="4329202681"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-</script>
         </div>
     </div><br />
 
@@ -369,17 +357,6 @@ $(document).ready(function(){
                 </div><br /><br />
                 <div id = "ad">
                     <p>Advertisement</p>
-					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- New horiznontal -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-8918135732106370"
-                data-ad-slot="4329202681"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
                 </div><br />
 
                 <!-- Beginning of code for tags -->
@@ -398,12 +375,12 @@ $(document).ready(function(){
 </html>
 
 <script>
-    $(document).ready(function(){
-        setTimeout(() => {
-            if ($(".ads").height() < 80){
-                var modal = document.getElementById("myModal");
-                modal.style.display = "block";
-            }
-        }, 2000);
-    });
+    // $(document).ready(function(){
+    //     setTimeout(() => {
+    //         if ($(".ads").height() < 80){
+    //             var modal = document.getElementById("myModal");
+    //             modal.style.display = "block";
+    //         }
+    //     }, 2000);
+    // });
 </script>

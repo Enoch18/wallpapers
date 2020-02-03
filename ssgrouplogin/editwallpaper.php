@@ -399,6 +399,18 @@ if($downloads >= 1000000){
                             }
 
                             echo "</div><br /><br /><br />";
+
+                            echo "<div style = 'text-align: center'><p><b>Resolutions and Size</b></p>";
+                            try{
+                                $sql = "SELECT * FROM resolutions WHERE d_id = '$id' AND width != 500";
+                                $result = $pdo->query($sql);
+                                while ($row = $result->fetch()){
+                                    echo "$row[width] X $row[height] ($row[filesize])<br />";
+                                }
+                            }catch(PDOException $e){
+                                echo "An error occured. " .$e;
+                            }
+                            echo "</div>";
                         ?>
                     </form>
                 </div>
@@ -444,7 +456,7 @@ if($downloads >= 1000000){
                                 }catch(PDOException $e){
                                     echo "An error occured. " .$e;
                                 }
-                                echo "<br /><br />"
+                                echo "<br /><br />";
                             ?>
                         </div>
                     </div>
