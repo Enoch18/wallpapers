@@ -67,18 +67,20 @@ $(document).ready(function(){
                             $colors = array("#00a2ed", "#00a550", "#00ff00", "#1c39bb"," #6ca0dc", "#6f00ff", "#9c51b6", "#15f2fd", "#66c992", "#80daeb", "#c1f9a2", "#cae00d", "#cc99ff", "#e3ff00", "#f64a8a");
                             echo "
                             <div class = 'col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-                            <div class = 'row' style = 'margin-left: 0px;'>
+                            <div class = 'row'>
                             ";
                             foreach (range('A', 'Z') as $letters){
-                                $num = array();
-                                $sql1 = "SELECT DISTINCT tagname FROM tagdetails WHERE tagname LIKE '$letters%' AND alt != '1'";
-                                $result1 = $pdo->query($sql1);
-                                while($row1 = $result1->fetch()){
-                                    $num[] = $row1['tagname'];
-                                }
-                                $total = count($num);
+                                echo "<div class = 'col-xs-1 col-sm-2 col-md-2 col-lg-2' style = 'width: 20%;'>";
+                                    $num = array();
+                                    $sql1 = "SELECT DISTINCT tagname FROM tagdetails WHERE tagname LIKE '$letters%' AND alt != '1'";
+                                    $result1 = $pdo->query($sql1);
+                                    while($row1 = $result1->fetch()){
+                                        $num[] = $row1['tagname'];
+                                    }
+                                    $total = count($num);
 
-                                echo "<span id = '$letters' class = 'letters'>$letters ($total)</span> &nbsp;&nbsp;";
+                                    echo "<span id = '$letters' class = 'letters'>$letters ($total)<br /><br /><br />";
+                                echo "</div>";
                             }
                             echo "</div></div><br /><br /><br />";
 

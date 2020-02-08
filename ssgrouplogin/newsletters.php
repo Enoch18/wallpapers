@@ -50,20 +50,46 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                             $data = explode("____", $images);
                             $images = $data[0];
                             $images = str_replace("../", "", $images);
-                            $imagename = str_replace(" ", "_", $data[1]);
-                            $id = $data[2];
+                            $imagename = $data[1];
 
                             $mail->Body .= "
                             <div class = 'col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-                                <a href = '$server/download.php?value=$imagename-$id'>
+                                <a href = '$server/download.php?value=$imagename'>
                                     <img src = '$server/$images' style = 'width: 100%'>
                                 </a>
                             </div>";
                         }
 
+                        if ($_POST['wallpaper_url'] != ''){
+                            $wallpaper_url = $_POST['wallpaper_url'];
+                            $explode = explode(",", $wallpaper_url);
+                            foreach ($explode as $image_url){
+                                $link_explode = explode("=", $image_url);
+                                $filestore = $link_explode[1] . "_500X281_www.incrediblewallpapers.com";
+                                try{
+                                    $sql = "SELECT * FROM resolutions AS r, details AS d
+                                    WHERE r.filestore = '$filestore'
+                                    AND d.d_id = r.d_id";
+                                    $result = $pdo->query($sql);
+                                    while($row = $result->fetch()){
+                                        $original_filename = $row['original_filename'];
+                                        $images = str_replace("../", "", $row['url']);
+                                        $mail->Body .= "
+                                        <div class = 'col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                                            <a href = '$server/download.php?value=$original_filename'>
+                                                <img src = '$server/$images' style = 'width: 100%'>
+                                            </a>
+                                        </div>";
+                                    } 
+                                }catch(PDOException $e){
+                                    echo "An error occured. " .$e;
+                                }
+                            }
+                        }
+
                         $mail->Body .= "
                         </div>
-                    <p style = 'font-size: 20px;'>You are receiving this message because you have subscribed to www.downloadallwallpapers.com 
+                    <p style = 'font-size: 20px;'>You are receiving this message because you have subscribed to www.incrediblewallpapers.com 
                     To no longer receive messages from us, click
                     <a href = '$server/unsubscribe.php?email=$email'>Unsubscribe</a></p><br />
                 </div>";
@@ -122,20 +148,46 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                                     $data = explode("____", $images);
                                     $images = $data[0];
                                     $images = str_replace("../", "", $images);
-                                    $imagename = str_replace(" ", "_", $data[1]);
-                                    $id = $data[2];
+                                    $imagename = $data[1];
 
                                     $mail->Body .= "
                                     <div class = 'col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-                                        <a href = '$server/download.php?value=$imagename-$id'>
+                                        <a href = '$server/download.php?value=$imagename'>
                                             <img src = '$server/$images' style = 'width: 100%'>
                                         </a>
                                     </div>";
                                 }
 
+                                if ($_POST['wallpaper_url'] != ''){
+                                    $wallpaper_url = $_POST['wallpaper_url'];
+                                    $explode = explode(",", $wallpaper_url);
+                                    foreach ($explode as $image_url){
+                                        $link_explode = explode("=", $image_url);
+                                        $filestore = $link_explode[1] . "_500X281_www.incrediblewallpapers.com";
+                                        try{
+                                            $sql = "SELECT * FROM resolutions AS r, details AS d
+                                            WHERE r.filestore = '$filestore'
+                                            AND d.d_id = r.d_id";
+                                            $result = $pdo->query($sql);
+                                            while($row = $result->fetch()){
+                                                $original_filename = $row['original_filename'];
+                                                $images = $row['url'];
+                                                $mail->Body .= "
+                                                <div class = 'col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                                                    <a href = '$server/download.php?value=$original_filename'>
+                                                        <img src = '$server/$images' style = 'width: 100%'>
+                                                    </a>
+                                                </div>";
+                                            } 
+                                        }catch(PDOException $e){
+                                            echo "An error occured. " .$e;
+                                        }
+                                    }
+                                }
+
                             $mail->Body .= "
                             </div>
-                        <p style = 'font-size: 20px;'>You are receiving this message because you have subscribed to www.downloadallwallpapers.com 
+                        <p style = 'font-size: 20px;'>You are receiving this message because you have subscribed to www.incrediblewallpapers.com
                         To no longer receive messages from us, click
                         <a href = '$server/unsubscribe.php?email=$email'>Unsubscribe</a></p><br />
                     </div>";
@@ -218,6 +270,16 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                 </div>
 
                 <div class = "row">
+                    <div class = "col-lg-12" style = "margin-left:10px; margin-top: -15px;">
+                        <label style = "font-weight: bold; margin-left: -10px;">Wallpaper Link (Seperate Multiple links with comma)</label>
+                    </div>
+
+                    <div class = "col-lg-12 form-group">
+                        <input type = "text" name = "wallpaper_url" id = "subject" class = "form-control" placeholder = "Wallpaper Url">
+                    </div>
+                </div>
+
+                <div class = "row">
                     <div class = "col-lg-12" style = "margin-left:10px; margin-top: -20px;">
                         <label style = "font-weight: bold; margin-left: -10px;">Message</label>
                     </div>
@@ -259,7 +321,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                                     $images = array();
 
                                     $sql = "SELECT * FROM resolutions AS r, details AS d
-                                    WHERE width = '500' AND height = '281'
+                                    WHERE width = '500' AND height = '281' AND d.createdat BETWEEN '$yesterday' AND '$today'
                                     AND d.d_id = r.d_id 
                                     ORDER BY r.createdat DESC
                                     LIMIT 30";
@@ -269,7 +331,7 @@ if(isset($_POST['submit']) && $_POST['subject'] != '' && $_POST['message'] != ''
                                         echo "<div class = 'col-xs-12 col-sm-12 col-md-4 col-lg-3'>";
                                             echo "<label class = 'checkbox-inline'>
                                                 <img src = '$row[url]'class = 'img img-responsive' style = 'width: 100%; cursor: pointer;'>
-                                                <input type = 'checkbox' name = 'images[]' class = 'images' value = '$row[url]____$row[tag]____$row[d_id]' style = 'float: right; height: 20px; width: 20px; margin-top: 1%;'><br /><br /><br />
+                                                <input type = 'checkbox' name = 'images[]' class = 'images' value = '$row[url]____$row[tag]' style = 'float: right; height: 20px; width: 20px; margin-top: 1%;'><br /><br /><br />
                                             </label>
                                         </div>";
                                         }else{

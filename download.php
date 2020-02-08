@@ -233,6 +233,7 @@ while ($rowt = $resultt->fetch()){
     }
 }
 $alt = implode(",", $arr);
+$alttags = str_replace(",", ", ", $alt);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -240,10 +241,10 @@ $alt = implode(",", $arr);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?php echo $alt; ?></title>
+    <title><?php echo $alttags; ?></title>
     <link rel="shortcut icon" href = "icons/Fevicon.ico">
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-    <meta name="description" content="<?php echo $alt; ?>">
+    <meta name="description" content="<?php echo $alttags; ?>">
     <meta name="keywords" content="Wallpapers, Images, Wallpaper, Image, Photos, Photo, 5K, FHD, HD, free,download,4k ultra hd,5k uhd,desktop,high quality,cute,stock,best,widescreen,HDTV,1080p full hd,720p hd">
     <meta name="robots" content="index, follow" />
     <script src = "assets/js/jquery.min.js"></script>

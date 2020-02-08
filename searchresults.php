@@ -407,7 +407,7 @@ $(document).ready(function(){
 </script>
 
 <body>
-    <div id = "color" style = "margin-top: -300px !important;">
+    <div id = "color">
         <?php 
             include ('navbar.php'); 
             include ('customizedstyles.php');    

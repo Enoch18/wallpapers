@@ -65,7 +65,7 @@ function resize_image($file, $max_resolution, $width, $height){
         $fileext = $ext = pathinfo($file, PATHINFO_EXTENSION);
         $path_parts = pathinfo($file);
         $filename = $path_parts['filename'];
-        $filename = str_replace(" ", "", $filename) . '_' . $width . 'X' . $height . '_www.downloadallwallpapers.com' . '.' . $fileext;
+        $filename = str_replace(" ", "", $filename) . '_' . $width . 'X' . $height . '_www.incrediblewallpapers.com' . '.' . $fileext;
         $file = $path . "/" . $filename;
         
         if($original_image){
@@ -87,7 +87,7 @@ function resize_image($file, $max_resolution, $width, $height){
             //Beginning of code for storing the url of various resolutions of the image
             $filesize = '';
             $fileexplode = explode(".", $filename);
-            $filename = $fileexplode[0] . '.downloadallwallpapers.com';
+            $filename = $fileexplode[0] . '.incrediblewallpapers.com';
             $sql = "INSERT INTO resolutions SET
             d_id = :did,
             width = :width,
@@ -234,7 +234,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                     d_id = :did,
                     created_at = :created_at";
                     $s3 = $pdo->prepare($sql3);
-                    $s3->bindValue(':tagname', str_replace(" ", "", $tagname[$i]));
+                    $s3->bindValue(':tagname', $tagname[$i]);
                     $s3->bindValue(':did', $did);
                     $s3->bindValue(':alt', '');
                     $s3->bindValue(':created_at', $created_at);
@@ -254,7 +254,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 d_id = :did,
                 created_at = :created_at";
                 $s3 = $pdo->prepare($sql3);
-                $s3->bindValue(':tagname', str_replace(" ", "", $tagname[$i]));
+                $s3->bindValue(':tagname', $tagname[$i]);
                 $s3->bindValue(':did', $did);
                 $s3->bindValue(':alt', '1');
                 $s3->bindValue(':created_at', $created_at);
