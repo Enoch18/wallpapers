@@ -84,7 +84,7 @@ input[type="email"]{
                     while ($row = $result->fetch()){
                         $lastupload = str_replace("-", "/", $row['createdat']);
                     }
-                    echo $maxdid = max($num);
+                    $maxdid = max($num);
                 }catch(PDOException $e){
                     echo "Could not perform the operation ".$e;
                 }

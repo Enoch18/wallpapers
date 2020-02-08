@@ -160,6 +160,7 @@ try{
 
         if($_POST['tag2'] != ''){
             $tag2 = $_POST['tag2'];
+            $tag2 = str_replace(", ", ",", $tag2);
             $tagname = explode(",", $tag2);
             $total = count($tagname);
             for($i=0; $i<$total; $i++){
@@ -177,6 +178,7 @@ try{
 
         if($_POST['alttags'] != ''){
             $alttags = $_POST['alttags'];
+            $alttags = str_replace(", ", ",", $alttags);
             $tagname = explode(",", $alttags);
             $total = count($tagname);
             for($i=0; $i<$total; $i++){

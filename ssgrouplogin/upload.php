@@ -223,6 +223,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
             $did = max($num);
             $tag2 = $_POST['tag2'];
+            $tag2 = str_replace(", ", ",", $tag2);
             $tagname = explode(",", $tag2);
             $total = count($tagname);
             for($i=0; $i<$total; $i++){
@@ -244,6 +245,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
             $did = max($num);
             $tag2 = $_POST['alttags'];
+            $tag2 = str_replace(", ", ",", $tag2);
             $tagname = explode(",", $tag2);
             $total = count($tagname);
             for($i=0; $i<$total; $i++){
